@@ -1,0 +1,150 @@
+version: '3.8'
+
+# ICICSO Local - Development Overrides
+# This file adds development-specific configurations
+# Usage: Docker Compose automatically merges this with docker-compose.yml
+#
+# Features:
+#   - Source code volume mounts for hot reload
+#   - Watch mode for TypeScript compilation
+#   - Exposed internal ports for debugging
+#   - Extended logging
+
+services:
+  gateway-api:
+    volumes:
+      - ./apps/gateway-api/src:/app/src
+      - ./packages:/app/packages
+    environment:
+      NODE_ENV: development
+    command: ["node", "--watch", "dist/index.js"]
+
+  auth-service:
+    volumes:
+      - ./apps/auth-service/src:/app/src
+      - ./packages:/app/packages
+    environment:
+      NODE_ENV: development
+    command: ["node", "--watch", "dist/index.js"]
+
+  identity-service:
+    volumes:
+      - ./apps/identity-service/src:/app/src
+      - ./packages:/app/packages
+    environment:
+      NODE_ENV: development
+    command: ["node", "--watch", "dist/index.js"]
+
+  audit-service:
+    volumes:
+      - ./apps/audit-service/src:/app/src
+      - ./packages:/app/packages
+    environment:
+      NODE_ENV: development
+    command: ["node", "--watch", "dist/index.js"]
+
+  storage-service:
+    volumes:
+      - ./apps/storage-service/src:/app/src
+      - ./packages:/app/packages
+    environment:
+      NODE_ENV: development
+    command: ["node", "--watch", "dist/index.js"]
+
+  ingestion-service:
+    volumes:
+      - ./apps/ingestion-service/src:/app/src
+      - ./packages:/app/packages
+    environment:
+      NODE_ENV: development
+    command: ["node", "--watch", "dist/index.js"]
+
+  terminology-service:
+    volumes:
+      - ./apps/terminology-service/src:/app/src
+      - ./packages:/app/packages
+    environment:
+      NODE_ENV: development
+    command: ["node", "--watch", "dist/index.js"]
+
+  data-governance-service:
+    volumes:
+      - ./apps/data-governance-service/src:/app/src
+      - ./packages:/app/packages
+    environment:
+      NODE_ENV: development
+    command: ["node", "--watch", "dist/index.js"]
+
+  evidence-lake-service:
+    volumes:
+      - ./apps/evidence-lake-service/src:/app/src
+      - ./packages:/app/packages
+    environment:
+      NODE_ENV: development
+    command: ["node", "--watch", "dist/index.js"]
+
+  ghl-service:
+    volumes:
+      - ./apps/ghl-service/src:/app/src
+      - ./packages:/app/packages
+    environment:
+      NODE_ENV: development
+    command: ["node", "--watch", "dist/index.js"]
+
+  kbol-service:
+    volumes:
+      - ./apps/kbol-service/src:/app/src
+      - ./packages:/app/packages
+    environment:
+      NODE_ENV: development
+    command: ["node", "--watch", "dist/index.js"]
+
+  runbook-service:
+    volumes:
+      - ./apps/runbook-service/src:/app/src
+      - ./packages:/app/packages
+    environment:
+      NODE_ENV: development
+    command: ["node", "--watch", "dist/index.js"]
+
+  readiness-service:
+    volumes:
+      - ./apps/readiness-service/src:/app/src
+      - ./packages:/app/packages
+    environment:
+      NODE_ENV: development
+    command: ["node", "--watch", "dist/index.js"]
+
+  case-control-service:
+    volumes:
+      - ./apps/case-control-service/src:/app/src
+      - ./packages:/app/packages
+    environment:
+      NODE_ENV: development
+    command: ["node", "--watch", "dist/index.js"]
+
+  systemic-risk-service:
+    volumes:
+      - ./apps/systemic-risk-service/src:/app/src
+      - ./packages:/app/packages
+    environment:
+      NODE_ENV: development
+    command: ["node", "--watch", "dist/index.js"]
+
+  cqoi-service:
+    volumes:
+      - ./apps/cqoi-service/src:/app/src
+      - ./packages:/app/packages
+    environment:
+      NODE_ENV: development
+    command: ["node", "--watch", "dist/index.js"]
+
+  desktop-emulator:
+    environment:
+      NODE_ENV: development
+
+  semantic-terminology-engine:
+    volumes:
+      - ./engines/13_semantic_terminology_engine/semantic_terminology_engine:/app/semantic_terminology_engine
+    environment:
+      PYTHONUNBUFFERED: "1"

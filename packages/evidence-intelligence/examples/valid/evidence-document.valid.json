@@ -1,0 +1,82 @@
+{
+  "artifact_kind": "evidence-document",
+  "data": {
+    "id": "EDOC-CABG-0001",
+    "title": "Guideline-based coronary revascularization evidence document",
+    "source_type": "guideline-body",
+    "evidence_type": "guideline",
+    "publication_year": 2024,
+    "version_or_update": "2024 focused update",
+    "jurisdiction": ["us", "global"],
+    "specialty": "cardiac-surgery",
+    "clinical_domain": "cardiovascular",
+    "population": {
+      "summary": "Adults with multivessel coronary artery disease",
+      "age_groups": ["adult", "older-adult"],
+      "diagnoses": ["multivessel-coronary-artery-disease"],
+      "severity": "high-anatomic-complexity"
+    },
+    "intervention": {
+      "class": "surgery",
+      "summary": "Coronary artery bypass grafting"
+    },
+    "comparator": {
+      "summary": "Percutaneous coronary intervention"
+    },
+    "outcomes": [
+      {
+        "outcome_class": "mortality",
+        "summary": "One-year mortality"
+      }
+    ],
+    "effect_direction": "benefit",
+    "certainty": "high",
+    "clinical_functions": ["intervention-selection", "eligibility"],
+    "time_horizons": ["1-year"],
+    "applicability": {
+      "matrix_classification": "applicable",
+      "population_fit": { "score": 3, "rationale": "Matches target adult CABG population." },
+      "intervention_fit": { "score": 3, "rationale": "Intervention is identical to target strategy." },
+      "setting_fit": { "score": 2, "rationale": "Requires tertiary surgical center." },
+      "jurisdiction_fit": { "score": 3, "rationale": "Source jurisdiction is accepted locally." },
+      "resource_fit": { "score": 2, "rationale": "Requires ICU and cardiac surgery team." },
+      "overall_recommendation": "directly-applicable"
+    },
+    "provenance": {
+      "source_system": "manual-ingest",
+      "captured_at": "2026-04-04T10:00:00Z",
+      "captured_by": "icicso.evidence.curator",
+      "chain_of_custody": [
+        {
+          "step": "ingest",
+          "actor": "icicso.evidence.curator",
+          "timestamp": "2026-04-04T10:00:00Z",
+          "hash": "sha256:cabg001",
+          "note": "Source captured from licensed access"
+        }
+      ],
+      "license_status": "licensed",
+      "attestation_status": "attested",
+      "review_policy": "dual-clinical-review",
+      "canonical_id": "CANON-CABG-DOC",
+      "version": "1.0.0",
+      "effective_from": "2026-04-04",
+      "effective_to": null,
+      "status": "active"
+    },
+    "references": [
+      {
+        "citation": "Example guideline citation",
+        "doi": "10.1016/example",
+        "uri": "https://example.org/guideline"
+      }
+    ],
+    "ingestion_metadata": {
+      "ingested_at": "2026-04-04T10:05:00Z",
+      "ingestion_channel": "manual-curation",
+      "parser_version": "1.0.0"
+    },
+    "hash": "sha256:evidence-document-cabg",
+    "status": "approved"
+  }
+}

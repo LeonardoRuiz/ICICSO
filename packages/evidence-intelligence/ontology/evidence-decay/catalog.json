@@ -1,0 +1,20 @@
+{
+  "catalogId": "icicso.evidence-decay.v1",
+  "code": "evidence-decay",
+  "label": "Evidence Decay",
+  "description": "Operational evidence half-life model used to flag reappraisal urgency as evidence ages.",
+  "usageNotes": [
+    "This model governs reappraisal cadence, not automatic deactivation by itself.",
+    "Half-life values are defaults and may be overridden by governance for specific domains."
+  ],
+  "entries": [
+    { "id": "decay.rapid", "code": "rapid", "label": "Rapid Decay", "description": "Evidence likely to become outdated quickly due to evolving technology or practice.", "usageNotes": ["Typical for devices, endovascular techniques, biomarker panels and omics studies."], "defaultHalfLifeMonths": 18, "reappraisalTriggerMonths": 12 },
+    { "id": "decay.moderate", "code": "moderate", "label": "Moderate Decay", "description": "Evidence ages at a moderate pace and should be reviewed on a planned cadence.", "usageNotes": ["Typical for perioperative bundles, protocols and many comparative studies."], "defaultHalfLifeMonths": 36, "reappraisalTriggerMonths": 24 },
+    { "id": "decay.slow", "code": "slow", "label": "Slow Decay", "description": "Evidence remains relatively stable for longer periods.", "usageNotes": ["Typical for mature surgical risk findings and long-standing standards of care."], "defaultHalfLifeMonths": 60, "reappraisalTriggerMonths": 48 },
+    { "id": "decay.governed", "code": "governed", "label": "Governed Decay", "description": "Evidence lifecycle is governed primarily by explicit issuing-body updates rather than generic half-life.", "usageNotes": ["Typical for authoritative guidelines and local protocols."], "defaultHalfLifeMonths": 48, "reappraisalTriggerMonths": 24 }
+  ],
+  "constraints": {
+    "uniqueFields": ["id", "code", "label"],
+    "requiredFields": ["id", "code", "label", "description", "usageNotes", "defaultHalfLifeMonths", "reappraisalTriggerMonths"]
+  }
+}

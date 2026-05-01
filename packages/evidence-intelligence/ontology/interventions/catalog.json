@@ -1,0 +1,33 @@
+{
+  "catalogId": "icicso.intervention-classes.v1",
+  "code": "intervention-classes",
+  "label": "Intervention Classes",
+  "description": "High-level intervention taxonomy for structuring recommendations and executable actions.",
+  "usageNotes": [
+    "Use high-level classes only; product-specific detail belongs in terminology mappings or downstream resource catalogs.",
+    "One EO action should have one primary intervention class."
+  ],
+  "entries": [
+    { "id": "intv.drug", "code": "drug", "label": "Drug", "description": "Pharmacologic intervention delivered as medication or biologic therapy.", "usageNotes": ["Map formulary or RxNorm detail downstream."] },
+    { "id": "intv.device", "code": "device", "label": "Device", "description": "Implantable or non-implantable device intervention.", "usageNotes": ["Use for device selection when the device itself is the intervention."] },
+    { "id": "intv.surgery", "code": "surgery", "label": "Surgery", "description": "Surgical intervention at the highest procedural level.", "usageNotes": ["Use when open/minimally invasive subtype is not the key distinction."] },
+    { "id": "intv.minimally-invasive-procedure", "code": "minimally-invasive-procedure", "label": "Minimally Invasive Procedure", "description": "Procedure delivered through minimally invasive operative access.", "usageNotes": ["Includes laparoscopic or thoracoscopic strategies when access is relevant."] },
+    { "id": "intv.open-procedure", "code": "open-procedure", "label": "Open Procedure", "description": "Procedure requiring open surgical access.", "usageNotes": ["Use when open approach itself changes risk or selection."] },
+    { "id": "intv.endovascular-procedure", "code": "endovascular-procedure", "label": "Endovascular Procedure", "description": "Catheter-based or endovascular intervention.", "usageNotes": ["Common in vascular and structural heart workflows."] },
+    { "id": "intv.icu-strategy", "code": "icu-strategy", "label": "ICU Strategy", "description": "Management strategy intended primarily for ICU settings.", "usageNotes": ["Use for sedation, hemodynamics or critical care bundles."] },
+    { "id": "intv.ventilation-strategy", "code": "ventilation-strategy", "label": "Ventilation Strategy", "description": "Mechanical ventilation or respiratory support strategy.", "usageNotes": ["Includes liberation and protective ventilation protocols."] },
+    { "id": "intv.analgesia-strategy", "code": "analgesia-strategy", "label": "Analgesia Strategy", "description": "Pain management strategy including multimodal protocols.", "usageNotes": ["Use for perioperative and postoperative analgesia bundles."] },
+    { "id": "intv.nutrition-strategy", "code": "nutrition-strategy", "label": "Nutrition Strategy", "description": "Enteral, parenteral or oral nutrition management strategy.", "usageNotes": ["Use for ERAS feeding and critical care nutrition pathways."] },
+    { "id": "intv.rehab-strategy", "code": "rehab-strategy", "label": "Rehabilitation Strategy", "description": "Structured rehabilitation, conditioning or recovery intervention.", "usageNotes": ["Use when the intervention is a planned rehab program."] },
+    { "id": "intv.diagnostic-test", "code": "diagnostic-test", "label": "Diagnostic Test", "description": "Laboratory or functional test used to diagnose or exclude disease.", "usageNotes": ["Use when imaging is not the primary modality."] },
+    { "id": "intv.imaging-test", "code": "imaging-test", "label": "Imaging Test", "description": "Imaging-based diagnostic or surveillance modality.", "usageNotes": ["Use for CT, MRI, echo and similar modalities."] },
+    { "id": "intv.biomarker-panel", "code": "biomarker-panel", "label": "Biomarker Panel", "description": "Single biomarker or multi-marker analytic panel.", "usageNotes": ["Use when assay composition matters clinically."] },
+    { "id": "intv.workflow-rule", "code": "workflow-rule", "label": "Workflow Rule", "description": "Operational workflow rule, sequencing rule or gating condition.", "usageNotes": ["Common for pathways, checklists and order-set gating."] },
+    { "id": "intv.care-bundle", "code": "care-bundle", "label": "Care Bundle", "description": "Multi-component bundle requiring coordinated implementation.", "usageNotes": ["Use when the bundle is the recommended unit, not a single action."] },
+    { "id": "intv.monitoring-strategy", "code": "monitoring-strategy", "label": "Monitoring Strategy", "description": "Structured monitoring or surveillance strategy over time.", "usageNotes": ["Use for telemetry, lab cadence, home monitoring or follow-up surveillance."] }
+  ],
+  "constraints": {
+    "uniqueFields": ["id", "code", "label"],
+    "requiredFields": ["id", "code", "label", "description", "usageNotes"]
+  }
+}

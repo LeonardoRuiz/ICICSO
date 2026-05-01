@@ -1,0 +1,36 @@
+{
+  "name": "icicso-continuum",
+  "version": "1.0.0",
+  "description": "Coordinacion raiz del canon icicso y del runtime demo icicso-local",
+  "type": "module",
+  "main": "index.js",
+  "packageManager": "pnpm@10.0.0",
+  "scripts": {
+    "dev": "pnpm --dir ./icicso-local dev",
+    "build": "pnpm --dir ./icicso-local build",
+    "icicso:run": "pnpm --dir ./icicso-local icicso:run",
+    "icicso:test": "pnpm --dir ./icicso-local test",
+    "icicso:trace": "pnpm --dir ./icicso-local icicso:trace",
+    "icicso:viewer": "pnpm --dir ./icicso-local dev",
+    "icicso:start": "pnpm dev",
+    "dev:foundation": "pnpm --dir ./_archive/noncanonical/08_Plataforma_Digital/icicso-foundation dev",
+    "build:foundation": "pnpm --dir ./_archive/noncanonical/08_Plataforma_Digital/icicso-foundation build",
+    "mockup:start": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\start-icicso-mockup.ps1",
+    "mockup:prepare": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\Initialize-ContinuumLocal.ps1",
+    "mockup:doctor": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\Invoke-ContinuumDoctor.ps1",
+    "mockup:stop": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\stop-icicso-mockup.ps1",
+    "glossary:scan": "node scripts/scan-glossary-candidates.mjs",
+    "glossary:build": "node scripts/generate-glossary-view.mjs",
+    "glossary:refresh": "node scripts/scan-glossary-candidates.mjs && node scripts/generate-glossary-view.mjs",
+    "clinical:extract": "node scripts/extract-clinical-concepts.mjs",
+    "clinical:refresh": "node scripts/extract-clinical-concepts.mjs",
+    "knowledge:refresh": "pnpm glossary:scan && pnpm clinical:extract && pnpm glossary:build",
+    "test": "npm --prefix ./icicso test",
+    "test:canon": "npm --prefix ./icicso test",
+    "test:quarantine": "node _quarantine/root-tests/shared-kernel.test.mjs && node _quarantine/root-tests/emulator-architecture-map.test.mjs && node _quarantine/root-tests/ingest-ser-pipeline.test.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}

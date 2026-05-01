@@ -1,0 +1,90 @@
+collections:
+  - name: CABG
+    query: "(coronary artery bypass grafting OR CABG) AND (adult OR adults)"
+    date_from: "2018-01-01"
+    date_to: "2026-12-31"
+    max_results: 50
+    topics: ["coronary disease", "cardiac surgery"]
+    study_types: ["Clinical Trial", "Meta-Analysis", "Systematic Review", "Guideline"]
+    languages: ["english"]
+
+  - name: PCI
+    query: "(percutaneous coronary intervention OR PCI) AND (stent OR revascularization)"
+    date_from: "2018-01-01"
+    date_to: "2026-12-31"
+    max_results: 50
+    topics: ["coronary disease", "interventional cardiology"]
+    study_types: ["Clinical Trial", "Meta-Analysis", "Systematic Review", "Guideline"]
+    languages: ["english"]
+
+  - name: Valvular Heart Disease
+    query: "(valvular heart disease OR aortic stenosis OR mitral regurgitation)"
+    date_from: "2018-01-01"
+    date_to: "2026-12-31"
+    max_results: 50
+    topics: ["valvular disease", "cardiology"]
+    study_types: ["Clinical Trial", "Meta-Analysis", "Guideline", "Observational Study"]
+    languages: ["english"]
+
+  - name: Heart Failure
+    query: "(heart failure OR HFrEF OR HFpEF) AND (therapy OR management)"
+    date_from: "2018-01-01"
+    date_to: "2026-12-31"
+    max_results: 50
+    topics: ["heart failure", "cardiology"]
+    study_types: ["Clinical Trial", "Meta-Analysis", "Systematic Review", "Guideline"]
+    languages: ["english"]
+
+  - name: Thoracic Oncology Surgery
+    query: "(thoracic oncology surgery OR lung cancer surgery OR esophagectomy)"
+    date_from: "2018-01-01"
+    date_to: "2026-12-31"
+    max_results: 50
+    topics: ["thoracic", "oncology surgery"]
+    study_types: ["Clinical Trial", "Observational Study", "Systematic Review"]
+    languages: ["english"]
+
+  - name: ERAS Cardiac Surgery
+    query: "(enhanced recovery after surgery OR ERAS) AND (cardiac surgery)"
+    date_from: "2018-01-01"
+    date_to: "2026-12-31"
+    max_results: 50
+    topics: ["perioperative", "cardiac surgery"]
+    study_types: ["Guideline", "Consensus Development Conference", "Systematic Review", "Observational Study"]
+    languages: ["english"]
+
+  - name: ICU Sedation
+    query: "(ICU sedation OR intensive care sedation) AND (critical care)"
+    date_from: "2018-01-01"
+    date_to: "2026-12-31"
+    max_results: 50
+    topics: ["ICU", "critical care"]
+    study_types: ["Clinical Trial", "Guideline", "Systematic Review", "Observational Study"]
+    languages: ["english"]
+
+  - name: Antiplatelet Therapy
+    query: "(antiplatelet therapy) AND (cardiovascular OR surgery OR PCI)"
+    date_from: "2018-01-01"
+    date_to: "2026-12-31"
+    max_results: 50
+    topics: ["coronary disease", "perioperative"]
+    study_types: ["Clinical Trial", "Meta-Analysis", "Guideline", "Observational Study"]
+    languages: ["english"]
+
+  - name: Anticoagulation
+    query: "(anticoagulation OR anticoagulants) AND (cardiac surgery OR atrial fibrillation OR thrombosis)"
+    date_from: "2018-01-01"
+    date_to: "2026-12-31"
+    max_results: 50
+    topics: ["arrhythmia", "perioperative", "vascular"]
+    study_types: ["Clinical Trial", "Meta-Analysis", "Guideline", "Observational Study"]
+    languages: ["english"]
+
+  - name: Cardiometabolic Prevention
+    query: "(cardiometabolic prevention OR cardiovascular prevention) AND (risk reduction OR primary prevention)"
+    date_from: "2018-01-01"
+    date_to: "2026-12-31"
+    max_results: 50
+    topics: ["coronary disease", "prevention"]
+    study_types: ["Guideline", "Meta-Analysis", "Systematic Review", "Observational Study"]
+    languages: ["english"]

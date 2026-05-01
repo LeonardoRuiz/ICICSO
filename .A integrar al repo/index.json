@@ -1,0 +1,106 @@
+{
+  "package": "icicso-terminology-modules",
+  "generated_at": "2026-04-26",
+  "source_manifest": "../icicso-terminology-seed/source-manifest.json",
+  "total_sources": 22,
+  "modules": [
+    {
+      "id": "laboratorio",
+      "name": "Laboratorio y observaciones",
+      "repo_path": "terminologies/modules/laboratorio",
+      "source_count": 1,
+      "source_ids": [
+        "loinc"
+      ],
+      "access_summary": {
+        "public": 0,
+        "gated": 1,
+        "restricted": 0,
+        "other": 0
+      }
+    },
+    {
+      "id": "diagnosticos",
+      "name": "Diagnosticos y nomenclatura clinica",
+      "repo_path": "terminologies/modules/diagnosticos",
+      "source_count": 6,
+      "source_ids": [
+        "snomed-ct-international-edition",
+        "snomed-ct-spanish-edition",
+        "icd-11-mms",
+        "icd-10-a-icd-11",
+        "icd-10-cm",
+        "mesh"
+      ],
+      "access_summary": {
+        "public": 4,
+        "gated": 0,
+        "restricted": 2,
+        "other": 0
+      }
+    },
+    {
+      "id": "procedimientos",
+      "name": "Procedimientos, intervenciones y suministros",
+      "repo_path": "terminologies/modules/procedimientos",
+      "source_count": 3,
+      "source_ids": [
+        "icd-10-pcs",
+        "hcpcs-level-ii",
+        "cpt"
+      ],
+      "access_summary": {
+        "public": 2,
+        "gated": 0,
+        "restricted": 1,
+        "other": 0
+      }
+    },
+    {
+      "id": "farmacos",
+      "name": "Farmacos, sustancias y prescripcion",
+      "repo_path": "terminologies/modules/farmacos",
+      "source_count": 4,
+      "source_ids": [
+        "rxnorm-full-monthly-release",
+        "rxnorm-prescribable-content",
+        "atc-ddd",
+        "unii-gsrs"
+      ],
+      "access_summary": {
+        "public": 2,
+        "gated": 1,
+        "restricted": 1,
+        "other": 0
+      }
+    },
+    {
+      "id": "interoperabilidad",
+      "name": "Interoperabilidad clinica, documentos y autorizacion",
+      "repo_path": "terminologies/modules/interoperabilidad",
+      "source_count": 8,
+      "source_ids": [
+        "hl7-fhir-r5-definitions",
+        "fhir-implementation-registry",
+        "hl7-terminology-tho",
+        "cda-r20-core",
+        "cda-value-sets",
+        "c-cda-on-fhir",
+        "us-core-implementation-guide",
+        "smart-app-launch"
+      ],
+      "access_summary": {
+        "public": 8,
+        "gated": 0,
+        "restricted": 0,
+        "other": 0
+      }
+    }
+  ],
+  "coverage": {
+    "assigned_sources": 22,
+    "manifest_sources": 22,
+    "missing": [],
+    "duplicates": []
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "seedMetadata": {
+    "seedId": "seed.colorectal-eras-pathway.v1",
+    "title": "Colorectal ERAS Pathway Example",
+    "structuralExample": true,
+    "note": "Structured example of perioperative pathway evidence with realistic workflow constraints."
+  },
+  "ser": {
+    "serId": "SER-ERAS-CRC-0001",
+    "sourceDocumentId": "EDOC-ERAS-CRC-2018",
+    "title": "Early oral intake after elective colorectal surgery",
+    "evidenceType": "pathway",
+    "clinicalDomain": "colorectal_surgery",
+    "summary": "ERAS pathways support early oral intake to accelerate recovery and reduce length of stay after elective colorectal surgery.",
+    "statements": [
+      {
+        "statementId": "SES-ERAS-01",
+        "clinicalFunction": "postoperative-management",
+        "interventionClass": "nutrition-strategy",
+        "interventionLabel": "Early oral intake within ERAS pathway",
+        "effectDirection": "benefit",
+        "strength": "high",
+        "certainty": "moderate",
+        "decisionReadiness": "ready-for-execution",
+        "timeHorizon": "7-days",
+        "outcomes": [
+          { "outcomeCode": "hospital-los", "effectDirection": "benefit", "note": "Shorter index hospitalization." },
+          { "outcomeCode": "functional-status", "effectDirection": "benefit", "note": "Faster recovery trajectory." }
+        ],
+        "conditions": ["hemodynamically stable patient", "no ongoing bowel ischemia"],
+        "exclusions": ["suspected anastomotic leak", "uncontrolled ileus"],
+        "rationale": "ERAS-aligned early intake supports physiologic recovery after elective colorectal surgery.",
+        "operationalContext": {
+          "implementationComplexity": "moderate",
+          "resourceDemand": "low",
+          "costRelevance": "moderate",
+          "operationalRelevance": "moderate",
+          "resourceRequirements": [
+            { "resourceType": "nursing_protocol", "role": "ward_nurse", "quantity": 1, "unit": "protocol", "mandatory": true, "costCenter": "WARD", "notes": null }
+          ],
+          "constraints": ["Exclude uncontrolled ileus or anastomotic concern."]
+        }
+      }
+    ],
+    "applicability": {
+      "clinicalDomain": "colorectal_surgery",
+      "careSetting": "general_hospital",
+      "jurisdictions": ["global", "latam"],
+      "decisionReadiness": "ready-for-execution",
+      "population": {
+        "summary": "Adults undergoing elective colorectal resection within ERAS-capable settings.",
+        "ageBands": ["adult", "older_adult"],
+        "sexes": ["female", "male"],
+        "diagnoses": ["colorectal neoplasm", "diverticular disease"],
+        "procedures": ["elective colorectal resection"],
+        "biomarkers": [],
+        "severity": null,
+        "comorbidities": [],
+        "inclusionCriteria": ["hemodynamic stability"],
+        "exclusionCriteria": ["bowel ischemia", "postoperative peritonitis"]
+      },
+      "dimensionAssessments": [
+        { "dimension": "population-fit", "score": 3, "rationale": "Elective colorectal surgical population is well matched." },
+        { "dimension": "intervention-fit", "score": 3, "rationale": "Early oral intake is directly represented." },
+        { "dimension": "setting-fit", "score": 3, "rationale": "General inpatient postoperative setting aligns well." },
+        { "dimension": "jurisdiction-fit", "score": 2, "rationale": "Multi-jurisdiction pathway with local adaptation potential." },
+        { "dimension": "resource-fit", "score": 3, "rationale": "Low incremental resources required." }
+      ],
+      "implementationPreconditions": ["ERAS nursing pathway", "postoperative surgeon signoff"]
+    },
+    "provenance": {
+      "sourceSystem": "manual_ingest",
+      "capturedAt": "2026-04-04T10:30:00Z",
+      "capturedBy": "icicso.evidence.curator",
+      "chainOfCustody": [
+        { "step": "ingest", "actor": "icicso.evidence.curator", "timestamp": "2026-04-04T10:30:00Z", "hashSha256": "eras-crc-01", "note": "Derived from ERAS pathway source." }
+      ],
+      "legal": {
+        "licenseStatus": "licensed",
+        "attestationStatus": "attested",
+        "reviewPolicy": "perioperative-governance-board",
+        "retentionClass": "clinical_evidence_permanent"
+      },
+      "versioning": {
+        "canonicalId": "CANON-SER-ERAS-CRC",
+        "version": "1.0.0",
+        "effectiveFrom": "2026-04-04",
+        "effectiveTo": null,
+        "supersedes": [],
+        "status": "active"
+      }
+    }
+  },
+  "expectedMapperBehavior": {
+    "shouldGenerateEo": true,
+    "expectedDecisionVerb": "recommend",
+    "expectedReviewState": "specialist-approved"
+  }
+}

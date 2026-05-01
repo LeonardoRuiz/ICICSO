@@ -1,0 +1,76 @@
+﻿{
+  "generated_at": "2026-04-26",
+  "summary": {
+    "public": 16,
+    "gated": 2,
+    "restricted": 4,
+    "review": 0
+  },
+  "groups": {
+    "gated": [
+      {
+        "id": "loinc",
+        "standard": "LOINC",
+        "access_label": "Gratis con cuenta LOINC",
+        "seed_mode": "metadata_plus_optional_private_snapshot",
+        "official_url": "https://loinc.org/downloads/loinc-table/"
+      },
+      {
+        "id": "atc-ddd",
+        "standard": "ATC/DDD",
+        "access_label": "Busqueda publica; descarga Excel/XML requiere cuenta",
+        "seed_mode": "metadata_plus_optional_private_snapshot",
+        "official_url": "https://atcddd.fhi.no/atc_ddd_index_and_guidelines/"
+      }
+    ],
+    "restricted": [
+      {
+        "id": "snomed-ct-international-edition",
+        "standard": "SNOMED CT International Edition",
+        "access_label": "Acceso por MLDS y licencia, segun pais miembro o afiliado",
+        "seed_mode": "adapter_only_with_mock_data",
+        "official_url": "https://www.snomed.org/releases"
+      },
+      {
+        "id": "snomed-ct-spanish-edition",
+        "standard": "SNOMED CT Spanish Edition",
+        "access_label": "Acceso por MLDS o espacio del pais miembro",
+        "seed_mode": "adapter_only_with_mock_data",
+        "official_url": "https://www.snomed.org/releases"
+      },
+      {
+        "id": "rxnorm-full-monthly-release",
+        "standard": "RxNorm Full Monthly Release",
+        "access_label": "Requiere licencia UMLS para full release",
+        "seed_mode": "adapter_only_with_mock_data",
+        "official_url": "https://www.nlm.nih.gov/research/umls/rxnorm/docs/rxnormfiles.html"
+      },
+      {
+        "id": "cpt",
+        "standard": "CPT",
+        "access_label": "Licencia propietaria AMA",
+        "seed_mode": "adapter_only_with_mock_data",
+        "official_url": "https://www.ama-assn.org/practice-management/cpt/cpt-code-set-overview"
+      }
+    ],
+    "public": [
+      { "id": "icd-11-mms", "standard": "ICD-11 MMS", "access_label": "Acceso publico", "seed_mode": "live_or_snapshot", "official_url": "https://icdcdn.who.int/static/releasefiles/2025-01/SimpleTabulation-ICD-11-MMS-en.zip" },
+      { "id": "icd-10-a-icd-11", "standard": "ICD-10 a ICD-11", "access_label": "Acceso publico", "seed_mode": "live_or_snapshot", "official_url": "https://icdcdn.who.int/static/releasefiles/2025-01/mapping.zip" },
+      { "id": "rxnorm-prescribable-content", "standard": "RxNorm Prescribable Content", "access_label": "Sin licencia para esta variante", "seed_mode": "live_or_snapshot", "official_url": "https://www.nlm.nih.gov/research/umls/rxnorm/docs/rxnormfiles.html" },
+      { "id": "hl7-fhir-r5-definitions", "standard": "HL7 FHIR R5 Definitions", "access_label": "Acceso publico", "seed_mode": "live_or_snapshot", "official_url": "https://www.hl7.org/fhir/definitions.json.zip" },
+      { "id": "icd-10-cm", "standard": "ICD-10-CM", "access_label": "Acceso publico", "seed_mode": "live_or_snapshot", "official_url": "https://www.cdc.gov/nchs/icd/icd-10-cm/files.html" },
+      { "id": "icd-10-pcs", "standard": "ICD-10-PCS", "access_label": "Acceso publico", "seed_mode": "live_or_snapshot", "official_url": "https://www.cms.gov/icd10" },
+      { "id": "hcpcs-level-ii", "standard": "HCPCS Level II", "access_label": "Acceso publico", "seed_mode": "live_or_snapshot", "official_url": "https://www.cms.gov/medicare/coding-billing/healthcare-common-procedure-system/quarterly-update" },
+      { "id": "mesh", "standard": "MeSH", "access_label": "Acceso publico", "seed_mode": "live_or_snapshot", "official_url": "https://www.nlm.nih.gov/databases/download/mesh.html" },
+      { "id": "unii-gsrs", "standard": "UNII / GSRS", "access_label": "Acceso publico para fuentes publicas", "seed_mode": "live_or_snapshot", "official_url": "https://www.fda.gov/industry/fda-data-standards-advisory-board/fdas-global-substance-registration-system" },
+      { "id": "fhir-implementation-registry", "standard": "FHIR Implementation Registry", "access_label": "Acceso publico", "seed_mode": "live_or_snapshot", "official_url": "https://build.fhir.org/registry/index.html" },
+      { "id": "hl7-terminology-tho", "standard": "HL7 Terminology (THO)", "access_label": "Acceso publico", "seed_mode": "live_or_snapshot", "official_url": "https://terminology.hl7.org/7.1.0/en/index.html" },
+      { "id": "cda-r20-core", "standard": "CDA R2.0 Core", "access_label": "Acceso publico", "seed_mode": "live_or_snapshot", "official_url": "https://www.hl7.org/cda/" },
+      { "id": "cda-value-sets", "standard": "CDA Value Sets", "access_label": "Acceso publico", "seed_mode": "live_or_snapshot", "official_url": "https://terminology.hl7.org/7.1.0/valuesets-cda.html" },
+      { "id": "c-cda-on-fhir", "standard": "C-CDA on FHIR", "access_label": "Acceso publico", "seed_mode": "live_or_snapshot", "official_url": "https://hl7.org/fhir/us/ccda/" },
+      { "id": "us-core-implementation-guide", "standard": "US Core Implementation Guide", "access_label": "Acceso publico", "seed_mode": "live_or_snapshot", "official_url": "https://hl7.org/fhir/us/core/STU8.0.1/" },
+      { "id": "smart-app-launch", "standard": "SMART App Launch", "access_label": "Acceso publico", "seed_mode": "live_or_snapshot", "official_url": "https://build.fhir.org/ig/HL7/smart-app-launch/" }
+    ],
+    "review": []
+  }
+}

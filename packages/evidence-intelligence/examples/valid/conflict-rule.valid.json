@@ -1,0 +1,11 @@
+{
+  "artifact_kind": "conflict-rule",
+  "data": {
+    "rule_id": "CRULE-000001",
+    "priority_code": "source-priority",
+    "priority_order": 1,
+    "description": "Prefer stronger source level first",
+    "resolution_action": "prefer-left",
+    "requires_governance_review": false
+  }
+}

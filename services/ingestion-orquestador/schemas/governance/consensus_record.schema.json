@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://icicso.local/schemas/governance/consensus_record.schema.json",
+  "title": "ConsensusRecord",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "cr_id": {
+      "type": "string",
+      "pattern": "^CR-[A-Z0-9_-]+$"
+    },
+    "domain": {
+      "type": "string",
+      "minLength": 1
+    },
+    "related_artifact_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "eul_level": {
+      "$ref": "../common/enums.schema.json#/$defs/uncertaintyLevel"
+    },
+    "outcome": {
+      "$ref": "../common/enums.schema.json#/$defs/consensusOutcome"
+    },
+    "quorum_percent": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "dissent_percent": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "impact_summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "vrn_generated": {
+      "type": ["string", "null"]
+    },
+    "hash_sha256": {
+      "type": "string",
+      "pattern": "^[A-F0-9]{64}$"
+    },
+    "recorded_at_utc": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "cr_id",
+    "domain",
+    "related_artifact_ids",
+    "eul_level",
+    "outcome",
+    "quorum_percent",
+    "dissent_percent",
+    "impact_summary",
+    "hash_sha256",
+    "recorded_at_utc"
+  ]
+}

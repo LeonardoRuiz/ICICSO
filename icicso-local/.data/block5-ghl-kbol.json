@@ -1,0 +1,222 @@
+{
+  "guidelineDomains": [
+    {
+      "domainId": "DOM-REVASC-CABG",
+      "title": "Revascularización CABG",
+      "clinicalArea": "cardiac-surgery",
+      "status": "active",
+      "description": "Dominio operativo para CABG x3 con ACS, DM2 y ERC3.",
+      "createdAt": "2026-03-29T12:30:00.000Z"
+    }
+  ],
+  "guidelinePackages": [
+    {
+      "gpId": "GP-REVASC-CABG-v3",
+      "domainId": "DOM-REVASC-CABG",
+      "caseId": "CASE-CABG3-2026-00014",
+      "title": "Guideline Package CABG x3 revascularización compleja",
+      "version": "v3",
+      "status": "active",
+      "eoCount": 8,
+      "icdrCount": 1,
+      "snapshotId": "SNAPSHOT-CABG3-EL-0001",
+      "neutralityDeclarationId": "ND-GP-REVASC-CABG-v3",
+      "sunsetPolicyId": "SUNSET-GP-REVASC-CABG-v3",
+      "summary": "Paquete guía compilado desde Evidence Lake activo para CABG x3 + DM2 + NSTEMI + FEVI 35% + ERC3.",
+      "createdAt": "2026-03-29T23:21:11.344Z"
+    }
+  ],
+  "packageEoLinks": [
+    {
+      "linkId": "LINK-GP-REVASC-CABG-v3-EO-REVASC-002",
+      "gpId": "GP-REVASC-CABG-v3",
+      "eoId": "EO-REVASC-002",
+      "serId": "SER-REVASC-ACC-2021",
+      "domain": "revascularization",
+      "groupLabel": "REVASCULARIZATION",
+      "createdAt": "2026-03-29T23:21:11.344Z"
+    },
+    {
+      "linkId": "LINK-GP-REVASC-CABG-v3-EO-REVASC-007",
+      "gpId": "GP-REVASC-CABG-v3",
+      "eoId": "EO-REVASC-007",
+      "serId": "SER-REVASC-ESC-2018",
+      "domain": "revascularization",
+      "groupLabel": "REVASCULARIZATION",
+      "createdAt": "2026-03-29T23:21:11.344Z"
+    },
+    {
+      "linkId": "LINK-GP-REVASC-CABG-v3-EO-ACS-003",
+      "gpId": "GP-REVASC-CABG-v3",
+      "eoId": "EO-ACS-003",
+      "serId": "SER-REVASC-ACC-2021",
+      "domain": "acs",
+      "groupLabel": "ACS",
+      "createdAt": "2026-03-29T23:21:11.344Z"
+    },
+    {
+      "linkId": "LINK-GP-REVASC-CABG-v3-EO-AKI-001",
+      "gpId": "GP-REVASC-CABG-v3",
+      "eoId": "EO-AKI-001",
+      "serId": "SER-AKI-KDIGO-2012",
+      "domain": "aki",
+      "groupLabel": "AKI",
+      "createdAt": "2026-03-29T23:21:11.344Z"
+    },
+    {
+      "linkId": "LINK-GP-REVASC-CABG-v3-EO-ERAS-003",
+      "gpId": "GP-REVASC-CABG-v3",
+      "eoId": "EO-ERAS-003",
+      "serId": "SER-ERAS-CARDIAC-2022",
+      "domain": "perioperative",
+      "groupLabel": "PERIOPERATIVE",
+      "createdAt": "2026-03-29T23:21:11.344Z"
+    },
+    {
+      "linkId": "LINK-GP-REVASC-CABG-v3-EO-PBM-003",
+      "gpId": "GP-REVASC-CABG-v3",
+      "eoId": "EO-PBM-003",
+      "serId": "SER-PBM-STS-2022",
+      "domain": "blood-management",
+      "groupLabel": "BLOOD-MANAGEMENT",
+      "createdAt": "2026-03-29T23:21:11.344Z"
+    },
+    {
+      "linkId": "LINK-GP-REVASC-CABG-v3-EO-CKD-002",
+      "gpId": "GP-REVASC-CABG-v3",
+      "eoId": "EO-CKD-002",
+      "serId": "SER-CKD-KDIGO-2023",
+      "domain": "ckd",
+      "groupLabel": "CKD",
+      "createdAt": "2026-03-29T23:21:11.344Z"
+    },
+    {
+      "linkId": "LINK-GP-REVASC-CABG-v3-EO-REVASC-003",
+      "gpId": "GP-REVASC-CABG-v3",
+      "eoId": "EO-REVASC-003",
+      "serId": "SER-DM-ADA-2024",
+      "domain": "diabetes",
+      "groupLabel": "DIABETES",
+      "createdAt": "2026-03-29T23:21:11.344Z"
+    }
+  ],
+  "sunsetPolicies": [
+    {
+      "sunsetPolicyId": "SUNSET-GP-REVASC-CABG-v3",
+      "gpId": "GP-REVASC-CABG-v3",
+      "reviewBy": "2026-09-30",
+      "reason": "Revisión semestral o cambio mayor de guideline base.",
+      "status": "scheduled",
+      "createdAt": "2026-03-29T23:21:11.344Z"
+    }
+  ],
+  "neutralityDeclarations": [
+    {
+      "neutralityDeclarationId": "ND-GP-REVASC-CABG-v3",
+      "gpId": "GP-REVASC-CABG-v3",
+      "statement": "El paquete agrupa EO activos y divergencias explícitas sin cerrar en falso la discrepancia ACC 2021 vs ESC 2018.",
+      "conflictStatus": "declared-neutral",
+      "reviewedBy": "governance-board-local",
+      "createdAt": "2026-03-29T23:21:11.344Z"
+    }
+  ],
+  "operativeFrameworks": [
+    {
+      "frameworkId": "FW-ERAS-CARD",
+      "title": "ERAS Cardiac",
+      "status": "active",
+      "purpose": "Trayectoria perioperatoria acelerada y estandarizada.",
+      "freezeFlag": false,
+      "reviewFlag": false,
+      "createdAt": "2026-03-29T12:30:00.000Z"
+    },
+    {
+      "frameworkId": "FW-GLYCEMIC",
+      "title": "Glycemic Control",
+      "status": "active",
+      "purpose": "Control glucémico perioperatorio en DM2.",
+      "freezeFlag": false,
+      "reviewFlag": true,
+      "createdAt": "2026-03-29T12:30:00.000Z"
+    },
+    {
+      "frameworkId": "FW-AKI",
+      "title": "AKI Prevention",
+      "status": "active",
+      "purpose": "Prevención y mitigación de lesión renal aguda.",
+      "freezeFlag": false,
+      "reviewFlag": true,
+      "createdAt": "2026-03-29T12:30:00.000Z"
+    },
+    {
+      "frameworkId": "FW-AF",
+      "title": "Post-op AF Prevention",
+      "status": "active",
+      "purpose": "Control de riesgo de fibrilación auricular posoperatoria.",
+      "freezeFlag": false,
+      "reviewFlag": false,
+      "createdAt": "2026-03-29T12:30:00.000Z"
+    },
+    {
+      "frameworkId": "FW-PBM",
+      "title": "Patient Blood Management",
+      "status": "active",
+      "purpose": "Manejo conservador de sangre y anemia en CABG.",
+      "freezeFlag": false,
+      "reviewFlag": false,
+      "createdAt": "2026-03-29T12:30:00.000Z"
+    }
+  ],
+  "frameworkDependencies": [
+    {
+      "dependencyId": "DEP-ERAS-PBM-001",
+      "frameworkId": "FW-ERAS-CARD",
+      "dependsOnFrameworkId": "FW-PBM",
+      "reason": "ERAS integra manejo transfusional conservador.",
+      "createdAt": "2026-03-29T12:30:00.000Z"
+    },
+    {
+      "dependencyId": "DEP-ERAS-GLY-001",
+      "frameworkId": "FW-ERAS-CARD",
+      "dependsOnFrameworkId": "FW-GLYCEMIC",
+      "reason": "ERAS requiere control glucémico estable en perioperatorio.",
+      "createdAt": "2026-03-29T12:30:00.000Z"
+    },
+    {
+      "dependencyId": "DEP-ERAS-AKI-001",
+      "frameworkId": "FW-ERAS-CARD",
+      "dependsOnFrameworkId": "FW-AKI",
+      "reason": "ERAS debe preservar función renal en CABG complejo.",
+      "createdAt": "2026-03-29T12:30:00.000Z"
+    },
+    {
+      "dependencyId": "DEP-AF-ERAS-001",
+      "frameworkId": "FW-AF",
+      "dependsOnFrameworkId": "FW-ERAS-CARD",
+      "reason": "Prevención de AF se monta sobre la trayectoria perioperatoria.",
+      "createdAt": "2026-03-29T12:30:00.000Z"
+    }
+  ],
+  "clinicalPathwayObjects": [
+    {
+      "cpoId": "CPO-CABG3-DM2-NSTEMI-FEVI35-ERC3-v1",
+      "caseId": "CASE-CABG3-2026-00014",
+      "gpId": "GP-REVASC-CABG-v3",
+      "frameworkIds": [
+        "FW-ERAS-CARD",
+        "FW-GLYCEMIC",
+        "FW-AKI",
+        "FW-AF",
+        "FW-PBM"
+      ],
+      "freezeFlag": false,
+      "reviewFlag": true,
+      "notAutoExecutable": true,
+      "ddmoGateStatus": "pass",
+      "status": "review",
+      "summary": "CPO formal no autoejecutable para CABG x3 + DM2 + NSTEMI + FEVI 35% + ERC3 con gate DDMO dependiente de dataset certificado.",
+      "createdAt": "2026-03-29T23:21:12.119Z"
+    }
+  ],
+  "rollbackRecords": []
+}

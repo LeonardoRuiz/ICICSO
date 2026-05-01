@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "target": "ES2022",
+        "module": "ES2022",
+        "moduleResolution": "bundler",
+        "lib": [
+            "ES2022",
+            "DOM"
+        ],
+        "strict": true,
+        "declaration": true,
+        "declarationMap": true,
+        "skipLibCheck": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "allowImportingTsExtensions": true,
+        "baseUrl": "."
+    },
+    "include": [
+        "apps/**/*.ts",
+        "packages/**/*.ts",
+        "services/**/*.ts",
+        "infra/**/*.ts"
+    ]
+}

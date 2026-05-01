@@ -1,0 +1,11 @@
+{
+  "artifact_kind": "applicability",
+  "data": {
+    "population_fit": { "score": 3, "rationale": "Strong fit" },
+    "intervention_fit": { "score": 3, "rationale": "Strong fit" },
+    "setting_fit": { "score": 2, "rationale": "Adequate fit" },
+    "jurisdiction_fit": { "score": 3, "rationale": "Valid locally" },
+    "resource_fit": { "score": 2, "rationale": "Resources available" },
+    "overall_recommendation": "directly-applicable"
+  }
+}

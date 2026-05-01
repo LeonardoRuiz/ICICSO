@@ -1,0 +1,20 @@
+- short_label: AATS perioperative atrial fibrillation guideline
+  query: "AATS guideline perioperative atrial fibrillation cardiac surgery"
+- short_label: DACAB
+  query: "DACAB trial CABG ticagrelor aspirin"
+- short_label: TiCAB
+  query: "TiCAB trial ticagrelor aspirin CABG"
+- short_label: Cochrane postoperative AF prevention
+  query: "Cochrane postoperative atrial fibrillation prevention cardiac surgery"
+- short_label: STS surgical treatment of AF guideline
+  query: "STS surgical treatment of atrial fibrillation guideline"
+- short_label: cefazolin sternal wound infection pharmacokinetic paper
+  query: "cefazolin sternal wound infection pharmacokinetic cardiac surgery"
+- short_label: BITA and DSWI meta-analysis in diabetes
+  query: "BITA deep sternal wound infection diabetes meta-analysis"
+- short_label: preop amiodarone prophylaxis NEJM 1997
+  query: "preoperative amiodarone prophylaxis NEJM 1997 atrial fibrillation cardiac surgery"
+- short_label: postoperative AF review 2023
+  query: "postoperative atrial fibrillation review 2023 cardiac surgery"
+- short_label: radial artery review
+  query: "radial artery graft review CABG"

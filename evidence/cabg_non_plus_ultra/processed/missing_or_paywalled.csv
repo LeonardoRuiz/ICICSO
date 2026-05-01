@@ -1,0 +1,48 @@
+seed_id,short_label,doi,pmid,publisher_url,access_status,validation_status,notes
+A01,ACC/AHA/SCAI Revascularization 2021,10.1161/cir.0000000000001038,34882435,https://doi.org/10.1161/CIR.0000000000001038,paywalled,validated_primary,not_downloaded_legal_restriction
+A02,ACC/AHA ACS 2025,10.1161/cir.0000000000001309,40014670,https://doi.org/10.1161/CIR.0000000000001309,paywalled,validated_primary,not_downloaded_legal_restriction
+A03,ESC ACS 2023,10.1093/eurheartj/ehad191,40152902,https://doi.org/10.1093/eurheartj/ehad191,not_downloaded_legal_restriction,validated_primary,not_downloaded_legal_restriction
+A04,ESC/EACTS Revascularization 2018,10.1093/eurheartj/ehy394,30165437,https://doi.org/10.1093/eurheartj/ehy394,not_downloaded_legal_restriction,validated_primary,not_downloaded_legal_restriction
+A05,ADA Pharmacologic 2026,10.2337/dc26-s009,41358900,https://doi.org/10.2337/dc19-s009,abstract-only,validated_primary,abstract_saved_no_legal_pdf
+A06,ADA CVD Risk 2026,10.2337/dc26-s010,41358899,https://doi.org/10.2337/dc26-S010,abstract-only,validated_primary,abstract_saved_no_legal_pdf
+A07,ADA CKD Risk 2026,10.2337/dc26-s011,41358881,https://doi.org/10.2337/dc26-S011,abstract-only,validated_primary,abstract_saved_no_legal_pdf
+A08,ADA Hospital Care 2026,10.2337/dc26-s016,41358892,https://doi.org/10.2337/dc26-S016,abstract-only,validated_primary,abstract_saved_no_legal_pdf
+A10,KDIGO AKI 2012,10.1038/kisup.2012.1,41101710,https://doi.org/10.1038/kisup.2012.1,abstract-only,validated_primary,abstract_saved_no_legal_pdf
+A11,ERAS Cardiac Surgery 2019,10.1093/ejcts/ezag083,41701146,https://doi.org/10.1007/978-3-030-33443-7_1,abstract-only,unresolved_partial,Low title similarity to seed (0.41); manual review required.
+A12,STS PBM Update,10.1053/j.jvca.2021.03.011,34217578,https://linkinghub.elsevier.com/retrieve/pii/S1053077021002536,paywalled,validated_primary,not_downloaded_legal_restriction
+A13,EACTS PBM 2024,10.1093/ejcts/ezae352,39385500,https://doi.org/10.1093/ejcts/ezae352,paywalled,validated_primary,not_downloaded_legal_restriction
+A14,STS Arterial Conduits,10.1016/j.athoracsur.2015.09.100,26680310,https://linkinghub.elsevier.com/retrieve/pii/S0003497515016082,abstract-only,validated_primary,abstract_saved_no_legal_pdf
+A15,Choice of Conduits Review,10.1016/j.jtcvs.2023.06.017,37542480,https://doi.org/10.1016/j.jtcvs.2023.06.017,paywalled,validated_primary,not_downloaded_legal_restriction
+B16,FREEDOM,10.1161/circoutcomes.125.012310,41697273,https://doi.org/10.1007/s11883-014-0426-0,abstract-only,unresolved_partial,Low title similarity to seed (0.38); manual review required.
+B17,FREEDOM Follow-On,10.1016/j.jacc.2018.11.001,30428398,https://linkinghub.elsevier.com/retrieve/pii/S0735109718389940,abstract-only,validated_primary,abstract_saved_no_legal_pdf
+B18,SYNTAX 10-year,10.1016/j.carrev.2021.08.027,34503909,https://linkinghub.elsevier.com/retrieve/pii/S1553838921006345,abstract-only,unresolved_partial,Low title similarity to seed (0.59); manual review required.
+B19,FAME 3,10.4330/wjc.v17.i9.111044,41024968,https://doi.org/10.1056/nejmc2202491,abstract-only,unresolved_partial,Low title similarity to seed (0.56); manual review required.
+B20,FAME 3 five-year,10.1016/s0140-6736(25)00505-7,39727036,https://doi.org/10.1016/S0140-6736(25)00505-7,paywalled,validated_primary,not_downloaded_legal_restriction
+B21,EXCEL,10.1056/nejmoa1610227,27797291,https://doi.org/10.1056/NEJMoa1610227,not_downloaded_legal_restriction,validated_primary,not_downloaded_legal_restriction
+B22,EXCEL five-year,10.1056/nejmoa1909406,31562798,https://doi.org/10.1056/NEJMoa1909406,not_downloaded_legal_restriction,validated_primary,not_downloaded_legal_restriction
+B23,NOBLE five-year,10.1016/s0140-6736(19)32972-1,31879028,https://linkinghub.elsevier.com/retrieve/pii/S0140673619329721,abstract-only,validated_primary,abstract_saved_no_legal_pdf
+B24,PRECOMBAT ten-year,10.1161/circulationaha.120.046039,32223567,https://doi.org/10.1161/circulationaha.120.046039,abstract-only,validated_primary,abstract_saved_no_legal_pdf
+B25,Left Main IPD Meta-analysis,10.1161/circulationaha.113.001258,37256598,https://doi.org/10.1016/j.carrev.2020.08.040,abstract-only,unresolved_partial,Low title similarity to seed (0.50); manual review required.
+B26,ISCHEMIA,10.1056/nejmoa1915922,32227755,https://doi.org/10.1056/NEJMoa1915922,not_downloaded_legal_restriction,validated_primary,not_downloaded_legal_restriction
+C27,STICH,10.1016/j.jtcvs.2010.10.031,41872899,https://linkinghub.elsevier.com/retrieve/pii/S002252231001247X,abstract-only,unresolved_partial,Low title similarity to seed (0.27); manual review required.
+C28,STICHES,10.1056/nejmoa1602001,27040723,https://doi.org/10.1056/NEJMoa1602001,paywalled,validated_primary,not_downloaded_legal_restriction
+C29,STICH age,10.1161/circulationaha.116.024800,27573034,https://doi.org/10.3410/f.725922934.793511258,abstract-only,validated_primary,abstract_saved_no_legal_pdf
+C30,STICH hospitalization,10.1016/j.jchf.2019.04.018,31521682,https://linkinghub.elsevier.com/retrieve/pii/S2213177919303336,abstract-only,unresolved_partial,Low title similarity to seed (0.44); manual review required.
+C31,STICH viability,10.1016/j.athoracsur.2025.01.011,39894429,https://linkinghub.elsevier.com/retrieve/pii/S0003497525000785,abstract-only,unresolved_partial,Low title similarity to seed (0.58); manual review required.
+C32,STICHES viability,10.1016/s0140-6736(13)60108-7,36892041,https://linkinghub.elsevier.com/retrieve/pii/S0140673613601087,abstract-only,unresolved_partial,Low title similarity to seed (0.50); manual review required.
+C33,STICH mode of death,10.1016/j.jchf.2013.04.012,24621972,https://linkinghub.elsevier.com/retrieve/pii/S2213177913002552,abstract-only,unresolved_partial,Low title similarity to seed (0.48); manual review required.
+C34,HF Guideline 2022,10.1177/17539447231202933,40264003,https://doi.org/10.1016/j.cardfail.2022.03.346,abstract-only,unresolved_partial,Low title similarity to seed (0.55); manual review required.
+D35,SVG vs LIMA patency,10.1097/crd.0000000000001091,41233944,https://doi.org/10.1016/j.jacc.2004.08.064,abstract-only,unresolved_partial,Low title similarity to seed (0.50); manual review required.
+D36,Early SVG patency,10.1016/j.jacc.2010.03.104,21050973,https://linkinghub.elsevier.com/retrieve/pii/S0735109710037290,abstract-only,unresolved_partial,Low title similarity to seed (0.55); manual review required.
+D37,1-year SVG patency,10.1111/jocs.16189,34961950,https://doi.org/10.1016/0049-3848(92)90461-i,abstract-only,unresolved_partial,Low title similarity to seed (0.52); manual review required.
+D38,Radial vs SVG NEJM 2018,10.1056/nejmoa1716026,29708851,https://doi.org/10.1056/NEJMoa1716026,not_downloaded_legal_restriction,validated_primary,not_downloaded_legal_restriction
+D39,Radial pooled long-term,10.1093/ejcts/ezx358,32662861,https://doi.org/10.1093/ejcts/ezac371,abstract-only,validated_primary,abstract_saved_no_legal_pdf
+D40,RAPCO,10.1056/nejmoa1808783,34285901,https://doi.org/10.1016/j.athoracsur.2012.05.121,abstract-only,unresolved_partial,Low title similarity to seed (0.42); manual review required.
+D42,BITA skeletonization diabetes,10.14789/ejmj.jmj25-0013-oa,21766699,https://linkinghub.elsevier.com/retrieve/pii/S0003497515017026,abstract-only,unresolved_partial,Low title similarity to seed (0.43); manual review required.
+D43,CORONARY 30-day,10.1080/14779072.2023.2283123,41689183,https://doi.org/10.1093/med/9780198735465.003.0002,abstract-only,unresolved_partial,Low title similarity to seed (0.47); manual review required.
+D44,CORONARY 1-year,10.1055/a-2839-7647,41911696,https://www.thieme-connect.de/products/ejournals/abstract/10.1055/a-2839-7647,abstract-only,unresolved_partial,Low title similarity to seed (0.48); manual review required.
+D45,ROOBY,10.1016/j.jtcvs.2015.08.124,26470910,https://linkinghub.elsevier.com/retrieve/pii/S0022522315017110,abstract-only,unresolved_partial,Low title similarity to seed (0.59); manual review required.
+D46,ROOBY five-year,10.1161/circulationaha.116.021861,27777257,https://doi.org/10.1161/CIRCULATIONAHA.116.021861,not_downloaded_legal_restriction,validated_primary,not_downloaded_legal_restriction
+E47,TRICS III,10.1056/nejmoa1711818,29130845,https://doi.org/10.1056/NEJMoa1711818,not_downloaded_legal_restriction,validated_primary,not_downloaded_legal_restriction
+E49,NICE-SUGAR,10.1016/0002-9343(83)90067-0,34590159,https://linkinghub.elsevier.com/retrieve/pii/0002934383900670,abstract-only,validated_primary,abstract_saved_no_legal_pdf
+E50,PAPABEAR,10.1001/jama.294.24.3093,16380589,https://doi.org/10.1001/jama.294.24.3093,abstract-only,validated_primary,abstract_saved_no_legal_pdf

@@ -1,0 +1,12 @@
+{
+  "id": "ESL-CASE-CABG-0001",
+  "caseId": "CASE-CABG-0001",
+  "episodeId": "EP-CABG-0001",
+  "generatedAt": "2026-04-25T00:00:00.000Z",
+  "evidenceLakeStatus": "ACTIVE",
+  "ecs": 91,
+  "uci": 0.29,
+  "eul": "LEVEL II",
+  "guidelinePackageId": "GP-REVASC-CABG-v3",
+  "transitionId": "STC-CABG-PREOP-001"
+}

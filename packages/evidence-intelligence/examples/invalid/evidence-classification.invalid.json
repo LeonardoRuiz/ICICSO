@@ -1,0 +1,12 @@
+{
+  "artifact_kind": "evidence-classification",
+  "data": {
+    "classification_id": "",
+    "evidence_type": "",
+    "evidence_level": "",
+    "clinical_functions": [],
+    "effect_direction": "positive",
+    "certainty": "certain",
+    "time_horizons": []
+  }
+}

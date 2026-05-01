@@ -1,0 +1,24 @@
+{
+  "catalogId": "icicso.jurisdictions.v1",
+  "code": "jurisdictions",
+  "label": "Jurisdictions",
+  "description": "Canonical jurisdiction model for scoping source validity, operational legality and localization review.",
+  "usageNotes": [
+    "Use the most specific jurisdiction available.",
+    "If a source is multinational, include multiple jurisdiction codes rather than forcing `global` unless truly transnational."
+  ],
+  "entries": [
+    { "id": "jur.global", "code": "global", "label": "Global", "description": "Multi-jurisdiction or broadly international source not bound to a single territory.", "usageNotes": ["Use when the source intentionally spans jurisdictions."], "priorityBand": 6, "kind": "supra" },
+    { "id": "jur.us", "code": "us", "label": "United States", "description": "United States national jurisdiction.", "usageNotes": ["Use for US-guideline and reimbursement-aligned sources."], "priorityBand": 2, "kind": "national" },
+    { "id": "jur.mexico", "code": "mexico", "label": "Mexico", "description": "Mexico national jurisdiction.", "usageNotes": ["Use for Mexican regulatory and clinical governance alignment."], "priorityBand": 2, "kind": "national" },
+    { "id": "jur.eu", "code": "eu", "label": "European Union", "description": "European Union supra-national jurisdiction.", "usageNotes": ["Use when guidance is framed at EU level."], "priorityBand": 3, "kind": "supra" },
+    { "id": "jur.uk", "code": "uk", "label": "United Kingdom", "description": "United Kingdom national jurisdiction.", "usageNotes": ["Use for NICE and UK-focused care models."], "priorityBand": 2, "kind": "national" },
+    { "id": "jur.canada", "code": "canada", "label": "Canada", "description": "Canada national jurisdiction.", "usageNotes": ["Use for Canadian guideline and HTA contexts."], "priorityBand": 2, "kind": "national" },
+    { "id": "jur.latam", "code": "latam", "label": "Latin America", "description": "Regional Latin American jurisdiction grouping.", "usageNotes": ["Use only when the source truly spans multiple LATAM countries."], "priorityBand": 4, "kind": "regional" },
+    { "id": "jur.institutional-local", "code": "institutional-local", "label": "Institutional Local", "description": "Local hospital or network governance boundary.", "usageNotes": ["Highest implementation specificity; requires local governance provenance."], "priorityBand": 1, "kind": "local" }
+  ],
+  "constraints": {
+    "uniqueFields": ["id", "code", "label"],
+    "requiredFields": ["id", "code", "label", "description", "usageNotes", "priorityBand", "kind"]
+  }
+}

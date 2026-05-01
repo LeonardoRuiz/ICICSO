@@ -1,0 +1,68 @@
+{
+  "updatedAt": "2026-03-30",
+  "canonicalRoot": "icicso",
+  "entries": [
+    {
+      "path": "icicso",
+      "role": "canonical",
+      "status": "active",
+      "notes": [
+        "Shared kernel efectivo",
+        "Architecture map efectivo",
+        "Linea de desarrollo nuevo del continuum"
+      ]
+    },
+    {
+      "path": "services/ingestion-orquestador",
+      "role": "active-support",
+      "status": "active",
+      "notes": [
+        "Gobierno documental",
+        "Ingestion y catalogacion"
+      ]
+    },
+    {
+      "path": "ICICSO_TERMINOLOGIAS",
+      "role": "active-support",
+      "status": "active",
+      "notes": [
+        "Terminologia y normalizacion local"
+      ]
+    },
+    {
+      "path": "domain",
+      "role": "legacy-reference",
+      "status": "frozen",
+      "notes": [
+        "Referencia semantica previa",
+        "No usar para codigo canonico nuevo"
+      ]
+    },
+    {
+      "path": "engines",
+      "role": "legacy-reference",
+      "status": "frozen",
+      "notes": [
+        "Referencia de flujos y motores previos"
+      ]
+    },
+    {
+      "path": "_archive/noncanonical/08_Plataforma_Digital/icicso-foundation",
+      "role": "reference",
+      "status": "maintained-reference",
+      "notes": [
+        "Foundation alterno",
+        "Extraer piezas utiles, no competir con el canon"
+      ]
+    },
+    {
+      "path": "icicso-local",
+      "role": "experimental",
+      "status": "mutable",
+      "notes": [
+        "Entorno local y experimental",
+        "Promover al canon solo despues de validar"
+      ]
+    }
+  ]
+}

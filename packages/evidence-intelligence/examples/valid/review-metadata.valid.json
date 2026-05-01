@@ -1,0 +1,11 @@
+{
+  "artifact_kind": "review-metadata",
+  "data": {
+    "owner": "icicso.evidence.board",
+    "review_status": "approved",
+    "reviewed_at": "2026-04-04T10:00:00Z",
+    "review_cycle": "quarterly",
+    "approver": "chief-clinical-architect",
+    "notes": "approved"
+  }
+}

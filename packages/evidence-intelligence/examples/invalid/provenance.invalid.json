@@ -1,0 +1,14 @@
+{
+  "artifact_kind": "provenance",
+  "data": {
+    "source_system": "",
+    "captured_at": "",
+    "captured_by": "",
+    "chain_of_custody": [],
+    "license_status": "",
+    "attestation_status": "",
+    "canonical_id": "",
+    "version": "",
+    "status": ""
+  }
+}

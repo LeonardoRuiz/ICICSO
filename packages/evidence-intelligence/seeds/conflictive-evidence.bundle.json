@@ -1,0 +1,99 @@
+{
+  "seedMetadata": {
+    "seedId": "seed.conflictive-evidence.v1",
+    "title": "Conflictive Evidence Example",
+    "structuralExample": true,
+    "note": "Structured example intended to force conflict detection rather than silent decision."
+  },
+  "ser": {
+    "serId": "SER-CONFLICT-0001",
+    "sourceDocumentId": "EDOC-CONFLICT-2024",
+    "title": "Conflicting evidence regarding extended monitoring after surgery",
+    "evidenceType": "consensus",
+    "clinicalDomain": "perioperative_monitoring",
+    "summary": "Consensus supports extended telemetry in selected patients, but embedded statement reveals mixed outcome direction and limited portability.",
+    "statements": [
+      {
+        "statementId": "SES-CONFLICT-01",
+        "clinicalFunction": "surveillance",
+        "interventionClass": "monitoring-strategy",
+        "interventionLabel": "Extended telemetry surveillance",
+        "effectDirection": "mixed",
+        "strength": "moderate",
+        "certainty": "low",
+        "decisionReadiness": "ready-with-local-review",
+        "timeHorizon": "7-days",
+        "outcomes": [
+          { "outcomeCode": "adverse-event", "effectDirection": "benefit", "note": "Potential earlier arrhythmia detection." },
+          { "outcomeCode": "resource-utilization", "effectDirection": "harm", "note": "Higher bed occupancy and telemetry burden." }
+        ],
+        "conditions": ["high-risk postoperative arrhythmia concern"],
+        "exclusions": ["telemetry unavailable"],
+        "rationale": "Use only after explicit review because clinical and operational effects diverge.",
+        "operationalContext": {
+          "implementationComplexity": "moderate",
+          "resourceDemand": "high",
+          "costRelevance": "high",
+          "operationalRelevance": "high",
+          "resourceRequirements": [
+            { "resourceType": "telemetry_capacity", "role": "monitoring_team", "quantity": 1, "unit": "service", "mandatory": true, "costCenter": "WARD", "notes": null }
+          ],
+          "constraints": ["Capacity limitation may prevent broad rollout."]
+        }
+      }
+    ],
+    "applicability": {
+      "clinicalDomain": "perioperative_monitoring",
+      "careSetting": "postoperative_ward",
+      "jurisdictions": ["global"],
+      "decisionReadiness": "ready-with-local-review",
+      "population": {
+        "summary": "Selected postoperative patients with elevated arrhythmia risk.",
+        "ageBands": ["adult", "older_adult"],
+        "sexes": ["female", "male"],
+        "diagnoses": ["postoperative telemetry candidate"],
+        "procedures": ["major surgery"],
+        "biomarkers": [],
+        "severity": "intermediate_risk",
+        "comorbidities": ["atrial fibrillation history"],
+        "inclusionCriteria": ["elevated rhythm risk"],
+        "exclusionCriteria": ["telemetry unavailable"]
+      },
+      "dimensionAssessments": [
+        { "dimension": "population-fit", "score": 2, "rationale": "Risk-targeted subgroup only." },
+        { "dimension": "intervention-fit", "score": 2, "rationale": "Monitoring strategy is plausible but resource-sensitive." },
+        { "dimension": "setting-fit", "score": 2, "rationale": "Ward telemetry availability varies." },
+        { "dimension": "jurisdiction-fit", "score": 2, "rationale": "Needs local policy adaptation." },
+        { "dimension": "resource-fit", "score": 1, "rationale": "Capacity constraints are common." }
+      ],
+      "implementationPreconditions": ["telemetry governance review"]
+    },
+    "provenance": {
+      "sourceSystem": "manual-ingest",
+      "capturedAt": "2026-04-04T12:40:00Z",
+      "capturedBy": "icicso.evidence.curator",
+      "chainOfCustody": [
+        { "step": "derive-ser", "actor": "icicso.evidence.curator", "timestamp": "2026-04-04T12:40:00Z", "hashSha256": "ser-conflict-01", "note": "Derived from conflictive example." }
+      ],
+      "legal": {
+        "licenseStatus": "licensed",
+        "attestationStatus": "attested",
+        "reviewPolicy": "perioperative-governance",
+        "retentionClass": "clinical_evidence_permanent"
+      },
+      "versioning": {
+        "canonicalId": "CANON-SER-CONFLICT",
+        "version": "1.0.0",
+        "effectiveFrom": "2026-04-04",
+        "effectiveTo": null,
+        "supersedes": [],
+        "status": "active"
+      }
+    }
+  },
+  "expectedMapperBehavior": {
+    "shouldGenerateEo": true,
+    "expectedDecisionVerb": "defer_to_review",
+    "expectedReviewState": "needs-human-review"
+  }
+}

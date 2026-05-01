@@ -1,0 +1,16 @@
+{
+  "artifact_kind": "provenance",
+  "data": {
+    "source_system": "manual-ingest",
+    "captured_at": "2026-04-04T10:00:00Z",
+    "captured_by": "icicso.evidence.curator",
+    "chain_of_custody": [
+      { "step": "ingest", "actor": "icicso.evidence.curator", "timestamp": "2026-04-04T10:00:00Z", "hash": "sha256:1", "note": "ok" }
+    ],
+    "license_status": "licensed",
+    "attestation_status": "attested",
+    "canonical_id": "CANON-001",
+    "version": "1.0.0",
+    "status": "active"
+  }
+}

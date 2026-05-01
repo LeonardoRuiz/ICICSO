@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://icicso.local/schemas/runtime/case_instance.schema.json",
+  "title": "CaseInstance",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "case_id": {
+      "type": "string",
+      "pattern": "^CASE-[A-Z0-9_-]+$"
+    },
+    "cpo_id": {
+      "type": "string",
+      "pattern": "^CPO-[A-Z0-9_-]+$"
+    },
+    "patient_longitudinal_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "$ref": "../common/enums.schema.json#/$defs/caseStatus"
+    },
+    "current_phase_id": {
+      "type": ["string", "null"]
+    },
+    "evidence_snapshot_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "instantiated_at_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "decision_cards": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "override_required": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "case_id",
+    "cpo_id",
+    "patient_longitudinal_id",
+    "status",
+    "evidence_snapshot_version",
+    "instantiated_at_utc",
+    "decision_cards",
+    "override_required"
+  ]
+}

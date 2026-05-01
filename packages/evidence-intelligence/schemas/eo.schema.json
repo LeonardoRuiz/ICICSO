@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://icicso.local/schemas/evidence-intelligence/eo.schema.json",
+  "title": "Evidence Object",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "eo_id",
+    "trigger",
+    "conditions",
+    "decision",
+    "actions",
+    "expected_outcomes",
+    "required_context",
+    "operational_constraints",
+    "evidence_support",
+    "confidence",
+    "jurisdiction",
+    "review_status",
+    "version",
+    "audit_fields"
+  ],
+  "properties": {
+    "eo_id": { "type": "string", "pattern": "^EO-[A-Z0-9_-]{6,}$" },
+    "trigger": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["event", "clinical_function"],
+      "properties": {
+        "event": { "type": "string", "minLength": 1 },
+        "clinical_function": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
+      }
+    },
+    "conditions": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+    "exclusions": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["verb", "effect_direction", "decision_readiness"],
+      "properties": {
+        "verb": { "type": "string", "enum": ["recommend", "consider", "avoid", "defer-to-review"] },
+        "effect_direction": { "type": "string", "enum": ["benefit", "harm", "no-benefit", "inconclusive", "mixed"] },
+        "decision_readiness": { "type": "string", "enum": ["ready-for-execution", "ready-with-local-review", "synthesis-required", "contextual-only", "not-ready"] },
+        "rationale": { "type": ["string", "null"] }
+      }
+    },
+    "actions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["action_id", "intervention_class", "summary"],
+        "properties": {
+          "action_id": { "type": "string", "minLength": 1 },
+          "intervention_class": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "summary": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "expected_outcomes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["outcome_class", "effect_direction"],
+        "properties": {
+          "outcome_class": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "effect_direction": { "type": "string", "enum": ["benefit", "harm", "no-benefit", "inconclusive", "mixed"] }
+        }
+      }
+    },
+    "required_context": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+    "operational_constraints": { "$ref": "https://icicso.local/schemas/evidence-intelligence/operational-context.schema.json" },
+    "evidence_support": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["artifact_type", "artifact_id"],
+        "properties": {
+          "artifact_type": { "type": "string", "enum": ["evidence-document", "evidence-source", "ser"] },
+          "artifact_id": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "confidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["certainty"],
+      "properties": {
+        "certainty": { "type": "string", "enum": ["very-high", "high", "moderate", "low", "very-low", "unknown"] },
+        "uncertainty_sources": { "type": "array", "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" } }
+      }
+    },
+    "jurisdiction": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" } },
+    "review_status": { "type": "string", "enum": ["draft", "under-review", "approved", "active", "superseded", "deprecated"] },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "audit_fields": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["created_at", "created_by", "updated_at"],
+      "properties": {
+        "created_at": { "type": "string", "format": "date-time" },
+        "created_by": { "type": "string", "minLength": 1 },
+        "updated_at": { "type": "string", "format": "date-time" }
+      }
+    }
+  }
+}

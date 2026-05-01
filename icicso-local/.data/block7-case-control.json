@@ -1,0 +1,222 @@
+{
+  "caseControls": [
+    {
+      "caseControlId": "CCCL-CASE-CABG3-2026-00014",
+      "caseId": "CASE-CABG3-2026-00014",
+      "currentState": "CLOSED",
+      "activated": true,
+      "readinessSnapshotId": "RDY-SNAPSHOT-CABG3-v1",
+      "currentLegalSnapshotId": "ESL-CASE_CLOSURE-CASE-CABG3-2026-00014-4",
+      "createdAt": "2026-03-30T01:13:13.855Z",
+      "updatedAt": "2026-03-30T01:14:59.282Z"
+    }
+  ],
+  "transitions": [
+    {
+      "transitionId": "TR-CASE-CABG3-2026-00014-ACTIVATE",
+      "caseId": "CASE-CABG3-2026-00014",
+      "fromState": null,
+      "toState": "PRE-OP",
+      "reason": "Activación formal del caso desde readiness PASS.",
+      "overrideId": null,
+      "createdAt": "2026-03-30T01:13:13.855Z"
+    },
+    {
+      "transitionId": "TR-CASE-CABG3-2026-00014-2",
+      "caseId": "CASE-CABG3-2026-00014",
+      "fromState": "PRE-OP",
+      "toState": "INTRA-OP",
+      "reason": "Ingreso a sala y tiempo operatorio",
+      "overrideId": null,
+      "createdAt": "2026-03-30T01:13:15.214Z"
+    },
+    {
+      "transitionId": "TR-CASE-CABG3-2026-00014-3",
+      "caseId": "CASE-CABG3-2026-00014",
+      "fromState": "INTRA-OP",
+      "toState": "ICU",
+      "reason": "Salida de quirófano e ingreso UCI",
+      "overrideId": null,
+      "createdAt": "2026-03-30T01:14:10.022Z"
+    },
+    {
+      "transitionId": "TR-CASE-CABG3-2026-00014-4",
+      "caseId": "CASE-CABG3-2026-00014",
+      "fromState": "ICU",
+      "toState": "FLOOR",
+      "reason": "Estabilidad post-UCI y traslado a piso",
+      "overrideId": null,
+      "createdAt": "2026-03-30T01:14:10.674Z"
+    },
+    {
+      "transitionId": "TR-CASE-CABG3-2026-00014-5",
+      "caseId": "CASE-CABG3-2026-00014",
+      "fromState": "FLOOR",
+      "toState": "FOLLOW-UP",
+      "reason": "Egreso a seguimiento estructurado",
+      "overrideId": null,
+      "createdAt": "2026-03-30T01:14:13.853Z"
+    },
+    {
+      "transitionId": "TR-CASE-CABG3-2026-00014-6",
+      "caseId": "CASE-CABG3-2026-00014",
+      "fromState": "FOLLOW-UP",
+      "toState": "CLOSED",
+      "reason": "Cierre formal del caso demo",
+      "overrideId": null,
+      "createdAt": "2026-03-30T01:14:59.282Z"
+    }
+  ],
+  "captures": [
+    {
+      "captureId": "STC-TR-CASE-CABG3-2026-00014-ACTIVATE",
+      "transitionId": "TR-CASE-CABG3-2026-00014-ACTIVATE",
+      "caseId": "CASE-CABG3-2026-00014",
+      "actorRole": "case-controller",
+      "summary": "Caso activado en PRE-OP con gates de readiness cumplidos.",
+      "createdAt": "2026-03-30T01:13:13.855Z"
+    },
+    {
+      "captureId": "STC-TR-CASE-CABG3-2026-00014-2",
+      "transitionId": "TR-CASE-CABG3-2026-00014-2",
+      "caseId": "CASE-CABG3-2026-00014",
+      "actorRole": "cirujano cardiovascular",
+      "summary": "Transición PRE-OP -> INTRA-OP. Ingreso a sala y tiempo operatorio",
+      "createdAt": "2026-03-30T01:13:15.214Z"
+    },
+    {
+      "captureId": "STC-TR-CASE-CABG3-2026-00014-3",
+      "transitionId": "TR-CASE-CABG3-2026-00014-3",
+      "caseId": "CASE-CABG3-2026-00014",
+      "actorRole": "intensivista",
+      "summary": "Transición INTRA-OP -> ICU. Salida de quirófano e ingreso UCI",
+      "createdAt": "2026-03-30T01:14:10.022Z"
+    },
+    {
+      "captureId": "STC-TR-CASE-CABG3-2026-00014-4",
+      "transitionId": "TR-CASE-CABG3-2026-00014-4",
+      "caseId": "CASE-CABG3-2026-00014",
+      "actorRole": "intensivista",
+      "summary": "Transición ICU -> FLOOR. Estabilidad post-UCI y traslado a piso",
+      "createdAt": "2026-03-30T01:14:10.674Z"
+    },
+    {
+      "captureId": "STC-TR-CASE-CABG3-2026-00014-5",
+      "transitionId": "TR-CASE-CABG3-2026-00014-5",
+      "caseId": "CASE-CABG3-2026-00014",
+      "actorRole": "cirujano cardiovascular",
+      "summary": "Transición FLOOR -> FOLLOW-UP. Egreso a seguimiento estructurado",
+      "createdAt": "2026-03-30T01:14:13.853Z"
+    },
+    {
+      "captureId": "STC-TR-CASE-CABG3-2026-00014-6",
+      "transitionId": "TR-CASE-CABG3-2026-00014-6",
+      "caseId": "CASE-CABG3-2026-00014",
+      "actorRole": "case-controller",
+      "summary": "Transición FOLLOW-UP -> CLOSED. Cierre formal del caso demo",
+      "createdAt": "2026-03-30T01:14:59.282Z"
+    }
+  ],
+  "legalSnapshots": [
+    {
+      "legalSnapshotId": "ESL-ACTIVATION_PREOP-CASE-CABG3-2026-00014-1",
+      "caseId": "CASE-CABG3-2026-00014",
+      "state": "PRE-OP",
+      "snapshotType": "activation_preop",
+      "summary": "Snapshot legal de activación preoperatoria con readiness PASS y CPO vigente.",
+      "createdAt": "2026-03-30T01:13:13.855Z"
+    },
+    {
+      "legalSnapshotId": "ESL-INTRAOP_EXIT-CASE-CABG3-2026-00014-2",
+      "caseId": "CASE-CABG3-2026-00014",
+      "state": "INTRA-OP",
+      "snapshotType": "intraop_exit",
+      "summary": "Snapshot legal de salida intraoperatoria con cierre de tiempo quirúrgico.",
+      "createdAt": "2026-03-30T01:14:10.022Z"
+    },
+    {
+      "legalSnapshotId": "ESL-ICU_ENTRY-CASE-CABG3-2026-00014-3",
+      "caseId": "CASE-CABG3-2026-00014",
+      "state": "ICU",
+      "snapshotType": "icu_entry",
+      "summary": "Snapshot legal de ingreso a UCI con transferencia clínica y hemodinámica.",
+      "createdAt": "2026-03-30T01:14:10.022Z"
+    },
+    {
+      "legalSnapshotId": "ESL-CASE_CLOSURE-CASE-CABG3-2026-00014-4",
+      "caseId": "CASE-CABG3-2026-00014",
+      "state": "CLOSED",
+      "snapshotType": "case_closure",
+      "summary": "Snapshot legal de cierre formal del caso con trazabilidad completa.",
+      "createdAt": "2026-03-30T01:14:59.283Z"
+    }
+  ],
+  "overrides": [
+    {
+      "overrideId": "OVR-CASE-CABG3-2026-00014-1",
+      "caseId": "CASE-CABG3-2026-00014",
+      "overrideType": "logistical",
+      "justification": "Necesidad excepcional de salto por contingencia logística",
+      "signedBy": "USR-GOVERNANCE-0001",
+      "status": "active",
+      "createdAt": "2026-03-30T01:13:15.692Z"
+    }
+  ],
+  "logs": [
+    {
+      "caseId": "CASE-CABG3-2026-00014",
+      "event": "legal.snapshot.created",
+      "createdAt": "2026-03-30T01:13:13.855Z"
+    },
+    {
+      "caseId": "CASE-CABG3-2026-00014",
+      "event": "case.activated",
+      "createdAt": "2026-03-30T01:13:13.855Z"
+    },
+    {
+      "caseId": "CASE-CABG3-2026-00014",
+      "event": "case.transitioned",
+      "createdAt": "2026-03-30T01:13:15.214Z"
+    },
+    {
+      "caseId": "CASE-CABG3-2026-00014",
+      "event": "override.created",
+      "createdAt": "2026-03-30T01:13:15.692Z"
+    },
+    {
+      "caseId": "CASE-CABG3-2026-00014",
+      "event": "legal.snapshot.created",
+      "createdAt": "2026-03-30T01:14:10.022Z"
+    },
+    {
+      "caseId": "CASE-CABG3-2026-00014",
+      "event": "legal.snapshot.created",
+      "createdAt": "2026-03-30T01:14:10.022Z"
+    },
+    {
+      "caseId": "CASE-CABG3-2026-00014",
+      "event": "case.transitioned",
+      "createdAt": "2026-03-30T01:14:10.022Z"
+    },
+    {
+      "caseId": "CASE-CABG3-2026-00014",
+      "event": "case.transitioned",
+      "createdAt": "2026-03-30T01:14:10.674Z"
+    },
+    {
+      "caseId": "CASE-CABG3-2026-00014",
+      "event": "case.transitioned",
+      "createdAt": "2026-03-30T01:14:13.853Z"
+    },
+    {
+      "caseId": "CASE-CABG3-2026-00014",
+      "event": "legal.snapshot.created",
+      "createdAt": "2026-03-30T01:14:59.283Z"
+    },
+    {
+      "caseId": "CASE-CABG3-2026-00014",
+      "event": "case.transitioned",
+      "createdAt": "2026-03-30T01:14:59.282Z"
+    }
+  ]
+}

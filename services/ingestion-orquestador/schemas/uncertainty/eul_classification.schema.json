@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://icicso.local/schemas/uncertainty/eul_classification.schema.json",
+  "title": "EULClassification",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "eul_id": {
+      "type": "string",
+      "pattern": "^EUL-[A-Z0-9_-]+$"
+    },
+    "ete_result_id": {
+      "type": "string",
+      "pattern": "^ETE-[A-Z0-9_-]+$"
+    },
+    "uncertainty_level": {
+      "$ref": "../common/enums.schema.json#/$defs/uncertaintyLevel"
+    },
+    "divergence_density": {
+      "$ref": "../common/enums.schema.json#/$defs/conflictSeverity"
+    },
+    "decision_irreversibility": {
+      "$ref": "../common/enums.schema.json#/$defs/conflictSeverity"
+    },
+    "outcome_sensitivity": {
+      "$ref": "../common/enums.schema.json#/$defs/conflictSeverity"
+    },
+    "requires_reinforced_validation": {
+      "type": "boolean"
+    },
+    "ruleset_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "classification_rationale": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "classified_at_utc": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "eul_id",
+    "ete_result_id",
+    "uncertainty_level",
+    "divergence_density",
+    "decision_irreversibility",
+    "outcome_sensitivity",
+    "requires_reinforced_validation",
+    "ruleset_version",
+    "classification_rationale",
+    "classified_at_utc"
+  ]
+}

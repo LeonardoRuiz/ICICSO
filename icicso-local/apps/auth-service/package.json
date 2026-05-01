@@ -1,0 +1,25 @@
+{
+  "name": "@icicso/auth-service",
+  "version": "1.0.0",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@icicso/canonical-types": "workspace:*",
+    "@icicso/config": "workspace:*",
+    "@icicso/contracts": "workspace:*",
+    "@icicso/database": "workspace:*",
+    "@icicso/logger": "workspace:*",
+    "@icicso/security": "workspace:*",
+    "@prisma/client": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}

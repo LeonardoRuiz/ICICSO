@@ -1,0 +1,20 @@
+{
+  "catalogId": "icicso.operational-relevance.v1",
+  "code": "operational-relevance",
+  "label": "Operational Relevance",
+  "description": "Model for how strongly an evidence statement should influence operational planning, resource design and workflow execution.",
+  "usageNotes": [
+    "Operational relevance is complementary to clinical strength, not a replacement for it.",
+    "Use this model to prioritize pathway engineering, resource allocation and readiness gates."
+  ],
+  "entries": [
+    { "id": "oprel.low", "code": "low", "label": "Low", "description": "Limited operational implications beyond routine care.", "usageNotes": ["Minimal effect on staffing, workflow or capital resources."] },
+    { "id": "oprel.moderate", "code": "moderate", "label": "Moderate", "description": "Meaningful operational implications requiring local planning.", "usageNotes": ["May alter workflow, scheduling or moderate resource consumption."] },
+    { "id": "oprel.high", "code": "high", "label": "High", "description": "Strong operational implications affecting resources, coordination or throughput.", "usageNotes": ["Should be visible in route design and pathway governance."] },
+    { "id": "oprel.transformational", "code": "transformational", "label": "Transformational", "description": "Materially changes care delivery model, capacity planning or institutional capability.", "usageNotes": ["Requires executive, service-line or governance board attention."] }
+  ],
+  "constraints": {
+    "uniqueFields": ["id", "code", "label"],
+    "requiredFields": ["id", "code", "label", "description", "usageNotes"]
+  }
+}

@@ -1,0 +1,466 @@
+{
+  "runbooks": [
+    {
+      "runbookId": "RO-CABG3-ACTORS-v1",
+      "caseId": "CASE-CABG3-2026-00014",
+      "cpoId": "CPO-CABG3-DM2-NSTEMI-FEVI35-ERC3-v1",
+      "title": "Runbook operativo CABG x3 por actor",
+      "status": "ready",
+      "summary": "Runbook formal de preparación por actor para CABG x3 + DM2 + NSTEMI + FEVI 35% + ERC3.",
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    }
+  ],
+  "runbookSteps": [
+    {
+      "stepId": "STEP-CIRUJANO-CARDIOVASCULAR-1",
+      "runbookId": "RO-CABG3-ACTORS-v1",
+      "actorRole": "cirujano cardiovascular",
+      "phase": "preop",
+      "title": "Confirmar indicación CABG x3 y consentimiento operatorio.",
+      "required": true,
+      "checklist": true,
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "stepId": "STEP-CIRUJANO-CARDIOVASCULAR-2",
+      "runbookId": "RO-CABG3-ACTORS-v1",
+      "actorRole": "cirujano cardiovascular",
+      "phase": "intraop",
+      "title": "Ejecutar plan quirúrgico y verificar targets de revascularización.",
+      "required": true,
+      "checklist": true,
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "stepId": "STEP-CIRUJANO-CARDIOVASCULAR-3",
+      "runbookId": "RO-CABG3-ACTORS-v1",
+      "actorRole": "cirujano cardiovascular",
+      "phase": "piso",
+      "title": "Definir hitos de alta y seguimiento quirúrgico.",
+      "required": true,
+      "checklist": true,
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "stepId": "STEP-ANESTESIÓLOGO-1",
+      "runbookId": "RO-CABG3-ACTORS-v1",
+      "actorRole": "anestesiólogo",
+      "phase": "preop",
+      "title": "Revisar antiagregante suspendido, crossmatch y vía aérea.",
+      "required": true,
+      "checklist": true,
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "stepId": "STEP-ANESTESIÓLOGO-2",
+      "runbookId": "RO-CABG3-ACTORS-v1",
+      "actorRole": "anestesiólogo",
+      "phase": "intraop",
+      "title": "Gestionar hipotensión, lactato y estrategia transfusional.",
+      "required": true,
+      "checklist": true,
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "stepId": "STEP-ANESTESIÓLOGO-3",
+      "runbookId": "RO-CABG3-ACTORS-v1",
+      "actorRole": "anestesiólogo",
+      "phase": "icu",
+      "title": "Transferir plan hemodinámico y de analgesia a UCI.",
+      "required": true,
+      "checklist": true,
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "stepId": "STEP-INTENSIVISTA-1",
+      "runbookId": "RO-CABG3-ACTORS-v1",
+      "actorRole": "intensivista",
+      "phase": "icu",
+      "title": "Recepcionar bundle post-CABG y vigilancia de creatinina/lactato.",
+      "required": true,
+      "checklist": true,
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "stepId": "STEP-INTENSIVISTA-2",
+      "runbookId": "RO-CABG3-ACTORS-v1",
+      "actorRole": "intensivista",
+      "phase": "icu",
+      "title": "Escalar ante FA, sangrado alto o hipotensión persistente.",
+      "required": true,
+      "checklist": true,
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "stepId": "STEP-INTENSIVISTA-3",
+      "runbookId": "RO-CABG3-ACTORS-v1",
+      "actorRole": "intensivista",
+      "phase": "follow-up",
+      "title": "Cerrar transición a piso con metas clínicas y de laboratorio.",
+      "required": true,
+      "checklist": true,
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "stepId": "STEP-ENFERMERÍA-QUIRÓFANO-1",
+      "runbookId": "RO-CABG3-ACTORS-v1",
+      "actorRole": "enfermería quirófano",
+      "phase": "preop",
+      "title": "Verificar checklist de sala, hemoderivados y equipamiento crítico.",
+      "required": true,
+      "checklist": true,
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "stepId": "STEP-ENFERMERÍA-QUIRÓFANO-2",
+      "runbookId": "RO-CABG3-ACTORS-v1",
+      "actorRole": "enfermería quirófano",
+      "phase": "intraop",
+      "title": "Sostener instrumentación y conteos intraoperatorios.",
+      "required": true,
+      "checklist": true,
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "stepId": "STEP-ENFERMERÍA-UCI-1",
+      "runbookId": "RO-CABG3-ACTORS-v1",
+      "actorRole": "enfermería UCI",
+      "phase": "icu",
+      "title": "Confirmar cama UCI, monitores y bombas de infusión.",
+      "required": true,
+      "checklist": true,
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "stepId": "STEP-ENFERMERÍA-UCI-2",
+      "runbookId": "RO-CABG3-ACTORS-v1",
+      "actorRole": "enfermería UCI",
+      "phase": "icu",
+      "title": "Protocolizar vigilancia de drenajes, FA e hipotensión.",
+      "required": true,
+      "checklist": true,
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "stepId": "STEP-ENFERMERÍA-UCI-3",
+      "runbookId": "RO-CABG3-ACTORS-v1",
+      "actorRole": "enfermería UCI",
+      "phase": "piso",
+      "title": "Preparar transición a piso y educación basal.",
+      "required": true,
+      "checklist": true,
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    }
+  ],
+  "actorMatrices": [
+    {
+      "actorMatrixId": "AM-CIRUJANO-CARDIOVASCULAR",
+      "runbookId": "RO-CABG3-ACTORS-v1",
+      "actorRole": "cirujano cardiovascular",
+      "responsibility": "Validar estrategia CABG x3, secuencia quirúrgica y contingencias de sangrado/FA.",
+      "stepIds": [
+        "STEP-CIRUJANO-CARDIOVASCULAR-1",
+        "STEP-CIRUJANO-CARDIOVASCULAR-2",
+        "STEP-CIRUJANO-CARDIOVASCULAR-3"
+      ],
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "actorMatrixId": "AM-ANESTESIÓLOGO",
+      "runbookId": "RO-CABG3-ACTORS-v1",
+      "actorRole": "anestesiólogo",
+      "responsibility": "Asegurar estabilidad hemodinámica, protección renal y control metabólico perioperatorio.",
+      "stepIds": [
+        "STEP-ANESTESIÓLOGO-1",
+        "STEP-ANESTESIÓLOGO-2",
+        "STEP-ANESTESIÓLOGO-3"
+      ],
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "actorMatrixId": "AM-INTENSIVISTA",
+      "runbookId": "RO-CABG3-ACTORS-v1",
+      "actorRole": "intensivista",
+      "responsibility": "Orquestar protección renal, ventilación, hemodinamia y detección de FA/hipotensión en UCI.",
+      "stepIds": [
+        "STEP-INTENSIVISTA-1",
+        "STEP-INTENSIVISTA-2",
+        "STEP-INTENSIVISTA-3"
+      ],
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "actorMatrixId": "AM-ENFERMERÍA-QUIRÓFANO",
+      "runbookId": "RO-CABG3-ACTORS-v1",
+      "actorRole": "enfermería quirófano",
+      "responsibility": "Preparar sala, material crítico y checklists del tiempo intraoperatorio.",
+      "stepIds": [
+        "STEP-ENFERMERÍA-QUIRÓFANO-1",
+        "STEP-ENFERMERÍA-QUIRÓFANO-2"
+      ],
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "actorMatrixId": "AM-ENFERMERÍA-UCI",
+      "runbookId": "RO-CABG3-ACTORS-v1",
+      "actorRole": "enfermería UCI",
+      "responsibility": "Ejecutar monitorización intensiva y alertamiento temprano de eventos críticos.",
+      "stepIds": [
+        "STEP-ENFERMERÍA-UCI-1",
+        "STEP-ENFERMERÍA-UCI-2",
+        "STEP-ENFERMERÍA-UCI-3"
+      ],
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    }
+  ],
+  "bomResources": [
+    {
+      "resourceId": "BOM-CL-001",
+      "caseId": "CASE-CABG3-2026-00014",
+      "category": "clinical",
+      "label": "Consentimiento quirúrgico firmado",
+      "availabilityStatus": "ready",
+      "critical": true,
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "resourceId": "BOM-CL-002",
+      "caseId": "CASE-CABG3-2026-00014",
+      "category": "clinical",
+      "label": "Crossmatch con 2 UGR reservadas",
+      "availabilityStatus": "ready",
+      "critical": true,
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "resourceId": "BOM-OR-001",
+      "caseId": "CASE-CABG3-2026-00014",
+      "category": "or",
+      "label": "Quirófano cardiovascular asignado",
+      "availabilityStatus": "reserved",
+      "critical": true,
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "resourceId": "BOM-OR-002",
+      "caseId": "CASE-CABG3-2026-00014",
+      "category": "or",
+      "label": "Set de bypass coronario e instrumentación",
+      "availabilityStatus": "ready",
+      "critical": true,
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "resourceId": "BOM-ICU-001",
+      "caseId": "CASE-CABG3-2026-00014",
+      "category": "icu",
+      "label": "Cama UCI posoperatoria reservada",
+      "availabilityStatus": "reserved",
+      "critical": true,
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "resourceId": "BOM-EQ-001",
+      "caseId": "CASE-CABG3-2026-00014",
+      "category": "equipment",
+      "label": "ECMO stand-by / bypass / cell saver",
+      "availabilityStatus": "ready",
+      "critical": true,
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "resourceId": "BOM-HR-001",
+      "caseId": "CASE-CABG3-2026-00014",
+      "category": "human",
+      "label": "Equipo quirúrgico completo",
+      "availabilityStatus": "ready",
+      "critical": true,
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "resourceId": "BOM-HR-002",
+      "caseId": "CASE-CABG3-2026-00014",
+      "category": "human",
+      "label": "Enfermería UCI asignada",
+      "availabilityStatus": "ready",
+      "critical": true,
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    }
+  ],
+  "tamPhases": [
+    {
+      "phaseId": "TAM-PREOP",
+      "caseId": "CASE-CABG3-2026-00014",
+      "phase": "preop",
+      "sequence": 1,
+      "title": "Preoperatorio",
+      "objective": "Cierre de checklist, consentimiento, crossmatch y suspensión de antiagregante.",
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "phaseId": "TAM-INTRAOP",
+      "caseId": "CASE-CABG3-2026-00014",
+      "phase": "intraop",
+      "sequence": 2,
+      "title": "Intraoperatorio",
+      "objective": "CABG x3 con vigilancia hemodinámica, renal y transfusional.",
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "phaseId": "TAM-ICU",
+      "caseId": "CASE-CABG3-2026-00014",
+      "phase": "icu",
+      "sequence": 3,
+      "title": "UCI",
+      "objective": "Estabilización inicial, detección de lactato, FA, sangrado e hipotensión.",
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "phaseId": "TAM-PISO",
+      "caseId": "CASE-CABG3-2026-00014",
+      "phase": "piso",
+      "sequence": 4,
+      "title": "Piso",
+      "objective": "Recuperación, movilización y optimización metabólica.",
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "phaseId": "TAM-FOLLOW-UP",
+      "caseId": "CASE-CABG3-2026-00014",
+      "phase": "follow-up",
+      "sequence": 5,
+      "title": "Seguimiento",
+      "objective": "Revisión quirúrgica, renal y glucémica post-alta.",
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    }
+  ],
+  "evtCatalog": [
+    {
+      "eventId": "EVT-LACTATE",
+      "caseId": "CASE-CABG3-2026-00014",
+      "label": "lactato alto",
+      "severity": "high",
+      "trigger": "Lactato > 4 mmol/L o ascenso sostenido",
+      "responseOwner": "anestesiólogo",
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "eventId": "EVT-BLEED",
+      "caseId": "CASE-CABG3-2026-00014",
+      "label": "sangrado alto",
+      "severity": "high",
+      "trigger": "Drenaje o pérdida sanguínea por encima de umbral quirúrgico",
+      "responseOwner": "cirujano cardiovascular",
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "eventId": "EVT-CREAT",
+      "caseId": "CASE-CABG3-2026-00014",
+      "label": "creatinina en ascenso",
+      "severity": "high",
+      "trigger": "Creatinina en ascenso > 0.3 mg/dL o tendencia renal adversa",
+      "responseOwner": "intensivista",
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "eventId": "EVT-AF",
+      "caseId": "CASE-CABG3-2026-00014",
+      "label": "FA",
+      "severity": "moderate",
+      "trigger": "Fibrilación auricular postoperatoria documentada",
+      "responseOwner": "intensivista",
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    },
+    {
+      "eventId": "EVT-HYPOT",
+      "caseId": "CASE-CABG3-2026-00014",
+      "label": "hipotensión",
+      "severity": "high",
+      "trigger": "MAP < 65 mmHg pese a soporte inicial",
+      "responseOwner": "anestesiólogo",
+      "createdAt": "2026-03-29T23:59:24.844Z"
+    }
+  ],
+  "readinessGates": [
+    {
+      "gateId": "RG-CONSENTIMIENTO",
+      "caseId": "CASE-CABG3-2026-00014",
+      "key": "consentimiento",
+      "label": "Consentimiento",
+      "status": "PASS",
+      "evidence": "Documento de consentimiento quirúrgico presente en BOM clínico.",
+      "critical": true,
+      "createdAt": "2026-03-29T23:59:22.781Z"
+    },
+    {
+      "gateId": "RG-CROSSMATCH",
+      "caseId": "CASE-CABG3-2026-00014",
+      "key": "crossmatch",
+      "label": "Crossmatch",
+      "status": "PASS",
+      "evidence": "Crossmatch con hemoderivados reservados para CABG x3.",
+      "critical": true,
+      "createdAt": "2026-03-29T23:59:22.781Z"
+    },
+    {
+      "gateId": "RG-ANTIAGREGANTE_SUSPENDIDO",
+      "caseId": "CASE-CABG3-2026-00014",
+      "key": "antiagregante_suspendido",
+      "label": "Antiagregante suspendido",
+      "status": "PASS",
+      "evidence": "Checklist preop del runbook valida suspensión perioperatoria del antiagregante.",
+      "critical": true,
+      "createdAt": "2026-03-29T23:59:22.781Z"
+    },
+    {
+      "gateId": "RG-RECURSO_QUIROFANO",
+      "caseId": "CASE-CABG3-2026-00014",
+      "key": "recurso_quirofano",
+      "label": "Recurso quirófano",
+      "status": "PASS",
+      "evidence": "Quirófano cardiovascular reservado y set de instrumentación listo.",
+      "critical": true,
+      "createdAt": "2026-03-29T23:59:22.781Z"
+    },
+    {
+      "gateId": "RG-CAMA_UCI",
+      "caseId": "CASE-CABG3-2026-00014",
+      "key": "cama_uci",
+      "label": "Cama UCI",
+      "status": "PASS",
+      "evidence": "Cama UCI posoperatoria reservada antes de emitir readiness.",
+      "critical": true,
+      "createdAt": "2026-03-29T23:59:22.781Z"
+    },
+    {
+      "gateId": "RG-DDMO_COMPLETO",
+      "caseId": "CASE-CABG3-2026-00014",
+      "key": "ddmo_completo",
+      "label": "DDMO completo",
+      "status": "PASS",
+      "evidence": "Dataset PASS y ddmoGateStatus=pass.",
+      "critical": true,
+      "createdAt": "2026-03-29T23:59:22.781Z"
+    }
+  ],
+  "blockingReasons": [],
+  "readinessSnapshots": [
+    {
+      "snapshotId": "RDY-SNAPSHOT-CABG3-v1",
+      "caseId": "CASE-CABG3-2026-00014",
+      "runbookId": "RO-CABG3-ACTORS-v1",
+      "cpoId": "CPO-CABG3-DM2-NSTEMI-FEVI35-ERC3-v1",
+      "overallStatus": "PASS",
+      "gateIds": [
+        "RG-CONSENTIMIENTO",
+        "RG-CROSSMATCH",
+        "RG-ANTIAGREGANTE_SUSPENDIDO",
+        "RG-RECURSO_QUIROFANO",
+        "RG-CAMA_UCI",
+        "RG-DDMO_COMPLETO"
+      ],
+      "blockingReasonIds": [],
+      "generatedAt": "2026-03-29T23:59:22.781Z"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "artifact_kind": "operational-context",
+  "data": {
+    "implementation_complexity": "moderate",
+    "resource_demand": "moderate",
+    "cost_relevance": "moderate",
+    "operational_relevance": "high",
+    "resource_requirements": [
+      { "resource_type": "icu-bed", "role": "critical-care", "quantity": 1, "unit": "bed", "mandatory": true, "cost_center": "icu", "note": null }
+    ],
+    "constraints": ["Requires ICU staffing"]
+  }
+}

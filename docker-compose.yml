@@ -1,0 +1,174 @@
+version: '3.8'
+
+services:
+  # ==================== DATABASE & CACHE ====================
+  postgres:
+    image: postgres:16-alpine
+    container_name: icicso-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-icicso}
+      POSTGRES_USER: ${POSTGRES_USER:-icicso}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-icicso}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - icicso-net
+
+  redis:
+    image: redis:7-alpine
+    container_name: icicso-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - icicso-net
+
+  # ==================== MESSAGE QUEUE ====================
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.5.0
+    container_name: icicso-zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+    networks:
+      - icicso-net
+
+  kafka:
+    image: confluentinc/cp-kafka:7.5.0
+    container_name: icicso-kafka
+    ports:
+      - "9092:9092"
+      - "9101:9101"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+    depends_on:
+      zookeeper:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:9092"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - icicso-net
+
+  # ==================== OBJECT STORAGE ====================
+  minio:
+    image: minio/minio:latest
+    container_name: icicso-minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:?MINIO_ROOT_PASSWORD is required}
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - icicso-net
+
+  # ==================== ADMIN TOOLS ====================
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: icicso-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-admin@icicso.local}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:?PGADMIN_DEFAULT_PASSWORD is required}
+    ports:
+      - "5050:80"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - icicso-net
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: icicso-kafka-ui
+    ports:
+      - "8888:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
+      KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
+    depends_on:
+      - kafka
+      - zookeeper
+    networks:
+      - icicso-net
+
+  # ==================== UNIFIED DASHBOARD ====================
+  dashboard:
+    image: node:20-alpine
+    container_name: icicso-dashboard
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./dashboard:/app
+      - /app/node_modules
+    working_dir: /app
+    command: sh -c "npm install -g http-server && http-server -p 3000 -c-1"
+    networks:
+      - icicso-net
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+
+  # ==================== HEALTH CHECK SERVICE ====================
+  health-check:
+    image: node:20-alpine
+    container_name: icicso-health-check
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./health-check:/app
+    working_dir: /app
+    command: sh -c "npm install && npm start"
+    networks:
+      - icicso-net
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+networks:
+  icicso-net:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  redis_data:
+  minio_data:

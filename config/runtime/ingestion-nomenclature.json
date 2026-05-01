@@ -1,0 +1,119 @@
+{
+  "specialties": [
+    "Cardiologia",
+    "Cirugia Cardiovascular",
+    "Cirugia Toracica",
+    "Cardiologia Intervencionista",
+    "Cirugia de Rescate",
+    "Anestesiologia",
+    "Medicina Critica",
+    "Urgencias",
+    "Imagenologia",
+    "Rehabilitacion Cardiaca",
+    "Medicina Interna",
+    "Salud Publica"
+  ],
+  "sub_specialties": {
+    "Cardiologia": [
+      "Hemodinamia",
+      "Arritmias",
+      "Insuficiencia Cardiaca",
+      "Imagen Cardiaca",
+      "ICU Cardio"
+    ],
+    "Cirugia Cardiovascular": [
+      "CABG",
+      "Valvular",
+      "Aorta",
+      "Transplante",
+      "ECMO"
+    ],
+    "Cirugia Toracica": [
+      "Pulmon",
+      "Mediastino",
+      "Esofago",
+      "Trauma Toracico",
+      "Oncologia Toracica"
+    ],
+    "Cardiologia Intervencionista": [
+      "PCI",
+      "TAVI",
+      "Structural Heart",
+      "FOP/ASD Closure",
+      "Shock Intervencionista"
+    ],
+    "Cirugia de Rescate": [
+      "Reintervencion",
+      "Complicaciones",
+      "Shock",
+      "Hemorragia",
+      "ECMO de Rescate"
+    ],
+    "Anestesiologia": [
+      "Cardioanestesia",
+      "Anestesia Toracica",
+      "Manejo de Via Aerea",
+      "Dolor Agudo",
+      "UCI Postoperatoria"
+    ],
+    "Medicina Critica": [
+      "UCI Cardiaca",
+      "UCI Quirurgica",
+      "Ventilacion Mecanica",
+      "Shock Septico",
+      "Sepsis"
+    ],
+    "Urgencias": [
+      "Trauma",
+      "Reanimacion",
+      "Toxicologia",
+      "Emergencia Cardiaca",
+      "Emergencia Toracica"
+    ],
+    "Imagenologia": [
+      "Cardio RM",
+      "Cardio CT",
+      "Angio",
+      "Eco",
+      "Intervencion Guiada"
+    ],
+    "Rehabilitacion Cardiaca": [
+      "Fase I",
+      "Fase II",
+      "Fase III",
+      "Prevencion Secundaria",
+      "Educacion"
+    ],
+    "Medicina Interna": [
+      "Metabolica",
+      "Respiratoria",
+      "Renal",
+      "Cardiometabolica",
+      "Inmunologia"
+    ],
+    "Salud Publica": [
+      "Prevencion",
+      "Programas",
+      "Riesgo Poblacional",
+      "Epidemiologia Clinica"
+    ]
+  },
+  "epidemics": [
+    "N/A",
+    "COVID-19",
+    "Influenza",
+    "Dengue",
+    "Zika",
+    "Chikungunya",
+    "Tuberculosis",
+    "VIH",
+    "SARS",
+    "MERS",
+    "Sepsis"
+  ],
+  "defaults": {
+    "specialty": "Cardiologia",
+    "sub_specialty": "Hemodinamia",
+    "epidemic": "N/A"
+  }
+}

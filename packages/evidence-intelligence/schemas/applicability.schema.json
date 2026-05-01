@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://icicso.local/schemas/evidence-intelligence/applicability.schema.json",
+  "title": "Applicability",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "population_fit",
+    "intervention_fit",
+    "setting_fit",
+    "jurisdiction_fit",
+    "resource_fit",
+    "overall_recommendation"
+  ],
+  "properties": {
+    "population_fit": { "$ref": "#/$defs/dimension" },
+    "intervention_fit": { "$ref": "#/$defs/dimension" },
+    "setting_fit": { "$ref": "#/$defs/dimension" },
+    "jurisdiction_fit": { "$ref": "#/$defs/dimension" },
+    "resource_fit": { "$ref": "#/$defs/dimension" },
+    "overall_recommendation": { "type": "string", "enum": ["directly-applicable", "applicable-with-review", "contextual-only", "not-applicable"] }
+  },
+  "$defs": {
+    "dimension": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["score", "rationale"],
+      "properties": {
+        "score": { "type": "integer", "minimum": 0, "maximum": 3 },
+        "rationale": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

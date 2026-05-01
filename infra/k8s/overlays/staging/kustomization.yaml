@@ -1,0 +1,40 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: icicso-staging
+resources:
+  - ../../frontend-deployment.yaml
+  - ../../frontend-service.yaml
+  - ../../api-deployment.yaml
+  - ../../api-service.yaml
+  - ../../parser-deployment.yaml
+  - ../../parser-service.yaml
+  - ../../engine-deployment.yaml
+  - ../../engine-service.yaml
+  - ../../postgres-pvc.yaml
+  - ../../postgres-deployment.yaml
+  - ../../postgres-service.yaml
+  - ../../redis-pvc.yaml
+  - ../../redis-deployment.yaml
+  - ../../redis-service.yaml
+  - namespace.yaml
+  - configmap.yaml
+  - ingress.yaml
+patches:
+  - path: patches/frontend-deployment.yaml
+  - path: patches/api-deployment.yaml
+  - path: patches/parser-deployment.yaml
+  - path: patches/engine-deployment.yaml
+  - path: patches/postgres-deployment.yaml
+  - path: patches/redis-deployment.yaml
+  - path: patches/pvc-postgres.yaml
+  - path: patches/pvc-redis.yaml
+images:
+  - name: icicso/frontend-local:dev
+    newName: 123456789012.dkr.ecr.us-east-1.amazonaws.com/icicso-staging/frontend
+    newTag: replace-with-image-tag
+  - name: icicso/node-runtime:dev
+    newName: 123456789012.dkr.ecr.us-east-1.amazonaws.com/icicso-staging/node-runtime
+    newTag: replace-with-image-tag
+  - name: icicso/semantic-terminology-engine:dev
+    newName: 123456789012.dkr.ecr.us-east-1.amazonaws.com/icicso-staging/semantic-terminology-engine
+    newTag: replace-with-image-tag

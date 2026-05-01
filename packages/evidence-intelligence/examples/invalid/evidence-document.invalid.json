@@ -1,0 +1,39 @@
+{
+  "artifact_kind": "evidence-document",
+  "data": {
+    "id": "EDOC-BAD-0001",
+    "title": "",
+    "source_type": "magazine",
+    "evidence_type": "",
+    "publication_year": "2024",
+    "version_or_update": "",
+    "jurisdiction": [],
+    "specialty": "",
+    "clinical_domain": "",
+    "population": null,
+    "intervention": null,
+    "outcomes": [],
+    "effect_direction": "positive",
+    "certainty": "certain",
+    "clinical_functions": [],
+    "time_horizons": [],
+    "applicability": {
+      "population_fit": { "score": 9, "rationale": "" }
+    },
+    "provenance": {
+      "source_system": "",
+      "captured_at": "",
+      "captured_by": "",
+      "chain_of_custody": [],
+      "license_status": "",
+      "attestation_status": "",
+      "canonical_id": "",
+      "version": "",
+      "status": ""
+    },
+    "references": [],
+    "ingestion_metadata": {},
+    "hash": "",
+    "status": ""
+  }
+}

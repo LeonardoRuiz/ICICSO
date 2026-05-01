@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://icicso.local/schemas/common/enums.schema.json",
+  "title": "ICICSO Common Enums",
+  "description": "Enumeraciones compartidas del modelo canonico ICICSO.",
+  "$defs": {
+    "layer": {
+      "type": "string",
+      "enum": ["ARCH", "L0", "L1", "L2", "L3", "L4", "L5", "L6", "OUTPUT", "SUPPORT"]
+    },
+    "documentType": {
+      "type": "string",
+      "enum": ["docx", "pdf", "spreadsheet", "audio", "json", "markdown", "other"]
+    },
+    "artifactStatus": {
+      "type": "string",
+      "enum": ["draft", "active", "under_review", "deprecated", "superseded", "archived"]
+    },
+    "sourceStatus": {
+      "type": "string",
+      "enum": ["local_source", "imported", "normalized", "validated", "rejected", "archived"]
+    },
+    "evidenceType": {
+      "type": "string",
+      "enum": ["guideline", "rct", "meta_analysis", "systematic_review", "registry", "observational", "expert_consensus", "statement", "other"]
+    },
+    "caseStatus": {
+      "type": "string",
+      "enum": ["draft", "instantiated", "active", "suspended", "reconciled", "closed", "cancelled"]
+    },
+    "uncertaintyLevel": {
+      "type": "string",
+      "enum": ["I", "II", "III", "IV"]
+    },
+    "macState": {
+      "type": "string",
+      "enum": ["applicable", "partially_applicable", "not_applicable", "indeterminate"]
+    },
+    "conflictSeverity": {
+      "type": "string",
+      "enum": ["low", "moderate", "high", "critical"]
+    },
+    "consensusOutcome": {
+      "type": "string",
+      "enum": ["approved", "rejected", "deferred", "expired"]
+    },
+    "gateType": {
+      "type": "string",
+      "enum": ["hard", "soft"]
+    }
+  }
+}

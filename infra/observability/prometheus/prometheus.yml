@@ -1,0 +1,57 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: icicso-frontend
+    metrics_path: /metrics
+    static_configs:
+      - targets: ["host.docker.internal:18080"]
+        labels:
+          service_name: desktop-emulator
+          layer: frontend
+
+  - job_name: icicso-api
+    metrics_path: /metrics
+    static_configs:
+      - targets: ["host.docker.internal:13100"]
+        labels:
+          service_name: gateway-api
+          layer: api
+
+  - job_name: icicso-parser
+    metrics_path: /metrics
+    static_configs:
+      - targets: ["host.docker.internal:13108"]
+        labels:
+          service_name: ingestion-service
+          layer: parser
+
+  - job_name: icicso-engine
+    metrics_path: /metrics
+    static_configs:
+      - targets: ["host.docker.internal:18000"]
+        labels:
+          service_name: semantic-terminology-engine
+          layer: engine
+
+  - job_name: icicso-postgres
+    static_configs:
+      - targets: ["postgres-exporter:9187"]
+        labels:
+          service_name: postgres
+          layer: infra
+
+  - job_name: icicso-redis
+    static_configs:
+      - targets: ["redis-exporter:9121"]
+        labels:
+          service_name: redis
+          layer: infra
+
+  - job_name: icicso-otel-collector
+    static_configs:
+      - targets: ["otel-collector:9464"]
+        labels:
+          service_name: otel-collector
+          layer: observability

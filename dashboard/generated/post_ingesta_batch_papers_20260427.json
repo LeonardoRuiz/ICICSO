@@ -1,0 +1,193 @@
+{
+  "generated_at_utc": "2026-04-27T15:27:51.661608+00:00",
+  "source_dir": "C:\\Users\\leona\\OneDrive\\Desktop\\MxRep\\ICICSO\\.A Imagen",
+  "sqlite_path": "C:\\Users\\leona\\OneDrive\\Desktop\\MxRep\\ICICSO\\services\\ingestion-orquestador\\data\\icicso_catalog.db",
+  "documents_total": 7,
+  "documents_ingested_now": 6,
+  "documents_already_present": 1,
+  "recommendations_total": 255,
+  "eo_candidates_total": 255,
+  "results": [
+    {
+      "file_name": "ezad426.pdf",
+      "status": "ingested",
+      "duplicate_detected": false,
+      "document_id": "UPL-56EB1B5BABAC",
+      "vrn": "VRN-ICICSO-L0-L1-ING-EXTERNAL-GUIDELINE-20260427-56EB1B5B-V001",
+      "document_group": "EACTS-STS",
+      "specialty": "Cirugia Cardiovascular",
+      "sub_specialty": "Aorta",
+      "recommendations": 8,
+      "eo_candidates": 8,
+      "warnings": [],
+      "html": "dashboard\\generated\\post_ingesta_upl-56eb1b5babac.html",
+      "csv": "dashboard\\generated\\post_ingesta_upl-56eb1b5babac.csv",
+      "document_type": "guideline",
+      "layer": "L1",
+      "category": "external-guideline",
+      "epidemic_focus": "N/A"
+    },
+    {
+      "file_name": "lawton-et-al-2021-2021-acc-aha-scai-guideline-for-coronary-artery-revascularization-a-report-of-the-american-college-of.pdf",
+      "status": "already_present",
+      "duplicate_detected": false,
+      "document_id": "UPL-CE02A6AB5E49",
+      "vrn": "VRN-ICICSO-L0-ING-ING-USER-UPLOAD-20260412-CE02A6AB-V001",
+      "document_group": "ACC-AHA-SCAI",
+      "specialty": "Cirugia Cardiovascular",
+      "sub_specialty": "Revascularizacion Coronaria",
+      "recommendations": 113,
+      "eo_candidates": 113,
+      "warnings": [],
+      "html": "dashboard\\generated\\post_ingesta_upl-ce02a6ab5e49.html",
+      "csv": "dashboard\\generated\\post_ingesta_upl-ce02a6ab5e49.csv",
+      "document_type": "guideline",
+      "layer": "ING",
+      "category": "user-upload",
+      "epidemic_focus": "N/A"
+    },
+    {
+      "file_name": "PIIS0003497515016082.pdf",
+      "status": "ingested",
+      "duplicate_detected": false,
+      "document_id": "UPL-A05533AE4192",
+      "vrn": "VRN-ICICSO-L0-L1-ING-EXTERNAL-GUIDELINE-20260427-A05533AE-V001",
+      "document_group": "STS",
+      "specialty": "Cirugia Cardiovascular",
+      "sub_specialty": "CABG",
+      "recommendations": 30,
+      "eo_candidates": 30,
+      "warnings": [],
+      "html": "dashboard\\generated\\post_ingesta_upl-a05533ae4192.html",
+      "csv": "dashboard\\generated\\post_ingesta_upl-a05533ae4192.csv",
+      "document_type": "guideline",
+      "layer": "L1",
+      "category": "external-guideline",
+      "epidemic_focus": "N/A"
+    },
+    {
+      "file_name": "PIIS0003497521005567.pdf",
+      "status": "ingested",
+      "duplicate_detected": false,
+      "document_id": "UPL-DE7B49F38002",
+      "vrn": "VRN-ICICSO-L0-L1-ING-EXTERNAL-GUIDELINE-20260427-DE7B49F3-V001",
+      "document_group": "STS-SCA-AmSECT-SABM",
+      "specialty": "Anestesiologia",
+      "sub_specialty": "Cardioanestesia",
+      "recommendations": 67,
+      "eo_candidates": 67,
+      "warnings": [],
+      "html": "dashboard\\generated\\post_ingesta_upl-de7b49f38002.html",
+      "csv": "dashboard\\generated\\post_ingesta_upl-de7b49f38002.csv",
+      "document_type": "guideline",
+      "layer": "L1",
+      "category": "external-guideline",
+      "epidemic_focus": "N/A"
+    },
+    {
+      "file_name": "PIIS0003497521019743.pdf",
+      "status": "ingested",
+      "duplicate_detected": false,
+      "document_id": "UPL-5C13D321B363",
+      "vrn": "VRN-ICICSO-L0-L1-ING-EXTERNAL-GUIDELINE-20260427-5C13D321-V001",
+      "document_group": "STS-AATS",
+      "specialty": "Cirugia Cardiovascular",
+      "sub_specialty": "Aorta",
+      "recommendations": 26,
+      "eo_candidates": 26,
+      "warnings": [],
+      "html": "dashboard\\generated\\post_ingesta_upl-5c13d321b363.html",
+      "csv": "dashboard\\generated\\post_ingesta_upl-5c13d321b363.csv",
+      "document_type": "guideline",
+      "layer": "L1",
+      "category": "external-guideline",
+      "epidemic_focus": "N/A"
+    },
+    {
+      "file_name": "PIIS0003497524000572.pdf",
+      "status": "ingested",
+      "duplicate_detected": false,
+      "document_id": "UPL-4434257E5B49",
+      "vrn": "VRN-ICICSO-L0-L1-ING-EXTERNAL-GUIDELINE-20260427-4434257E-V001",
+      "document_group": "STS",
+      "specialty": "Cardiologia",
+      "sub_specialty": "Arritmias",
+      "recommendations": 9,
+      "eo_candidates": 9,
+      "warnings": [],
+      "html": "dashboard\\generated\\post_ingesta_upl-4434257e5b49.html",
+      "csv": "dashboard\\generated\\post_ingesta_upl-4434257e5b49.csv",
+      "document_type": "guideline",
+      "layer": "L1",
+      "category": "external-guideline",
+      "epidemic_focus": "N/A"
+    },
+    {
+      "file_name": "PIIS0894731720301334.pdf",
+      "status": "ingested",
+      "duplicate_detected": false,
+      "document_id": "UPL-D6E97CE22A5E",
+      "vrn": "VRN-ICICSO-L0-L1-ING-EXTERNAL-GUIDELINE-20260427-D6E97CE2-V001",
+      "document_group": "ASE-SCA-STS",
+      "specialty": "Imagenologia",
+      "sub_specialty": "Eco",
+      "recommendations": 2,
+      "eo_candidates": 2,
+      "warnings": [],
+      "html": "dashboard\\generated\\post_ingesta_upl-d6e97ce22a5e.html",
+      "csv": "dashboard\\generated\\post_ingesta_upl-d6e97ce22a5e.csv",
+      "document_type": "guideline",
+      "layer": "L1",
+      "category": "external-guideline",
+      "epidemic_focus": "N/A"
+    }
+  ],
+  "top_clinical_topics": [
+    {
+      "clinical_topic": "General Coronary Revascularization",
+      "n": 146
+    },
+    {
+      "clinical_topic": "CABG Strategy",
+      "n": 29
+    },
+    {
+      "clinical_topic": "Revascularization Strategy",
+      "n": 17
+    },
+    {
+      "clinical_topic": "STEMI",
+      "n": 15
+    },
+    {
+      "clinical_topic": "PCI Strategy",
+      "n": 14
+    },
+    {
+      "clinical_topic": "Acute Coronary Syndromes",
+      "n": 13
+    },
+    {
+      "clinical_topic": "SIHD",
+      "n": 8
+    },
+    {
+      "clinical_topic": "Physiology and Complexity Assessment",
+      "n": 5
+    },
+    {
+      "clinical_topic": "Heart Team",
+      "n": 4
+    },
+    {
+      "clinical_topic": "Left Main Disease",
+      "n": 4
+    }
+  ],
+  "information_weight_counts": [
+    {
+      "information_weight": "critical",
+      "n": 255
+    }
+  ]
+}

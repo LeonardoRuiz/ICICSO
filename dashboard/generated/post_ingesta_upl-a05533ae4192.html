@@ -1,0 +1,3788 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Post ingesta | PIIS0003497515016082.pdf</title>
+<style>
+:root { --bg:#071015; --panel:#0d171d; --ink:#edf7f4; --muted:#a9c0bc; --line:#21343d; --accent:#68d6b0; }
+* { box-sizing:border-box }
+body { margin:0; font-family:Segoe UI,Arial,sans-serif; background:linear-gradient(180deg,#081116,#061017); color:var(--ink) }
+main { width:min(1600px,calc(100vw - clamp(12px,4vw,40px))); margin:clamp(12px,3vw,24px) auto clamp(24px,4vw,48px); display:grid; gap:clamp(12px,2vw,18px) }
+section,.card { background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:clamp(14px,2.2vw,18px) }
+h1,h2,h3 { margin:0 0 8px }
+h1 { font-size:clamp(1.55rem, 2.4vw, 2.2rem) }
+h2 { font-size:clamp(1.15rem, 1.8vw, 1.5rem) }
+h3 { font-size:clamp(1rem, 1.5vw, 1.15rem) }
+p,li { line-height:1.5 }
+.grid { display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr)) }
+.filters { display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(min(180px,100%),1fr)); margin-top:14px }
+.filter-box { display:grid; gap:6px }
+.filter-box label { color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.08em }
+.filter-box input,.filter-box select { width:100%; background:#0a1318; color:var(--ink); border:1px solid var(--line); border-radius:10px; padding:10px 12px }
+.stats { display:flex; gap:10px; flex-wrap:wrap; margin-top:12px }
+.stat { background:#0a1318; border:1px solid var(--line); border-radius:999px; padding:8px 12px; color:var(--muted); font-size:13px }
+.toolbar { display:flex; gap:10px; flex-wrap:wrap; margin-top:12px }
+.btn { background:#0a1318; color:var(--ink); border:1px solid var(--line); border-radius:10px; padding:10px 12px; cursor:pointer }
+.btn:hover { border-color:var(--accent) }
+.btn.active { border-color:var(--accent); background:#102821 }
+.modebar,.preset-row { display:flex; gap:10px; flex-wrap:wrap; margin-top:14px }
+[data-mode-panel] { display:none }
+body[data-view-mode="clinical"] [data-mode-panel~="clinical"],
+body[data-view-mode="audit"] [data-mode-panel~="audit"],
+body[data-view-mode="data"] [data-mode-panel~="data"] { display:block }
+.mobile-nav { display:none; gap:8px; overflow:auto; padding-bottom:4px }
+.mobile-nav a { white-space:nowrap; text-decoration:none }
+.chart-grid { display:grid; gap:12px; grid-template-columns:repeat(3,minmax(0,1fr)); margin-top:14px }
+.chart-card { background:#0a1318; border:1px solid var(--line); border-radius:12px; padding:14px }
+.chart-row { display:grid; grid-template-columns:minmax(92px,.9fr) minmax(120px,1.4fr) 48px; gap:10px; align-items:center; margin-top:8px; font-size:13px }
+.chart-track { height:8px; border-radius:999px; overflow:hidden; background:#13252d }
+.chart-track i { display:block; height:100%; border-radius:inherit; background:var(--accent) }
+.workbench-grid { display:grid; grid-template-columns:minmax(0,1.55fr) minmax(320px,.85fr); gap:14px; align-items:start }
+.workbench-detail { position:sticky; top:12px }
+.table-wrap { overflow:visible; border:1px solid var(--line); border-radius:14px; background:#091219; max-width:100% }
+table { width:100%; border-collapse:collapse; min-width:0 }
+table.desktop-table { min-width:0 }
+th,td { padding:12px 10px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line); font-size:clamp(12px,1.3vw,14px); line-height:1.45; overflow-wrap:anywhere; word-break:break-word }
+th { position:sticky; top:0; background:#0b151b; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; font-size:12px }
+th.sortable { cursor:pointer }
+th.sortable:hover { color:var(--ink) }
+tbody tr:nth-child(even) { background:#0a1318 }
+tbody tr.active-row { outline:2px solid var(--accent); outline-offset:-2px; background:#102127 }
+.kv { background:#0a1318; border:1px solid var(--line); border-radius:12px; padding:12px }
+.label { color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px }
+.value { word-break:break-word }
+.pill { display:inline-flex; margin:2px 6px 2px 0; padding:6px 10px; border-radius:999px; border:1px solid var(--line); background:#0a1318; color:var(--ink); font-size:12px }
+.row { display:flex; gap:12px; align-items:center; flex-wrap:wrap }
+.spread { justify-content:space-between }
+.muted { color:var(--muted); font-size:14px }
+.detail-box { background:#0a1318; border:1px solid var(--line); border-radius:12px; padding:14px }
+.detail-box h3 { margin-bottom:10px }
+.section-body[hidden] { display:none }
+table.responsive-stack thead { display:none }
+table.responsive-stack tbody { display:grid; gap:10px; padding:10px }
+table.responsive-stack tbody tr {
+  display:grid;
+  grid-template-columns:1fr;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#0a1318;
+  overflow:hidden;
+}
+table.responsive-stack tbody tr:nth-child(even) { background:#0a1318 }
+table.responsive-stack td {
+  display:grid;
+  grid-template-columns:minmax(120px, 28%) 1fr;
+  gap:10px;
+  align-items:start;
+  padding:10px 12px;
+  border-bottom:1px solid var(--line);
+}
+table.responsive-stack td:last-child { border-bottom:none }
+table.responsive-stack td::before {
+  content:attr(data-label);
+  color:var(--muted);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+@media (min-width: 1700px) {
+  main { width:min(1880px, calc(100vw - 56px)) }
+}
+@media (max-width: 1440px) and (min-width: 961px) {
+  main { width:min(100vw - 24px, 100%) }
+  .workbench-grid { grid-template-columns:1fr }
+  .workbench-detail { position:static }
+  th,td { padding:10px 8px; font-size:13px }
+}
+@media (max-width: 1700px) {
+  .row.spread { align-items:flex-start }
+  .toolbar, .stats, .row { gap:8px }
+  .pill { max-width:100%; word-break:break-word }
+  .table-wrap { border-radius:12px }
+}
+@media (max-width: 760px) {
+  main { width:min(100vw - 12px, 100%); margin:10px auto 24px }
+  section,.card { border-radius:14px }
+  .filters { grid-template-columns:1fr }
+  .chart-grid,.workbench-grid { grid-template-columns:1fr }
+  .workbench-detail { position:static }
+  .btn { width:100% }
+  .detail-box, .kv { padding:12px }
+  .mobile-nav { display:flex }
+  table.responsive-stack td {
+    grid-template-columns:1fr;
+    gap:6px;
+  }
+  table.responsive-stack td::before { margin-bottom:2px }
+}
+</style>
+</head>
+<body data-view-mode="clinical">
+<main>
+<section>
+<h1>Post ingesta del PDF</h1>
+<p>Extraccion estructurada de guideline recommendations, modelo ejecutable, constraints clinicos, entidades y EO candidates derivadas, generada desde el repo ICICSO.</p>
+<div class="modebar" aria-label="Modo de export">
+<button class="btn active" type="button" data-view-mode-button="clinical">Vista clinica</button>
+<button class="btn" type="button" data-view-mode-button="audit">Auditoria</button>
+<button class="btn" type="button" data-view-mode-button="data">Datos</button>
+</div>
+<div class="mobile-nav">
+<a class="btn" href="#summary-section">Resumen</a>
+<a class="btn" href="#priority-section">Prioridad</a>
+<a class="btn" href="#clinical-workbench">Workbench</a>
+<a class="btn" href="#candidates-section">EOs</a>
+<a class="btn" href="#reconciliation-section">Cruce</a>
+</div>
+<div class="row">
+<span class="pill">document_id: UPL-A05533AE4192</span>
+<span class="pill">guideline_recommendations: 45</span>
+<span class="pill">eo_candidates: 45</span>
+<span class="pill">document_group: STS</span>
+<span class="pill">specialty: Cirugia Cardiovascular</span>
+<span class="pill">vrn: VRN-ICICSO-L0-L1-ING-EXTERNAL-GUIDELINE-20260427-A05533AE-V001</span>
+<span class="pill">institutional_version: V001</span>
+</div>
+</section>
+<section id="summary-section" data-mode-panel="clinical audit data">
+<h2>Resumen</h2>
+<div class="grid">
+<div class="kv"><div class="label">Documento</div><div class="value">PIIS0003497515016082.pdf</div></div>
+<div class="kv"><div class="label">VRN</div><div class="value">VRN-ICICSO-L0-L1-ING-EXTERNAL-GUIDELINE-20260427-A05533AE-V001</div></div>
+<div class="kv"><div class="label">Tipo</div><div class="value">guideline</div></div>
+<div class="kv"><div class="label">Grupo</div><div class="value">STS</div></div>
+<div class="kv"><div class="label">Especialidad</div><div class="value">Cirugia Cardiovascular</div></div>
+<div class="kv"><div class="label">Subespecialidad</div><div class="value">CABG</div></div>
+<div class="kv"><div class="label">Version</div><div class="value">V001</div></div>
+<div class="kv"><div class="label">Lineage</div><div class="value">STS-ARTERIAL-CONDUITS-CABG-2016</div></div>
+<div class="kv"><div class="label">Path</div><div class="value">services/ingestion-orquestador/data/uploaded_documents/2026/04/27/UPL-A05533AE4192_PIIS0003497515016082.pdf</div></div>
+</div>
+</section>
+<section id="priority-section" data-mode-panel="clinical audit data">
+<div class="row spread"><h2>Prioridad Institucional</h2><button class="btn section-toggle" data-target="priority-body">Colapsar</button></div>
+<div class="section-body" id="priority-body">
+<p class="muted">Resumen compacto para orientar revision clinica sin duplicar tablas ni tarjetas extensas.</p>
+<div class="stats">
+<span class="stat">Recomendaciones: 45</span>
+<span class="stat">EO candidates: 45</span>
+<span class="stat">Temas clinicos: 5</span>
+</div>
+<div class="chart-grid">
+<div class="chart-card"><h3>Recomendaciones por peso</h3><div class="chart-row"><span>critical</span><div class="chart-track"><i style="width:100%"></i></div><strong>45</strong></div></div>
+<div class="chart-card"><h3>EO candidates por tipo</h3><div class="chart-row"><span>recommendation</span><div class="chart-track"><i style="width:100%"></i></div><strong>41</strong></div><div class="chart-row"><span>team_decision</span><div class="chart-track"><i style="width:10%"></i></div><strong>4</strong></div></div>
+<div class="chart-card"><h3>Temas clinicos dominantes</h3><div class="chart-row"><span>General Coronary Revascularization</span><div class="chart-track"><i style="width:100%"></i></div><strong>33</strong></div><div class="chart-row"><span>Revascularization Strategy</span><div class="chart-track"><i style="width:15%"></i></div><strong>5</strong></div><div class="chart-row"><span>Heart Team</span><div class="chart-track"><i style="width:12%"></i></div><strong>4</strong></div><div class="chart-row"><span>CABG Strategy</span><div class="chart-track"><i style="width:6%"></i></div><strong>2</strong></div><div class="chart-row"><span>Physiology and Complexity Assessment</span><div class="chart-track"><i style="width:6%"></i></div><strong>1</strong></div></div>
+</div>
+</div>
+</section>
+<section id="reconciliation-section" data-mode-panel="audit data">
+<div class="row spread"><h2>Reconciliacion Entre Documentos</h2><button class="btn section-toggle" data-target="reconciliation-body">Colapsar</button></div>
+<div class="section-body" id="reconciliation-body">
+<p class="muted">Comparativo del documento actual contra el corpus institucional por <code>clinical_topic</code>, para detectar densidad, peso promedio y tipos de EO por tema.</p>
+<div class="table-wrap">
+<table id="reconciliation-table" class="desktop-table responsive-stack">
+<thead>
+<tr>
+<th class="sortable">Tema Clinico</th>
+<th class="sortable">Document ID</th>
+<th class="sortable">Archivo</th>
+<th class="sortable">Grupo</th>
+<th class="sortable">Tipo</th>
+<th class="sortable">Especialidad</th>
+<th class="sortable">VRN</th>
+<th class="sortable">Recomendaciones</th>
+<th class="sortable">Peso Promedio</th>
+<th class="sortable">Confianza Promedio</th>
+<th class="sortable">Tipos de EO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CABG Strategy</td>
+<td>UPL-CE02A6AB5E49</td>
+<td>lawton-et-al-2021-2021-acc-aha-scai-guideline-for-coronary-artery-revascularization-a-report-of-the-american-college-of.pdf</td>
+<td>ACC-AHA-SCAI</td>
+<td>guideline</td>
+<td>Cirugia Cardiovascular</td>
+<td>VRN-ICICSO-L0-ING-ING-USER-UPLOAD-20260412-CE02A6AB-V001</td>
+<td>35</td>
+<td>1.00</td>
+<td>0.81</td>
+<td>recommendation:33; care_pathway:1; timing_rule:1</td>
+</tr><tr>
+<td>CABG Strategy</td>
+<td>UPL-A05533AE4192</td>
+<td>PIIS0003497515016082.pdf</td>
+<td>STS</td>
+<td>guideline</td>
+<td>Cirugia Cardiovascular</td>
+<td>VRN-ICICSO-L0-L1-ING-EXTERNAL-GUIDELINE-20260427-A05533AE-V001</td>
+<td>2</td>
+<td>1.00</td>
+<td>0.54</td>
+<td>recommendation:2</td>
+</tr><tr>
+<td>General Coronary Revascularization</td>
+<td>UPL-56EB1B5BABAC</td>
+<td>ezad426.pdf</td>
+<td>EACTS-STS</td>
+<td>guideline</td>
+<td>Cirugia Cardiovascular</td>
+<td>VRN-ICICSO-L0-L1-ING-EXTERNAL-GUIDELINE-20260427-56EB1B5B-V001</td>
+<td>430</td>
+<td>1.00</td>
+<td>0.55</td>
+<td>recommendation:422; care_pathway:8</td>
+</tr><tr>
+<td>General Coronary Revascularization</td>
+<td>UPL-DE7B49F38002</td>
+<td>PIIS0003497521005567.pdf</td>
+<td>STS-SCA-AmSECT-SABM</td>
+<td>guideline</td>
+<td>Anestesiologia</td>
+<td>VRN-ICICSO-L0-L1-ING-EXTERNAL-GUIDELINE-20260427-DE7B49F3-V001</td>
+<td>66</td>
+<td>0.95</td>
+<td>0.55</td>
+<td>recommendation:65; timing_rule:1</td>
+</tr><tr>
+<td>General Coronary Revascularization</td>
+<td>UPL-CE02A6AB5E49</td>
+<td>lawton-et-al-2021-2021-acc-aha-scai-guideline-for-coronary-artery-revascularization-a-report-of-the-american-college-of.pdf</td>
+<td>ACC-AHA-SCAI</td>
+<td>guideline</td>
+<td>Cirugia Cardiovascular</td>
+<td>VRN-ICICSO-L0-ING-ING-USER-UPLOAD-20260412-CE02A6AB-V001</td>
+<td>41</td>
+<td>1.00</td>
+<td>0.61</td>
+<td>recommendation:41</td>
+</tr><tr>
+<td>General Coronary Revascularization</td>
+<td>UPL-A05533AE4192</td>
+<td>PIIS0003497515016082.pdf</td>
+<td>STS</td>
+<td>guideline</td>
+<td>Cirugia Cardiovascular</td>
+<td>VRN-ICICSO-L0-L1-ING-EXTERNAL-GUIDELINE-20260427-A05533AE-V001</td>
+<td>33</td>
+<td>1.00</td>
+<td>0.63</td>
+<td>recommendation:33</td>
+</tr><tr>
+<td>General Coronary Revascularization</td>
+<td>UPL-5C13D321B363</td>
+<td>PIIS0003497521019743.pdf</td>
+<td>STS-AATS</td>
+<td>guideline</td>
+<td>Cirugia Cardiovascular</td>
+<td>VRN-ICICSO-L0-L1-ING-EXTERNAL-GUIDELINE-20260427-5C13D321-V001</td>
+<td>26</td>
+<td>1.00</td>
+<td>0.56</td>
+<td>recommendation:26</td>
+</tr><tr>
+<td>Heart Team</td>
+<td>UPL-CE02A6AB5E49</td>
+<td>lawton-et-al-2021-2021-acc-aha-scai-guideline-for-coronary-artery-revascularization-a-report-of-the-american-college-of.pdf</td>
+<td>ACC-AHA-SCAI</td>
+<td>guideline</td>
+<td>Cirugia Cardiovascular</td>
+<td>VRN-ICICSO-L0-ING-ING-USER-UPLOAD-20260412-CE02A6AB-V001</td>
+<td>11</td>
+<td>1.00</td>
+<td>0.57</td>
+<td>team_decision:11</td>
+</tr><tr>
+<td>Heart Team</td>
+<td>UPL-A05533AE4192</td>
+<td>PIIS0003497515016082.pdf</td>
+<td>STS</td>
+<td>guideline</td>
+<td>Cirugia Cardiovascular</td>
+<td>VRN-ICICSO-L0-L1-ING-EXTERNAL-GUIDELINE-20260427-A05533AE-V001</td>
+<td>4</td>
+<td>1.00</td>
+<td>0.59</td>
+<td>team_decision:4</td>
+</tr><tr>
+<td>Heart Team</td>
+<td>UPL-4434257E5B49</td>
+<td>PIIS0003497524000572.pdf</td>
+<td>STS</td>
+<td>guideline</td>
+<td>Cardiologia</td>
+<td>VRN-ICICSO-L0-L1-ING-EXTERNAL-GUIDELINE-20260427-4434257E-V001</td>
+<td>1</td>
+<td>1.00</td>
+<td>0.62</td>
+<td>team_decision:1</td>
+</tr><tr>
+<td>Physiology and Complexity Assessment</td>
+<td>UPL-CE02A6AB5E49</td>
+<td>lawton-et-al-2021-2021-acc-aha-scai-guideline-for-coronary-artery-revascularization-a-report-of-the-american-college-of.pdf</td>
+<td>ACC-AHA-SCAI</td>
+<td>guideline</td>
+<td>Cirugia Cardiovascular</td>
+<td>VRN-ICICSO-L0-ING-ING-USER-UPLOAD-20260412-CE02A6AB-V001</td>
+<td>6</td>
+<td>1.00</td>
+<td>0.78</td>
+<td>recommendation:5; diagnostic_threshold:1</td>
+</tr><tr>
+<td>Physiology and Complexity Assessment</td>
+<td>UPL-A05533AE4192</td>
+<td>PIIS0003497515016082.pdf</td>
+<td>STS</td>
+<td>guideline</td>
+<td>Cirugia Cardiovascular</td>
+<td>VRN-ICICSO-L0-L1-ING-EXTERNAL-GUIDELINE-20260427-A05533AE-V001</td>
+<td>1</td>
+<td>1.00</td>
+<td>0.54</td>
+<td>recommendation:1</td>
+</tr><tr>
+<td>Revascularization Strategy</td>
+<td>UPL-CE02A6AB5E49</td>
+<td>lawton-et-al-2021-2021-acc-aha-scai-guideline-for-coronary-artery-revascularization-a-report-of-the-american-college-of.pdf</td>
+<td>ACC-AHA-SCAI</td>
+<td>guideline</td>
+<td>Cirugia Cardiovascular</td>
+<td>VRN-ICICSO-L0-ING-ING-USER-UPLOAD-20260412-CE02A6AB-V001</td>
+<td>35</td>
+<td>1.00</td>
+<td>0.68</td>
+<td>recommendation:33; contraindication:2</td>
+</tr><tr>
+<td>Revascularization Strategy</td>
+<td>UPL-A05533AE4192</td>
+<td>PIIS0003497515016082.pdf</td>
+<td>STS</td>
+<td>guideline</td>
+<td>Cirugia Cardiovascular</td>
+<td>VRN-ICICSO-L0-L1-ING-EXTERNAL-GUIDELINE-20260427-A05533AE-V001</td>
+<td>5</td>
+<td>1.00</td>
+<td>0.62</td>
+<td>recommendation:5</td>
+</tr><tr>
+<td>Revascularization Strategy</td>
+<td>UPL-56EB1B5BABAC</td>
+<td>ezad426.pdf</td>
+<td>EACTS-STS</td>
+<td>guideline</td>
+<td>Cirugia Cardiovascular</td>
+<td>VRN-ICICSO-L0-L1-ING-EXTERNAL-GUIDELINE-20260427-56EB1B5B-V001</td>
+<td>4</td>
+<td>1.00</td>
+<td>0.56</td>
+<td>recommendation:3; care_pathway:1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="conflicts-section" data-mode-panel="audit data">
+<div class="row spread"><h2>Conflictos y Precedencia</h2><button class="btn section-toggle" data-target="conflicts-body">Colapsar</button></div>
+<div class="section-body" id="conflicts-body">
+<p class="muted">Deteccion simple de conflicto documental por <code>clinical_topic</code>. La precedencia se estima con tipo documental, peso y confianza promedio.</p>
+<div class="table-wrap">
+<table id="conflicts-table" class="desktop-table responsive-stack">
+<thead>
+<tr>
+<th class="sortable">Tema Clinico</th>
+<th class="sortable">Nivel</th>
+<th class="sortable">Documento Preferido</th>
+<th class="sortable">Archivo Preferido</th>
+<th class="sortable">Postura Preferida</th>
+<th class="sortable">Score Preferido</th>
+<th class="sortable">Documento Retador</th>
+<th class="sortable">Archivo Retador</th>
+<th class="sortable">Postura Retadora</th>
+<th class="sortable">Score Retador</th>
+<th class="sortable">Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr><td colspan="11" class="muted">Sin conflictos detectados para los temas clinicos del documento.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="clinical-workbench" data-mode-panel="clinical data">
+<div class="row spread"><h2>Workbench clinico</h2><button class="btn section-toggle" data-target="workbench-body">Colapsar</button></div>
+<div class="section-body" id="workbench-body">
+<p class="muted">Vista principal unica: filtra recomendaciones, abre presets clinicos y revisa el detalle seleccionado en el panel lateral.</p>
+<div class="workbench-grid">
+<aside class="workbench-detail">
+<div class="detail-box">
+<h3 id="detail-title">Sin seleccion</h3>
+<p id="detail-summary" class="muted">Selecciona una recomendacion o candidate para ver su desglose completo.</p>
+<div class="grid">
+<div class="kv"><div class="label">Clave del Statement</div><div class="value" id="detail-key">-</div></div>
+<div class="kv"><div class="label">Tipo</div><div class="value" id="detail-kind">-</div></div>
+<div class="kv"><div class="label">COR / LOE</div><div class="value" id="detail-cor-loe">-</div></div>
+<div class="kv"><div class="label">Peso / Confianza</div><div class="value" id="detail-weight-confidence">-</div></div>
+<div class="kv"><div class="label">Poblacion / Enfermedad</div><div class="value" id="detail-population-disease">-</div></div>
+<div class="kv"><div class="label">Tema Clinico</div><div class="value" id="detail-topic">-</div></div>
+<div class="kv"><div class="label">Estado / Tiempo / Ancla</div><div class="value" id="detail-state-time">-</div></div>
+<div class="kv"><div class="label">Intervencion / Desenlace</div><div class="value" id="detail-intervention-outcome">-</div></div>
+<div class="kv"><div class="label">Localizador Fuente</div><div class="value" id="detail-locator">-</div></div>
+</div>
+</div>
+<div class="detail-box">
+<h3>Modelo y Estado</h3>
+<div class="grid">
+<div class="kv"><div class="label">Activador</div><div class="value" id="detail-trigger">-</div></div>
+<div class="kv"><div class="label">Modelo de Activacion</div><div class="value" id="detail-trigger-model">-</div></div>
+<div class="kv"><div class="label">Restricciones de Activacion</div><div class="value" id="detail-trigger-constraints">-</div></div>
+<div class="kv"><div class="label">Action</div><div class="value" id="detail-action">-</div></div>
+<div class="kv"><div class="label">Prerequisites</div><div class="value" id="detail-prerequisites">-</div></div>
+<div class="kv"><div class="label">Contraindications</div><div class="value" id="detail-contraindications">-</div></div>
+<div class="kv"><div class="label">Conditions / Exclusions</div><div class="value" id="detail-conditions-exclusions">-</div></div>
+<div class="kv"><div class="label">Entities</div><div class="value" id="detail-entities">-</div></div>
+<div class="kv"><div class="label">EO Candidate State</div><div class="value" id="detail-candidate-state">-</div></div>
+<div class="kv"><div class="label">Rationale</div><div class="value" id="detail-rationale">-</div></div>
+</div>
+</div>
+</aside>
+<div class="workbench-main">
+<div class="row spread"><h3>Recomendaciones filtrables</h3><button class="btn section-toggle" data-target="recommendations-body">Colapsar</button></div>
+<div class="section-body" id="recommendations-body">
+<p class="muted">Vista maestra de recomendaciones con contexto clinico, semantica ejecutable, peso, confianza y trazabilidad.</p>
+<div class="filters" id="recommendation-filters">
+<div class="filter-box"><label for="rec-search">Busqueda</label><input id="rec-search" type="text" placeholder="statement, enfermedad, activador, localizador" /></div>
+<div class="filter-box"><label for="rec-cor">COR</label><select id="rec-cor"><option value="">Todos</option><option>I</option><option>IIa</option><option>IIb</option><option>III</option></select></div>
+<div class="filter-box"><label for="rec-loe">LOE</label><select id="rec-loe"><option value="">Todos</option><option>A</option><option>B-R</option><option>B-NR</option><option>C-LD</option><option>C-EO</option></select></div>
+<div class="filter-box"><label for="rec-weight">Peso</label><select id="rec-weight"><option value="">Todos</option><option>critical</option><option>high</option><option>moderate</option><option>emerging</option></select></div>
+<div class="filter-box"><label for="rec-confidence">Confianza minima</label><select id="rec-confidence"><option value="">Todas</option><option value="0.90">0.90</option><option value="0.80">0.80</option><option value="0.70">0.70</option><option value="0.60">0.60</option></select></div>
+<div class="filter-box"><label for="rec-disease">Enfermedad</label><input id="rec-disease" type="text" placeholder="STEMI, SIHD, CAD..." /></div>
+<div class="filter-box"><label for="rec-topic">Tema Clinico</label><input id="rec-topic" type="text" placeholder="Left Main, STEMI, Heart Team..." /></div>
+</div>
+<div class="preset-row" aria-label="Presets de filtros">
+<button class="btn" type="button" data-filter-preset="clear">Todo</button>
+<button class="btn" type="button" data-filter-preset="critical">Critico confiable</button>
+<button class="btn" type="button" data-filter-preset="stemi">STEMI / shock</button>
+<button class="btn" type="button" data-filter-preset="cabg">CABG</button>
+<button class="btn" type="button" data-filter-preset="timing">Timing rules</button>
+<button class="btn" type="button" data-filter-preset="audit">Pendiente auditoria</button>
+</div>
+<div class="stats"><span class="stat" id="rec-visible-count">0 visibles</span><span class="stat" id="rec-total-count">45 totales</span></div>
+<div class="toolbar"><button class="btn" id="export-rec-visible">Exportar recomendaciones visibles CSV</button></div>
+<div class="table-wrap">
+<table id="recommendations-table" class="desktop-table responsive-stack">
+<thead>
+<tr>
+<th class="sortable">Statement</th>
+<th class="sortable">Tema Clinico</th>
+<th class="sortable">COR / LOE</th>
+<th class="sortable">Contexto Clinico</th>
+<th class="sortable">Intervencion / Desenlace</th>
+<th class="sortable">Tiempo / Umbral</th>
+<th class="sortable">Peso</th>
+<th class="sortable">Confianza</th>
+<th class="sortable">Recomendacion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="recommendation-row"
+data-cor="2A"
+data-loe="B"
+data-weight="critical"
+data-confidence="0.74"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S001 Use of BITAs should be considered in patients who do not have an excessive risk of sternal complications ( IIa, B) p.4 class-level-row COR 2A LOE B statement:Use of BITAs should be considered in patients who do not have an excessive risk of sternal complications ( IIa, B)"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S001"
+data-title="PIIS0003497515016082"
+data-recommendation="Use of BITAs should be considered in patients who do not have an excessive risk of sternal complications ( IIa, B)"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:Use of BITAs should be considered in patients who do not have an excessive risk of sternal complications ( IIa, B)"
+data-locator="p.4 class-level-row COR 2A LOE B"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-2a, loe-b"
+data-confidence-rationale="recommendation-language; cor:2a; loe:b; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S001</td>
+<td>General Coronary Revascularization</td>
+<td>2A / B</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.74</td>
+<td>Use of BITAs should be considered in patients who do not have an excessive risk of sternal complications ( IIa, B)</td>
+</tr><tr class="recommendation-row"
+data-cor="2A"
+data-loe="B"
+data-weight="critical"
+data-confidence="0.74"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S002 As an adjunct to left internal thoracic artery (LITA), a second arterial graft (right ITA or radial artery [RA]) should be considered in appropriate patients p.1 inline-cor-loe COR 2A LOE B statement:As an adjunct to left internal thoracic artery (LITA), a second arterial graft (right ITA or radial artery [RA]) should"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S002"
+data-title="PIIS0003497515016082"
+data-recommendation="As an adjunct to left internal thoracic artery (LITA), a second arterial graft (right ITA or radial artery [RA]) should be considered in appropriate patients"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:As an adjunct to left internal thoracic artery (LITA), a second arterial graft (right ITA or radial artery [RA]) should"
+data-locator="p.1 inline-cor-loe COR 2A LOE B"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-2a, loe-b"
+data-confidence-rationale="recommendation-language; cor:2a; loe:b; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S002</td>
+<td>General Coronary Revascularization</td>
+<td>2A / B</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.74</td>
+<td>As an adjunct to left internal thoracic artery (LITA), a second arterial graft (right ITA or radial artery [RA]) should be considered in appropriate patients</td>
+</tr><tr class="recommendation-row"
+data-cor="2A"
+data-loe="B"
+data-weight="critical"
+data-confidence="0.74"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S003 Use of bilateral ITAs (BITAs) should be considered in patients who do not have an excessive risk of sternal complications p.1 inline-cor-loe COR 2A LOE B statement:Use of bilateral ITAs (BITAs) should be considered in patients who do not have an excessive risk of sternal complication"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S003"
+data-title="PIIS0003497515016082"
+data-recommendation="Use of bilateral ITAs (BITAs) should be considered in patients who do not have an excessive risk of sternal complications"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:Use of bilateral ITAs (BITAs) should be considered in patients who do not have an excessive risk of sternal complication"
+data-locator="p.1 inline-cor-loe COR 2A LOE B"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-2a, loe-b"
+data-confidence-rationale="recommendation-language; cor:2a; loe:b; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S003</td>
+<td>General Coronary Revascularization</td>
+<td>2A / B</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.74</td>
+<td>Use of bilateral ITAs (BITAs) should be considered in patients who do not have an excessive risk of sternal complications</td>
+</tr><tr class="recommendation-row"
+data-cor="2A"
+data-loe="B"
+data-weight="critical"
+data-confidence="0.74"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S004 To reduce the risk of sternal infection with BITA, skeletonized grafts should be considered p.1 inline-cor-loe COR 2A LOE B outcome:reduce the risk of sternal infection with BITA, skeletonized grafts should be considered"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S004"
+data-title="PIIS0003497515016082"
+data-recommendation="To reduce the risk of sternal infection with BITA, skeletonized grafts should be considered"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome="reduce the risk of sternal infection with BITA, skeletonized grafts should be considered"
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome="reduce the risk of sternal infection with BITA, skeletonized grafts should be considered"
+data-entities="outcome:reduce the risk of sternal infection with BITA, skeletonized grafts should be considered"
+data-locator="p.1 inline-cor-loe COR 2A LOE B"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-2a, loe-b"
+data-confidence-rationale="recommendation-language; cor:2a; loe:b; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S004</td>
+<td>General Coronary Revascularization</td>
+<td>2A / B</td>
+<td>-</td>
+<td>reduce the risk of sternal infection with BITA, skeletonized grafts should be considered</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.74</td>
+<td>To reduce the risk of sternal infection with BITA, skeletonized grafts should be considered</td>
+</tr><tr class="recommendation-row"
+data-cor="1"
+data-loe="C"
+data-weight="critical"
+data-confidence="0.74"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S005 smoking cessation is recommended p.1 inline-cor-loe COR 1 LOE C statement:smoking cessation is recommended"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S005"
+data-title="PIIS0003497515016082"
+data-recommendation="smoking cessation is recommended"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action="is recommended"
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:smoking cessation is recommended"
+data-locator="p.1 inline-cor-loe COR 1 LOE C"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-1, loe-c"
+data-confidence-rationale="recommendation-language; cor:1; loe:c; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S005</td>
+<td>General Coronary Revascularization</td>
+<td>1 / C</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.74</td>
+<td>smoking cessation is recommended</td>
+</tr><tr class="recommendation-row"
+data-cor="2A"
+data-loe="B"
+data-weight="critical"
+data-confidence="0.74"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S006 glycemic control should be considered p.1 inline-cor-loe COR 2A LOE B statement:glycemic control should be considered"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S006"
+data-title="PIIS0003497515016082"
+data-recommendation="glycemic control should be considered"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:glycemic control should be considered"
+data-locator="p.1 inline-cor-loe COR 2A LOE B"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-2a, loe-b"
+data-confidence-rationale="recommendation-language; cor:2a; loe:b; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S006</td>
+<td>General Coronary Revascularization</td>
+<td>2A / B</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.74</td>
+<td>glycemic control should be considered</td>
+</tr><tr class="recommendation-row"
+data-cor="2B"
+data-loe="C"
+data-weight="critical"
+data-confidence="0.74"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S007 and enhanced sternal stabilization may be considered p.1 inline-cor-loe COR 2B LOE C statement:and enhanced sternal stabilization may be considered"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S007"
+data-title="PIIS0003497515016082"
+data-recommendation="and enhanced sternal stabilization may be considered"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action="may be considered"
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:and enhanced sternal stabilization may be considered"
+data-locator="p.1 inline-cor-loe COR 2B LOE C"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-2b, loe-c"
+data-confidence-rationale="recommendation-language; cor:2b; loe:c; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S007</td>
+<td>General Coronary Revascularization</td>
+<td>2B / C</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.74</td>
+<td>and enhanced sternal stabilization may be considered</td>
+</tr><tr class="recommendation-row"
+data-cor="2B"
+data-loe="B"
+data-weight="critical"
+data-confidence="0.74"
+data-disease=""
+data-topic="Revascularization Strategy"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S008 The right gastroepiploic artery may be considered in patients with poor conduit options or as an adjunct to more complete arterial revascularization p.1 inline-cor-loe COR 2B LOE B statement:The right gastroepiploic artery may be considered in patients with poor conduit options or as an adjunct to more complet"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S008"
+data-title="PIIS0003497515016082"
+data-recommendation="The right gastroepiploic artery may be considered in patients with poor conduit options or as an adjunct to more complete arterial revascularization"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action="may be considered"
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:The right gastroepiploic artery may be considered in patients with poor conduit options or as an adjunct to more complet"
+data-locator="p.1 inline-cor-loe COR 2B LOE B"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-2b, loe-b"
+data-confidence-rationale="recommendation-language; cor:2b; loe:b; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S008</td>
+<td>Revascularization Strategy</td>
+<td>2B / B</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.74</td>
+<td>The right gastroepiploic artery may be considered in patients with poor conduit options or as an adjunct to more complete arterial revascularization</td>
+</tr><tr class="recommendation-row"
+data-cor="1"
+data-loe="C"
+data-weight="critical"
+data-confidence="0.74"
+data-disease=""
+data-topic="Heart Team"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S009 Use of arterial grafts (specific targets, number, and type) should be a part of the discussion of the heart team in determining the optimal approach for each patient p.1 inline-cor-loe COR 1 LOE C statement:Use of arterial grafts (specific targets, number, and type) should be a part of the discussion of the heart team in dete"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S009"
+data-title="PIIS0003497515016082"
+data-recommendation="Use of arterial grafts (specific targets, number, and type) should be a part of the discussion of the heart team in determining the optimal approach for each patient"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:Use of arterial grafts (specific targets, number, and type) should be a part of the discussion of the heart team in dete"
+data-locator="p.1 inline-cor-loe COR 1 LOE C"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-1, loe-c"
+data-confidence-rationale="recommendation-language; cor:1; loe:c; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S009</td>
+<td>Heart Team</td>
+<td>1 / C</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.74</td>
+<td>Use of arterial grafts (specific targets, number, and type) should be a part of the discussion of the heart team in determining the optimal approach for each patient</td>
+</tr><tr class="recommendation-row"
+data-cor="1"
+data-loe="B"
+data-weight="critical"
+data-confidence="0.74"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S010 The ITA should be used to bypass the LAD artery when bypass of the LAD is indicated p.4 inline-cor-loe COR 1 LOE B condition:bypass of the LAD is indicated [contains] condition:bypass of the LAD is indicated"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S010"
+data-title="PIIS0003497515016082"
+data-recommendation="The ITA should be used to bypass the LAD artery when bypass of the LAD is indicated"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions="bypass of the LAD is indicated"
+data-exclusions=""
+data-trigger="bypass of the LAD is indicated"
+data-trigger-model="qualifiers=bypass of the LAD is indicated"
+data-trigger-constraints="condition:bypass of the LAD is indicated [contains]"
+data-execution-action="is indicated"
+data-execution-prerequisites="bypass of the LAD is indicated"
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="condition:bypass of the LAD is indicated"
+data-locator="p.4 inline-cor-loe COR 1 LOE B"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-1, loe-b"
+data-confidence-rationale="recommendation-language; cor:1; loe:b; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S010</td>
+<td>General Coronary Revascularization</td>
+<td>1 / B</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.74</td>
+<td>The ITA should be used to bypass the LAD artery when bypass of the LAD is indicated</td>
+</tr><tr class="recommendation-row"
+data-cor="2A"
+data-loe="B"
+data-weight="critical"
+data-confidence="0.74"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S011 As an adjunct to LITA, a second arterial graft (right internal thoracic artery or radial artery [RA]) should be considered in appropriate patients p.4 inline-cor-loe COR 2A LOE B statement:As an adjunct to LITA, a second arterial graft (right internal thoracic artery or radial artery [RA]) should be consider"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S011"
+data-title="PIIS0003497515016082"
+data-recommendation="As an adjunct to LITA, a second arterial graft (right internal thoracic artery or radial artery [RA]) should be considered in appropriate patients"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:As an adjunct to LITA, a second arterial graft (right internal thoracic artery or radial artery [RA]) should be consider"
+data-locator="p.4 inline-cor-loe COR 2A LOE B"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-2a, loe-b"
+data-confidence-rationale="recommendation-language; cor:2a; loe:b; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S011</td>
+<td>General Coronary Revascularization</td>
+<td>2A / B</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.74</td>
+<td>As an adjunct to LITA, a second arterial graft (right internal thoracic artery or radial artery [RA]) should be considered in appropriate patients</td>
+</tr><tr class="recommendation-row"
+data-cor="2A"
+data-loe="B"
+data-weight="critical"
+data-confidence="0.74"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S012 Use of BITAs should be considered in patients who do not have an excessive risk of sternal complications p.4 inline-cor-loe COR 2A LOE B statement:Use of BITAs should be considered in patients who do not have an excessive risk of sternal complications"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S012"
+data-title="PIIS0003497515016082"
+data-recommendation="Use of BITAs should be considered in patients who do not have an excessive risk of sternal complications"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:Use of BITAs should be considered in patients who do not have an excessive risk of sternal complications"
+data-locator="p.4 inline-cor-loe COR 2A LOE B"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-2a, loe-b"
+data-confidence-rationale="recommendation-language; cor:2a; loe:b; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S012</td>
+<td>General Coronary Revascularization</td>
+<td>2A / B</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.74</td>
+<td>Use of BITAs should be considered in patients who do not have an excessive risk of sternal complications</td>
+</tr><tr class="recommendation-row"
+data-cor="2A"
+data-loe="B"
+data-weight="critical"
+data-confidence="0.74"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S013 To reduce the risk of sternal infection with BITA consider the following: B Skeletonized grafts should be considered p.4 inline-cor-loe COR 2A LOE B outcome:reduce the risk of sternal infection with BITA consider the following: B Skeletonized grafts should be considered"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S013"
+data-title="PIIS0003497515016082"
+data-recommendation="To reduce the risk of sternal infection with BITA consider the following: B Skeletonized grafts should be considered"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome="reduce the risk of sternal infection with BITA consider the following: B Skeletonized grafts should be considered"
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome="reduce the risk of sternal infection with BITA consider the following: B Skeletonized grafts should be considered"
+data-entities="outcome:reduce the risk of sternal infection with BITA consider the following: B Skeletonized grafts should be considered"
+data-locator="p.4 inline-cor-loe COR 2A LOE B"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-2a, loe-b"
+data-confidence-rationale="recommendation-language; cor:2a; loe:b; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S013</td>
+<td>General Coronary Revascularization</td>
+<td>2A / B</td>
+<td>-</td>
+<td>reduce the risk of sternal infection with BITA consider the following: B Skeletonized grafts should be considered</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.74</td>
+<td>To reduce the risk of sternal infection with BITA consider the following: B Skeletonized grafts should be considered</td>
+</tr><tr class="recommendation-row"
+data-cor="1"
+data-loe="C"
+data-weight="critical"
+data-confidence="0.74"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S014 B Smoking cessation is recommended p.4 inline-cor-loe COR 1 LOE C statement:B Smoking cessation is recommended"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S014"
+data-title="PIIS0003497515016082"
+data-recommendation="B Smoking cessation is recommended"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action="is recommended"
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:B Smoking cessation is recommended"
+data-locator="p.4 inline-cor-loe COR 1 LOE C"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-1, loe-c"
+data-confidence-rationale="recommendation-language; cor:1; loe:c; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S014</td>
+<td>General Coronary Revascularization</td>
+<td>1 / C</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.74</td>
+<td>B Smoking cessation is recommended</td>
+</tr><tr class="recommendation-row"
+data-cor="2A"
+data-loe="B"
+data-weight="critical"
+data-confidence="0.74"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S015 B Glycemic control should be considered p.4 inline-cor-loe COR 2A LOE B statement:B Glycemic control should be considered"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S015"
+data-title="PIIS0003497515016082"
+data-recommendation="B Glycemic control should be considered"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:B Glycemic control should be considered"
+data-locator="p.4 inline-cor-loe COR 2A LOE B"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-2a, loe-b"
+data-confidence-rationale="recommendation-language; cor:2a; loe:b; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S015</td>
+<td>General Coronary Revascularization</td>
+<td>2A / B</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.74</td>
+<td>B Glycemic control should be considered</td>
+</tr><tr class="recommendation-row"
+data-cor="2B"
+data-loe="C"
+data-weight="critical"
+data-confidence="0.74"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S016 B Enhanced sternal stabilization may be considered p.4 inline-cor-loe COR 2B LOE C statement:B Enhanced sternal stabilization may be considered"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S016"
+data-title="PIIS0003497515016082"
+data-recommendation="B Enhanced sternal stabilization may be considered"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action="may be considered"
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:B Enhanced sternal stabilization may be considered"
+data-locator="p.4 inline-cor-loe COR 2B LOE C"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-2b, loe-c"
+data-confidence-rationale="recommendation-language; cor:2b; loe:c; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S016</td>
+<td>General Coronary Revascularization</td>
+<td>2B / C</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.74</td>
+<td>B Enhanced sternal stabilization may be considered</td>
+</tr><tr class="recommendation-row"
+data-cor="2A"
+data-loe="B"
+data-weight="critical"
+data-confidence="0.74"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S017 As an adjunct to LITA to LAD (or in patients with inadequate LITA grafts), use of a RA graft is reasonable when grafting coronary targets with severe stenoses p.5 inline-cor-loe COR 2A LOE B condition:grafting coronary targets with severe stenoses [contains] condition:grafting coronary targets with severe stenoses"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S017"
+data-title="PIIS0003497515016082"
+data-recommendation="As an adjunct to LITA to LAD (or in patients with inadequate LITA grafts), use of a RA graft is reasonable when grafting coronary targets with severe stenoses"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions="grafting coronary targets with severe stenoses"
+data-exclusions=""
+data-trigger="grafting coronary targets with severe stenoses"
+data-trigger-model="qualifiers=grafting coronary targets with severe stenoses"
+data-trigger-constraints="condition:grafting coronary targets with severe stenoses [contains]"
+data-execution-action="is reasonable"
+data-execution-prerequisites="grafting coronary targets with severe stenoses"
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="condition:grafting coronary targets with severe stenoses"
+data-locator="p.5 inline-cor-loe COR 2A LOE B"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-2a, loe-b"
+data-confidence-rationale="recommendation-language; cor:2a; loe:b; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S017</td>
+<td>General Coronary Revascularization</td>
+<td>2A / B</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.74</td>
+<td>As an adjunct to LITA to LAD (or in patients with inadequate LITA grafts), use of a RA graft is reasonable when grafting coronary targets with severe stenoses</td>
+</tr><tr class="recommendation-row"
+data-cor="2B"
+data-loe="B"
+data-weight="critical"
+data-confidence="0.74"
+data-disease=""
+data-topic="Revascularization Strategy"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S018 The RGEA may be considered in patients with poor conduit options or as an adjunct to more complete arterial revascularization p.6 inline-cor-loe COR 2B LOE B statement:The RGEA may be considered in patients with poor conduit options or as an adjunct to more complete arterial revasculariz"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S018"
+data-title="PIIS0003497515016082"
+data-recommendation="The RGEA may be considered in patients with poor conduit options or as an adjunct to more complete arterial revascularization"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action="may be considered"
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:The RGEA may be considered in patients with poor conduit options or as an adjunct to more complete arterial revasculariz"
+data-locator="p.6 inline-cor-loe COR 2B LOE B"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-2b, loe-b"
+data-confidence-rationale="recommendation-language; cor:2b; loe:b; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S018</td>
+<td>Revascularization Strategy</td>
+<td>2B / B</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.74</td>
+<td>The RGEA may be considered in patients with poor conduit options or as an adjunct to more complete arterial revascularization</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S019 Description of and Description Class I (benefit &gt;&gt;&gt;risk) Procedure/treatment should be performed/administered p.3 numbered statement:Description of and Description Class I (benefit &gt;&gt;&gt;risk) Procedure/treatment should be performed/administered"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S019"
+data-title="PIIS0003497515016082"
+data-recommendation="Description of and Description Class I (benefit &gt;&gt;&gt;risk) Procedure/treatment should be performed/administered"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action="should be performed"
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:Description of and Description Class I (benefit &gt;&gt;&gt;risk) Procedure/treatment should be performed/administered"
+data-locator="p.3 numbered"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S019</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>Description of and Description Class I (benefit &gt;&gt;&gt;risk) Procedure/treatment should be performed/administered</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S020 As an adjunct to left internal thoracic artery (LITA), a second arterial graft (right ITA or radial artery [RA]) should be considered in appropriate patients ( IIa, B) p.1 narrative statement:As an adjunct to left internal thoracic artery (LITA), a second arterial graft (right ITA or radial artery [RA]) should"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S020"
+data-title="PIIS0003497515016082"
+data-recommendation="As an adjunct to left internal thoracic artery (LITA), a second arterial graft (right ITA or radial artery [RA]) should be considered in appropriate patients ( IIa, B)"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:As an adjunct to left internal thoracic artery (LITA), a second arterial graft (right ITA or radial artery [RA]) should"
+data-locator="p.1 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S020</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>As an adjunct to left internal thoracic artery (LITA), a second arterial graft (right ITA or radial artery [RA]) should be considered in appropriate patients ( IIa, B)</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S021 Use of bilateral ITAs (BITAs) should be considered in patients who do not have an excessive risk of sternal complications ( IIa, B) p.1 narrative statement:Use of bilateral ITAs (BITAs) should be considered in patients who do not have an excessive risk of sternal complication"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S021"
+data-title="PIIS0003497515016082"
+data-recommendation="Use of bilateral ITAs (BITAs) should be considered in patients who do not have an excessive risk of sternal complications ( IIa, B)"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:Use of bilateral ITAs (BITAs) should be considered in patients who do not have an excessive risk of sternal complication"
+data-locator="p.1 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S021</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>Use of bilateral ITAs (BITAs) should be considered in patients who do not have an excessive risk of sternal complications ( IIa, B)</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S022 To reduce the risk of sternal infection with BITA, skeletonized grafts should be considered ( IIa, B), smoking cessation is recommended ( I, C), glycemic control should be considered ( IIa, B), and enhanced sternal stabilization may be considered ( IIb, C) p.1 narrative outcome:reduce the risk of sternal infection with BITA, skeletonized grafts should be considered ( IIa, B), smoking cessation is recommended ( I, C), glycemic control should be considered ( IIa, B), and enhanced sternal stabilization may be considered ( IIb, C)"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S022"
+data-title="PIIS0003497515016082"
+data-recommendation="To reduce the risk of sternal infection with BITA, skeletonized grafts should be considered ( IIa, B), smoking cessation is recommended ( I, C), glycemic control should be considered ( IIa, B), and enhanced sternal stabilization may be considered ( IIb, C)"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome="reduce the risk of sternal infection with BITA, skeletonized grafts should be considered ( IIa, B), smoking cessation is recommended ( I, C), glycemic control should be considered ( IIa, B), and enhanced sternal stabilization may be considered ( IIb, C)"
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action="is recommended"
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome="reduce the risk of sternal infection with BITA, skeletonized grafts should be considered ( IIa, B), smoking cessation is recommended ( I, C), glycemic control should be considered ( IIa, B), and enhanced sternal stabilization may be considered ( IIb, C)"
+data-entities="outcome:reduce the risk of sternal infection with BITA, skeletonized grafts should be considered ( IIa, B), smoking cessation is recommended ( I, C), glycemic control should be considered ( IIa, B), and enhanced sternal stabilization may be considered ( IIb, C)"
+data-locator="p.1 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S022</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>reduce the risk of sternal infection with BITA, skeletonized grafts should be considered ( IIa, B), smoking cessation is recommended ( I, C), glycemic control should be considered ( IIa, B), and enhanced sternal stabilization may be considered ( IIb, C)</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>To reduce the risk of sternal infection with BITA, skeletonized grafts should be considered ( IIa, B), smoking cessation is recommended ( I, C), glycemic control should be considered ( IIa, B), and enhanced sternal stabilization may be considered ( IIb, C)</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S023 As an adjunct to LITA to LAD (or in patients with inadequate LITA grafts), use of a RA graft is reasonable when grafting coronary targets with severe stenoses ( IIa, : B) p.1 narrative condition:grafting coronary targets with severe stenoses ( IIa [contains] condition:grafting coronary targets with severe stenoses ( IIa"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S023"
+data-title="PIIS0003497515016082"
+data-recommendation="As an adjunct to LITA to LAD (or in patients with inadequate LITA grafts), use of a RA graft is reasonable when grafting coronary targets with severe stenoses ( IIa, : B)"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions="grafting coronary targets with severe stenoses ( IIa"
+data-exclusions=""
+data-trigger="grafting coronary targets with severe stenoses ( IIa"
+data-trigger-model="qualifiers=grafting coronary targets with severe stenoses ( IIa"
+data-trigger-constraints="condition:grafting coronary targets with severe stenoses ( IIa [contains]"
+data-execution-action="is reasonable"
+data-execution-prerequisites="grafting coronary targets with severe stenoses ( IIa"
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="condition:grafting coronary targets with severe stenoses ( IIa"
+data-locator="p.1 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S023</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>As an adjunct to LITA to LAD (or in patients with inadequate LITA grafts), use of a RA graft is reasonable when grafting coronary targets with severe stenoses ( IIa, : B)</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="Revascularization Strategy"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S024 The right gastroepiploic artery may be considered in patients with poor conduit options or as an adjunct to more complete arterial revascularization ( IIb, B) p.1 narrative statement:The right gastroepiploic artery may be considered in patients with poor conduit options or as an adjunct to more complet"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S024"
+data-title="PIIS0003497515016082"
+data-recommendation="The right gastroepiploic artery may be considered in patients with poor conduit options or as an adjunct to more complete arterial revascularization ( IIb, B)"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action="may be considered"
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:The right gastroepiploic artery may be considered in patients with poor conduit options or as an adjunct to more complet"
+data-locator="p.1 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S024</td>
+<td>Revascularization Strategy</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>The right gastroepiploic artery may be considered in patients with poor conduit options or as an adjunct to more complete arterial revascularization ( IIb, B)</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="Heart Team"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S025 Use of arterial grafts (specific targets, number, and type) should be a part of the discussion of the heart team in determining the optimal approach for each patient ( I, C) p.1 narrative statement:Use of arterial grafts (specific targets, number, and type) should be a part of the discussion of the heart team in dete"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S025"
+data-title="PIIS0003497515016082"
+data-recommendation="Use of arterial grafts (specific targets, number, and type) should be a part of the discussion of the heart team in determining the optimal approach for each patient ( I, C)"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:Use of arterial grafts (specific targets, number, and type) should be a part of the discussion of the heart team in dete"
+data-locator="p.1 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S025</td>
+<td>Heart Team</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>Use of arterial grafts (specific targets, number, and type) should be a part of the discussion of the heart team in determining the optimal approach for each patient ( I, C)</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease="CAD"
+data-topic="Revascularization Strategy"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S026 (Ann Thorac Surg ;101:801–9) 2016 by The Society of Thoracic Surgeons A s the techniques of surgical and percutaneous coronary revascularization for coronary artery disease (CAD) continue to evolve, reassessing available data to inform decision making should take place periodically CAD p.1 narrative disease:CAD [eq] statement:(Ann Thorac Surg ;101:801–9) 2016 by The Society of Thoracic Surgeons A s the techniques of surgical and percutaneous co"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S026"
+data-title="PIIS0003497515016082"
+data-recommendation="(Ann Thorac Surg ;101:801–9) 2016 by The Society of Thoracic Surgeons A s the techniques of surgical and percutaneous coronary revascularization for coronary artery disease (CAD) continue to evolve, reassessing available data to inform decision making should take place periodically"
+data-population=""
+data-clinical-state=""
+data-disease-full="CAD"
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model="disease=CAD"
+data-trigger-constraints="disease:CAD [eq]"
+data-execution-action=""
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:(Ann Thorac Surg ;101:801–9) 2016 by The Society of Thoracic Surgeons A s the techniques of surgical and percutaneous co"
+data-locator="p.1 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S026</td>
+<td>Revascularization Strategy</td>
+<td>-</td>
+<td>CAD</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>(Ann Thorac Surg ;101:801–9) 2016 by The Society of Thoracic Surgeons A s the techniques of surgical and percutaneous coronary revascularization for coronary artery disease (CAD) continue to evolve, reassessing available data to inform decision making should take place periodically</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S027 Despite these higher-risk patients, surgeons are required to provide superior short-term surgical outcomes, minimal patient morbidity, and durable long-term outcomes and graft patency p.2 narrative statement:Despite these higher-risk patients, surgeons are required to provide superior short-term surgical outcomes, minimal pati"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S027"
+data-title="PIIS0003497515016082"
+data-recommendation="Despite these higher-risk patients, surgeons are required to provide superior short-term surgical outcomes, minimal patient morbidity, and durable long-term outcomes and graft patency"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:Despite these higher-risk patients, surgeons are required to provide superior short-term surgical outcomes, minimal pati"
+data-locator="p.2 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S027</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>Despite these higher-risk patients, surgeons are required to provide superior short-term surgical outcomes, minimal patient morbidity, and durable long-term outcomes and graft patency</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S028 it is reasonable to perform procedure/ administer treatment Class IIB (benefit &gt;risk) Additional studies with broad objectives needed p.3 narrative statement:it is reasonable to perform procedure/ administer treatment Class IIB (benefit &gt;risk) Additional studies with broad obje"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S028"
+data-title="PIIS0003497515016082"
+data-recommendation="it is reasonable to perform procedure/ administer treatment Class IIB (benefit &gt;risk) Additional studies with broad objectives needed"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action="is reasonable"
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:it is reasonable to perform procedure/ administer treatment Class IIB (benefit &gt;risk) Additional studies with broad obje"
+data-locator="p.3 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S028</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>it is reasonable to perform procedure/ administer treatment Class IIB (benefit &gt;risk) Additional studies with broad objectives needed</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S029 procedure/treatment may be considered Class III (no benefit) Procedure/test: not helpful p.3 narrative statement:procedure/treatment may be considered Class III (no benefit) Procedure/test: not helpful"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S029"
+data-title="PIIS0003497515016082"
+data-recommendation="procedure/treatment may be considered Class III (no benefit) Procedure/test: not helpful"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action="may be considered"
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:procedure/treatment may be considered Class III (no benefit) Procedure/test: not helpful"
+data-locator="p.3 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S029</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>procedure/treatment may be considered Class III (no benefit) Procedure/test: not helpful</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S030 The ITA should be used to bypass the LAD artery when bypass of the LAD is indicated ( I, B) p.4 narrative condition:bypass of the LAD is indicated ( I [contains] condition:bypass of the LAD is indicated ( I"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S030"
+data-title="PIIS0003497515016082"
+data-recommendation="The ITA should be used to bypass the LAD artery when bypass of the LAD is indicated ( I, B)"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions="bypass of the LAD is indicated ( I"
+data-exclusions=""
+data-trigger="bypass of the LAD is indicated ( I"
+data-trigger-model="qualifiers=bypass of the LAD is indicated ( I"
+data-trigger-constraints="condition:bypass of the LAD is indicated ( I [contains]"
+data-execution-action="is indicated"
+data-execution-prerequisites="bypass of the LAD is indicated ( I"
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="condition:bypass of the LAD is indicated ( I"
+data-locator="p.4 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S030</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>The ITA should be used to bypass the LAD artery when bypass of the LAD is indicated ( I, B)</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S031 As an adjunct to LITA, a second arterial graft (right internal thoracic artery or radial artery [RA]) should be considered in appropriate patients ( IIa, B) p.4 narrative statement:As an adjunct to LITA, a second arterial graft (right internal thoracic artery or radial artery [RA]) should be consider"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S031"
+data-title="PIIS0003497515016082"
+data-recommendation="As an adjunct to LITA, a second arterial graft (right internal thoracic artery or radial artery [RA]) should be considered in appropriate patients ( IIa, B)"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:As an adjunct to LITA, a second arterial graft (right internal thoracic artery or radial artery [RA]) should be consider"
+data-locator="p.4 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S031</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>As an adjunct to LITA, a second arterial graft (right internal thoracic artery or radial artery [RA]) should be considered in appropriate patients ( IIa, B)</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S032 To reduce the risk of sternal infection with BITA consider the following: B Skeletonized grafts should be considered ( IIa, B) p.4 narrative outcome:reduce the risk of sternal infection with BITA consider the following: B Skeletonized grafts should be considered ( IIa, B)"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S032"
+data-title="PIIS0003497515016082"
+data-recommendation="To reduce the risk of sternal infection with BITA consider the following: B Skeletonized grafts should be considered ( IIa, B)"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome="reduce the risk of sternal infection with BITA consider the following: B Skeletonized grafts should be considered ( IIa, B)"
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome="reduce the risk of sternal infection with BITA consider the following: B Skeletonized grafts should be considered ( IIa, B)"
+data-entities="outcome:reduce the risk of sternal infection with BITA consider the following: B Skeletonized grafts should be considered ( IIa, B)"
+data-locator="p.4 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S032</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>reduce the risk of sternal infection with BITA consider the following: B Skeletonized grafts should be considered ( IIa, B)</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>To reduce the risk of sternal infection with BITA consider the following: B Skeletonized grafts should be considered ( IIa, B)</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S033 B Smoking cessation is recommended ( I, C) p.4 narrative statement:B Smoking cessation is recommended ( I, C)"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S033"
+data-title="PIIS0003497515016082"
+data-recommendation="B Smoking cessation is recommended ( I, C)"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action="is recommended"
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:B Smoking cessation is recommended ( I, C)"
+data-locator="p.4 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S033</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>B Smoking cessation is recommended ( I, C)</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S034 B Glycemic control should be considered ( IIa, B) p.4 narrative statement:B Glycemic control should be considered ( IIa, B)"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S034"
+data-title="PIIS0003497515016082"
+data-recommendation="B Glycemic control should be considered ( IIa, B)"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:B Glycemic control should be considered ( IIa, B)"
+data-locator="p.4 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S034</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>B Glycemic control should be considered ( IIa, B)</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S035 B Enhanced sternal stabilization may be considered ( IIb, C) p.4 narrative statement:B Enhanced sternal stabilization may be considered ( IIb, C)"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S035"
+data-title="PIIS0003497515016082"
+data-recommendation="B Enhanced sternal stabilization may be considered ( IIb, C)"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action="may be considered"
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:B Enhanced sternal stabilization may be considered ( IIb, C)"
+data-locator="p.4 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S035</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>B Enhanced sternal stabilization may be considered ( IIb, C)</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S036 A properly conducted Allen’s test is a useful first-line test to select patients for RA harvest, but the cutoff is controversial, and the test does not have a perfect sensitivity or specificity p.4 narrative statement:A properly conducted Allen’s test is a useful first-line test to select patients for RA harvest, but the cutoff is contr"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S036"
+data-title="PIIS0003497515016082"
+data-recommendation="A properly conducted Allen’s test is a useful first-line test to select patients for RA harvest, but the cutoff is controversial, and the test does not have a perfect sensitivity or specificity"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:A properly conducted Allen’s test is a useful first-line test to select patients for RA harvest, but the cutoff is contr"
+data-locator="p.4 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S036</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>A properly conducted Allen’s test is a useful first-line test to select patients for RA harvest, but the cutoff is controversial, and the test does not have a perfect sensitivity or specificity</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S037 therefore local application of antispasmodic agents is preferred p.4 narrative statement:therefore local application of antispasmodic agents is preferred"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S037"
+data-title="PIIS0003497515016082"
+data-recommendation="therefore local application of antispasmodic agents is preferred"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:therefore local application of antispasmodic agents is preferred"
+data-locator="p.4 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S037</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>therefore local application of antispasmodic agents is preferred</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="CABG Strategy"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S038 Because of concerns about injury to the RA caused by instrumentation and its potential impact on graft patency [90, 91], it is recommended that there should be a delay between transradial angiography and the use of the instrumented RA as a conduit for CABG p.5 narrative statement:Because of concerns about injury to the RA caused by instrumentation and its potential impact on graft patency [90, 91]"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S038"
+data-title="PIIS0003497515016082"
+data-recommendation="Because of concerns about injury to the RA caused by instrumentation and its potential impact on graft patency [90, 91], it is recommended that there should be a delay between transradial angiography and the use of the instrumented RA as a conduit for CABG"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action="is recommended"
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:Because of concerns about injury to the RA caused by instrumentation and its potential impact on graft patency [90, 91]"
+data-locator="p.5 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S038</td>
+<td>CABG Strategy</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>Because of concerns about injury to the RA caused by instrumentation and its potential impact on graft patency [90, 91], it is recommended that there should be a delay between transradial angiography and the use of the instrumented RA as a conduit for CABG</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S039 Clinical data are insufficient to designate a safe wait time, but histologic and flow dynamic data suggest that 3 months may be reasonable [90] p.5 narrative statement:Clinical data are insufficient to designate a safe wait time, but histologic and flow dynamic data suggest that 3 months"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S039"
+data-title="PIIS0003497515016082"
+data-recommendation="Clinical data are insufficient to designate a safe wait time, but histologic and flow dynamic data suggest that 3 months may be reasonable [90]"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:Clinical data are insufficient to designate a safe wait time, but histologic and flow dynamic data suggest that 3 months"
+data-locator="p.5 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S039</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>Clinical data are insufficient to designate a safe wait time, but histologic and flow dynamic data suggest that 3 months may be reasonable [90]</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.62"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S040 As an adjunct to LITA to LAD (or in patients with inadequate LITA grafts), use of a RA graft is reasonable when grafting coronary targets with severe stenoses ( IIa, B), When RA grafts are used, it is reasonable to use pharmacologic agents to reduce acute intraoperative and perioperative spasm ( IIa, C) p.5 narrative condition:grafting coronary targets with severe stenoses ( IIa [contains] | condition:RA grafts are used [contains] outcome:reduce acute intraoperative and perioperative spasm ( IIa, C) | condition:grafting coronary targets with severe stenoses ( IIa | condition:RA grafts are used | temporal_qualifier:acute"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S040"
+data-title="PIIS0003497515016082"
+data-recommendation="As an adjunct to LITA to LAD (or in patients with inadequate LITA grafts), use of a RA graft is reasonable when grafting coronary targets with severe stenoses ( IIa, B), When RA grafts are used, it is reasonable to use pharmacologic agents to reduce acute intraoperative and perioperative spasm ( IIa, C)"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome="reduce acute intraoperative and perioperative spasm ( IIa, C)"
+data-conditions="grafting coronary targets with severe stenoses ( IIa; RA grafts are used"
+data-exclusions=""
+data-trigger="grafting coronary targets with severe stenoses ( IIa; RA grafts are used"
+data-trigger-model="qualifiers=grafting coronary targets with severe stenoses ( IIa; RA grafts are used"
+data-trigger-constraints="condition:grafting coronary targets with severe stenoses ( IIa [contains] | condition:RA grafts are used [contains]"
+data-execution-action="is reasonable"
+data-execution-prerequisites="acute; grafting coronary targets with severe stenoses ( IIa; RA grafts are used"
+data-execution-contraindications=""
+data-execution-outcome="reduce acute intraoperative and perioperative spasm ( IIa, C)"
+data-entities="outcome:reduce acute intraoperative and perioperative spasm ( IIa, C) | condition:grafting coronary targets with severe stenoses ( IIa | condition:RA grafts are used | temporal_qualifier:acute"
+data-locator="p.5 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator; temporal-qualifiers; clinical-entities">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S040</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>reduce acute intraoperative and perioperative spasm ( IIa, C)</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.62</td>
+<td>As an adjunct to LITA to LAD (or in patients with inadequate LITA grafts), use of a RA graft is reasonable when grafting coronary targets with severe stenoses ( IIa, B), When RA grafts are used, it is reasonable to use pharmacologic agents to reduce acute intraoperative and perioperative spasm ( IIa, C)</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="CABG Strategy"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S041 Because it is also susceptible to spasm, it should only be used to bypass 805 Ann Thorac Surg SPECIAL REPORT ALDEA ET AL ;101:801–9 GUIDELINES ON ARTERIAL CONDUITS FOR CABG REPORT p.5 narrative statement:Because it is also susceptible to spasm, it should only be used to bypass 805 Ann Thorac Surg SPECIAL REPORT ALDEA ET AL"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S041"
+data-title="PIIS0003497515016082"
+data-recommendation="Because it is also susceptible to spasm, it should only be used to bypass 805 Ann Thorac Surg SPECIAL REPORT ALDEA ET AL ;101:801–9 GUIDELINES ON ARTERIAL CONDUITS FOR CABG REPORT"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:Because it is also susceptible to spasm, it should only be used to bypass 805 Ann Thorac Surg SPECIAL REPORT ALDEA ET AL"
+data-locator="p.5 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S041</td>
+<td>CABG Strategy</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>Because it is also susceptible to spasm, it should only be used to bypass 805 Ann Thorac Surg SPECIAL REPORT ALDEA ET AL ;101:801–9 GUIDELINES ON ARTERIAL CONDUITS FOR CABG REPORT</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="Revascularization Strategy"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S042 The RGEA may be considered in patients with poor conduit options or as an adjunct to more complete arterial revascularization ( IIb, B) p.6 narrative statement:The RGEA may be considered in patients with poor conduit options or as an adjunct to more complete arterial revasculariz"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S042"
+data-title="PIIS0003497515016082"
+data-recommendation="The RGEA may be considered in patients with poor conduit options or as an adjunct to more complete arterial revascularization ( IIb, B)"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action="may be considered"
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:The RGEA may be considered in patients with poor conduit options or as an adjunct to more complete arterial revasculariz"
+data-locator="p.6 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S042</td>
+<td>Revascularization Strategy</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>The RGEA may be considered in patients with poor conduit options or as an adjunct to more complete arterial revascularization ( IIb, B)</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="Physiology and Complexity Assessment"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S043 Physicians and care providers engaged in this multidisciplinary decisionmaking process should have a common collective goal of facilitating patient-centered care that is based on reviewing the patient’s coronary anatomy and disease burden (including SYNTAX score) p.6 narrative statement:Physicians and care providers engaged in this multidisciplinary decisionmaking process should have a common collective g"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S043"
+data-title="PIIS0003497515016082"
+data-recommendation="Physicians and care providers engaged in this multidisciplinary decisionmaking process should have a common collective goal of facilitating patient-centered care that is based on reviewing the patient’s coronary anatomy and disease burden (including SYNTAX score)"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:Physicians and care providers engaged in this multidisciplinary decisionmaking process should have a common collective g"
+data-locator="p.6 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S043</td>
+<td>Physiology and Complexity Assessment</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>Physicians and care providers engaged in this multidisciplinary decisionmaking process should have a common collective goal of facilitating patient-centered care that is based on reviewing the patient’s coronary anatomy and disease burden (including SYNTAX score)</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="Heart Team"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S044 The heart team should acknowledge that particular patients will derive specific shortand long-term benefits from alternative treatments within subsets of strategies for percutaneous (eg, duration of dual antiplatelet therapy and type of stent) and surgical revascularization (eg, choice of conduits, off-pump CABG, and limited aortic manipulation) p.6 narrative statement:The heart team should acknowledge that particular patients will derive specific shortand long-term benefits from alterna"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S044"
+data-title="PIIS0003497515016082"
+data-recommendation="The heart team should acknowledge that particular patients will derive specific shortand long-term benefits from alternative treatments within subsets of strategies for percutaneous (eg, duration of dual antiplatelet therapy and type of stent) and surgical revascularization (eg, choice of conduits, off-pump CABG, and limited aortic manipulation)"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:The heart team should acknowledge that particular patients will derive specific shortand long-term benefits from alterna"
+data-locator="p.6 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S044</td>
+<td>Heart Team</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>The heart team should acknowledge that particular patients will derive specific shortand long-term benefits from alternative treatments within subsets of strategies for percutaneous (eg, duration of dual antiplatelet therapy and type of stent) and surgical revascularization (eg, choice of conduits, off-pump CABG, and limited aortic manipulation)</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="Heart Team"
+data-family="guideline_generic"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S045 Because number, type, and specific targets of arterial grafts influence patient survival, quality of life, and durability of revascularization, these should be discussed as part of the heart team assessment and recommendation to the patient p.6 narrative statement:Because number, type, and specific targets of arterial grafts influence patient survival, quality of life, and durabilit"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S045"
+data-title="PIIS0003497515016082"
+data-recommendation="Because number, type, and specific targets of arterial grafts influence patient survival, quality of life, and durability of revascularization, these should be discussed as part of the heart team assessment and recommendation to the patient"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:Because number, type, and specific targets of arterial grafts influence patient survival, quality of life, and durabilit"
+data-locator="p.6 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S045</td>
+<td>Heart Team</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>Because number, type, and specific targets of arterial grafts influence patient survival, quality of life, and durability of revascularization, these should be discussed as part of the heart team assessment and recommendation to the patient</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="candidates-section" data-mode-panel="audit data">
+<div class="row spread"><h2>Tabla de Candidatos EO</h2><button class="btn section-toggle" data-target="candidates-body">Colapsar</button></div>
+<div class="section-body" id="candidates-body">
+<p class="muted">Estado institucional y avance de auditoria de cada EO candidate derivado.</p>
+<div class="filters" id="candidate-filters">
+<div class="filter-box"><label for="cand-search">Busqueda</label><input id="cand-search" type="text" placeholder="statement, candidate id, localizador" /></div>
+<div class="filter-box"><label for="cand-completion">Terminacion</label><select id="cand-completion"><option value="">Todos</option><option>L1_structured</option><option>L2_audited_clinical</option><option>L3_audited_surgical</option><option>L5_executable</option></select></div>
+<div class="filter-box"><label for="cand-type">Tipo de EO</label><input id="cand-type" type="text" placeholder="recommendation, timing_rule..." /></div>
+<div class="filter-box"><label for="cand-review">Revision</label><select id="cand-review"><option value="">Todos</option><option>pending</option><option>approved</option><option>changes_requested</option><option>rejected</option><option>under_clinical_review</option><option>under_surgical_review</option></select></div>
+<div class="filter-box"><label for="cand-clinical">Clinical Audit</label><select id="cand-clinical"><option value="">Todos</option><option>pending</option><option>approved</option><option>changes_requested</option><option>rejected</option></select></div>
+<div class="filter-box"><label for="cand-surgical">Surgical Audit</label><select id="cand-surgical"><option value="">Todos</option><option>pending</option><option>approved</option><option>changes_requested</option><option>rejected</option></select></div>
+<div class="filter-box"><label for="cand-weight">Peso</label><select id="cand-weight"><option value="">Todos</option><option>critical</option><option>high</option><option>moderate</option><option>emerging</option></select></div>
+</div>
+<div class="stats"><span class="stat" id="cand-visible-count">0 visibles</span><span class="stat" id="cand-total-count">45 totales</span></div>
+<div class="toolbar"><button class="btn" id="export-cand-visible">Exportar candidates visibles CSV</button></div>
+<div class="table-wrap">
+<table id="candidates-table" class="desktop-table responsive-stack">
+<thead>
+<tr>
+<th class="sortable">Statement</th>
+<th class="sortable">Tipo / Subtipo</th>
+<th class="sortable">Nivel / Revision</th>
+<th class="sortable">Auditoria Clinica / Quirurgica</th>
+<th class="sortable">Finalizacion / Fuerza</th>
+<th class="sortable">Peso</th>
+<th class="sortable">Texto del Statement</th>
+</tr>
+</thead>
+<tbody>
+<tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="general_recommendation"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S001 EOC-8AB5D2FAE96C Use of BITAs should be considered in patients who do not have an excessive risk of sternal complications ( IIa, B) p.4 class-level-row COR 2A LOE B candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S001"
+data-candidate-id="EOC-8AB5D2FAE96C"
+data-statement="Use of BITAs should be considered in patients who do not have an excessive risk of sternal complications ( IIa, B)"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.4 class-level-row COR 2A LOE B"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-2a, loe-b">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S001</td>
+<td>recommendation / general_recommendation</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>Use of BITAs should be considered in patients who do not have an excessive risk of sternal complications ( IIa, B)</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="general_recommendation"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S002 EOC-305BAE676B5D As an adjunct to left internal thoracic artery (LITA), a second arterial graft (right ITA or radial artery [RA]) should be considered in appropriate patients p.1 inline-cor-loe COR 2A LOE B candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S002"
+data-candidate-id="EOC-305BAE676B5D"
+data-statement="As an adjunct to left internal thoracic artery (LITA), a second arterial graft (right ITA or radial artery [RA]) should be considered in appropriate patients"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.1 inline-cor-loe COR 2A LOE B"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-2a, loe-b">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S002</td>
+<td>recommendation / general_recommendation</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>As an adjunct to left internal thoracic artery (LITA), a second arterial graft (right ITA or radial artery [RA]) should be considered in appropriate patients</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="general_recommendation"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S003 EOC-D5B5B7CF792F Use of bilateral ITAs (BITAs) should be considered in patients who do not have an excessive risk of sternal complications p.1 inline-cor-loe COR 2A LOE B candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S003"
+data-candidate-id="EOC-D5B5B7CF792F"
+data-statement="Use of bilateral ITAs (BITAs) should be considered in patients who do not have an excessive risk of sternal complications"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.1 inline-cor-loe COR 2A LOE B"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-2a, loe-b">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S003</td>
+<td>recommendation / general_recommendation</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>Use of bilateral ITAs (BITAs) should be considered in patients who do not have an excessive risk of sternal complications</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="general_recommendation"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S004 EOC-879752F053E4 To reduce the risk of sternal infection with BITA, skeletonized grafts should be considered p.1 inline-cor-loe COR 2A LOE B candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S004"
+data-candidate-id="EOC-879752F053E4"
+data-statement="To reduce the risk of sternal infection with BITA, skeletonized grafts should be considered"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.1 inline-cor-loe COR 2A LOE B"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-2a, loe-b">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S004</td>
+<td>recommendation / general_recommendation</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>To reduce the risk of sternal infection with BITA, skeletonized grafts should be considered</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S005 EOC-140C3C2F9780 smoking cessation is recommended p.1 inline-cor-loe COR 1 LOE C candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S005"
+data-candidate-id="EOC-140C3C2F9780"
+data-statement="smoking cessation is recommended"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.1 inline-cor-loe COR 1 LOE C"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-1, loe-c">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S005</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>smoking cessation is recommended</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="general_recommendation"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S006 EOC-4C7E947A030A glycemic control should be considered p.1 inline-cor-loe COR 2A LOE B candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S006"
+data-candidate-id="EOC-4C7E947A030A"
+data-statement="glycemic control should be considered"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.1 inline-cor-loe COR 2A LOE B"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-2a, loe-b">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S006</td>
+<td>recommendation / general_recommendation</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>glycemic control should be considered</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S007 EOC-88B789474260 and enhanced sternal stabilization may be considered p.1 inline-cor-loe COR 2B LOE C candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S007"
+data-candidate-id="EOC-88B789474260"
+data-statement="and enhanced sternal stabilization may be considered"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.1 inline-cor-loe COR 2B LOE C"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-2b, loe-c">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S007</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>and enhanced sternal stabilization may be considered</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S008 EOC-B5822F715039 The right gastroepiploic artery may be considered in patients with poor conduit options or as an adjunct to more complete arterial revascularization p.1 inline-cor-loe COR 2B LOE B candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S008"
+data-candidate-id="EOC-B5822F715039"
+data-statement="The right gastroepiploic artery may be considered in patients with poor conduit options or as an adjunct to more complete arterial revascularization"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.1 inline-cor-loe COR 2B LOE B"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-2b, loe-b">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S008</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>The right gastroepiploic artery may be considered in patients with poor conduit options or as an adjunct to more complete arterial revascularization</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="team_decision"
+data-eo-subtype="multidisciplinary_review"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S009 EOC-4B27DC76E283 Use of arterial grafts (specific targets, number, and type) should be a part of the discussion of the heart team in determining the optimal approach for each patient p.1 inline-cor-loe COR 1 LOE C candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S009"
+data-candidate-id="EOC-4B27DC76E283"
+data-statement="Use of arterial grafts (specific targets, number, and type) should be a part of the discussion of the heart team in determining the optimal approach for each patient"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.1 inline-cor-loe COR 1 LOE C"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-1, loe-c">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S009</td>
+<td>team_decision / multidisciplinary_review</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>Use of arterial grafts (specific targets, number, and type) should be a part of the discussion of the heart team in determining the optimal approach for each patient</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S010 EOC-295971FB1EE1 The ITA should be used to bypass the LAD artery when bypass of the LAD is indicated p.4 inline-cor-loe COR 1 LOE B candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S010"
+data-candidate-id="EOC-295971FB1EE1"
+data-statement="The ITA should be used to bypass the LAD artery when bypass of the LAD is indicated"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.4 inline-cor-loe COR 1 LOE B"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-1, loe-b">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S010</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>The ITA should be used to bypass the LAD artery when bypass of the LAD is indicated</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="general_recommendation"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S011 EOC-B33F982AE87B As an adjunct to LITA, a second arterial graft (right internal thoracic artery or radial artery [RA]) should be considered in appropriate patients p.4 inline-cor-loe COR 2A LOE B candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S011"
+data-candidate-id="EOC-B33F982AE87B"
+data-statement="As an adjunct to LITA, a second arterial graft (right internal thoracic artery or radial artery [RA]) should be considered in appropriate patients"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.4 inline-cor-loe COR 2A LOE B"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-2a, loe-b">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S011</td>
+<td>recommendation / general_recommendation</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>As an adjunct to LITA, a second arterial graft (right internal thoracic artery or radial artery [RA]) should be considered in appropriate patients</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="general_recommendation"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S012 EOC-F6C1F1569757 Use of BITAs should be considered in patients who do not have an excessive risk of sternal complications p.4 inline-cor-loe COR 2A LOE B candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S012"
+data-candidate-id="EOC-F6C1F1569757"
+data-statement="Use of BITAs should be considered in patients who do not have an excessive risk of sternal complications"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.4 inline-cor-loe COR 2A LOE B"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-2a, loe-b">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S012</td>
+<td>recommendation / general_recommendation</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>Use of BITAs should be considered in patients who do not have an excessive risk of sternal complications</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="general_recommendation"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S013 EOC-A94413F2D9E2 To reduce the risk of sternal infection with BITA consider the following: B Skeletonized grafts should be considered p.4 inline-cor-loe COR 2A LOE B candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S013"
+data-candidate-id="EOC-A94413F2D9E2"
+data-statement="To reduce the risk of sternal infection with BITA consider the following: B Skeletonized grafts should be considered"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.4 inline-cor-loe COR 2A LOE B"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-2a, loe-b">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S013</td>
+<td>recommendation / general_recommendation</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>To reduce the risk of sternal infection with BITA consider the following: B Skeletonized grafts should be considered</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S014 EOC-5E9E9E22C3C2 B Smoking cessation is recommended p.4 inline-cor-loe COR 1 LOE C candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S014"
+data-candidate-id="EOC-5E9E9E22C3C2"
+data-statement="B Smoking cessation is recommended"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.4 inline-cor-loe COR 1 LOE C"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-1, loe-c">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S014</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>B Smoking cessation is recommended</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="general_recommendation"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S015 EOC-F910069FA165 B Glycemic control should be considered p.4 inline-cor-loe COR 2A LOE B candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S015"
+data-candidate-id="EOC-F910069FA165"
+data-statement="B Glycemic control should be considered"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.4 inline-cor-loe COR 2A LOE B"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-2a, loe-b">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S015</td>
+<td>recommendation / general_recommendation</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>B Glycemic control should be considered</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S016 EOC-9D693CB52143 B Enhanced sternal stabilization may be considered p.4 inline-cor-loe COR 2B LOE C candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S016"
+data-candidate-id="EOC-9D693CB52143"
+data-statement="B Enhanced sternal stabilization may be considered"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.4 inline-cor-loe COR 2B LOE C"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-2b, loe-c">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S016</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>B Enhanced sternal stabilization may be considered</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S017 EOC-6BC44DC1291F As an adjunct to LITA to LAD (or in patients with inadequate LITA grafts), use of a RA graft is reasonable when grafting coronary targets with severe stenoses p.5 inline-cor-loe COR 2A LOE B candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S017"
+data-candidate-id="EOC-6BC44DC1291F"
+data-statement="As an adjunct to LITA to LAD (or in patients with inadequate LITA grafts), use of a RA graft is reasonable when grafting coronary targets with severe stenoses"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.5 inline-cor-loe COR 2A LOE B"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-2a, loe-b">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S017</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>As an adjunct to LITA to LAD (or in patients with inadequate LITA grafts), use of a RA graft is reasonable when grafting coronary targets with severe stenoses</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S018 EOC-47AF8FC5AE93 The RGEA may be considered in patients with poor conduit options or as an adjunct to more complete arterial revascularization p.6 inline-cor-loe COR 2B LOE B candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S018"
+data-candidate-id="EOC-47AF8FC5AE93"
+data-statement="The RGEA may be considered in patients with poor conduit options or as an adjunct to more complete arterial revascularization"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.6 inline-cor-loe COR 2B LOE B"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language, cor-2b, loe-b">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S018</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>The RGEA may be considered in patients with poor conduit options or as an adjunct to more complete arterial revascularization</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S019 EOC-22C461561BFD Description of and Description Class I (benefit &gt;&gt;&gt;risk) Procedure/treatment should be performed/administered p.3 numbered candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S019"
+data-candidate-id="EOC-22C461561BFD"
+data-statement="Description of and Description Class I (benefit &gt;&gt;&gt;risk) Procedure/treatment should be performed/administered"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.3 numbered"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S019</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>Description of and Description Class I (benefit &gt;&gt;&gt;risk) Procedure/treatment should be performed/administered</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="general_recommendation"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S020 EOC-53AF1EF621CC As an adjunct to left internal thoracic artery (LITA), a second arterial graft (right ITA or radial artery [RA]) should be considered in appropriate patients ( IIa, B) p.1 narrative candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S020"
+data-candidate-id="EOC-53AF1EF621CC"
+data-statement="As an adjunct to left internal thoracic artery (LITA), a second arterial graft (right ITA or radial artery [RA]) should be considered in appropriate patients ( IIa, B)"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.1 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S020</td>
+<td>recommendation / general_recommendation</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>As an adjunct to left internal thoracic artery (LITA), a second arterial graft (right ITA or radial artery [RA]) should be considered in appropriate patients ( IIa, B)</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="general_recommendation"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S021 EOC-D24072F551E0 Use of bilateral ITAs (BITAs) should be considered in patients who do not have an excessive risk of sternal complications ( IIa, B) p.1 narrative candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S021"
+data-candidate-id="EOC-D24072F551E0"
+data-statement="Use of bilateral ITAs (BITAs) should be considered in patients who do not have an excessive risk of sternal complications ( IIa, B)"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.1 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S021</td>
+<td>recommendation / general_recommendation</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>Use of bilateral ITAs (BITAs) should be considered in patients who do not have an excessive risk of sternal complications ( IIa, B)</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S022 EOC-C663A38B72F0 To reduce the risk of sternal infection with BITA, skeletonized grafts should be considered ( IIa, B), smoking cessation is recommended ( I, C), glycemic control should be considered ( IIa, B), and enhanced sternal stabilization may be considered ( IIb, C) p.1 narrative candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S022"
+data-candidate-id="EOC-C663A38B72F0"
+data-statement="To reduce the risk of sternal infection with BITA, skeletonized grafts should be considered ( IIa, B), smoking cessation is recommended ( I, C), glycemic control should be considered ( IIa, B), and enhanced sternal stabilization may be considered ( IIb, C)"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.1 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S022</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>To reduce the risk of sternal infection with BITA, skeletonized grafts should be considered ( IIa, B), smoking cessation is recommended ( I, C), glycemic control should be considered ( IIa, B), and enhanced sternal stabilization may be considered ( IIb, C)</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S023 EOC-561A9D15C7FF As an adjunct to LITA to LAD (or in patients with inadequate LITA grafts), use of a RA graft is reasonable when grafting coronary targets with severe stenoses ( IIa, : B) p.1 narrative candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S023"
+data-candidate-id="EOC-561A9D15C7FF"
+data-statement="As an adjunct to LITA to LAD (or in patients with inadequate LITA grafts), use of a RA graft is reasonable when grafting coronary targets with severe stenoses ( IIa, : B)"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.1 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S023</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>As an adjunct to LITA to LAD (or in patients with inadequate LITA grafts), use of a RA graft is reasonable when grafting coronary targets with severe stenoses ( IIa, : B)</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S024 EOC-941ABB93F64D The right gastroepiploic artery may be considered in patients with poor conduit options or as an adjunct to more complete arterial revascularization ( IIb, B) p.1 narrative candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S024"
+data-candidate-id="EOC-941ABB93F64D"
+data-statement="The right gastroepiploic artery may be considered in patients with poor conduit options or as an adjunct to more complete arterial revascularization ( IIb, B)"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.1 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S024</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>The right gastroepiploic artery may be considered in patients with poor conduit options or as an adjunct to more complete arterial revascularization ( IIb, B)</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="team_decision"
+data-eo-subtype="multidisciplinary_review"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S025 EOC-C63B2E4D1E46 Use of arterial grafts (specific targets, number, and type) should be a part of the discussion of the heart team in determining the optimal approach for each patient ( I, C) p.1 narrative candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S025"
+data-candidate-id="EOC-C63B2E4D1E46"
+data-statement="Use of arterial grafts (specific targets, number, and type) should be a part of the discussion of the heart team in determining the optimal approach for each patient ( I, C)"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.1 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S025</td>
+<td>team_decision / multidisciplinary_review</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>Use of arterial grafts (specific targets, number, and type) should be a part of the discussion of the heart team in determining the optimal approach for each patient ( I, C)</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="contextual_statement"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S026 EOC-10E90E05DBAA (Ann Thorac Surg ;101:801–9) 2016 by The Society of Thoracic Surgeons A s the techniques of surgical and percutaneous coronary revascularization for coronary artery disease (CAD) continue to evolve, reassessing available data to inform decision making should take place periodically p.1 narrative candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S026"
+data-candidate-id="EOC-10E90E05DBAA"
+data-statement="(Ann Thorac Surg ;101:801–9) 2016 by The Society of Thoracic Surgeons A s the techniques of surgical and percutaneous coronary revascularization for coronary artery disease (CAD) continue to evolve, reassessing available data to inform decision making should take place periodically"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.1 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S026</td>
+<td>recommendation / contextual_statement</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>(Ann Thorac Surg ;101:801–9) 2016 by The Society of Thoracic Surgeons A s the techniques of surgical and percutaneous coronary revascularization for coronary artery disease (CAD) continue to evolve, reassessing available data to inform decision making should take place periodically</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="contextual_statement"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S027 EOC-3240D82453ED Despite these higher-risk patients, surgeons are required to provide superior short-term surgical outcomes, minimal patient morbidity, and durable long-term outcomes and graft patency p.2 narrative candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S027"
+data-candidate-id="EOC-3240D82453ED"
+data-statement="Despite these higher-risk patients, surgeons are required to provide superior short-term surgical outcomes, minimal patient morbidity, and durable long-term outcomes and graft patency"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.2 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S027</td>
+<td>recommendation / contextual_statement</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>Despite these higher-risk patients, surgeons are required to provide superior short-term surgical outcomes, minimal patient morbidity, and durable long-term outcomes and graft patency</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S028 EOC-63A829F53267 it is reasonable to perform procedure/ administer treatment Class IIB (benefit &gt;risk) Additional studies with broad objectives needed p.3 narrative candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S028"
+data-candidate-id="EOC-63A829F53267"
+data-statement="it is reasonable to perform procedure/ administer treatment Class IIB (benefit &gt;risk) Additional studies with broad objectives needed"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.3 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S028</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>it is reasonable to perform procedure/ administer treatment Class IIB (benefit &gt;risk) Additional studies with broad objectives needed</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S029 EOC-AC8F344C6669 procedure/treatment may be considered Class III (no benefit) Procedure/test: not helpful p.3 narrative candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S029"
+data-candidate-id="EOC-AC8F344C6669"
+data-statement="procedure/treatment may be considered Class III (no benefit) Procedure/test: not helpful"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.3 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S029</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>procedure/treatment may be considered Class III (no benefit) Procedure/test: not helpful</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S030 EOC-CD7F6CE4537F The ITA should be used to bypass the LAD artery when bypass of the LAD is indicated ( I, B) p.4 narrative candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S030"
+data-candidate-id="EOC-CD7F6CE4537F"
+data-statement="The ITA should be used to bypass the LAD artery when bypass of the LAD is indicated ( I, B)"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.4 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S030</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>The ITA should be used to bypass the LAD artery when bypass of the LAD is indicated ( I, B)</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="general_recommendation"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S031 EOC-9CA1D272B065 As an adjunct to LITA, a second arterial graft (right internal thoracic artery or radial artery [RA]) should be considered in appropriate patients ( IIa, B) p.4 narrative candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S031"
+data-candidate-id="EOC-9CA1D272B065"
+data-statement="As an adjunct to LITA, a second arterial graft (right internal thoracic artery or radial artery [RA]) should be considered in appropriate patients ( IIa, B)"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.4 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S031</td>
+<td>recommendation / general_recommendation</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>As an adjunct to LITA, a second arterial graft (right internal thoracic artery or radial artery [RA]) should be considered in appropriate patients ( IIa, B)</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="general_recommendation"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S032 EOC-215B4C3F5BEF To reduce the risk of sternal infection with BITA consider the following: B Skeletonized grafts should be considered ( IIa, B) p.4 narrative candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S032"
+data-candidate-id="EOC-215B4C3F5BEF"
+data-statement="To reduce the risk of sternal infection with BITA consider the following: B Skeletonized grafts should be considered ( IIa, B)"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.4 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S032</td>
+<td>recommendation / general_recommendation</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>To reduce the risk of sternal infection with BITA consider the following: B Skeletonized grafts should be considered ( IIa, B)</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S033 EOC-5854E2A136A1 B Smoking cessation is recommended ( I, C) p.4 narrative candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S033"
+data-candidate-id="EOC-5854E2A136A1"
+data-statement="B Smoking cessation is recommended ( I, C)"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.4 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S033</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>B Smoking cessation is recommended ( I, C)</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="general_recommendation"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S034 EOC-E0191616D4B8 B Glycemic control should be considered ( IIa, B) p.4 narrative candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S034"
+data-candidate-id="EOC-E0191616D4B8"
+data-statement="B Glycemic control should be considered ( IIa, B)"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.4 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S034</td>
+<td>recommendation / general_recommendation</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>B Glycemic control should be considered ( IIa, B)</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S035 EOC-32F2CAF4C1BD B Enhanced sternal stabilization may be considered ( IIb, C) p.4 narrative candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S035"
+data-candidate-id="EOC-32F2CAF4C1BD"
+data-statement="B Enhanced sternal stabilization may be considered ( IIb, C)"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.4 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S035</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>B Enhanced sternal stabilization may be considered ( IIb, C)</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="contextual_statement"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S036 EOC-A7AED1B048A1 A properly conducted Allen’s test is a useful first-line test to select patients for RA harvest, but the cutoff is controversial, and the test does not have a perfect sensitivity or specificity p.4 narrative candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S036"
+data-candidate-id="EOC-A7AED1B048A1"
+data-statement="A properly conducted Allen’s test is a useful first-line test to select patients for RA harvest, but the cutoff is controversial, and the test does not have a perfect sensitivity or specificity"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.4 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S036</td>
+<td>recommendation / contextual_statement</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>A properly conducted Allen’s test is a useful first-line test to select patients for RA harvest, but the cutoff is controversial, and the test does not have a perfect sensitivity or specificity</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="contextual_statement"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S037 EOC-9A0A0DCEF48D therefore local application of antispasmodic agents is preferred p.4 narrative candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S037"
+data-candidate-id="EOC-9A0A0DCEF48D"
+data-statement="therefore local application of antispasmodic agents is preferred"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.4 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S037</td>
+<td>recommendation / contextual_statement</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>therefore local application of antispasmodic agents is preferred</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S038 EOC-917AA8C13F43 Because of concerns about injury to the RA caused by instrumentation and its potential impact on graft patency [90, 91], it is recommended that there should be a delay between transradial angiography and the use of the instrumented RA as a conduit for CABG p.5 narrative candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S038"
+data-candidate-id="EOC-917AA8C13F43"
+data-statement="Because of concerns about injury to the RA caused by instrumentation and its potential impact on graft patency [90, 91], it is recommended that there should be a delay between transradial angiography and the use of the instrumented RA as a conduit for CABG"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.5 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S038</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>Because of concerns about injury to the RA caused by instrumentation and its potential impact on graft patency [90, 91], it is recommended that there should be a delay between transradial angiography and the use of the instrumented RA as a conduit for CABG</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="contextual_statement"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S039 EOC-CE6B14B7D6C5 Clinical data are insufficient to designate a safe wait time, but histologic and flow dynamic data suggest that 3 months may be reasonable [90] p.5 narrative candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S039"
+data-candidate-id="EOC-CE6B14B7D6C5"
+data-statement="Clinical data are insufficient to designate a safe wait time, but histologic and flow dynamic data suggest that 3 months may be reasonable [90]"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.5 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S039</td>
+<td>recommendation / contextual_statement</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>Clinical data are insufficient to designate a safe wait time, but histologic and flow dynamic data suggest that 3 months may be reasonable [90]</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S040 EOC-424322F3D848 As an adjunct to LITA to LAD (or in patients with inadequate LITA grafts), use of a RA graft is reasonable when grafting coronary targets with severe stenoses ( IIa, B), When RA grafts are used, it is reasonable to use pharmacologic agents to reduce acute intraoperative and perioperative spasm ( IIa, C) p.5 narrative candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S040"
+data-candidate-id="EOC-424322F3D848"
+data-statement="As an adjunct to LITA to LAD (or in patients with inadequate LITA grafts), use of a RA graft is reasonable when grafting coronary targets with severe stenoses ( IIa, B), When RA grafts are used, it is reasonable to use pharmacologic agents to reduce acute intraoperative and perioperative spasm ( IIa, C)"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.5 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S040</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>As an adjunct to LITA to LAD (or in patients with inadequate LITA grafts), use of a RA graft is reasonable when grafting coronary targets with severe stenoses ( IIa, B), When RA grafts are used, it is reasonable to use pharmacologic agents to reduce acute intraoperative and perioperative spasm ( IIa, C)</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="contextual_statement"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S041 EOC-737BAAFD5D0A Because it is also susceptible to spasm, it should only be used to bypass 805 Ann Thorac Surg SPECIAL REPORT ALDEA ET AL ;101:801–9 GUIDELINES ON ARTERIAL CONDUITS FOR CABG REPORT p.5 narrative candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S041"
+data-candidate-id="EOC-737BAAFD5D0A"
+data-statement="Because it is also susceptible to spasm, it should only be used to bypass 805 Ann Thorac Surg SPECIAL REPORT ALDEA ET AL ;101:801–9 GUIDELINES ON ARTERIAL CONDUITS FOR CABG REPORT"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.5 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S041</td>
+<td>recommendation / contextual_statement</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>Because it is also susceptible to spasm, it should only be used to bypass 805 Ann Thorac Surg SPECIAL REPORT ALDEA ET AL ;101:801–9 GUIDELINES ON ARTERIAL CONDUITS FOR CABG REPORT</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S042 EOC-F81A12E817A7 The RGEA may be considered in patients with poor conduit options or as an adjunct to more complete arterial revascularization ( IIb, B) p.6 narrative candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S042"
+data-candidate-id="EOC-F81A12E817A7"
+data-statement="The RGEA may be considered in patients with poor conduit options or as an adjunct to more complete arterial revascularization ( IIb, B)"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.6 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S042</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>The RGEA may be considered in patients with poor conduit options or as an adjunct to more complete arterial revascularization ( IIb, B)</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="contextual_statement"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S043 EOC-60453842F687 Physicians and care providers engaged in this multidisciplinary decisionmaking process should have a common collective goal of facilitating patient-centered care that is based on reviewing the patient’s coronary anatomy and disease burden (including SYNTAX score) p.6 narrative candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S043"
+data-candidate-id="EOC-60453842F687"
+data-statement="Physicians and care providers engaged in this multidisciplinary decisionmaking process should have a common collective goal of facilitating patient-centered care that is based on reviewing the patient’s coronary anatomy and disease burden (including SYNTAX score)"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.6 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S043</td>
+<td>recommendation / contextual_statement</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>Physicians and care providers engaged in this multidisciplinary decisionmaking process should have a common collective goal of facilitating patient-centered care that is based on reviewing the patient’s coronary anatomy and disease burden (including SYNTAX score)</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="team_decision"
+data-eo-subtype="multidisciplinary_review"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S044 EOC-C4D50C9BBC55 The heart team should acknowledge that particular patients will derive specific shortand long-term benefits from alternative treatments within subsets of strategies for percutaneous (eg, duration of dual antiplatelet therapy and type of stent) and surgical revascularization (eg, choice of conduits, off-pump CABG, and limited aortic manipulation) p.6 narrative candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S044"
+data-candidate-id="EOC-C4D50C9BBC55"
+data-statement="The heart team should acknowledge that particular patients will derive specific shortand long-term benefits from alternative treatments within subsets of strategies for percutaneous (eg, duration of dual antiplatelet therapy and type of stent) and surgical revascularization (eg, choice of conduits, off-pump CABG, and limited aortic manipulation)"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.6 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S044</td>
+<td>team_decision / multidisciplinary_review</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>The heart team should acknowledge that particular patients will derive specific shortand long-term benefits from alternative treatments within subsets of strategies for percutaneous (eg, duration of dual antiplatelet therapy and type of stent) and surgical revascularization (eg, choice of conduits, off-pump CABG, and limited aortic manipulation)</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="team_decision"
+data-eo-subtype="multidisciplinary_review"
+data-text="STS-ARTERIAL-CONDUITS-CABG-2016:S045 EOC-DA7EAB1394C5 Because number, type, and specific targets of arterial grafts influence patient survival, quality of life, and durability of revascularization, these should be discussed as part of the heart team assessment and recommendation to the patient p.6 narrative candidate"
+data-key="STS-ARTERIAL-CONDUITS-CABG-2016:S045"
+data-candidate-id="EOC-DA7EAB1394C5"
+data-statement="Because number, type, and specific targets of arterial grafts influence patient survival, quality of life, and durability of revascularization, these should be discussed as part of the heart team assessment and recommendation to the patient"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.6 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-ARTERIAL-CONDUITS-CABG-2016:S045</td>
+<td>team_decision / multidisciplinary_review</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>Because number, type, and specific targets of arterial grafts influence patient survival, quality of life, and durability of revascularization, these should be discussed as part of the heart team assessment and recommendation to the patient</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</main>
+<script>
+const normalize = (value) => (value || '').toLowerCase().trim();
+const sortState = new Map();
+const recommendationFilterIds = ['rec-search','rec-cor','rec-loe','rec-weight','rec-confidence','rec-disease','rec-topic'];
+const candidateFilterIds = ['cand-search','cand-completion','cand-type','cand-review','cand-clinical','cand-surgical','cand-weight'];
+
+function setViewMode(mode) {
+  document.body.dataset.viewMode = mode;
+  document.querySelectorAll('[data-view-mode-button]').forEach((button) => {
+    button.classList.toggle('active', button.dataset.viewModeButton === mode);
+  });
+}
+
+function setFieldValue(id, value) {
+  const field = document.getElementById(id);
+  if (field) field.value = value;
+}
+
+function clearWorkbenchFilters() {
+  recommendationFilterIds.concat(candidateFilterIds).forEach((id) => setFieldValue(id, ''));
+}
+
+function applyFilterPreset(preset) {
+  clearWorkbenchFilters();
+  if (preset === 'critical') {
+    setFieldValue('rec-weight', 'critical');
+    setFieldValue('cand-weight', 'critical');
+    setFieldValue('rec-confidence', '0.80');
+  }
+  if (preset === 'stemi') {
+    setFieldValue('rec-search', 'STEMI');
+    setFieldValue('cand-search', 'STEMI');
+  }
+  if (preset === 'cabg') {
+    setFieldValue('rec-search', 'CABG');
+    setFieldValue('cand-search', 'CABG');
+  }
+  if (preset === 'timing') {
+    setFieldValue('rec-search', 'hours');
+    setFieldValue('cand-type', 'timing_rule');
+  }
+  if (preset === 'audit') {
+    setFieldValue('cand-review', 'pending');
+    setFieldValue('cand-clinical', 'pending');
+    setFieldValue('cand-surgical', 'pending');
+    setViewMode('audit');
+  }
+  filterRecommendations();
+  filterCandidates();
+  document.querySelectorAll('[data-filter-preset]').forEach((button) => {
+    button.classList.toggle('active', button.dataset.filterPreset === preset);
+  });
+}
+
+function filterRecommendations() {
+  const search = normalize(document.getElementById('rec-search')?.value);
+  const cor = normalize(document.getElementById('rec-cor')?.value);
+  const loe = normalize(document.getElementById('rec-loe')?.value);
+  const weight = normalize(document.getElementById('rec-weight')?.value);
+  const disease = normalize(document.getElementById('rec-disease')?.value);
+  const topic = normalize(document.getElementById('rec-topic')?.value);
+  const minConfidence = parseFloat(document.getElementById('rec-confidence')?.value || '');
+  let visible = 0;
+
+  document.querySelectorAll('.recommendation-row').forEach((row) => {
+    const rowText = normalize(row.dataset.text);
+    const rowCor = normalize(row.dataset.cor);
+    const rowLoe = normalize(row.dataset.loe);
+    const rowWeight = normalize(row.dataset.weight);
+    const rowDisease = normalize(row.dataset.disease);
+    const rowTopic = normalize(row.dataset.topic);
+    const rowConfidence = parseFloat(row.dataset.confidence || '');
+
+    const matches =
+      (!search || rowText.includes(search)) &&
+      (!cor || rowCor === cor) &&
+      (!loe || rowLoe === loe) &&
+      (!weight || rowWeight === weight) &&
+      (!disease || rowDisease.includes(disease)) &&
+      (!topic || rowTopic.includes(topic)) &&
+      (Number.isNaN(minConfidence) || (!Number.isNaN(rowConfidence) && rowConfidence >= minConfidence));
+
+    row.style.display = matches ? '' : 'none';
+    if (matches) visible += 1;
+  });
+
+  const counter = document.getElementById('rec-visible-count');
+  if (counter) counter.textContent = `${visible} visibles`;
+}
+
+function filterCandidates() {
+  const search = normalize(document.getElementById('cand-search')?.value);
+  const completion = normalize(document.getElementById('cand-completion')?.value);
+  const eoType = normalize(document.getElementById('cand-type')?.value);
+  const review = normalize(document.getElementById('cand-review')?.value);
+  const clinical = normalize(document.getElementById('cand-clinical')?.value);
+  const surgical = normalize(document.getElementById('cand-surgical')?.value);
+  const weight = normalize(document.getElementById('cand-weight')?.value);
+  let visible = 0;
+
+  document.querySelectorAll('.candidate-row').forEach((row) => {
+    const matches =
+      (!search || normalize(row.dataset.text).includes(search)) &&
+      (!completion || normalize(row.dataset.completion) === completion) &&
+      (!eoType || normalize(row.dataset.eoType).includes(eoType) || normalize(row.dataset.eoSubtype).includes(eoType)) &&
+      (!review || normalize(row.dataset.review) === review) &&
+      (!clinical || normalize(row.dataset.clinical) === clinical) &&
+      (!surgical || normalize(row.dataset.surgical) === surgical) &&
+      (!weight || normalize(row.dataset.weight) === weight);
+
+    row.style.display = matches ? '' : 'none';
+    if (matches) visible += 1;
+  });
+
+  const counter = document.getElementById('cand-visible-count');
+  if (counter) counter.textContent = `${visible} visibles`;
+}
+
+function downloadCsv(filename, rows) {
+  const csv = rows.map((row) => row.map((cell) => {
+    const text = `${cell ?? ''}`.replaceAll('"', '""');
+    return `"${text}"`;
+  }).join(',')).join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
+
+function hydrateResponsiveTables() {
+  document.querySelectorAll('table.responsive-stack').forEach((table) => {
+    const headers = Array.from(table.querySelectorAll('thead th')).map((th) => th.textContent.trim());
+    table.querySelectorAll('tbody tr').forEach((row) => {
+      Array.from(row.children).forEach((cell, index) => {
+        if (cell instanceof HTMLElement) {
+          cell.setAttribute('data-label', headers[index] || '');
+        }
+      });
+    });
+  });
+}
+
+function exportVisibleTable(tableId, filename) {
+  const table = document.getElementById(tableId);
+  if (!table) return;
+  const header = Array.from(table.querySelectorAll('thead th')).map((th) => th.textContent.trim());
+  const bodyRows = Array.from(table.querySelectorAll('tbody tr')).filter((row) => row.style.display !== 'none');
+  const rows = [header];
+  bodyRows.forEach((row) => {
+    rows.push(Array.from(row.children).map((cell) => cell.textContent.trim()));
+  });
+  downloadCsv(filename, rows);
+}
+
+function makeTableSortable(tableId) {
+  const table = document.getElementById(tableId);
+  if (!table) return;
+  const headers = Array.from(table.querySelectorAll('thead th'));
+  const tbody = table.querySelector('tbody');
+  if (!tbody) return;
+
+  headers.forEach((header, index) => {
+    header.addEventListener('click', () => {
+      const key = `${tableId}:${index}`;
+      const current = sortState.get(key) === 'asc' ? 'desc' : 'asc';
+      sortState.clear();
+      sortState.set(key, current);
+
+      headers.forEach((th) => th.textContent = th.textContent.replace(/\s+[▲▼]$/, ''));
+      header.textContent = `${header.textContent.replace(/\s+[▲▼]$/, '')} ${current === 'asc' ? '▲' : '▼'}`;
+
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      rows.sort((a, b) => {
+        const aText = (a.children[index]?.textContent || '').trim();
+        const bText = (b.children[index]?.textContent || '').trim();
+        const aNum = Number.parseFloat(aText);
+        const bNum = Number.parseFloat(bText);
+        const bothNumeric = !Number.isNaN(aNum) && !Number.isNaN(bNum);
+        const comparison = bothNumeric ? aNum - bNum : aText.localeCompare(bText, undefined, { numeric: true, sensitivity: 'base' });
+        return current === 'asc' ? comparison : -comparison;
+      });
+      rows.forEach((row) => tbody.appendChild(row));
+    });
+  });
+}
+
+function setText(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = value && value.trim() ? value : '-';
+}
+
+function clearActiveRows() {
+  document.querySelectorAll('.active-row').forEach((row) => row.classList.remove('active-row'));
+}
+
+function findCandidateByKey(statementKey) {
+  return Array.from(document.querySelectorAll('.candidate-row')).find((row) => row.dataset.key === statementKey);
+}
+
+function renderRecommendationDetail(row) {
+  clearActiveRows();
+  row.classList.add('active-row');
+  const candidate = findCandidateByKey(row.dataset.key);
+
+  setText('detail-title', row.dataset.title || row.dataset.key);
+  setText('detail-summary', row.dataset.recommendation);
+  setText('detail-key', row.dataset.key);
+  setText('detail-kind', 'Guideline Recommendation');
+  setText('detail-cor-loe', [row.dataset.cor, row.dataset.loe].filter(Boolean).join(' / '));
+  setText('detail-weight-confidence', [row.dataset.weight, row.dataset.confidence].filter(Boolean).join(' / '));
+  setText('detail-population-disease', [row.dataset.population, row.dataset.diseaseFull].filter(Boolean).join(' / '));
+  setText('detail-topic', row.dataset.topic);
+  setText('detail-state-time', [row.dataset.clinicalState, row.dataset.timeWindow, row.dataset.eventAnchor].filter(Boolean).join(' / '));
+  setText('detail-intervention-outcome', [row.dataset.intervention, row.dataset.outcome].filter(Boolean).join(' / '));
+  setText('detail-locator', row.dataset.locator);
+  setText('detail-trigger', row.dataset.trigger);
+  setText('detail-trigger-model', row.dataset.triggerModel);
+  setText('detail-trigger-constraints', row.dataset.triggerConstraints);
+  setText('detail-action', row.dataset.executionAction);
+  setText('detail-prerequisites', row.dataset.executionPrerequisites);
+  setText('detail-contraindications', row.dataset.executionContraindications);
+  setText('detail-conditions-exclusions', [row.dataset.conditions, row.dataset.exclusions].filter(Boolean).join(' | '));
+  setText('detail-entities', row.dataset.entities);
+  setText(
+    'detail-candidate-state',
+    candidate
+      ? [candidate.dataset.completion, candidate.dataset.review, candidate.dataset.clinical, candidate.dataset.surgical, candidate.dataset.finalization].filter(Boolean).join(' / ')
+      : 'Sin EO candidate enlazado'
+  );
+  setText('detail-rationale', [row.dataset.weightRationale, row.dataset.confidenceRationale].filter(Boolean).join(' | '));
+}
+
+function renderCandidateDetail(row) {
+  clearActiveRows();
+  row.classList.add('active-row');
+
+  setText('detail-title', row.dataset.candidateId);
+  setText('detail-summary', row.dataset.statement);
+  setText('detail-key', row.dataset.key);
+  setText('detail-kind', 'EO Candidate');
+  setText('detail-cor-loe', '-');
+  setText('detail-weight-confidence', [row.dataset.weight].filter(Boolean).join(' / '));
+  setText('detail-population-disease', '-');
+  setText('detail-topic', '-');
+  setText('detail-state-time', '-');
+  setText('detail-intervention-outcome', [row.dataset.eoType, row.dataset.eoSubtype, row.dataset.strength].filter(Boolean).join(' / '));
+  setText('detail-locator', row.dataset.locator);
+  setText('detail-trigger', '-');
+  setText('detail-trigger-model', '-');
+  setText('detail-trigger-constraints', '-');
+  setText('detail-action', '-');
+  setText('detail-prerequisites', '-');
+  setText('detail-contraindications', '-');
+  setText('detail-conditions-exclusions', '-');
+  setText('detail-entities', '-');
+  setText('detail-candidate-state', [row.dataset.eoType, row.dataset.eoSubtype, row.dataset.completion, row.dataset.review, row.dataset.clinical, row.dataset.surgical, row.dataset.finalization].filter(Boolean).join(' / '));
+  setText('detail-rationale', row.dataset.rationale);
+}
+
+document.querySelectorAll('.section-toggle').forEach((button) => {
+  button.addEventListener('click', () => {
+    const target = document.getElementById(button.dataset.target);
+    if (!target) return;
+    const hidden = target.hasAttribute('hidden');
+    if (hidden) {
+      target.removeAttribute('hidden');
+      button.textContent = 'Colapsar';
+    } else {
+      target.setAttribute('hidden', '');
+      button.textContent = 'Expandir';
+    }
+  });
+});
+
+function setMobileSectionDefaults() {
+  if (!window.matchMedia('(max-width: 760px)').matches) return;
+  const keepOpen = new Set(['priority-body', 'workbench-body']);
+  document.querySelectorAll('.section-toggle').forEach((button) => {
+    const target = document.getElementById(button.dataset.target);
+    if (!target || keepOpen.has(button.dataset.target)) return;
+    target.setAttribute('hidden', '');
+    button.textContent = 'Expandir';
+  });
+}
+
+recommendationFilterIds.forEach((id) => {
+  document.getElementById(id)?.addEventListener('input', filterRecommendations);
+  document.getElementById(id)?.addEventListener('change', filterRecommendations);
+});
+candidateFilterIds.forEach((id) => {
+  document.getElementById(id)?.addEventListener('input', filterCandidates);
+  document.getElementById(id)?.addEventListener('change', filterCandidates);
+});
+document.querySelectorAll('[data-view-mode-button]').forEach((button) => {
+  button.addEventListener('click', () => setViewMode(button.dataset.viewModeButton || 'clinical'));
+});
+document.querySelectorAll('[data-filter-preset]').forEach((button) => {
+  button.addEventListener('click', () => applyFilterPreset(button.dataset.filterPreset || 'clear'));
+});
+
+document.querySelectorAll('.recommendation-row').forEach((row) => {
+  row.style.cursor = 'pointer';
+  row.addEventListener('click', () => renderRecommendationDetail(row));
+});
+document.querySelectorAll('.candidate-row').forEach((row) => {
+  row.style.cursor = 'pointer';
+  row.addEventListener('click', () => renderCandidateDetail(row));
+});
+
+document.getElementById('export-rec-visible')?.addEventListener('click', () => exportVisibleTable('recommendations-table', 'recommendaciones_visibles.csv'));
+document.getElementById('export-cand-visible')?.addEventListener('click', () => exportVisibleTable('candidates-table', 'eo_candidates_visibles.csv'));
+
+makeTableSortable('recommendations-table');
+makeTableSortable('candidates-table');
+makeTableSortable('reconciliation-table');
+makeTableSortable('conflicts-table');
+hydrateResponsiveTables();
+setMobileSectionDefaults();
+filterRecommendations();
+filterCandidates();
+document.querySelector('.recommendation-row') && renderRecommendationDetail(document.querySelector('.recommendation-row'));
+</script>
+</body>
+</html>

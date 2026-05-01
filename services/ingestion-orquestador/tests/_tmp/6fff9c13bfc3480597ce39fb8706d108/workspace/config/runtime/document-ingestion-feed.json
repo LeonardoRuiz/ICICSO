@@ -1,0 +1,54 @@
+{
+  "generated_at_utc": "2026-04-24T01:16:19.785692+00:00",
+  "uploaded_documents": 1,
+  "continuum_ready_documents": 1,
+  "layers": {
+    "ING": 1
+  },
+  "sync_artifacts": [
+    "config/runtime/document-ingestion-feed.json",
+    "dashboard/data/document-ingestion-feed.json",
+    "icicso/apps/emulator/src/data/documentIngestionFeed.generated.js"
+  ],
+  "latest_documents": [
+    {
+      "document_id": "UPL-41D1E75C3EFA",
+      "lineage_id": "LIN-7BA72DFC2614",
+      "lineage_key": "CONTINUUM-INTAKE-GUIDELINE-AUDIT-EO-CANDIDATE",
+      "vrn": "VRN-ICICSO-L0-ING-ING-USER-UPLOAD-20260424-41D1E75C-V001",
+      "vrn_policy_id": "vrn-l0-governance-2026-04-12",
+      "version_number": 1,
+      "institutional_version": "V001",
+      "previous_document_id": null,
+      "vrn_status": "ACTIVE",
+      "specialty": "General",
+      "sub_specialty": "General",
+      "epidemic_focus": "N/A",
+      "ingest_artifact_id": "ING-41D1E75C3EFA",
+      "ser_artifact_id": "SER-41D1E75C3EFA",
+      "file_name": "audit-eo-candidate.txt",
+      "absolute_path": "C:\\Users\\leona\\OneDrive\\Desktop\\MxRep\\ICICSO\\services\\ingestion-orquestador\\tests\\_tmp\\6fff9c13bfc3480597ce39fb8706d108\\workspace\\services\\ingestion-orquestador\\data\\uploaded_documents\\2026\\04\\24\\UPL-41D1E75C3EFA_audit-eo-candidate.txt",
+      "relative_path": "services/ingestion-orquestador/data/uploaded_documents/2026/04/24/UPL-41D1E75C3EFA_audit-eo-candidate.txt",
+      "extension": ".txt",
+      "document_type": "guideline",
+      "layer": "ING",
+      "category": "user-upload",
+      "document_group": "continuum-intake",
+      "language": "en",
+      "version_detected": null,
+      "size_bytes": 92,
+      "last_write_time_utc": "2026-04-24T01:16:16.416597+00:00",
+      "ingestion_timestamp_utc": "2026-04-24T01:16:16.416597+00:00",
+      "hash_sha256": "41d1e75c3efadc4d6e52d52c6783157b321745e30ab0c5f26df71ff28513df53",
+      "source_status": "uploaded",
+      "source_origin": "workspace-upload",
+      "continuum_stage": "ING",
+      "ingestion_notes": null,
+      "derived_artifacts": [
+        "config/runtime/document-ingestion-feed.json",
+        "dashboard/data/document-ingestion-feed.json",
+        "icicso/apps/emulator/src/data/documentIngestionFeed.generated.js"
+      ]
+    }
+  ]
+}

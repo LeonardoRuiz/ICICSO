@@ -1,0 +1,89 @@
+Add:         02HM3JZ Insertion of Pacemaker Lead into Ventricular Septum, Percutaneous Approach
+Add:         02HM3KZ Insertion of Defibrillator Lead into Ventricular Septum, Percutaneous Approach
+Add:         02HM3MZ Insertion of Cardiac Lead into Ventricular Septum, Percutaneous Approach
+Add:         02HM3NZ Insertion of Intracardiac Pacemaker into Ventricular Septum, Percutaneous Approach
+Add:         02HM3YZ Insertion of Other Device into Ventricular Septum, Percutaneous Approach
+Add:         0DDU0ZZ Extraction of Omentum, Open Approach
+Add:         0DDU4ZZ Extraction of Omentum, Percutaneous Endoscopic Approach
+Add:         0DDV0ZZ Extraction of Mesentery, Open Approach
+Add:         0DDV4ZZ Extraction of Mesentery, Percutaneous Endoscopic Approach
+Add:         0F9480D Drainage of Gallbladder with Drainage Device, Via Natural or Artificial Opening Endoscopic, Transmural
+Add:         0F9480E Drainage of Gallbladder with Drainage Device, Via Natural or Artificial Opening Endoscopic, Transpapillary
+Add:         0F9580D Drainage of Right Hepatic Duct with Drainage Device, Via Natural or Artificial Opening Endoscopic, Transmural
+Add:         0F9580E Drainage of Right Hepatic Duct with Drainage Device, Via Natural or Artificial Opening Endoscopic, Transpapillary
+Add:         0F9680D Drainage of Left Hepatic Duct with Drainage Device, Via Natural or Artificial Opening Endoscopic, Transmural
+Add:         0F9680E Drainage of Left Hepatic Duct with Drainage Device, Via Natural or Artificial Opening Endoscopic, Transpapillary
+Add:         0F9780D Drainage of Common Hepatic Duct with Drainage Device, Via Natural or Artificial Opening Endoscopic, Transmural
+Add:         0F9780E Drainage of Common Hepatic Duct with Drainage Device, Via Natural or Artificial Opening Endoscopic, Transpapillary
+Add:         0F9880D Drainage of Cystic Duct with Drainage Device, Via Natural or Artificial Opening Endoscopic, Transmural
+Add:         0F9880E Drainage of Cystic Duct with Drainage Device, Via Natural or Artificial Opening Endoscopic, Transpapillary
+Add:         0F9980D Drainage of Common Bile Duct with Drainage Device, Via Natural or Artificial Opening Endoscopic, Transmural
+Add:         0F9980E Drainage of Common Bile Duct with Drainage Device, Via Natural or Artificial Opening Endoscopic, Transpapillary
+Add:         0F9C80D Drainage of Ampulla of Vater with Drainage Device, Via Natural or Artificial Opening Endoscopic, Transmural
+Add:         0F9C80E Drainage of Ampulla of Vater with Drainage Device, Via Natural or Artificial Opening Endoscopic, Transpapillary
+Add:         0F9D80D Drainage of Pancreatic Duct with Drainage Device, Via Natural or Artificial Opening Endoscopic, Transmural
+Add:         0F9D80E Drainage of Pancreatic Duct with Drainage Device, Via Natural or Artificial Opening Endoscopic, Transpapillary
+Add:         0F9F80D Drainage of Accessory Pancreatic Duct with Drainage Device, Via Natural or Artificial Opening Endoscopic, Transmural
+Add:         0F9F80E Drainage of Accessory Pancreatic Duct with Drainage Device, Via Natural or Artificial Opening Endoscopic, Transpapillary
+Add:         0F9G80D Drainage of Pancreas with Drainage Device, Via Natural or Artificial Opening Endoscopic, Transmural
+Add:         0F9G80E Drainage of Pancreas with Drainage Device, Via Natural or Artificial Opening Endoscopic, Transpapillary
+Add:         0TXB0Z6 Transfer Bladder to Right Ureter, Open Approach
+Add:         0TXB0Z7 Transfer Bladder to Left Ureter, Open Approach
+Add:         0TXB4Z6 Transfer Bladder to Right Ureter, Percutaneous Endoscopic Approach
+Add:         0TXB4Z7 Transfer Bladder to Left Ureter, Percutaneous Endoscopic Approach
+Add:         0VT00ZE Resection of Prostate, Open Approach, Capsule Intact
+Add:         0VT04ZE Resection of Prostate, Percutaneous Endoscopic Approach, Capsule Intact
+Add:         0VT07ZE Resection of Prostate, Via Natural or Artificial Opening, Capsule Intact
+Add:         0VT08ZE Resection of Prostate, Via Natural or Artificial Opening Endoscopic, Capsule Intact
+Delete:      30233AZ Transfusion of Embryonic Stem Cells into Peripheral Vein, Percutaneous Approach
+Delete:      30243AZ Transfusion of Embryonic Stem Cells into Central Vein, Percutaneous Approach
+Add:         3E033AZ Introduction of Embryonic Stem Cells into Peripheral Vein, Percutaneous Approach
+Add:         3E043AZ Introduction of Embryonic Stem Cells into Central Vein, Percutaneous Approach
+Add:         4A0FXEJ Measurement of Musculoskeletal Body Composition using Air Displacement Plethysmography, External Approach
+Add:         5A0221E Assistance with Cardiac Output using Blood Flow Modulator, Continuous
+Add:         F07DYD0 Electrotherapeutic Treatment of Integumentary System - Head and Neck using Microcurrent Stimulation
+Add:         F07EYD0 Electrotherapeutic Treatment of Integumentary System - Thorax / Abdomen using Microcurrent Stimulation
+Add:         F07FYD0 Electrotherapeutic Treatment of Integumentary System - Upper Back / Upper Extremity using Microcurrent Stimulation
+Add:         F07GYD0 Electrotherapeutic Treatment of Integumentary System - Lower Back / Lower Extremity using Microcurrent Stimulation
+Add:         F07HYD0 Electrotherapeutic Treatment of Integumentary System - Whole Body using Microcurrent Stimulation
+Add:         F08E5AZ Wound Management Treatment of Integumentary System - Thorax / Abdomen using Negative Pressure Therapy
+Add:         F08E5BZ Wound Management Treatment of Integumentary System - Thorax / Abdomen using Physical Agents
+Add:         F08E5CZ Wound Management Treatment of Integumentary System - Thorax / Abdomen using Mechanical Equipment
+Add:         F08E5DZ Wound Management Treatment of Integumentary System - Thorax / Abdomen using Electrotherapeutic Equipment
+Add:         F08E5EZ Wound Management Treatment of Integumentary System - Thorax / Abdomen using Orthosis
+Add:         F08E5FZ Wound Management Treatment of Integumentary System - Thorax / Abdomen using Assistive, Adaptive, Supportive or Protective Equipment
+Add:         F08E5UZ Wound Management Treatment of Integumentary System - Thorax / Abdomen using Prosthesis
+Add:         F08E5YZ Wound Management Treatment of Integumentary System - Thorax / Abdomen using Other Equipment
+Add:         F08E5ZZ Wound Management Treatment of Integumentary System - Thorax / Abdomen
+Add:         F08P5AZ Wound Management Treatment of Musculoskeletal System - Thorax / Abdomen using Negative Pressure Therapy
+Add:         F08P5BZ Wound Management Treatment of Musculoskeletal System - Thorax / Abdomen using Physical Agents
+Add:         F08P5CZ Wound Management Treatment of Musculoskeletal System - Thorax / Abdomen using Mechanical Equipment
+Add:         F08P5DZ Wound Management Treatment of Musculoskeletal System - Thorax / Abdomen using Electrotherapeutic Equipment
+Add:         F08P5EZ Wound Management Treatment of Musculoskeletal System - Thorax / Abdomen using Orthosis
+Add:         F08P5FZ Wound Management Treatment of Musculoskeletal System - Thorax / Abdomen using Assistive, Adaptive, Supportive or Protective Equipment
+Add:         F08P5UZ Wound Management Treatment of Musculoskeletal System - Thorax / Abdomen using Prosthesis
+Add:         F08P5YZ Wound Management Treatment of Musculoskeletal System - Thorax / Abdomen using Other Equipment
+Add:         F08P5ZZ Wound Management Treatment of Musculoskeletal System - Thorax / Abdomen
+Add:         X2723CB Dilation of Inferior Vena Cava and Iliocaval Confluence with Open-structure Polymer Lattice Intraluminal Device, Percutaneous Approach, New Technology Group 11
+Add:         X2HM3GB Insertion of Lumenless Small-diameter Defibrillator Lead into Ventricular Septum, Percutaneous Approach, New Technology Group 11
+Add:         X2HV3GB Insertion of Lumenless Small-diameter Defibrillator Lead into Right Ventricle, Percutaneous Approach, New Technology Group 11
+Add:         X2K00FB Bypass Inferior Vena Cava using Autologous Cell Seeded Tissue Engineered Resorbable Scaffold to Pulmonary Artery, Open Approach, New Technology Group 11
+Add:         X2KG0FB Bypass Hepatic Vein using Autologous Cell Seeded Tissue Engineered Resorbable Scaffold to Pulmonary Artery, Open Approach, New Technology Group 11
+Add:         X9HD01B Insertion of Temporary Infusion Device into Right Inner Ear, Open Approach, New Technology Group 11
+Add:         X9HE01B Insertion of Temporary Infusion Device into Left Inner Ear, Open Approach, New Technology Group 11
+Add:         X9HF01B Insertion of Temporary Infusion Device into Bilateral Inner Ear, Open Approach, New Technology Group 11
+Add:         XU7G71B Dilation of Vagina with Temporary Electromechanical Intraluminal Device, Via Natural or Artificial Opening, New Technology Group 11
+Add:         XW0330B Introduction of Alpha1-proteinase Inhibitor into Peripheral Vein, Percutaneous Approach, New Technology Group 11
+Add:         XW0331B Introduction of Anitocabtagene Autoleucel Immunotherapy into Peripheral Vein, Percutaneous Approach, New Technology Group 11
+Add:         XW0430B Introduction of Alpha1-proteinase Inhibitor into Central Vein, Percutaneous Approach, New Technology Group 11
+Add:         XW0431B Introduction of Anitocabtagene Autoleucel Immunotherapy into Central Vein, Percutaneous Approach, New Technology Group 11
+Add:         XW0534B Introduction of Somatic Stem Cells into Peripheral Artery, Percutaneous Approach, New Technology Group 11
+Add:         XW0632B Introduction of CPI-601 Enzyme Replacement Therapy into Cerebral Ventricle, Percutaneous Approach, New Technology Group 11
+Add:         XW0E33B Introduction of DB-OTO via Intracochlear Infusion into Ear(s), Percutaneous Approach, New Technology Group 11
+
+Codes
+  79115 codes in icd10pcs_codes_2026.txt
+  79193 codes in icd10pcs_codes_2026.txt
+     80 additions
+      2 deletions
+      0 revisions

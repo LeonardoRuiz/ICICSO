@@ -1,0 +1,424 @@
+﻿{
+    "generated_at":  "2026-04-26",
+    "project_hint":  "ICICSO",
+    "registries":  [
+                       {
+                           "key":  "loinc",
+                           "standard":  "LOINC",
+                           "ingest":  {
+                                          "enabled_by_default":  false,
+                                          "mode":  "metadata_plus_optional_private_snapshot",
+                                          "expected_format":  "ZIP con CSV, XML, OWL, TXT/PDF",
+                                          "source_url":  "https://loinc.org/downloads/loinc-table/"
+                                      },
+                           "storage":  {
+                                           "manifest_path":  "terminologies/manifests/loinc.json",
+                                           "raw_cache_dir":  "terminologies/raw/loinc/",
+                                           "normalized_cache_dir":  "terminologies/normalized/loinc/"
+                                       },
+                           "compliance":  {
+                                              "access_type":  "gated",
+                                              "access_label":  "gated"
+                                          }
+                       },
+                       {
+                           "key":  "snomed-ct-international-edition",
+                           "standard":  "SNOMED CT International Edition",
+                           "ingest":  {
+                                          "enabled_by_default":  false,
+                                          "mode":  "adapter_only_with_mock_data",
+                                          "expected_format":  "Paquete RF2 ZIP",
+                                          "source_url":  "https://www.snomed.org/releases"
+                                      },
+                           "storage":  {
+                                           "manifest_path":  "terminologies/manifests/snomed-ct-international-edition.json",
+                                           "raw_cache_dir":  "terminologies/raw/snomed-ct-international-edition/",
+                                           "normalized_cache_dir":  "terminologies/normalized/snomed-ct-international-edition/"
+                                       },
+                           "compliance":  {
+                                              "access_type":  "restricted",
+                                              "access_label":  "restricted"
+                                          }
+                       },
+                       {
+                           "key":  "snomed-ct-spanish-edition",
+                           "standard":  "SNOMED CT Spanish Edition",
+                           "ingest":  {
+                                          "enabled_by_default":  false,
+                                          "mode":  "adapter_only_with_mock_data",
+                                          "expected_format":  "Paquete RF2 ZIP",
+                                          "source_url":  "https://www.snomed.org/releases"
+                                      },
+                           "storage":  {
+                                           "manifest_path":  "terminologies/manifests/snomed-ct-spanish-edition.json",
+                                           "raw_cache_dir":  "terminologies/raw/snomed-ct-spanish-edition/",
+                                           "normalized_cache_dir":  "terminologies/normalized/snomed-ct-spanish-edition/"
+                                       },
+                           "compliance":  {
+                                              "access_type":  "restricted",
+                                              "access_label":  "restricted"
+                                          }
+                       },
+                       {
+                           "key":  "icd-11-mms",
+                           "standard":  "ICD-11 MMS",
+                           "ingest":  {
+                                          "enabled_by_default":  true,
+                                          "mode":  "live_or_snapshot",
+                                          "expected_format":  "ZIP",
+                                          "source_url":  "https://icdcdn.who.int/static/releasefiles/2025-01/SimpleTabulation-ICD-11-MMS-en.zip"
+                                      },
+                           "storage":  {
+                                           "manifest_path":  "terminologies/manifests/icd-11-mms.json",
+                                           "raw_cache_dir":  "terminologies/raw/icd-11-mms/",
+                                           "normalized_cache_dir":  "terminologies/normalized/icd-11-mms/"
+                                       },
+                           "compliance":  {
+                                              "access_type":  "public",
+                                              "access_label":  "public"
+                                          }
+                       },
+                       {
+                           "key":  "icd-10-a-icd-11",
+                           "standard":  "ICD-10 a ICD-11",
+                           "ingest":  {
+                                          "enabled_by_default":  true,
+                                          "mode":  "live_or_snapshot",
+                                          "expected_format":  "ZIP",
+                                          "source_url":  "https://icdcdn.who.int/static/releasefiles/2025-01/mapping.zip"
+                                      },
+                           "storage":  {
+                                           "manifest_path":  "terminologies/manifests/icd-10-a-icd-11.json",
+                                           "raw_cache_dir":  "terminologies/raw/icd-10-a-icd-11/",
+                                           "normalized_cache_dir":  "terminologies/normalized/icd-10-a-icd-11/"
+                                       },
+                           "compliance":  {
+                                              "access_type":  "public",
+                                              "access_label":  "public"
+                                          }
+                       },
+                       {
+                           "key":  "rxnorm-full-monthly-release",
+                           "standard":  "RxNorm Full Monthly Release",
+                           "ingest":  {
+                                          "enabled_by_default":  false,
+                                          "mode":  "adapter_only_with_mock_data",
+                                          "expected_format":  "ZIP con archivos RRF UTF-8",
+                                          "source_url":  "https://www.nlm.nih.gov/research/umls/rxnorm/docs/rxnormfiles.html"
+                                      },
+                           "storage":  {
+                                           "manifest_path":  "terminologies/manifests/rxnorm-full-monthly-release.json",
+                                           "raw_cache_dir":  "terminologies/raw/rxnorm-full-monthly-release/",
+                                           "normalized_cache_dir":  "terminologies/normalized/rxnorm-full-monthly-release/"
+                                       },
+                           "compliance":  {
+                                              "access_type":  "restricted",
+                                              "access_label":  "restricted"
+                                          }
+                       },
+                       {
+                           "key":  "rxnorm-prescribable-content",
+                           "standard":  "RxNorm Prescribable Content",
+                           "ingest":  {
+                                          "enabled_by_default":  true,
+                                          "mode":  "live_or_snapshot",
+                                          "expected_format":  "ZIP con archivos RRF UTF-8",
+                                          "source_url":  "https://www.nlm.nih.gov/research/umls/rxnorm/docs/rxnormfiles.html"
+                                      },
+                           "storage":  {
+                                           "manifest_path":  "terminologies/manifests/rxnorm-prescribable-content.json",
+                                           "raw_cache_dir":  "terminologies/raw/rxnorm-prescribable-content/",
+                                           "normalized_cache_dir":  "terminologies/normalized/rxnorm-prescribable-content/"
+                                       },
+                           "compliance":  {
+                                              "access_type":  "public",
+                                              "access_label":  "public"
+                                          }
+                       },
+                       {
+                           "key":  "hl7-fhir-r5-definitions",
+                           "standard":  "HL7 FHIR R5 Definitions",
+                           "ingest":  {
+                                          "enabled_by_default":  true,
+                                          "mode":  "live_or_snapshot",
+                                          "expected_format":  "ZIP JSON",
+                                          "source_url":  "https://www.hl7.org/fhir/definitions.json.zip"
+                                      },
+                           "storage":  {
+                                           "manifest_path":  "terminologies/manifests/hl7-fhir-r5-definitions.json",
+                                           "raw_cache_dir":  "terminologies/raw/hl7-fhir-r5-definitions/",
+                                           "normalized_cache_dir":  "terminologies/normalized/hl7-fhir-r5-definitions/"
+                                       },
+                           "compliance":  {
+                                              "access_type":  "public",
+                                              "access_label":  "public"
+                                          }
+                       },
+                       {
+                           "key":  "icd-10-cm",
+                           "standard":  "ICD-10-CM",
+                           "ingest":  {
+                                          "enabled_by_default":  true,
+                                          "mode":  "live_or_snapshot",
+                                          "expected_format":  "ZIP, XML, PDF",
+                                          "source_url":  "https://www.cdc.gov/nchs/icd/icd-10-cm/files.html"
+                                      },
+                           "storage":  {
+                                           "manifest_path":  "terminologies/manifests/icd-10-cm.json",
+                                           "raw_cache_dir":  "terminologies/raw/icd-10-cm/",
+                                           "normalized_cache_dir":  "terminologies/normalized/icd-10-cm/"
+                                       },
+                           "compliance":  {
+                                              "access_type":  "public",
+                                              "access_label":  "public"
+                                          }
+                       },
+                       {
+                           "key":  "icd-10-pcs",
+                           "standard":  "ICD-10-PCS",
+                           "ingest":  {
+                                          "enabled_by_default":  true,
+                                          "mode":  "live_or_snapshot",
+                                          "expected_format":  "ZIP, PDF",
+                                          "source_url":  "https://www.cms.gov/icd10"
+                                      },
+                           "storage":  {
+                                           "manifest_path":  "terminologies/manifests/icd-10-pcs.json",
+                                           "raw_cache_dir":  "terminologies/raw/icd-10-pcs/",
+                                           "normalized_cache_dir":  "terminologies/normalized/icd-10-pcs/"
+                                       },
+                           "compliance":  {
+                                              "access_type":  "public",
+                                              "access_label":  "public"
+                                          }
+                       },
+                       {
+                           "key":  "hcpcs-level-ii",
+                           "standard":  "HCPCS Level II",
+                           "ingest":  {
+                                          "enabled_by_default":  true,
+                                          "mode":  "live_or_snapshot",
+                                          "expected_format":  "ZIP",
+                                          "source_url":  "https://www.cms.gov/medicare/coding-billing/healthcare-common-procedure-system/quarterly-update"
+                                      },
+                           "storage":  {
+                                           "manifest_path":  "terminologies/manifests/hcpcs-level-ii.json",
+                                           "raw_cache_dir":  "terminologies/raw/hcpcs-level-ii/",
+                                           "normalized_cache_dir":  "terminologies/normalized/hcpcs-level-ii/"
+                                       },
+                           "compliance":  {
+                                              "access_type":  "public",
+                                              "access_label":  "public"
+                                          }
+                       },
+                       {
+                           "key":  "cpt",
+                           "standard":  "CPT",
+                           "ingest":  {
+                                          "enabled_by_default":  false,
+                                          "mode":  "adapter_only_with_mock_data",
+                                          "expected_format":  "Data file propietario; web informativa",
+                                          "source_url":  "https://www.ama-assn.org/practice-management/cpt/cpt-code-set-overview"
+                                      },
+                           "storage":  {
+                                           "manifest_path":  "terminologies/manifests/cpt.json",
+                                           "raw_cache_dir":  "terminologies/raw/cpt/",
+                                           "normalized_cache_dir":  "terminologies/normalized/cpt/"
+                                       },
+                           "compliance":  {
+                                              "access_type":  "restricted",
+                                              "access_label":  "restricted"
+                                          }
+                       },
+                       {
+                           "key":  "mesh",
+                           "standard":  "MeSH",
+                           "ingest":  {
+                                          "enabled_by_default":  true,
+                                          "mode":  "live_or_snapshot",
+                                          "expected_format":  "XML, MARC21, RDF, API",
+                                          "source_url":  "https://www.nlm.nih.gov/databases/download/mesh.html"
+                                      },
+                           "storage":  {
+                                           "manifest_path":  "terminologies/manifests/mesh.json",
+                                           "raw_cache_dir":  "terminologies/raw/mesh/",
+                                           "normalized_cache_dir":  "terminologies/normalized/mesh/"
+                                       },
+                           "compliance":  {
+                                              "access_type":  "public",
+                                              "access_label":  "public"
+                                          }
+                       },
+                       {
+                           "key":  "atc-ddd",
+                           "standard":  "ATC/DDD",
+                           "ingest":  {
+                                          "enabled_by_default":  false,
+                                          "mode":  "metadata_plus_optional_private_snapshot",
+                                          "expected_format":  "Web buscable; Excel o XML mediante cuenta registrada; PDF de guidelines",
+                                          "source_url":  "https://atcddd.fhi.no/atc_ddd_index_and_guidelines/"
+                                      },
+                           "storage":  {
+                                           "manifest_path":  "terminologies/manifests/atc-ddd.json",
+                                           "raw_cache_dir":  "terminologies/raw/atc-ddd/",
+                                           "normalized_cache_dir":  "terminologies/normalized/atc-ddd/"
+                                       },
+                           "compliance":  {
+                                              "access_type":  "gated",
+                                              "access_label":  "gated"
+                                          }
+                       },
+                       {
+                           "key":  "unii-gsrs",
+                           "standard":  "UNII / GSRS",
+                           "ingest":  {
+                                          "enabled_by_default":  true,
+                                          "mode":  "live_or_snapshot",
+                                          "expected_format":  "Spreadsheet flat file, JSON y buscadores publicos",
+                                          "source_url":  "https://www.fda.gov/industry/fda-data-standards-advisory-board/fdas-global-substance-registration-system"
+                                      },
+                           "storage":  {
+                                           "manifest_path":  "terminologies/manifests/unii-gsrs.json",
+                                           "raw_cache_dir":  "terminologies/raw/unii-gsrs/",
+                                           "normalized_cache_dir":  "terminologies/normalized/unii-gsrs/"
+                                       },
+                           "compliance":  {
+                                              "access_type":  "public",
+                                              "access_label":  "public"
+                                          }
+                       },
+                       {
+                           "key":  "fhir-implementation-registry",
+                           "standard":  "FHIR Implementation Registry",
+                           "ingest":  {
+                                          "enabled_by_default":  true,
+                                          "mode":  "live_or_snapshot",
+                                          "expected_format":  "Web registry",
+                                          "source_url":  "https://build.fhir.org/registry/index.html"
+                                      },
+                           "storage":  {
+                                           "manifest_path":  "terminologies/manifests/fhir-implementation-registry.json",
+                                           "raw_cache_dir":  "terminologies/raw/fhir-implementation-registry/",
+                                           "normalized_cache_dir":  "terminologies/normalized/fhir-implementation-registry/"
+                                       },
+                           "compliance":  {
+                                              "access_type":  "public",
+                                              "access_label":  "public"
+                                          }
+                       },
+                       {
+                           "key":  "hl7-terminology-tho",
+                           "standard":  "HL7 Terminology (THO)",
+                           "ingest":  {
+                                          "enabled_by_default":  true,
+                                          "mode":  "live_or_snapshot",
+                                          "expected_format":  "Web, JSON, XML, TTL, paquetes",
+                                          "source_url":  "https://terminology.hl7.org/7.1.0/en/index.html"
+                                      },
+                           "storage":  {
+                                           "manifest_path":  "terminologies/manifests/hl7-terminology-tho.json",
+                                           "raw_cache_dir":  "terminologies/raw/hl7-terminology-tho/",
+                                           "normalized_cache_dir":  "terminologies/normalized/hl7-terminology-tho/"
+                                       },
+                           "compliance":  {
+                                              "access_type":  "public",
+                                              "access_label":  "public"
+                                          }
+                       },
+                       {
+                           "key":  "cda-r20-core",
+                           "standard":  "CDA R2.0 Core",
+                           "ingest":  {
+                                          "enabled_by_default":  true,
+                                          "mode":  "live_or_snapshot",
+                                          "expected_format":  "Web, schema, StructureDefinition, stylesheet",
+                                          "source_url":  "https://www.hl7.org/cda/"
+                                      },
+                           "storage":  {
+                                           "manifest_path":  "terminologies/manifests/cda-r20-core.json",
+                                           "raw_cache_dir":  "terminologies/raw/cda-r20-core/",
+                                           "normalized_cache_dir":  "terminologies/normalized/cda-r20-core/"
+                                       },
+                           "compliance":  {
+                                              "access_type":  "public",
+                                              "access_label":  "public"
+                                          }
+                       },
+                       {
+                           "key":  "cda-value-sets",
+                           "standard":  "CDA Value Sets",
+                           "ingest":  {
+                                          "enabled_by_default":  true,
+                                          "mode":  "live_or_snapshot",
+                                          "expected_format":  "Web, package artifacts",
+                                          "source_url":  "https://terminology.hl7.org/7.1.0/valuesets-cda.html"
+                                      },
+                           "storage":  {
+                                           "manifest_path":  "terminologies/manifests/cda-value-sets.json",
+                                           "raw_cache_dir":  "terminologies/raw/cda-value-sets/",
+                                           "normalized_cache_dir":  "terminologies/normalized/cda-value-sets/"
+                                       },
+                           "compliance":  {
+                                              "access_type":  "public",
+                                              "access_label":  "public"
+                                          }
+                       },
+                       {
+                           "key":  "c-cda-on-fhir",
+                           "standard":  "C-CDA on FHIR",
+                           "ingest":  {
+                                          "enabled_by_default":  true,
+                                          "mode":  "live_or_snapshot",
+                                          "expected_format":  "Web IG, downloads, artifact index",
+                                          "source_url":  "https://hl7.org/fhir/us/ccda/"
+                                      },
+                           "storage":  {
+                                           "manifest_path":  "terminologies/manifests/c-cda-on-fhir.json",
+                                           "raw_cache_dir":  "terminologies/raw/c-cda-on-fhir/",
+                                           "normalized_cache_dir":  "terminologies/normalized/c-cda-on-fhir/"
+                                       },
+                           "compliance":  {
+                                              "access_type":  "public",
+                                              "access_label":  "public"
+                                          }
+                       },
+                       {
+                           "key":  "us-core-implementation-guide",
+                           "standard":  "US Core Implementation Guide",
+                           "ingest":  {
+                                          "enabled_by_default":  true,
+                                          "mode":  "live_or_snapshot",
+                                          "expected_format":  "Web IG, downloadable artifacts",
+                                          "source_url":  "https://hl7.org/fhir/us/core/STU8.0.1/"
+                                      },
+                           "storage":  {
+                                           "manifest_path":  "terminologies/manifests/us-core-implementation-guide.json",
+                                           "raw_cache_dir":  "terminologies/raw/us-core-implementation-guide/",
+                                           "normalized_cache_dir":  "terminologies/normalized/us-core-implementation-guide/"
+                                       },
+                           "compliance":  {
+                                              "access_type":  "public",
+                                              "access_label":  "public"
+                                          }
+                       },
+                       {
+                           "key":  "smart-app-launch",
+                           "standard":  "SMART App Launch",
+                           "ingest":  {
+                                          "enabled_by_default":  true,
+                                          "mode":  "live_or_snapshot",
+                                          "expected_format":  "Web IG, packages R4/R4B",
+                                          "source_url":  "https://build.fhir.org/ig/HL7/smart-app-launch/"
+                                      },
+                           "storage":  {
+                                           "manifest_path":  "terminologies/manifests/smart-app-launch.json",
+                                           "raw_cache_dir":  "terminologies/raw/smart-app-launch/",
+                                           "normalized_cache_dir":  "terminologies/normalized/smart-app-launch/"
+                                       },
+                           "compliance":  {
+                                              "access_type":  "public",
+                                              "access_label":  "public"
+                                          }
+                       }
+                   ]
+}

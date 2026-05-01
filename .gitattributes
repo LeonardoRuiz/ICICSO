@@ -1,0 +1,13 @@
+* text=auto
+
+*.pdf binary
+*.docx binary
+*.xlsx binary
+*.pptx binary
+*.zip binary
+*.m4a binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.lnk binary

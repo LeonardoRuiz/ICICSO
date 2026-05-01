@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://icicso.local/schemas/evidence-intelligence/operational-context.schema.json",
+  "title": "Operational Context",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "implementation_complexity",
+    "resource_demand",
+    "cost_relevance",
+    "operational_relevance",
+    "resource_requirements"
+  ],
+  "properties": {
+    "implementation_complexity": { "type": "string", "enum": ["low", "moderate", "high", "very-high"] },
+    "resource_demand": { "type": "string", "enum": ["low", "moderate", "high", "critical"] },
+    "cost_relevance": { "type": "string", "enum": ["low", "moderate", "high", "transformational"] },
+    "operational_relevance": { "type": "string", "enum": ["low", "moderate", "high", "transformational"] },
+    "resource_requirements": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["resource_type", "role", "quantity", "unit", "mandatory"],
+        "properties": {
+          "resource_type": { "type": "string", "minLength": 1 },
+          "role": { "type": "string", "minLength": 1 },
+          "quantity": { "type": "number", "minimum": 0 },
+          "unit": { "type": "string", "minLength": 1 },
+          "mandatory": { "type": "boolean" },
+          "cost_center": { "type": ["string", "null"] },
+          "note": { "type": ["string", "null"] }
+        }
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    }
+  }
+}

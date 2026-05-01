@@ -1,0 +1,65 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: icicso-app-config
+  namespace: icicso-staging
+  labels:
+    app.kubernetes.io/part-of: icicso
+    app.kubernetes.io/environment: staging
+data:
+  NODE_ENV: staging
+  LOG_LEVEL: info
+  BUILD_ID: staging
+  JWT_EXPIRES_IN: 12h
+  AUTH_ISSUER: icicso-staging-auth
+  AUTH_AUDIENCE: icicso-staging-api
+  POSTGRES_DB: icicso_staging
+  POSTGRES_USER: icicso
+  POSTGRES_HOST: icicso-postgres
+  POSTGRES_PORT: "5432"
+  REDIS_HOST: icicso-redis
+  REDIS_PORT: "6379"
+  REDIS_URL: redis://icicso-redis:6379
+  MINIO_ENDPOINT: https://object-storage.staging.example.internal
+  MINIO_BUCKET: icicso-staging
+  FRONTEND_HOST: 0.0.0.0
+  FRONTEND_PORT: "8080"
+  API_PORT: "3001"
+  WEB_PORT: "3000"
+  GATEWAY_API_PORT: "3100"
+  AUTH_SERVICE_PORT: "3101"
+  IDENTITY_SERVICE_PORT: "3102"
+  AUDIT_SERVICE_PORT: "3103"
+  EVIDENCE_LAKE_SERVICE_PORT: "3104"
+  GHL_SERVICE_PORT: "3105"
+  KBOL_SERVICE_PORT: "3106"
+  STORAGE_SERVICE_PORT: "3107"
+  INGESTION_SERVICE_PORT: "3108"
+  TERMINOLOGY_SERVICE_PORT: "3109"
+  DATA_GOVERNANCE_SERVICE_PORT: "3110"
+  RUNBOOK_SERVICE_PORT: "3111"
+  READINESS_SERVICE_PORT: "3112"
+  CASE_CONTROL_SERVICE_PORT: "3113"
+  SYSTEMIC_RISK_SERVICE_PORT: "3114"
+  CQOI_SERVICE_PORT: "3115"
+  GATEWAY_API_URL: http://icicso-api:3100
+  AUTH_SERVICE_URL: http://icicso-engine:3101
+  IDENTITY_SERVICE_URL: http://icicso-engine:3102
+  AUDIT_SERVICE_URL: http://icicso-engine:3103
+  EVIDENCE_LAKE_SERVICE_URL: http://icicso-engine:3104
+  GHL_SERVICE_URL: http://icicso-engine:3105
+  KBOL_SERVICE_URL: http://icicso-engine:3106
+  STORAGE_SERVICE_URL: http://icicso-engine:3107
+  INGESTION_SERVICE_URL: http://icicso-parser:3108
+  TERMINOLOGY_SERVICE_URL: http://icicso-engine:3109
+  DATA_GOVERNANCE_SERVICE_URL: http://icicso-engine:3110
+  RUNBOOK_SERVICE_URL: http://icicso-engine:3111
+  READINESS_SERVICE_URL: http://icicso-engine:3112
+  CASE_CONTROL_SERVICE_URL: http://icicso-engine:3113
+  SYSTEMIC_RISK_SERVICE_URL: http://icicso-engine:3114
+  CQOI_SERVICE_URL: http://icicso-engine:3115
+  TERMINOLOGY_ENGINE_URL: http://icicso-engine:8000
+  DEMO_ILC_ID: ILC-MX-CIH-2026-0004821
+  DEMO_EPISODE_ID: EPI-ACS-2026-02-15
+  DEMO_CASE_ID: CASE-CABG3-2026-00014
+  INGRESS_HOST: staging.icicso.example.internal

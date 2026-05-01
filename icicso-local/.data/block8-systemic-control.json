@@ -1,0 +1,368 @@
+{
+  "thresholds": [
+    {
+      "thresholdId": "RTH-AKI-001",
+      "signalKey": "aki_risk",
+      "label": "Ascenso de creatinina perioperatoria",
+      "comparator": ">=",
+      "unit": "mg/dL",
+      "thresholdValue": 0.3,
+      "warningValue": 0.2
+    },
+    {
+      "thresholdId": "RTH-FA-001",
+      "signalKey": "fa_signal",
+      "label": "FA postoperatoria",
+      "comparator": ">=",
+      "unit": "binary",
+      "thresholdValue": 1,
+      "warningValue": 1
+    },
+    {
+      "thresholdId": "RTH-ICU-001",
+      "signalKey": "prolonged_icu_stay",
+      "label": "Estancia UCI prolongada",
+      "comparator": ">=",
+      "unit": "hours",
+      "thresholdValue": 48,
+      "warningValue": 36
+    },
+    {
+      "thresholdId": "RTH-DOC-001",
+      "signalKey": "documentation_quality_issue",
+      "label": "Cierre documental incompleto",
+      "comparator": "<=",
+      "unit": "%",
+      "thresholdValue": 90,
+      "warningValue": 95
+    },
+    {
+      "thresholdId": "RTH-PBM-001",
+      "signalKey": "pbm_drift",
+      "label": "Consumo transfusional sobre PBM",
+      "comparator": ">=",
+      "unit": "units",
+      "thresholdValue": 2,
+      "warningValue": 1
+    }
+  ],
+  "windows": [
+    {
+      "windowId": "SW-PREOP-001",
+      "label": "Activación y salida a intra-op",
+      "phase": "preop",
+      "startState": "PRE-OP",
+      "endState": "INTRA-OP",
+      "horizonHours": 12
+    },
+    {
+      "windowId": "SW-INTRAOP-001",
+      "label": "Salida de intra-op",
+      "phase": "intraop",
+      "startState": "INTRA-OP",
+      "endState": "ICU",
+      "horizonHours": 8
+    },
+    {
+      "windowId": "SW-ICU-001",
+      "label": "Primeras 48h de UCI",
+      "phase": "icu",
+      "startState": "ICU",
+      "endState": "FLOOR",
+      "horizonHours": 48
+    },
+    {
+      "windowId": "SW-CLOSE-001",
+      "label": "Cierre y revisión institucional",
+      "phase": "closure",
+      "startState": "FOLLOW-UP",
+      "endState": "CLOSED",
+      "horizonHours": 72
+    }
+  ],
+  "signals": [
+    {
+      "signalId": "SRS-AKI-001",
+      "caseId": "CASE-CABG3-2026-00014",
+      "signalKey": "aki_risk",
+      "label": "AKI risk signal",
+      "severity": "high",
+      "status": "open",
+      "thresholdId": "RTH-AKI-001",
+      "windowId": "SW-ICU-001",
+      "metricValue": 0.4,
+      "thresholdValue": 0.3,
+      "unit": "mg/dL",
+      "summary": "Creatinina perioperatoria con ascenso compatible con AKI stage 1 sobre ERC3.",
+      "sourceRefs": [
+        "STC",
+        "ESL",
+        "EVT creatinina en ascenso",
+        "outcomeAggregate.akiStage"
+      ],
+      "createdAt": "2026-04-13T02:20:22.253Z"
+    },
+    {
+      "signalId": "SRS-FA-001",
+      "caseId": "CASE-CABG3-2026-00014",
+      "signalKey": "fa_signal",
+      "label": "FA signal",
+      "severity": "moderate",
+      "status": "monitoring",
+      "thresholdId": "RTH-FA-001",
+      "windowId": "SW-ICU-001",
+      "metricValue": 1,
+      "thresholdValue": 1,
+      "unit": "binary",
+      "summary": "FA postoperatoria documentada durante la ventana de UCI temprana.",
+      "sourceRefs": [
+        "STC",
+        "EVT FA",
+        "outcomeAggregate.postopFa"
+      ],
+      "createdAt": "2026-04-13T02:20:22.253Z"
+    },
+    {
+      "signalId": "SRS-ICU-001",
+      "caseId": "CASE-CABG3-2026-00014",
+      "signalKey": "prolonged_icu_stay",
+      "label": "Prolonged ICU stay",
+      "severity": "high",
+      "status": "open",
+      "thresholdId": "RTH-ICU-001",
+      "windowId": "SW-ICU-001",
+      "metricValue": 68,
+      "thresholdValue": 48,
+      "unit": "hours",
+      "summary": "Estancia en UCI por arriba del umbral institucional para CABG x3 con complicaciones vigiladas.",
+      "sourceRefs": [
+        "STC",
+        "ESL icu_entry",
+        "outcomeAggregate.icuLengthHours"
+      ],
+      "createdAt": "2026-04-13T02:20:22.253Z"
+    },
+    {
+      "signalId": "SRS-DOC-001",
+      "caseId": "CASE-CABG3-2026-00014",
+      "signalKey": "documentation_quality_issue",
+      "label": "Documentation quality issue",
+      "severity": "moderate",
+      "status": "open",
+      "thresholdId": "RTH-DOC-001",
+      "windowId": "SW-CLOSE-001",
+      "metricValue": 78,
+      "thresholdValue": 90,
+      "unit": "%",
+      "summary": "La trazabilidad es alta, pero el cierre documental institucional sigue incompleto para auditoría dura.",
+      "sourceRefs": [
+        "STC",
+        "ESL case_closure",
+        "traceabilityScore.documentationCompleteness"
+      ],
+      "createdAt": "2026-04-13T02:20:22.253Z"
+    },
+    {
+      "signalId": "SRS-PBM-001",
+      "caseId": "CASE-CABG3-2026-00014",
+      "signalKey": "pbm_drift",
+      "label": "Transfusion / PBM drift",
+      "severity": "high",
+      "status": "open",
+      "thresholdId": "RTH-PBM-001",
+      "windowId": "SW-INTRAOP-001",
+      "metricValue": 3,
+      "thresholdValue": 2,
+      "unit": "units",
+      "summary": "Consumo transfusional por arriba del target PBM para el perfil demo CABG x3.",
+      "sourceRefs": [
+        "override.logistical",
+        "ESL intraop_exit",
+        "outcomeAggregate.transfusionUnits"
+      ],
+      "createdAt": "2026-04-13T02:20:22.253Z"
+    }
+  ],
+  "dataQualityRecords": [
+    {
+      "recordId": "DTQ-TRACE-001",
+      "caseId": "CASE-CABG3-2026-00014",
+      "category": "traceability",
+      "status": "pass",
+      "finding": "Cobertura sólida de STC y ESL para la ruta demo.",
+      "evidence": "6 transiciones, 6 STC y 4 ESL disponibles para agregación.",
+      "anomalyFlags": [],
+      "createdAt": "2026-04-13T02:20:22.253Z"
+    },
+    {
+      "recordId": "DTQ-DOC-001",
+      "caseId": "CASE-CABG3-2026-00014",
+      "category": "documentation",
+      "status": "issue",
+      "finding": "Persisten huecos de cierre documental y completitud de outcome package.",
+      "evidence": "documentationCompleteness=78% con 1 override(s) y outcome agregado derivado.",
+      "anomalyFlags": [
+        "documentation_gap",
+        "outcome_fixture_derived"
+      ],
+      "createdAt": "2026-04-13T02:20:22.253Z"
+    }
+  ],
+  "traceabilityScores": [
+    {
+      "scoreId": "TS-CABG3-0001",
+      "caseId": "CASE-CABG3-2026-00014",
+      "overallScore": 93.5,
+      "stcCoverage": 96,
+      "eslCoverage": 100,
+      "overrideTransparency": 100,
+      "documentationCompleteness": 78,
+      "createdAt": "2026-04-13T02:20:22.253Z"
+    }
+  ],
+  "cqoiMetrics": [
+    {
+      "metricId": "CQOI-AKI-001",
+      "caseId": "CASE-CABG3-2026-00014",
+      "code": "AKI_STAGE",
+      "label": "AKI stage postoperatorio",
+      "value": 1,
+      "unit": "stage",
+      "target": 0,
+      "comparator": "<=",
+      "status": "out_of_range",
+      "createdAt": "2026-04-13T02:20:22.253Z"
+    },
+    {
+      "metricId": "CQOI-FA-001",
+      "caseId": "CASE-CABG3-2026-00014",
+      "code": "POSTOP_FA",
+      "label": "FA postoperatoria",
+      "value": 1,
+      "unit": "binary",
+      "target": 0,
+      "comparator": "<=",
+      "status": "out_of_range",
+      "createdAt": "2026-04-13T02:20:22.253Z"
+    },
+    {
+      "metricId": "CQOI-ICU-001",
+      "caseId": "CASE-CABG3-2026-00014",
+      "code": "ICU_STAY_HOURS",
+      "label": "Estancia UCI",
+      "value": 68,
+      "unit": "hours",
+      "target": 48,
+      "comparator": "<=",
+      "status": "out_of_range",
+      "createdAt": "2026-04-13T02:20:22.253Z"
+    },
+    {
+      "metricId": "CQOI-PBM-001",
+      "caseId": "CASE-CABG3-2026-00014",
+      "code": "TRANSFUSION_UNITS",
+      "label": "Unidades transfundidas",
+      "value": 3,
+      "unit": "units",
+      "target": 2,
+      "comparator": "<=",
+      "status": "out_of_range",
+      "createdAt": "2026-04-13T02:20:22.253Z"
+    },
+    {
+      "metricId": "CQOI-DOC-001",
+      "caseId": "CASE-CABG3-2026-00014",
+      "code": "DOC_CLOSURE_RATE",
+      "label": "Cierre documental",
+      "value": 78,
+      "unit": "%",
+      "target": 90,
+      "comparator": ">=",
+      "status": "watch",
+      "createdAt": "2026-04-13T02:20:22.253Z"
+    }
+  ],
+  "outcomeAggregates": [
+    {
+      "aggregateId": "OUT-CABG3-0001",
+      "caseId": "CASE-CABG3-2026-00014",
+      "mortality30d": false,
+      "akiStage": 1,
+      "postopFa": true,
+      "prolongedIcuStay": true,
+      "transfusionUnits": 3,
+      "icuLengthHours": 68,
+      "lengthOfStayDays": 9,
+      "documentationClosureRate": 78,
+      "createdAt": "2026-04-13T02:20:22.253Z"
+    }
+  ],
+  "qualityReports": [
+    {
+      "reportId": "QREP-CABG3-0001",
+      "caseId": "CASE-CABG3-2026-00014",
+      "metricIds": [
+        "CQOI-AKI-001",
+        "CQOI-FA-001",
+        "CQOI-ICU-001",
+        "CQOI-PBM-001",
+        "CQOI-DOC-001"
+      ],
+      "outcomeAggregateId": "OUT-CABG3-0001",
+      "summary": "Reporte CQOI derivado del caso demo cerrado. Resume AKI, FA, estancia UCI, PBM y cierre documental sin write-back sobre la ejecución clínica.",
+      "createdAt": "2026-04-13T02:20:22.253Z"
+    }
+  ],
+  "driftCandidates": [
+    {
+      "candidateId": "DRC-PBM-001",
+      "caseId": "CASE-CABG3-2026-00014",
+      "domain": "perioperative_blood_management",
+      "label": "PBM drift candidate",
+      "rationale": "El consumo de hemoderivados excede el baseline operativo del GP/CPO para CABG x3.",
+      "signalIds": [
+        "SRS-PBM-001"
+      ],
+      "status": "confirmed",
+      "createdAt": "2026-04-13T02:20:22.253Z"
+    },
+    {
+      "candidateId": "DRC-DOC-001",
+      "caseId": "CASE-CABG3-2026-00014",
+      "domain": "documentation_quality",
+      "label": "Documentation drift candidate",
+      "rationale": "La trazabilidad clínica es robusta, pero el cierre documental institucional queda por debajo del target.",
+      "signalIds": [
+        "SRS-DOC-001"
+      ],
+      "status": "candidate",
+      "createdAt": "2026-04-13T02:20:22.253Z"
+    }
+  ],
+  "driftRecords": [
+    {
+      "driftId": "DRIFT-PBM-001",
+      "caseId": "CASE-CABG3-2026-00014",
+      "driftType": "transfusion_drift",
+      "candidateId": "DRC-PBM-001",
+      "severity": "high",
+      "baseline": 2,
+      "observed": 3,
+      "delta": 1,
+      "summary": "El caso demo excede en una unidad el baseline PBM definido para CABG x3.",
+      "createdAt": "2026-04-13T02:20:22.253Z"
+    },
+    {
+      "driftId": "DRIFT-DOC-001",
+      "caseId": "CASE-CABG3-2026-00014",
+      "driftType": "documentation_drift",
+      "candidateId": "DRC-DOC-001",
+      "severity": "moderate",
+      "baseline": 90,
+      "observed": 78,
+      "delta": -12,
+      "summary": "El cierre documental queda por debajo del estándar institucional esperado para CQOI.",
+      "createdAt": "2026-04-13T02:20:22.253Z"
+    }
+  ]
+}

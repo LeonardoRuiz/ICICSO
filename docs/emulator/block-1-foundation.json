@@ -1,0 +1,49 @@
+{
+  "id": "block-1-foundation",
+  "title": "Bloque 1 Foundation",
+  "status": "Operativo base",
+  "summary": "Sustrato institucional ejecutable para identidad longitudinal, acceso contextual, auditoria hash-linked, VRN y storage gobernado.",
+  "pillars": [
+    {
+      "name": "Identidad longitudinal",
+      "detail": "ILC, Episode y Case ya forman el spine canonico."
+    },
+    {
+      "name": "Acceso contextual",
+      "detail": "PrincipalIdentity, roles y AccessPolicy separan identidad, permiso y dominio."
+    },
+    {
+      "name": "Auditoria verificable",
+      "detail": "AuditEvent mantiene cadena append-only con previousHash y eventHash."
+    },
+    {
+      "name": "Versionado soberano",
+      "detail": "VersionRecord, HashRecord y DigitalSignature fijan VRN e integridad."
+    }
+  ],
+  "checklist": [
+    "Identity Linkage Log",
+    "Access Policy Registry",
+    "Audit Fabric Specification",
+    "Hash and Signature Standard"
+  ],
+  "cabgCase": {
+    "ilcId": "ILC-MX-CIH-2026-0004821",
+    "episodeId": "EPI-ACS-2026-02-15",
+    "caseId": "CASE-CABG3-2026-00014"
+  },
+  "metrics": [
+    {
+      "label": "Spine canonico",
+      "value": "ILC -> Episode -> Case"
+    },
+    {
+      "label": "Audit fabric",
+      "value": "Hash-linked"
+    },
+    {
+      "label": "VRN",
+      "value": "Versionado activo"
+    }
+  ]
+}

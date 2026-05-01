@@ -1,0 +1,450 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ICICSO Configuration Contract",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "NODE_ENV": {
+      "type": "string",
+      "enum": ["development", "test", "staging", "production"],
+      "description": "Runtime environment for Node services.",
+      "x-sensitive": false,
+      "x-defaultAllowed": false,
+      "x-requiredIn": ["local", "dev", "staging", "prod"],
+      "x-services": ["frontend", "api", "parser", "engine", "observability"]
+    },
+    "LOG_LEVEL": {
+      "type": "string",
+      "enum": ["debug", "info", "warn", "error", "INFO", "DEBUG", "WARN", "ERROR"],
+      "description": "Structured log level.",
+      "x-sensitive": false,
+      "x-defaultAllowed": true,
+      "x-requiredIn": ["local", "dev", "staging", "prod"],
+      "x-services": ["frontend", "api", "parser", "engine"]
+    },
+    "BUILD_ID": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Build or image tag identifier.",
+      "x-sensitive": false,
+      "x-defaultAllowed": true,
+      "x-requiredIn": ["local", "dev", "staging", "prod"],
+      "x-services": ["frontend", "api", "parser", "engine"]
+    },
+    "DATABASE_URL": {
+      "type": "string",
+      "pattern": "^postgres(ql)?://.+",
+      "description": "Primary PostgreSQL connection string used by ICICSO services.",
+      "x-sensitive": true,
+      "x-defaultAllowed": false,
+      "x-requiredIn": ["local", "dev", "staging", "prod"],
+      "x-services": ["api", "parser", "engine", "postgres"]
+    },
+    "POSTGRES_HOST": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Hostname or service name for PostgreSQL.",
+      "x-sensitive": false,
+      "x-defaultAllowed": true,
+      "x-requiredIn": ["local", "dev", "staging", "prod"],
+      "x-services": ["api", "parser", "engine", "postgres", "observability"]
+    },
+    "POSTGRES_PORT": {
+      "type": "string",
+      "pattern": "^[0-9]{2,5}$",
+      "description": "PostgreSQL TCP port.",
+      "x-sensitive": false,
+      "x-defaultAllowed": true,
+      "x-requiredIn": ["local", "dev", "staging", "prod"],
+      "x-services": ["api", "parser", "engine", "postgres", "observability"]
+    },
+    "POSTGRES_DB": {
+      "type": "string",
+      "minLength": 1,
+      "description": "PostgreSQL database name.",
+      "x-sensitive": false,
+      "x-defaultAllowed": true,
+      "x-requiredIn": ["local", "dev", "staging", "prod"],
+      "x-services": ["api", "parser", "engine", "postgres", "observability"]
+    },
+    "POSTGRES_USER": {
+      "type": "string",
+      "minLength": 1,
+      "description": "PostgreSQL user name.",
+      "x-sensitive": false,
+      "x-defaultAllowed": true,
+      "x-requiredIn": ["local", "dev", "staging", "prod"],
+      "x-services": ["api", "parser", "engine", "postgres", "observability"]
+    },
+    "POSTGRES_PASSWORD": {
+      "type": "string",
+      "minLength": 12,
+      "description": "PostgreSQL password.",
+      "x-sensitive": true,
+      "x-defaultAllowed": false,
+      "x-requiredIn": ["local", "dev", "staging", "prod"],
+      "x-services": ["api", "parser", "engine", "postgres", "observability"]
+    },
+    "REDIS_URL": {
+      "type": "string",
+      "pattern": "^redis://.+",
+      "description": "Redis connection string.",
+      "x-sensitive": false,
+      "x-defaultAllowed": true,
+      "x-requiredIn": ["local", "dev", "staging", "prod"],
+      "x-services": ["parser", "engine", "redis"]
+    },
+    "REDIS_HOST": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Redis host or service name.",
+      "x-sensitive": false,
+      "x-defaultAllowed": true,
+      "x-requiredIn": ["local", "dev", "staging", "prod"],
+      "x-services": ["engine", "redis", "observability"]
+    },
+    "REDIS_PORT": {
+      "type": "string",
+      "pattern": "^[0-9]{2,5}$",
+      "description": "Redis TCP port.",
+      "x-sensitive": false,
+      "x-defaultAllowed": true,
+      "x-requiredIn": ["local", "dev", "staging", "prod"],
+      "x-services": ["engine", "redis", "observability"]
+    },
+    "REDIS_PASSWORD": {
+      "type": "string",
+      "minLength": 12,
+      "description": "Redis password when auth is enabled.",
+      "x-sensitive": true,
+      "x-defaultAllowed": false,
+      "x-requiredIn": [],
+      "x-services": ["redis"]
+    },
+    "JWT_SECRET": {
+      "type": "string",
+      "minLength": 24,
+      "description": "JWT signing secret for Node services.",
+      "x-sensitive": true,
+      "x-defaultAllowed": false,
+      "x-requiredIn": ["local", "dev", "staging", "prod"],
+      "x-services": ["api", "parser", "engine"]
+    },
+    "AUTH_ISSUER": {
+      "type": "string",
+      "minLength": 3,
+      "description": "Logical JWT issuer for ICICSO auth-service.",
+      "x-sensitive": false,
+      "x-defaultAllowed": true,
+      "x-requiredIn": ["local", "dev", "staging", "prod"],
+      "x-services": ["api", "parser", "engine"]
+    },
+    "AUTH_AUDIENCE": {
+      "type": "string",
+      "minLength": 3,
+      "description": "Expected JWT audience enforced by gateway and services.",
+      "x-sensitive": false,
+      "x-defaultAllowed": true,
+      "x-requiredIn": ["local", "dev", "staging", "prod"],
+      "x-services": ["api", "parser", "engine"]
+    },
+    "JWT_EXPIRES_IN": {
+      "type": "string",
+      "minLength": 2,
+      "description": "JWT expiration expression.",
+      "x-sensitive": false,
+      "x-defaultAllowed": true,
+      "x-requiredIn": ["local", "dev", "staging", "prod"],
+      "x-services": ["api"]
+    },
+    "INTERNAL_SERVICE_TOKEN": {
+      "type": "string",
+      "minLength": 24,
+      "description": "Shared local token used for service-to-service trust until a stronger identity mechanism is introduced.",
+      "x-sensitive": true,
+      "x-defaultAllowed": false,
+      "x-requiredIn": ["local", "dev", "staging", "prod"],
+      "x-services": ["api", "parser", "engine"]
+    },
+    "MINIO_ENDPOINT": {
+      "type": "string",
+      "pattern": "^https?://.+",
+      "description": "MinIO or object storage endpoint.",
+      "x-sensitive": false,
+      "x-defaultAllowed": true,
+      "x-requiredIn": ["local", "dev", "staging", "prod"],
+      "x-services": ["api", "parser"]
+    },
+    "MINIO_BUCKET": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Object storage bucket for ingested documents.",
+      "x-sensitive": false,
+      "x-defaultAllowed": true,
+      "x-requiredIn": ["local", "dev", "staging", "prod"],
+      "x-services": ["api", "parser"]
+    },
+    "MINIO_ACCESS_KEY": {
+      "type": "string",
+      "minLength": 3,
+      "description": "MinIO access key.",
+      "x-sensitive": true,
+      "x-defaultAllowed": false,
+      "x-requiredIn": ["local", "dev", "staging", "prod"],
+      "x-services": ["api", "parser"]
+    },
+    "MINIO_SECRET_KEY": {
+      "type": "string",
+      "minLength": 8,
+      "description": "MinIO secret key.",
+      "x-sensitive": true,
+      "x-defaultAllowed": false,
+      "x-requiredIn": ["local", "dev", "staging", "prod"],
+      "x-services": ["api", "parser"]
+    },
+    "MINIO_ROOT_USER": {
+      "type": "string",
+      "minLength": 3,
+      "description": "Local compose MinIO root user.",
+      "x-sensitive": true,
+      "x-defaultAllowed": false,
+      "x-requiredIn": ["local"],
+      "x-services": ["observability"]
+    },
+    "MINIO_ROOT_PASSWORD": {
+      "type": "string",
+      "minLength": 8,
+      "description": "Local compose MinIO root password.",
+      "x-sensitive": true,
+      "x-defaultAllowed": false,
+      "x-requiredIn": ["local"],
+      "x-services": ["observability"]
+    },
+    "KAFKA_BROKERS": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Kafka bootstrap servers for local compose compatibility.",
+      "x-sensitive": false,
+      "x-defaultAllowed": true,
+      "x-requiredIn": ["local"],
+      "x-services": ["api"]
+    },
+    "KAFKA_CLIENT_ID": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Kafka client id for local compatibility.",
+      "x-sensitive": false,
+      "x-defaultAllowed": true,
+      "x-requiredIn": ["local"],
+      "x-services": ["api"]
+    },
+    "INGRESS_HOST": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Ingress hostname for Docker Desktop Kubernetes.",
+      "x-sensitive": false,
+      "x-defaultAllowed": true,
+      "x-requiredIn": ["local", "dev", "staging", "prod"],
+      "x-services": ["frontend", "api"]
+    },
+    "FRONTEND_HOST": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Frontend bind host.",
+      "x-sensitive": false,
+      "x-defaultAllowed": true,
+      "x-requiredIn": ["local", "dev", "staging", "prod"],
+      "x-services": ["frontend"]
+    },
+    "FRONTEND_PORT": {
+      "type": "string",
+      "pattern": "^[0-9]{2,5}$",
+      "description": "Frontend bind port.",
+      "x-sensitive": false,
+      "x-defaultAllowed": true,
+      "x-requiredIn": ["local", "dev", "staging", "prod"],
+      "x-services": ["frontend"]
+    },
+    "API_PORT": {
+      "type": "string",
+      "pattern": "^[0-9]{2,5}$",
+      "description": "Legacy API port exposed by local stack.",
+      "x-sensitive": false,
+      "x-defaultAllowed": true,
+      "x-requiredIn": ["local"],
+      "x-services": ["api"]
+    },
+    "WEB_PORT": {
+      "type": "string",
+      "pattern": "^[0-9]{2,5}$",
+      "description": "Legacy web port exposed by local stack.",
+      "x-sensitive": false,
+      "x-defaultAllowed": true,
+      "x-requiredIn": ["local"],
+      "x-services": ["frontend"]
+    },
+    "PGADMIN_DEFAULT_EMAIL": {
+      "type": "string",
+      "format": "email",
+      "description": "Local pgAdmin login email.",
+      "x-sensitive": false,
+      "x-defaultAllowed": true,
+      "x-requiredIn": ["local"],
+      "x-services": ["postgres"]
+    },
+    "PGADMIN_DEFAULT_PASSWORD": {
+      "type": "string",
+      "minLength": 12,
+      "description": "Local pgAdmin password.",
+      "x-sensitive": true,
+      "x-defaultAllowed": false,
+      "x-requiredIn": ["local"],
+      "x-services": ["postgres"]
+    },
+    "GATEWAY_API_PORT": { "type": "string", "pattern": "^[0-9]{2,5}$", "description": "Gateway port.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["api"] },
+    "AUTH_SERVICE_PORT": { "type": "string", "pattern": "^[0-9]{2,5}$", "description": "Auth service port.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["engine"] },
+    "IDENTITY_SERVICE_PORT": { "type": "string", "pattern": "^[0-9]{2,5}$", "description": "Identity service port.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["engine"] },
+    "AUDIT_SERVICE_PORT": { "type": "string", "pattern": "^[0-9]{2,5}$", "description": "Audit service port.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["engine"] },
+    "EVIDENCE_LAKE_SERVICE_PORT": { "type": "string", "pattern": "^[0-9]{2,5}$", "description": "Evidence lake service port.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["engine"] },
+    "GHL_SERVICE_PORT": { "type": "string", "pattern": "^[0-9]{2,5}$", "description": "Guideline hub service port.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["engine"] },
+    "KBOL_SERVICE_PORT": { "type": "string", "pattern": "^[0-9]{2,5}$", "description": "KBOL service port.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["engine"] },
+    "STORAGE_SERVICE_PORT": { "type": "string", "pattern": "^[0-9]{2,5}$", "description": "Storage service port.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["engine"] },
+    "INGESTION_SERVICE_PORT": { "type": "string", "pattern": "^[0-9]{2,5}$", "description": "Ingestion service port.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["parser"] },
+    "TERMINOLOGY_SERVICE_PORT": { "type": "string", "pattern": "^[0-9]{2,5}$", "description": "Terminology service port.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["engine"] },
+    "DATA_GOVERNANCE_SERVICE_PORT": { "type": "string", "pattern": "^[0-9]{2,5}$", "description": "Data governance service port.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["engine"] },
+    "RUNBOOK_SERVICE_PORT": { "type": "string", "pattern": "^[0-9]{2,5}$", "description": "Runbook service port.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["engine"] },
+    "READINESS_SERVICE_PORT": { "type": "string", "pattern": "^[0-9]{2,5}$", "description": "Readiness service port.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["engine"] },
+    "CASE_CONTROL_SERVICE_PORT": { "type": "string", "pattern": "^[0-9]{2,5}$", "description": "Case control service port.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["engine"] },
+    "SYSTEMIC_RISK_SERVICE_PORT": { "type": "string", "pattern": "^[0-9]{2,5}$", "description": "Systemic risk service port.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["engine"] },
+    "CQOI_SERVICE_PORT": { "type": "string", "pattern": "^[0-9]{2,5}$", "description": "CQOI service port.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["engine"] },
+    "GATEWAY_API_URL": { "type": "string", "pattern": "^https?://.+", "description": "Gateway URL.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["frontend", "api"] },
+    "AUTH_SERVICE_URL": { "type": "string", "pattern": "^https?://.+", "description": "Auth service URL.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["api"] },
+    "IDENTITY_SERVICE_URL": { "type": "string", "pattern": "^https?://.+", "description": "Identity service URL.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["api"] },
+    "AUDIT_SERVICE_URL": { "type": "string", "pattern": "^https?://.+", "description": "Audit service URL.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["api", "parser"] },
+    "EVIDENCE_LAKE_SERVICE_URL": { "type": "string", "pattern": "^https?://.+", "description": "Evidence lake URL.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["api"] },
+    "GHL_SERVICE_URL": { "type": "string", "pattern": "^https?://.+", "description": "Guideline hub URL.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["api"] },
+    "KBOL_SERVICE_URL": { "type": "string", "pattern": "^https?://.+", "description": "KBOL URL.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["api"] },
+    "STORAGE_SERVICE_URL": { "type": "string", "pattern": "^https?://.+", "description": "Storage service URL.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["api"] },
+    "INGESTION_SERVICE_URL": { "type": "string", "pattern": "^https?://.+", "description": "Ingestion service URL.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["api"] },
+    "TERMINOLOGY_SERVICE_URL": { "type": "string", "pattern": "^https?://.+", "description": "Terminology service URL.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["api"] },
+    "DATA_GOVERNANCE_SERVICE_URL": { "type": "string", "pattern": "^https?://.+", "description": "Data governance service URL.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["api"] },
+    "RUNBOOK_SERVICE_URL": { "type": "string", "pattern": "^https?://.+", "description": "Runbook service URL.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["api"] },
+    "READINESS_SERVICE_URL": { "type": "string", "pattern": "^https?://.+", "description": "Readiness service URL.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["api"] },
+    "CASE_CONTROL_SERVICE_URL": { "type": "string", "pattern": "^https?://.+", "description": "Case control service URL.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["api"] },
+    "SYSTEMIC_RISK_SERVICE_URL": { "type": "string", "pattern": "^https?://.+", "description": "Systemic risk service URL.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["api"] },
+    "CQOI_SERVICE_URL": { "type": "string", "pattern": "^https?://.+", "description": "CQOI service URL.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["api"] },
+    "TERMINOLOGY_ENGINE_URL": { "type": "string", "pattern": "^https?://.+", "description": "Semantic terminology engine URL.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local", "dev", "staging", "prod"], "x-services": ["api", "engine"] },
+    "DEMO_CASE_ID": { "type": "string", "minLength": 1, "description": "Demo case identifier.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local"], "x-services": ["frontend", "api", "parser"] },
+    "DEMO_EPISODE_ID": { "type": "string", "minLength": 1, "description": "Demo episode identifier.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local"], "x-services": ["frontend", "api", "parser"] },
+    "DEMO_ILC_ID": { "type": "string", "minLength": 1, "description": "Demo longitudinal clinical identity.", "x-sensitive": false, "x-defaultAllowed": true, "x-requiredIn": ["local"], "x-services": ["frontend", "api", "parser"] },
+    "OBSERVABILITY_GRAFANA_ADMIN_USER": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Grafana admin user for local observability.",
+      "x-sensitive": false,
+      "x-defaultAllowed": true,
+      "x-requiredIn": ["local", "dev"],
+      "x-services": ["observability"]
+    },
+    "OBSERVABILITY_GRAFANA_ADMIN_PASSWORD": {
+      "type": "string",
+      "minLength": 12,
+      "description": "Grafana admin password for local observability.",
+      "x-sensitive": true,
+      "x-defaultAllowed": false,
+      "x-requiredIn": ["local", "dev"],
+      "x-services": ["observability"]
+    },
+    "OBSERVABILITY_POSTGRES_EXPORTER_DSN": {
+      "type": "string",
+      "pattern": "^postgres(ql)?://.+",
+      "description": "DSN used by postgres-exporter.",
+      "x-sensitive": true,
+      "x-defaultAllowed": false,
+      "x-requiredIn": ["local", "dev"],
+      "x-services": ["observability"]
+    },
+    "OBSERVABILITY_REDIS_EXPORTER_ADDR": {
+      "type": "string",
+      "pattern": "^redis://.+",
+      "description": "Redis address used by redis-exporter.",
+      "x-sensitive": false,
+      "x-defaultAllowed": true,
+      "x-requiredIn": ["local", "dev"],
+      "x-services": ["observability"]
+    },
+    "OBSERVABILITY_PROMETHEUS_PORT": {
+      "type": "string",
+      "pattern": "^[0-9]{2,5}$",
+      "description": "Prometheus published port.",
+      "x-sensitive": false,
+      "x-defaultAllowed": true,
+      "x-requiredIn": ["local"],
+      "x-services": ["observability"]
+    },
+    "OBSERVABILITY_GRAFANA_PORT": {
+      "type": "string",
+      "pattern": "^[0-9]{2,5}$",
+      "description": "Grafana published port.",
+      "x-sensitive": false,
+      "x-defaultAllowed": true,
+      "x-requiredIn": ["local"],
+      "x-services": ["observability"]
+    },
+    "OBSERVABILITY_LOKI_PORT": {
+      "type": "string",
+      "pattern": "^[0-9]{2,5}$",
+      "description": "Loki published port.",
+      "x-sensitive": false,
+      "x-defaultAllowed": true,
+      "x-requiredIn": ["local"],
+      "x-services": ["observability"]
+    },
+    "OBSERVABILITY_TEMPO_PORT": {
+      "type": "string",
+      "pattern": "^[0-9]{2,5}$",
+      "description": "Tempo published port.",
+      "x-sensitive": false,
+      "x-defaultAllowed": true,
+      "x-requiredIn": ["local"],
+      "x-services": ["observability"]
+    },
+    "OTEL_EXPORTER_OTLP_ENDPOINT": {
+      "type": "string",
+      "pattern": "^https?://.+",
+      "description": "Default OTLP endpoint for future tracing export.",
+      "x-sensitive": false,
+      "x-defaultAllowed": true,
+      "x-requiredIn": ["local", "dev", "staging", "prod"],
+      "x-services": ["api", "parser", "engine", "observability"]
+    }
+  },
+  "required": [
+    "NODE_ENV",
+    "LOG_LEVEL",
+    "DATABASE_URL",
+    "POSTGRES_HOST",
+    "POSTGRES_PORT",
+    "POSTGRES_DB",
+    "POSTGRES_USER",
+    "POSTGRES_PASSWORD",
+    "REDIS_URL",
+    "REDIS_HOST",
+    "REDIS_PORT",
+    "JWT_SECRET",
+    "AUTH_ISSUER",
+    "AUTH_AUDIENCE",
+    "INTERNAL_SERVICE_TOKEN",
+    "MINIO_ENDPOINT",
+    "MINIO_BUCKET",
+    "MINIO_ACCESS_KEY",
+    "MINIO_SECRET_KEY",
+    "GATEWAY_API_PORT",
+    "INGESTION_SERVICE_PORT",
+    "TERMINOLOGY_ENGINE_URL",
+    "OBSERVABILITY_GRAFANA_ADMIN_USER",
+    "OBSERVABILITY_GRAFANA_ADMIN_PASSWORD",
+    "OBSERVABILITY_POSTGRES_EXPORTER_DSN",
+    "OBSERVABILITY_REDIS_EXPORTER_ADDR"
+  ]
+}

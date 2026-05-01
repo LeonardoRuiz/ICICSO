@@ -1,0 +1,97 @@
+{
+  "generated_at_utc": "2026-04-24T01:16:20.521155+00:00",
+  "database_path": "C:\\Users\\leona\\OneDrive\\Desktop\\MxRep\\ICICSO\\services\\ingestion-orquestador\\tests\\_tmp\\6fff9c13bfc3480597ce39fb8706d108\\workspace\\services\\ingestion-orquestador\\data\\icicso_catalog.db",
+  "reports": [
+    {
+      "document_id": "UPL-41D1E75C3EFA",
+      "audit_status": "valid",
+      "vrn": "VRN-ICICSO-L0-ING-ING-USER-UPLOAD-20260424-41D1E75C-V001",
+      "vrn_status": "ACTIVE",
+      "file_name": "audit-eo-candidate.txt",
+      "absolute_path": "C:\\Users\\leona\\OneDrive\\Desktop\\MxRep\\ICICSO\\services\\ingestion-orquestador\\tests\\_tmp\\6fff9c13bfc3480597ce39fb8706d108\\workspace\\services\\ingestion-orquestador\\data\\uploaded_documents\\2026\\04\\24\\UPL-41D1E75C3EFA_audit-eo-candidate.txt",
+      "relative_path": "services/ingestion-orquestador/data/uploaded_documents/2026/04/24/UPL-41D1E75C3EFA_audit-eo-candidate.txt",
+      "hash_sha256": "41d1e75c3efadc4d6e52d52c6783157b321745e30ab0c5f26df71ff28513df53",
+      "source_origin": "workspace-upload",
+      "document_present": true,
+      "file_exists": true,
+      "database_path": "C:\\Users\\leona\\OneDrive\\Desktop\\MxRep\\ICICSO\\services\\ingestion-orquestador\\tests\\_tmp\\6fff9c13bfc3480597ce39fb8706d108\\workspace\\services\\ingestion-orquestador\\data\\icicso_catalog.db",
+      "report_generated_at_utc": "2026-04-24T01:16:20.520831+00:00",
+      "materialized_artifacts": {
+        "ingest_artifact_id": "ING-41D1E75C3EFA",
+        "ser_artifact_id": null,
+        "eo_artifact_id": null,
+        "el_artifact_id": null
+      },
+      "eo_candidates": [],
+      "eo_candidate_audits": [],
+      "governance_records": [],
+      "events": [
+        {
+          "event_id": 1,
+          "document_id": "UPL-41D1E75C3EFA",
+          "vrn": "VRN-ICICSO-L0-ING-ING-USER-UPLOAD-20260424-41D1E75C-V001",
+          "event_type": "DOCUMENT_INGESTED",
+          "stage": "ING",
+          "actor": "icicso-document-ingestion-console",
+          "summary": "Documento cargado y persistido en uploaded_source_documents.",
+          "payload": {
+            "file_name": "audit-eo-candidate.txt",
+            "absolute_path": "C:\\Users\\leona\\OneDrive\\Desktop\\MxRep\\ICICSO\\services\\ingestion-orquestador\\tests\\_tmp\\6fff9c13bfc3480597ce39fb8706d108\\workspace\\services\\ingestion-orquestador\\data\\uploaded_documents\\2026\\04\\24\\UPL-41D1E75C3EFA_audit-eo-candidate.txt",
+            "relative_path": "services/ingestion-orquestador/data/uploaded_documents/2026/04/24/UPL-41D1E75C3EFA_audit-eo-candidate.txt",
+            "hash_sha256": "41d1e75c3efadc4d6e52d52c6783157b321745e30ab0c5f26df71ff28513df53",
+            "vrn": "VRN-ICICSO-L0-ING-ING-USER-UPLOAD-20260424-41D1E75C-V001",
+            "classification": {
+              "specialty": null,
+              "sub_specialty": null,
+              "epidemic_focus": null
+            },
+            "lineage_id": "LIN-7BA72DFC2614",
+            "lineage_key": "CONTINUUM-INTAKE-GUIDELINE-AUDIT-EO-CANDIDATE",
+            "version_number": 1,
+            "institutional_version": "V001",
+            "previous_document_id": null
+          },
+          "related_record_id": null,
+          "created_at": "2026-04-24T01:16:17.210120+00:00"
+        },
+        {
+          "event_id": 2,
+          "document_id": "UPL-41D1E75C3EFA",
+          "vrn": "VRN-ICICSO-L0-ING-ING-USER-UPLOAD-20260424-41D1E75C-V001",
+          "event_type": "VERSION_ISSUED",
+          "stage": "ING",
+          "actor": "icicso-document-ingestion-console",
+          "summary": "Version institucional V001 emitida para lineage CONTINUUM-INTAKE-GUIDELINE-AUDIT-EO-CANDIDATE.",
+          "payload": {
+            "lineage_id": "LIN-7BA72DFC2614",
+            "lineage_key": "CONTINUUM-INTAKE-GUIDELINE-AUDIT-EO-CANDIDATE",
+            "version_number": 1,
+            "institutional_version": "V001",
+            "previous_document_id": null
+          },
+          "related_record_id": null,
+          "created_at": "2026-04-24T01:16:17.311835+00:00"
+        },
+        {
+          "event_id": null,
+          "document_id": "UPL-41D1E75C3EFA",
+          "vrn": "VRN-ICICSO-L0-ING-ING-USER-UPLOAD-20260424-41D1E75C-V001",
+          "event_type": "CLASSIFICATION_SNAPSHOT",
+          "stage": "ING",
+          "actor": "icicso-audit-report-service",
+          "summary": "Estado actual de clasificaci\u00f3n.",
+          "payload": {
+            "classification": {
+              "specialty": "General",
+              "sub_specialty": "General",
+              "epidemic_focus": "N/A"
+            }
+          },
+          "related_record_id": null,
+          "created_at": "2026-04-24T01:16:20.516050+00:00"
+        }
+      ],
+      "warnings": []
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "artifact_kind": "ser",
+  "data": {
+    "ser_id": "SER-CABG-0001",
+    "linked_source_ids": ["EDOC-CABG-0001"],
+    "pico": {
+      "population": "Adults with multivessel CAD",
+      "intervention": "CABG",
+      "comparator": "PCI",
+      "outcomes": ["mortality", "mi"]
+    },
+    "population_details": {
+      "summary": "Adults with high anatomic complexity"
+    },
+    "intervention_details": {
+      "class": "surgery",
+      "summary": "Coronary artery bypass grafting"
+    },
+    "comparator_details": {
+      "summary": "Percutaneous coronary intervention"
+    },
+    "outcome_objects": [
+      {
+        "outcome_class": "mortality",
+        "effect_direction": "benefit",
+        "measure": "1-year mortality"
+      }
+    ],
+    "effect_estimates": [
+      {
+        "measure_type": "hr",
+        "value": 0.82,
+        "confidence_interval": {
+          "lower": 0.72,
+          "upper": 0.94
+        }
+      }
+    ],
+    "follow_up_period": "1-year",
+    "bias_limitations": ["Potential center-level treatment selection bias."],
+    "applicability_assessment": {
+      "matrix_classification": "applicable",
+      "population_fit": { "score": 3, "rationale": "Target population aligned." },
+      "intervention_fit": { "score": 3, "rationale": "Intervention exactly matches." },
+      "setting_fit": { "score": 2, "rationale": "Tertiary capability required." },
+      "jurisdiction_fit": { "score": 3, "rationale": "Applicable in target jurisdiction." },
+      "resource_fit": { "score": 2, "rationale": "Resource demand is high but available." },
+      "overall_recommendation": "directly-applicable"
+    },
+    "operational_relevance": "transformational",
+    "decision_readiness": "ready-for-execution",
+    "evidence_grading": {
+      "evidence_level": "directive",
+      "certainty": "high"
+    },
+    "provenance": {
+      "source_system": "manual-ingest",
+      "captured_at": "2026-04-04T10:10:00Z",
+      "captured_by": "icicso.evidence.curator",
+      "chain_of_custody": [
+        { "step": "derive-ser", "actor": "icicso.evidence.curator", "timestamp": "2026-04-04T10:10:00Z", "hash": "sha256:ser001", "note": "SER derived from approved document" }
+      ],
+      "license_status": "licensed",
+      "attestation_status": "attested",
+      "review_policy": "dual-clinical-review",
+      "canonical_id": "CANON-SER-CABG",
+      "version": "1.0.0",
+      "effective_from": "2026-04-04",
+      "effective_to": null,
+      "status": "active"
+    },
+    "review": {
+      "owner": "icicso.evidence.board",
+      "review_status": "approved",
+      "reviewed_at": "2026-04-04T10:20:00Z",
+      "review_cycle": "quarterly",
+      "approver": "chief-clinical-architect",
+      "notes": "Approved for controlled EO generation."
+    }
+  }
+}

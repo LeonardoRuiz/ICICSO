@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICICSO Repo Reality Dashboard</title>
+    <link rel="stylesheet" href="./assets/icicso-palette.css">
+    <style>
+/* ICICSO_DARK_OVERRIDE v3 */
+:root {
+  color-scheme: dark;
+  --icicso-bg: #050c10;
+  --icicso-panel: #0b1418;
+  --icicso-panel-strong: #0a1115;
+  --icicso-panel-soft: #0f1a1f;
+  --icicso-ink: #eef8f7;
+  --icicso-ink-soft: #c8dbd9;
+  --icicso-ink-dim: #8da7a3;
+  --icicso-line: rgba(111, 153, 147, 0.22);
+  --icicso-line-strong: rgba(155, 194, 187, 0.32);
+  --icicso-accent: #5fc9bb;
+  --icicso-accent-warm: #d6a25e;
+  --icicso-accent-cool: #7fb3d5;
+  --icicso-ok: #76d8a8;
+  --icicso-warn: #d6a25e;
+  --icicso-bad: #cc6f73;
+}
+
+html, body {
+  background-color: var(--icicso-bg) !important;
+  color: var(--icicso-ink) !important;
+}
+
+body {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif !important;
+  line-height: 1.6 !important;
+}
+
+a,
+a:visited {
+  color: var(--icicso-accent) !important;
+}
+
+a:hover {
+  color: #86ddd3 !important;
+}
+
+hr {
+  border-color: var(--icicso-line) !important;
+}
+
+table {
+  border-color: var(--icicso-line) !important;
+  background-color: var(--icicso-panel) !important;
+}
+
+th,
+td {
+  border-color: var(--icicso-line) !important;
+  color: var(--icicso-ink) !important;
+}
+
+input,
+textarea,
+select,
+button {
+  background-color: var(--icicso-panel-strong) !important;
+  color: var(--icicso-ink) !important;
+  border-color: var(--icicso-line) !important;
+}
+
+code,
+pre {
+  background-color: var(--icicso-panel-strong) !important;
+  color: var(--icicso-ink) !important;
+  border-color: var(--icicso-line) !important;
+}
+
+header,
+footer,
+nav,
+section,
+article,
+aside,
+main,
+.panel,
+.card,
+.tile,
+.box,
+.container,
+.shell,
+.hero,
+.surface,
+.module,
+.workspace,
+.table-wrap,
+.table-container,
+.panel-group {
+  background-color: var(--icicso-panel) !important;
+  color: var(--icicso-ink) !important;
+  border-color: var(--icicso-line) !important;
+}
+
+.badge,
+.chip,
+.tag,
+.pill,
+.status {
+  background-color: var(--icicso-panel-strong) !important;
+  border-color: var(--icicso-line) !important;
+  color: var(--icicso-ink) !important;
+}
+
+</style>
+</head>
+<body>
+    <div class="shell">
+        <section class="hero">
+            <span class="eyebrow">Dashboard raíz alineado a repo, runtime y docs</span>
+            <h1>ICICSO Repo Reality Dashboard</h1>
+            <p class="lead">
+                Esta superficie ya no representa una infraestructura ficticia. Resume lo que hoy existe de verdad en el repo,
+                qué entrypoints son operativos y qué partes deben tratarse como legado o trabajo en curso.
+            </p>
+            <div class="nav-strip">
+                <a class="action" href="http://127.0.0.1:8090/index.html" target="_blank" rel="noopener noreferrer">Abrir mockup local</a>
+                <a class="action secondary" href="http://127.0.0.1:8098/index.html" target="_blank" rel="noopener noreferrer">Abrir canon emulator</a>
+                <a class="action" href="./document-ingestion.html">Abrir ingesta documental</a>
+                <a class="action secondary" href="..\\..\\ICICSO Local\\Abrir ICICSO Mockup Local.cmd">Abrir ICICSO Local</a>
+                <a class="quick-link" href="#surfaces">Superficies</a>
+                <a class="quick-link" href="#repo">Árboles</a>
+                <a class="quick-link" href="#docs">Documentación</a>
+                <a class="quick-link" href="#strategy">Anti-drift</a>
+            </div>
+            <div class="meta-grid">
+                <div class="meta">
+                    <span class="meta-label">Fuente de verdad</span>
+                    <span class="meta-value">`SYSTEM_STATUS.md` + `desktop-hub.json`</span>
+                </div>
+                <div class="meta">
+                    <span class="meta-label">Mockup oficial</span>
+                    <span class="meta-value">`127.0.0.1:8090`</span>
+                </div>
+                <div class="meta">
+                    <span class="meta-label">Gateway real</span>
+                    <span class="meta-value">`127.0.0.1:3100`</span>
+                </div>
+                <div class="meta">
+                    <span class="meta-label">Última base auditada</span>
+                    <span class="meta-value">2026-04-06</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="surfaces">
+            <div class="section-head">
+                <h2>Superficies operativas</h2>
+                <p>Cada bloque visual apunta a un endpoint o documento real. No hay botones con `#`, navegación vacía ni puertos heredados como entrada principal.</p>
+            </div>
+            <div class="panel">
+                <div class="cards">
+                    <article class="card">
+                        <div class="card-top">
+                            <h3>ICICSO Local launchers</h3>
+                            <span class="chip implemented">implemented</span>
+                        </div>
+                        <p>Accesos directos al runtime local instalado fuera del repo para entrar rápido al mockup o al canon emulator.</p>
+                        <div class="path">C:\Users\leona\OneDrive\Desktop\ICICSO Local\*</div>
+                        <div class="card-actions">
+                            <a class="action" href="..\\..\\ICICSO Local\\Abrir ICICSO Mockup Local.cmd">Abrir mockup local (launcher)</a>
+                            <a class="quick-link" href="..\\..\\ICICSO Local\\Abrir ICICSO Canon Emulator.cmd">Abrir canon emulator (launcher)</a>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <div class="card-top">
+                            <h3>Mockup local dashboard</h3>
+                            <span class="chip implemented">implemented</span>
+                        </div>
+                        <p>Superficie HTML operativa del runtime local actual. Es la entrada útil para demo, walkthrough y navegación funcional.</p>
+                        <div class="path">http://127.0.0.1:8090/index.html</div>
+                        <div class="card-actions">
+                            <a class="action" href="http://127.0.0.1:8090/index.html" target="_blank" rel="noopener noreferrer">Abrir</a>
+                            <a class="quick-link" href="../icicso-local/README.md">Ver runtime</a>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-top">
+                            <h3>Gateway readiness</h3>
+                            <span class="chip implemented">implemented</span>
+                        </div>
+                        <p>Readiness del gateway real del mockup. En modo degradado puede responder `503` y aun así seguir siendo el endpoint correcto.</p>
+                        <div class="path">http://127.0.0.1:3100/health</div>
+                        <div class="card-actions">
+                            <a class="action" href="http://127.0.0.1:3100/health" target="_blank" rel="noopener noreferrer">Abrir</a>
+                            <a class="quick-link" href="../docs/audit/dashboard-link-validation.md">Validación</a>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-top">
+                            <h3>Block1 overview</h3>
+                            <span class="chip implemented">implemented</span>
+                        </div>
+                        <p>Vista base del caso desde el gateway. Sirve como comprobación de que el runtime expone flujo clínico visible.</p>
+                        <div class="path">http://127.0.0.1:3100/block1/overview</div>
+                        <div class="card-actions">
+                            <a class="action" href="http://127.0.0.1:3100/block1/overview" target="_blank" rel="noopener noreferrer">Abrir</a>
+                            <a class="quick-link" href="../icicso-local/README.md">Contexto</a>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-top">
+                            <h3>Canon emulator</h3>
+                            <span class="chip implemented">implemented</span>
+                        </div>
+                        <p>Emulador del árbol canónico. No sustituye al mockup local; representa otra superficie real del repo.</p>
+                        <div class="path">http://127.0.0.1:8098/index.html</div>
+                        <div class="card-actions">
+                            <a class="action" href="http://127.0.0.1:8098/index.html" target="_blank" rel="noopener noreferrer">Abrir</a>
+                            <a class="quick-link" href="../icicso/README.md">Ver árbol</a>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-top">
+                            <h3>Document ingestion console</h3>
+                            <span class="chip implemented">implemented</span>
+                        </div>
+                        <p>Superficie HTML para subir documentos, registrarlos en SQLite y revisar el reporteo de ingesta en formato tabular con foco operativo.</p>
+                        <div class="path">dashboard/document-ingestion.html + /api/source-documents/ingestions</div>
+                        <div class="card-actions">
+                            <a class="action" href="./document-ingestion.html">Abrir consola</a>
+                            <a class="quick-link" href="http://127.0.0.1:8098/index.html" target="_blank" rel="noopener noreferrer">Abrir emulador</a>
+                            <a class="quick-link" href="../config/runtime/document-ingestion-feed.json">Ver feed</a>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-top">
+                            <h3>Root legacy line</h3>
+                            <span class="chip deprecated">deprecated</span>
+                        </div>
+                        <p>La línea root antigua de `docker-compose.yml`, `health-check/` y el dashboard en `3000` dejó de ser navegación oficial.</p>
+                        <div class="path">dashboard/index.html ahora documenta realidad, no la topología vieja</div>
+                        <div class="card-actions">
+                            <a class="quick-link" href="../docs/audit/html-runtime-repo-alignment.md">Ver auditoría</a>
+                            <a class="quick-link" href="../SYSTEM_STATUS.md">Ver estado real</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="repo">
+            <div class="section-head">
+                <h2>Árboles del repo</h2>
+                <p>Los estados se normalizan a `implemented`, `in-progress`, `planned` y `deprecated`, pero cada tarjeta aclara la condición operativa real para no maquillar fallas activas.</p>
+            </div>
+            <div class="panel">
+                <div class="cards">
+                    <article class="card">
+                        <div class="card-top">
+                            <h3>`icicso/`</h3>
+                            <span class="chip in-progress">in-progress</span>
+                        </div>
+                        <p>Árbol canónico consistente con scaffold útil y emulador base, pero todavía parcial como implementación total del continuum.</p>
+                        <div class="path">../icicso/README.md</div>
+                        <div class="card-actions">
+                            <a class="quick-link" href="../icicso/README.md">Abrir README</a>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-top">
+                            <h3>`icicso-local/`</h3>
+                            <span class="chip implemented">implemented</span>
+                        </div>
+                        <p>Runtime demo local vigente. Arranca, navega y se valida incluso con dependencia externa degradada.</p>
+                        <div class="path">../icicso-local/README.md</div>
+                        <div class="card-actions">
+                            <a class="quick-link" href="../icicso-local/README.md">Abrir README</a>
+                            <a class="quick-link" href="../icicso-local/docker-compose.yml">Compose real</a>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-top">
+                            <h3>`services/ingestion-orquestador/`</h3>
+                            <span class="chip implemented">implemented</span>
+                        </div>
+                        <p>Módulo funcional con pruebas locales pasando. Su presencia en el dashboard ahora apunta a código y documentación reales.</p>
+                        <div class="path">../services/ingestion-orquestador/README.md</div>
+                        <div class="card-actions">
+                            <a class="quick-link" href="../services/ingestion-orquestador/README.md">Abrir README</a>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-top">
+                            <h3>`_archive/noncanonical/08_Plataforma_Digital/icicso-foundation/`</h3>
+                            <span class="chip deprecated">deprecated</span>
+                        </div>
+                        <p>Monorepo alterno archivado. Se conserva como referencia técnica, no como ruta operativa vigente.</p>
+                        <div class="path">../_archive/noncanonical/08_Plataforma_Digital/icicso-foundation/README.md</div>
+                        <div class="card-actions">
+                            <a class="quick-link" href="../_archive/noncanonical/08_Plataforma_Digital/icicso-foundation/README.md">Abrir README</a>
+                        </div>
+                    </article>
+
+                    <article class="card">
+                        <div class="card-top">
+                            <h3>`_archive/deprecated_audit_20260405/`</h3>
+                            <span class="chip deprecated">deprecated</span>
+                        </div>
+                        <p>Material histórico fuera de la ruta operativa. No se presenta como superficie viva del producto.</p>
+                        <div class="path">../docs/audit/html-runtime-repo-alignment.md</div>
+                        <div class="card-actions">
+                            <a class="quick-link" href="../docs/audit/html-runtime-repo-alignment.md">Ver contexto</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="docs">
+            <div class="section-head">
+                <h2>Documentación y launchers reales</h2>
+                <p>El dashboard raíz ya no inventa botones ejecutables. Enlaza runbooks, manifiestos y scripts existentes para que el operador vea dónde está la verdad operativa.</p>
+            </div>
+            <div class="panel">
+                <div class="doc-grid">
+                    <article class="doc-item">
+                        <h3>Entrada documental</h3>
+                        <p>`START_HERE.md` sigue siendo el punto de entrada principal del proyecto.</p>
+                        <div class="link-row" style="margin-top: 12px;">
+                            <a class="text-link" href="../START_HERE.md">Abrir `START_HERE.md`</a>
+                        </div>
+                    </article>
+
+                    <article class="doc-item">
+                        <h3>Estado auditado</h3>
+                        <p>`SYSTEM_STATUS.md` y la auditoría de alineación son la referencia para decidir qué está implementado y qué no.</p>
+                        <div class="link-row" style="margin-top: 12px;">
+                            <a class="text-link" href="../SYSTEM_STATUS.md">Abrir `SYSTEM_STATUS.md`</a>
+                            <a class="text-link" href="../docs/audit/html-runtime-repo-alignment.md">Ver auditoría</a>
+                        </div>
+                    </article>
+
+                    <article class="doc-item">
+                        <h3>Operación local</h3>
+                        <p>La operación diaria se apoya en el runbook local y en el hub generado para el escritorio.</p>
+                        <div class="link-row" style="margin-top: 12px;">
+                            <a class="text-link" href="../docs/local-development.md">Runbook local</a>
+                            <a class="text-link" href="../docs/desktop-hub-operations.md">Hub de escritorio</a>
+                        </div>
+                    </article>
+
+                    <article class="doc-item">
+                        <h3>Manifiestos canónicos</h3>
+                        <p>Estos archivos son la base de alineación entre repo, dashboard raíz y punto de entrada operativo del escritorio.</p>
+                        <div class="link-row" style="margin-top: 12px;">
+                            <a class="text-link" href="../config/runtime/desktop-hub.json">`desktop-hub.json`</a>
+                            <a class="text-link" href="../config/runtime/dashboard-reality.json">`dashboard-reality.json`</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-head">
+                <h2>Comandos operativos</h2>
+                <p>Se muestran exactamente los comandos vigentes del repo. El dashboard no promete ejecución desde navegador; solo expone el uso correcto.</p>
+            </div>
+            <div class="panel">
+                <div class="command-grid">
+                    <article class="command-item">
+                        <h3>Levantar mockup local</h3>
+                        <p>Entrada de runtime recomendada para demo y navegación local.</p>
+                        <code class="command-code">.\scripts\start-icicso-mockup.ps1</code>
+                    </article>
+
+                    <article class="command-item">
+                        <h3>Levantar runtime completo</h3>
+                        <p>Arranca infraestructura Docker + servicios con validación estricta.</p>
+                        <code class="command-code">.\scripts\start-icicso-local-full.ps1</code>
+                    </article>
+
+                    <article class="command-item">
+                        <h3>Diagnóstico del runtime</h3>
+                        <p>Valida gateway, servicios, puertos, logs y modo degradado.</p>
+                        <code class="command-code">.\scripts\Invoke-ContinuumDoctor.ps1</code>
+                    </article>
+
+                    <article class="command-item">
+                        <h3>Levantar canon emulator</h3>
+                        <p>Arranque separado de la superficie canónica.</p>
+                        <code class="command-code">.\scripts\start-icicso-canon-emulator.ps1</code>
+                    </article>
+
+                    <article class="command-item">
+                        <h3>Validar alineación</h3>
+                        <p>Chequea links, rutas, assets, cockpit del escritorio y ahora también el dashboard raíz.</p>
+                        <code class="command-code">.\scripts\Validate-DashboardLinks.ps1</code>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="strategy">
+            <div class="section-head">
+                <h2>Estrategia anti-drift</h2>
+                <p>La alineación ya no depende de recordar a mano qué puerto o qué README es el correcto. Queda respaldada por un manifiesto y por validación automatizada.</p>
+            </div>
+            <div class="panel">
+                <ol class="strategy-list">
+                    <li>`config/runtime/dashboard-reality.json` define superficies, estados permitidos y targets prohibidos para el dashboard raíz.</li>
+                    <li>`config/runtime/desktop-hub.json` sigue siendo la fuente de verdad del hub operativo del escritorio y sus launchers.</li>
+                    <li>`scripts/Validate-DashboardLinks.ps1` valida que no existan `href="#"`, que las rutas relativas resuelvan y que el dashboard no vuelva a apuntar a puertos legacy como entrada principal.</li>
+                    <li>Los cambios de runtime o de documentación deben actualizar primero los manifiestos y después las superficies HTML. Si el manifiesto no cambia, el dashboard tampoco debería cambiar.</li>
+                </ol>
+            </div>
+        </section>
+
+        <p class="footer">
+            Este dashboard es una vista alineada del repositorio. La operación cotidiana sigue entrando por `START_HERE.md`,
+            el hub de escritorio generado y los scripts de `scripts/`.
+        </p>
+    </div>
+    <script>
+// ICICSO_LEVEL_TAGGER v2
+(function () {
+  const levelRegex = /\bL(1[0-2]|[0-9])\b/;
+  const preferredTargets = ".module-card,.continuum-node,.continuum-card,.block-card,.block-node,.workspace-card,.feed-document,.gcl-record,.slice-stage,.slice-card,.ingestion-card,.catalog-row,.catalog-card";
+  const fallbackTargets = "article,section";
+  const ignoredSelectors = "pre,code,textarea,script,style";
+
+  function applyLevel(element, level) {
+    if (!element || !level) return;
+    const cls = "l" + level.slice(1);
+    element.classList.add(cls);
+    element.setAttribute("data-level", level);
+  }
+
+  function findTarget(node) {
+    const preferred = node.closest(preferredTargets);
+    if (preferred) return preferred;
+    const fallback = node.closest(fallbackTargets);
+    return fallback || node;
+  }
+
+  function scan() {
+    const nodes = document.querySelectorAll("body *:not(script):not(style)");
+    nodes.forEach((node) => {
+      if (node.matches(ignoredSelectors)) return;
+      if (node.children && node.children.length) return;
+      const text = (node.textContent || "").trim();
+      const match = text.match(levelRegex);
+      if (!match) return;
+      const level = "L" + match[1];
+      const target = findTarget(node);
+      applyLevel(target, level);
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", scan);
+  } else {
+    scan();
+  }
+})();
+</script><script>
+// ICICSO_CATALOGS_LOADER v1
+(function () {
+  const embedded = {
+  "layers": ["ING", "SER", "EO", "EL", "DDMO", "EUL", "KBOL", "CPO", "TAM", "EVT", "RDY-G", "CAE"],
+  "continuum_stages": ["ING", "SER", "EO", "EL", "DDMO", "EUL", "KBOL", "CPO", "TAM", "EVT", "RDY-G", "CAE"],
+  "categories": [
+    "user-upload",
+    "imported",
+    "legacy",
+    "research",
+    "guideline",
+    "evidence",
+    "case",
+    "protocol",
+    "dataset",
+    "imaging",
+    "lab",
+    "surgical-report",
+    "operative-note",
+    "discharge-summary"
+  ],
+  "document_groups": [
+    "continuum-intake",
+    "CABG",
+    "Valvular",
+    "Aorta",
+    "ECMO",
+    "Shock",
+    "Trauma Toracico",
+    "Intervencionismo",
+    "TAVI",
+    "PCI",
+    "Structural Heart",
+    "Reintervencion",
+    "Hemodinamia",
+    "Arritmias",
+    "Insuficiencia Cardiaca",
+    "UCI Cardiaca",
+    "UCI Quirurgica",
+    "Anestesia Cardiaca",
+    "Rehabilitacion Cardiaca",
+    "Emergencia Cardiaca",
+    "Emergencia Toracica"
+  ],
+  "document_types": [
+    "guideline",
+    "protocol",
+    "case",
+    "dataset",
+    "imaging",
+    "lab",
+    "surgical-report",
+    "operative-note",
+    "discharge-summary",
+    "consent",
+    "device-spec",
+    "clinical-trial",
+    "registry",
+    "systematic-review",
+    "meta-analysis",
+    "cohort-study"
+  ],
+  "vrn_statuses": ["ACTIVE", "PENDING", "SUNSET"],
+  "languages": ["en", "es", "pt", "fr", "de", "it"],
+  "defaults": {
+    "layer": "ING",
+    "continuum_stage": "ING",
+    "category": "user-upload",
+    "document_group": "continuum-intake",
+    "document_type": "guideline",
+    "vrn_status": "ACTIVE",
+    "language": "en"
+  }
+}
+;
+  const candidates = [
+    "file:///c:/Users/leona/OneDrive/Desktop/MxRep/ICICSO/config/runtime/ingestion-catalogs.json",
+    "../config/runtime/ingestion-catalogs.json",
+    "../../config/runtime/ingestion-catalogs.json",
+    "../../../config/runtime/ingestion-catalogs.json"
+  ];
+  function setCatalogs(payload) {
+    if (payload && typeof payload === "object") {
+      window.ICICSO_CATALOGS = payload;
+    }
+  }
+  setCatalogs(embedded);
+  (async function () {
+    for (const url of candidates) {
+      try {
+        const resp = await fetch(url);
+        if (resp.ok) {
+          const json = await resp.json();
+          setCatalogs(json);
+          break;
+        }
+      } catch (err) {
+        // ignore
+      }
+    }
+  })();
+})();
+</script></body>
+</html>
+
+
+
+
+
+
+

@@ -1,0 +1,213 @@
+{
+  "desktopRootName": "ICICSO Local",
+  "hubTitle": "ICICSO Local Hub",
+  "entries": [
+    {
+      "id": "open-repo",
+      "category": "launcher",
+      "label": "Open Repo ICICSO",
+      "fileName": "Open Repo ICICSO.cmd",
+      "description": "Abre la raiz real del repo ICICSO.",
+      "targetType": "folder",
+      "target": "."
+    },
+    {
+      "id": "start-mockup",
+      "category": "launcher",
+      "label": "Start Mockup Local",
+      "fileName": "Start Mockup Local.cmd",
+      "description": "Levanta el runtime local oficial del mockup.",
+      "targetType": "cmd",
+      "target": "Launch-ICICSO-Continuum.cmd"
+    },
+    {
+      "id": "start-mockup-ps1",
+      "category": "launcher",
+      "label": "Run Start Mockup PS1",
+      "fileName": "Run Start Mockup PS1.cmd",
+      "description": "Ejecuta directamente scripts/start-icicso-mockup.ps1.",
+      "targetType": "script",
+      "target": "scripts/start-icicso-mockup.ps1"
+    },
+    {
+      "id": "prepare-mockup",
+      "category": "launcher",
+      "label": "Prepare Mockup Build",
+      "fileName": "Prepare Mockup Build.cmd",
+      "description": "Prepara dependencias y build local del continuum.",
+      "targetType": "script",
+      "target": "scripts/Initialize-ContinuumLocal.ps1"
+    },
+    {
+      "id": "run-doctor",
+      "category": "launcher",
+      "label": "Run Continuum Doctor",
+      "fileName": "Run Continuum Doctor.cmd",
+      "description": "Diagnostica gateway, servicios, puertos y logs.",
+      "targetType": "script",
+      "target": "scripts/Invoke-ContinuumDoctor.ps1"
+    },
+    {
+      "id": "start-canon",
+      "category": "launcher",
+      "label": "Start Canon Emulator",
+      "fileName": "Start Canon Emulator.cmd",
+      "description": "Levanta el canon emulator en 8098.",
+      "targetType": "cmd",
+      "target": "scripts/start-icicso-canon-emulator.bat"
+    },
+    {
+      "id": "stop-mockup",
+      "category": "launcher",
+      "label": "Stop Mockup Local",
+      "fileName": "Stop Mockup Local.cmd",
+      "description": "Detiene el runtime local del mockup.",
+      "targetType": "script",
+      "target": "scripts/stop-icicso-mockup.ps1"
+    },
+    {
+      "id": "stop-canon",
+      "category": "launcher",
+      "label": "Stop Canon Emulator",
+      "fileName": "Stop Canon Emulator.cmd",
+      "description": "Detiene el canon emulator.",
+      "targetType": "cmd",
+      "target": "scripts/stop-icicso-canon-emulator.bat"
+    },
+    {
+      "id": "doc-start-here",
+      "category": "documentation",
+      "label": "Open START_HERE Repo",
+      "fileName": "Open START_HERE Repo.cmd",
+      "description": "Entrada documental principal del proyecto.",
+      "targetType": "file",
+      "target": "START_HERE.md"
+    },
+    {
+      "id": "doc-system-status",
+      "category": "documentation",
+      "label": "Open SYSTEM_STATUS",
+      "fileName": "Open SYSTEM_STATUS.cmd",
+      "description": "Estado real del sistema y de cada arbol.",
+      "targetType": "file",
+      "target": "SYSTEM_STATUS.md"
+    },
+    {
+      "id": "doc-next-actions",
+      "category": "documentation",
+      "label": "Open NEXT_ACTIONS",
+      "fileName": "Open NEXT_ACTIONS.cmd",
+      "description": "Siguiente capa de trabajo priorizada.",
+      "targetType": "file",
+      "target": "NEXT_ACTIONS.md"
+    },
+    {
+      "id": "doc-local-development",
+      "category": "documentation",
+      "label": "Open Local Development Runbook",
+      "fileName": "Open Local Development Runbook.cmd",
+      "description": "Guia operativa y de desarrollo local.",
+      "targetType": "file",
+      "target": "docs/local-development.md"
+    },
+    {
+      "id": "report-audit",
+      "category": "report",
+      "label": "Open AUDIT_REPORT",
+      "fileName": "Open AUDIT_REPORT.cmd",
+      "description": "Auditoria general del repo.",
+      "targetType": "file",
+      "target": "AUDIT_REPORT.md"
+    },
+    {
+      "id": "report-system-map",
+      "category": "report",
+      "label": "Open SYSTEM_MAP",
+      "fileName": "Open SYSTEM_MAP.cmd",
+      "description": "Mapa real de topologia y ownership.",
+      "targetType": "file",
+      "target": "SYSTEM_MAP.md"
+    },
+    {
+      "id": "report-cleanup-decisions",
+      "category": "report",
+      "label": "Open CLEANUP_DECISIONS",
+      "fileName": "Open CLEANUP_DECISIONS.cmd",
+      "description": "Decisiones tomadas durante limpieza y depuracion.",
+      "targetType": "file",
+      "target": "CLEANUP_DECISIONS.md"
+    },
+    {
+      "id": "report-module-classification",
+      "category": "report",
+      "label": "Open MODULE_CLASSIFICATION",
+      "fileName": "Open MODULE_CLASSIFICATION.cmd",
+      "description": "Clasificacion de modulos y estado real.",
+      "targetType": "file",
+      "target": "MODULE_CLASSIFICATION.md"
+    },
+    {
+      "id": "open-mockup-dashboard",
+      "category": "operation",
+      "label": "Open Mockup Dashboard",
+      "fileName": "Open Mockup Dashboard.cmd",
+      "description": "Abre el dashboard oficial del mockup local.",
+      "targetType": "url",
+      "target": "http://127.0.0.1:8090/index.html"
+    },
+    {
+      "id": "open-canon-emulator",
+      "category": "operation",
+      "label": "Open Canon Emulator",
+      "fileName": "Open Canon Emulator.cmd",
+      "description": "Abre el canon emulator oficial.",
+      "targetType": "url",
+      "target": "http://127.0.0.1:8098/index.html"
+    },
+    {
+      "id": "open-gateway-health",
+      "category": "operation",
+      "label": "Open Gateway Health",
+      "fileName": "Open Gateway Health.cmd",
+      "description": "Abre el health del gateway real del mockup.",
+      "targetType": "url",
+      "target": "http://127.0.0.1:3100/health"
+    },
+    {
+      "id": "open-block1-overview",
+      "category": "operation",
+      "label": "Open Block1 Overview",
+      "fileName": "Open Block1 Overview.cmd",
+      "description": "Abre la vista base del caso desde el gateway.",
+      "targetType": "url",
+      "target": "http://127.0.0.1:3100/block1/overview"
+    },
+    {
+      "id": "open-logs-folder",
+      "category": "operation",
+      "label": "Open Useful Logs Folder",
+      "fileName": "Open Useful Logs Folder.cmd",
+      "description": "Abre la carpeta de logs del runtime mockup.",
+      "targetType": "folder",
+      "target": "logs"
+    },
+    {
+      "id": "open-compose-source",
+      "category": "operation",
+      "label": "Open Docker Compose Source",
+      "fileName": "Open Docker Compose Source.cmd",
+      "description": "Abre el compose oficial del runtime local.",
+      "targetType": "file",
+      "target": "icicso-local/docker-compose.yml"
+    },
+    {
+      "id": "open-evidence-assets",
+      "category": "operation",
+      "label": "Open Evidence Assets",
+      "fileName": "Open Evidence Assets.cmd",
+      "description": "Abre la carpeta de evidencia local del repo.",
+      "targetType": "folder",
+      "target": "evidence"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "updated_at": "2026-04-27T13:31:37.816980+00:00",
+  "datasets": {
+    "SNOMED_CT": {
+      "attempts": 1,
+      "status": "manual_required",
+      "updated_at": "2026-04-27T13:31:37.816670+00:00",
+      "path": "C:\\Users\\leona\\OneDrive\\Desktop\\MxRep\\ICICSO\\logs\\manual_tmp_direct_term_checks\\case1\\01_RAW\\SNOMED_CT\\README.txt",
+      "url": null,
+      "bytes": 0,
+      "mode": "manual",
+      "note": "licencia requerida",
+      "last_error": "licencia requerida"
+    }
+  }
+}

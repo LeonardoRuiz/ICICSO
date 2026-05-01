@@ -1,0 +1,59 @@
+{
+  "artifact_kind": "ser",
+  "data": {
+    "ser_id": "SER-BROKEN-0001",
+    "linked_source_ids": ["EDOC-BROKEN-0001"],
+    "pico": {
+      "population": "Adults after surgery",
+      "intervention": "Experimental bundle",
+      "outcomes": ["mortality"]
+    },
+    "population_details": {},
+    "intervention_details": {},
+    "outcome_objects": [
+      {
+        "outcome_class": "mortality",
+        "effect_direction": "positive"
+      }
+    ],
+    "effect_estimates": [
+      {
+        "measure_type": "rr",
+        "value": 0.8
+      }
+    ],
+    "follow_up_period": "30-days",
+    "bias_limitations": [],
+    "applicability_assessment": {
+      "population_fit": { "score": 3, "rationale": "ok" },
+      "intervention_fit": { "score": 3, "rationale": "ok" },
+      "setting_fit": { "score": 3, "rationale": "ok" },
+      "jurisdiction_fit": { "score": 3, "rationale": "ok" },
+      "resource_fit": { "score": 3, "rationale": "ok" },
+      "overall_recommendation": "directly-applicable"
+    },
+    "operational_relevance": "high",
+    "decision_readiness": "ready-for-execution",
+    "evidence_grading": {
+      "evidence_level": "directive",
+      "certainty": "high"
+    },
+    "provenance": {
+      "source_system": "manual-ingest",
+      "captured_at": "2026-04-04T10:00:00Z",
+      "captured_by": "curator",
+      "chain_of_custody": [],
+      "license_status": "licensed",
+      "attestation_status": "attested",
+      "canonical_id": "CANON-BROKEN",
+      "version": "1.0.0",
+      "status": "active"
+    },
+    "review": {
+      "owner": "board",
+      "review_status": "approved",
+      "reviewed_at": "2026-04-04T10:00:00Z",
+      "review_cycle": "monthly"
+    }
+  }
+}

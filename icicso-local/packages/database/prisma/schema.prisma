@@ -1,0 +1,522 @@
+// Prisma schema for ICICSO Local
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum BaseRole {
+  admin
+  clinician
+  governance
+}
+
+enum DocumentType {
+  LAB
+  IMAGING
+  NOTE
+  EXTERNAL
+  CONSENT
+  MEDICATION
+  PROCEDURE
+  DEVICE
+  DYNAMIC_ODD
+  DYNAMIC_PRI
+}
+
+enum SourceSystemType {
+  LIS
+  PACS
+  EHR
+  EXTERNAL
+  PATIENT_PORTAL
+  DEVICE_GATEWAY
+  MANUAL_ENTRY
+}
+
+enum IngestionMethod {
+  API
+  UPLOAD
+  STREAM
+  BULK_IMPORT
+  MANUAL_CAPTURE
+}
+
+enum RawFormat {
+  PDF
+  DICOM
+  JSON
+  TXT
+  HL7
+  FHIR
+  CSV
+  IMAGE
+}
+
+enum SensitivityClass {
+  PUBLIC
+  INTERNAL
+  CONFIDENTIAL
+  RESTRICTED
+  HIGHLY_SENSITIVE
+}
+
+enum IngestionStatus {
+  RECEIVED
+  CLASSIFIED
+  PARSED
+  CERTIFIED
+  FAILED
+  QUARANTINED
+}
+
+enum VariableType {
+  LAB
+  DIAGNOSIS
+  MEASUREMENT
+  PROCEDURE
+  MEDICATION
+  DEVICE
+  ODD
+  PRI
+  CONSENT
+  NOTE
+}
+
+enum ExtractionMethod {
+  HL7
+  FHIR
+  JSON_PATH
+  PDF_PARSER
+  OCR
+  DICOM_METADATA
+  DICOM_MEASUREMENT
+  NLP
+  MANUAL
+}
+
+enum ReliabilityLevel {
+  LOW
+  MODERATE
+  HIGH
+  VALIDATED_INTERNAL
+}
+
+enum CompletenessStatus {
+  COMPLETE
+  PARTIAL
+  MISSING
+}
+
+enum SemanticValidityStatus {
+  VALID
+  INVALID
+  REQUIRES_REVIEW
+}
+
+enum CertificationStatus {
+  PASS
+  FAIL
+  PARTIAL
+}
+
+// Governance Ledger - Append-only records
+model GovernanceRecord {
+  id                    String   @id @default(cuid())
+  governanceRecordId    String   @unique
+  vrn                   String
+  type                  String
+  hash                  String   @unique
+  signatureRef          String
+  payload               Json
+  lineageRef            String?
+  createdAt             DateTime @default(now())
+
+  @@map("governance_records")
+}
+
+// Terminology mappings
+model TerminologySet {
+  id          String   @id @default(cuid())
+  name        String
+  system      String   // SNOMED, ICD-10, LOINC, etc.
+  version     String
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  mappings    TerminologyMapping[]
+
+  @@map("terminology_sets")
+}
+
+model TerminologyMapping {
+  id                String   @id @default(cuid())
+  terminologySetId  String
+  sourceCode        String
+  canonicalCode     String
+  displayName       String?
+  createdAt         DateTime @default(now())
+
+  terminologySet    TerminologySet @relation(fields: [terminologySetId], references: [id], onDelete: Cascade)
+
+  @@unique([terminologySetId, sourceCode])
+  @@map("terminology_mappings")
+}
+
+// Evidence Objects
+model EvidenceObject {
+  id                String   @id @default(cuid())
+  eoId              String   @unique
+  sourceRecordId    String
+  sourceDocumentId  String
+  sourceId          String   @unique
+  canonicalTitle    String
+  evidenceSynopsis  String
+  documentType      String
+  issuingBody       String
+  publicationDate   String
+  publicationYear   Int
+  sourceUrlReference String?
+  sourceHash        String
+  evidenceStatus    String   @default("Active")
+  canonicalClaims   Json     // Array of strings
+  domainTags        Json     // Array of strings
+  payload           Json
+  audit             Json
+  provenance        Json
+  integrity         Json
+  vrn               String
+  version           Int      @default(1)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  sourceDocument    SourceDocument @relation(fields: [sourceDocumentId], references: [id])
+
+  @@index([sourceId])
+  @@index([sourceRecordId])
+  @@map("evidence_objects")
+}
+
+// Evidence Lake Records - Indexed evidence objects for runtime queries
+model EvidenceLakeRecord {
+  id                String   @id @default(cuid())
+  elrId             String   @unique
+  vrn               String
+  version           Int      @default(1)
+  sourceObjectId    String
+  sourceRecordId    String
+  sourceId          String   @unique
+  canonicalTitle    String
+  evidenceSynopsis  String
+  lakeStatus        String   @default("indexed")
+  indexingKey       String
+  domainTags        Json     // Array of strings
+  canonicalClaims   Json     // Array of strings
+  evidenceHash      String
+  snapshotSummary   String
+  audit             Json
+  provenance        Json
+  integrity         Json
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@index([sourceId])
+  @@index([sourceObjectId])
+  @@index([sourceRecordId])
+  @@index([indexingKey])
+  @@map("evidence_lake_records")
+}
+
+model SourceDocument {
+  id          String   @id @default(cuid())
+  documentId  String   @unique
+  title       String
+  doi         String?
+  layer       String
+  category    String
+  group       String
+  status      String   @default("active")
+  createdAt   DateTime @default(now())
+
+  evidenceObjects EvidenceObject[]
+
+  @@map("source_documents")
+}
+
+// Source Evidence Record - Unified contract for ingested documents
+model SourceEvidenceRecord {
+  id                    String   @id @default(cuid())
+  serId                 String   @unique
+  vrn                   String
+  version               Int      @default(1)
+  sourceDocumentId      String
+  sourceId              String   @unique
+  canonicalTitle        String
+  shortTitle            String
+  documentType          String
+  issuingBody           String
+  publicationDate       String
+  publicationYear       Int
+  sourceUrlReference    String?
+  sourceHash            String
+  lifecycleStatus       String   @default("validated")
+  payload               Json
+  audit                 Json
+  provenance            Json
+  integrity             Json
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  @@index([sourceId])
+  @@index([sourceDocumentId])
+  @@map("source_evidence_records")
+}
+
+// Clinical Cases
+model ClinicalCase {
+  id            String   @id @default(cuid())
+  caseId        String   @unique
+  patientId     String
+  longitudinalIdentityId String?
+  status        String   @default("pending_activation")
+  pathwayId     String?
+  reason        String?
+  clinicalSummary String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  longitudinalIdentity LongitudinalIdentity? @relation(fields: [longitudinalIdentityId], references: [id], onDelete: SetNull)
+  transitions   CaseTransition[]
+  episodes      ClinicalEpisode[]
+  documents     IngestedDocument[]
+  certifications DataCertificationRecord[]
+  datasetStatus DatasetStatus?
+
+  @@map("clinical_cases")
+}
+
+model CaseTransition {
+  id          String   @id @default(cuid())
+  caseId      String
+  fromStatus  String
+  toStatus    String
+  reason      String?
+  userId      String?
+  createdAt   DateTime @default(now())
+
+  clinicalCase ClinicalCase @relation(fields: [caseId], references: [id], onDelete: Cascade)
+
+  @@map("case_transitions")
+}
+
+model ClinicalEpisode {
+  id          String   @id @default(cuid())
+  episodeId   String   @unique
+  caseId      String
+  longitudinalIdentityId String?
+  episodeType String
+  status      String   @default("open")
+  startedAt   DateTime @default(now())
+  endedAt     DateTime?
+  createdAt   DateTime @default(now())
+
+  longitudinalIdentity LongitudinalIdentity? @relation(fields: [longitudinalIdentityId], references: [id], onDelete: SetNull)
+  clinicalCase ClinicalCase      @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  documents    IngestedDocument[]
+
+  @@map("clinical_episodes")
+}
+
+model LongitudinalIdentity {
+  id          String   @id @default(cuid())
+  ilcId       String   @unique
+  firstName   String
+  lastName    String
+  birthDate   DateTime
+  sex         String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  episodes    ClinicalEpisode[]
+  cases       ClinicalCase[]
+
+  @@map("longitudinal_identity")
+}
+
+model AuthUser {
+  id           String   @id @default(cuid())
+  userId       String   @unique
+  email        String   @unique
+  passwordHash String
+  fullName     String
+  role         BaseRole
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("auth_users")
+}
+
+model AuditEvent {
+  id            String   @id @default(cuid())
+  auditEventId  String   @unique
+  eventType     String
+  actorId       String?
+  actorEmail    String?
+  targetCaseId  String?
+  correlationId String
+  hash          String   @unique
+  previousHash  String?
+  payload       Json
+  createdAt     DateTime @default(now())
+
+  @@index([targetCaseId, createdAt])
+  @@index([eventType, createdAt])
+  @@map("audit_events")
+}
+
+model IngestedDocument {
+  id                 String          @id @default(cuid())
+  documentId         String          @unique
+  caseId             String
+  episodeId          String?
+  ilcId              String?
+  documentType       DocumentType
+  sourceSystem       SourceSystemType
+  ingestionMethod    IngestionMethod
+  rawFormat          RawFormat
+  language           String?
+  sensitivityClass   SensitivityClass
+  ingestionTimestamp DateTime        @default(now())
+  rawHash            String
+  storageObjectId    String
+  ingestionStatus    IngestionStatus @default(RECEIVED)
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+
+  clinicalCase   ClinicalCase     @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  clinicalEpisode ClinicalEpisode? @relation(fields: [episodeId], references: [id], onDelete: SetNull)
+  parsedVariables ParsedVariable[]
+  provenanceRecords ProvenanceRecord[]
+
+  @@index([caseId, ingestionTimestamp])
+  @@index([episodeId])
+  @@map("ingested_documents")
+}
+
+model ParsedVariable {
+  id                 String           @id @default(cuid())
+  parsedVariableId   String           @unique
+  documentId         String
+  variableType       VariableType
+  variableName       String
+  rawText            String
+  normalizedValue    Json?
+  unit               String?
+  terminologyCode    String?
+  terminologySystem  String?
+  parsingConfidence  Float
+  extractionMethod   ExtractionMethod
+  manualOverrideFlag Boolean          @default(false)
+  timestampExtracted DateTime         @default(now())
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+
+  document        IngestedDocument          @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  provenance      ProvenanceRecord[]
+  certifications  DataCertificationRecord[]
+  mappings        Block2TerminologyMapping[]
+
+  @@index([documentId, variableType])
+  @@index([terminologyCode, terminologySystem])
+  @@map("parsed_variables")
+}
+
+model ProvenanceRecord {
+  id                    String            @id @default(cuid())
+  provenanceId          String            @unique
+  parsedVariableId      String
+  sourceDocumentId      String
+  sourceSystem          SourceSystemType
+  acquisitionMethod     String
+  operatorId            String?
+  institutionId         String?
+  timestampAcquired     DateTime?
+  timestampRecorded     DateTime?
+  methodDescription     String?
+  reliabilityLevel      ReliabilityLevel
+  calibrationReference  String?
+  transformationHistory Json?
+  createdAt             DateTime          @default(now())
+
+  parsedVariable ParsedVariable @relation(fields: [parsedVariableId], references: [id], onDelete: Cascade)
+  sourceDocument IngestedDocument @relation(fields: [sourceDocumentId], references: [id], onDelete: Cascade)
+
+  @@index([parsedVariableId, reliabilityLevel])
+  @@map("provenance_records")
+}
+
+model DataCertificationRecord {
+  id                  String                 @id @default(cuid())
+  certificationId     String                 @unique
+  caseId              String
+  parsedVariableId    String
+  completenessStatus  CompletenessStatus
+  semanticValidity    SemanticValidityStatus
+  sourceVerified      Boolean
+  reliabilityScore    Float
+  sensitivityClass    SensitivityClass
+  timestampCertified  DateTime               @default(now())
+  certifierId         String
+  certificationHash   String                 @unique
+  certificationVersion String
+  createdAt           DateTime               @default(now())
+
+  clinicalCase   ClinicalCase   @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  parsedVariable ParsedVariable @relation(fields: [parsedVariableId], references: [id], onDelete: Cascade)
+
+  @@index([caseId, timestampCertified])
+  @@index([parsedVariableId])
+  @@map("data_certification_records")
+}
+
+model DatasetStatus {
+  id                          String              @id @default(cuid())
+  caseId                      String              @unique
+  certificationStatus         CertificationStatus
+  blockingReasons             Json
+  missingVariables            Json
+  lastCertificationTimestamp  DateTime
+  readinessForEte             Boolean             @default(false)
+  dataCompletenessIndex       Float?
+  dataReliabilityTier         String?
+  createdAt                   DateTime            @default(now())
+  updatedAt                   DateTime            @updatedAt
+
+  clinicalCase ClinicalCase @relation(fields: [caseId], references: [id], onDelete: Cascade)
+
+  @@map("dataset_status")
+}
+
+model Block2TerminologyMapping {
+  id                       String   @id @default(cuid())
+  mappingId                String   @unique
+  parsedVariableId         String?
+  sourceValue              String
+  sourceSystem             String
+  normalizedCode           String
+  normalizedSystem         String
+  mappingConfidence        Float
+  mappingMethod            String
+  canonicalTerm            String
+  versionRegistryReference String
+  createdAt                DateTime @default(now())
+
+  parsedVariable ParsedVariable? @relation(fields: [parsedVariableId], references: [id], onDelete: SetNull)
+
+  @@index([normalizedSystem, normalizedCode])
+  @@index([sourceSystem, sourceValue])
+  @@map("block2_terminology_mappings")
+}

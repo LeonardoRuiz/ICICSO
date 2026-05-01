@@ -1,0 +1,173 @@
+{
+  "seedMetadata": {
+    "seedId": "seed.cardiovascular-rct.v1",
+    "title": "Cardiovascular Therapeutic RCT Example",
+    "structuralExample": true,
+    "note": "Structured example representing an RCT with plausible metadata and effect estimate placeholders."
+  },
+  "document": {
+    "documentId": "EDOC-RCT-DOAC-2022",
+    "title": "Randomized Trial of Extended Antithrombotic Therapy After Vascular Revascularization",
+    "evidenceType": "rct",
+    "clinicalDomain": "cardiovascular_medicine",
+    "publicationDate": "2022-06-18",
+    "publication": {
+      "publisher": "Major Cardiovascular Journal",
+      "journal": "Cardiovascular Medicine",
+      "citation": "Example et al. Randomized trial of extended antithrombotic therapy after vascular revascularization.",
+      "doi": "10.1000/example-rct-2022",
+      "sourceUri": "https://example.org/rct"
+    },
+    "evidenceHierarchy": "comparative-primary",
+    "effectDirection": "benefit",
+    "strength": "moderate",
+    "certainty": "moderate",
+    "recency": {
+      "publicationYear": 2022,
+      "lastReappraisedAt": "2025-03-01T00:00:00Z",
+      "currencyStatus": "current",
+      "decayClass": "moderate"
+    },
+    "applicability": {
+      "clinicalDomain": "cardiovascular_medicine",
+      "careSetting": "vascular_follow_up_clinic",
+      "jurisdictions": ["us", "global"],
+      "decisionReadiness": "synthesis-required",
+      "population": {
+        "summary": "Adults after lower-extremity or coronary vascular intervention with residual thrombotic risk.",
+        "ageBands": ["adult", "older_adult"],
+        "sexes": ["female", "male"],
+        "diagnoses": ["peripheral artery disease", "atherosclerotic cardiovascular disease"],
+        "procedures": ["vascular revascularization"],
+        "biomarkers": [],
+        "severity": "high_thrombotic_risk",
+        "comorbidities": ["diabetes mellitus"],
+        "inclusionCriteria": ["post-revascularization status"],
+        "exclusionCriteria": ["active bleeding"]
+      },
+      "dimensionAssessments": [
+        { "dimension": "population-fit", "score": 2, "rationale": "Good fit with treated vascular population." },
+        { "dimension": "intervention-fit", "score": 3, "rationale": "Drug regimen directly represented." },
+        { "dimension": "setting-fit", "score": 2, "rationale": "Follow-up clinic context is transferable." },
+        { "dimension": "jurisdiction-fit", "score": 2, "rationale": "Requires local formulary review." },
+        { "dimension": "resource-fit", "score": 3, "rationale": "Medication is available and logistically simple." }
+      ],
+      "implementationPreconditions": ["bleeding risk review", "antithrombotic stewardship"]
+    },
+    "provenance": {
+      "sourceSystem": "manual-ingest",
+      "capturedAt": "2026-04-04T11:00:00Z",
+      "capturedBy": "icicso.evidence.curator",
+      "chainOfCustody": [
+        { "step": "ingest", "actor": "icicso.evidence.curator", "timestamp": "2026-04-04T11:00:00Z", "hashSha256": "rct-doac-2022", "note": "Structured trial example." }
+      ],
+      "legal": {
+        "licenseStatus": "licensed",
+        "attestationStatus": "attested",
+        "reviewPolicy": "dual-clinical-review",
+        "retentionClass": "clinical_evidence_permanent"
+      },
+      "versioning": {
+        "canonicalId": "CANON-RCT-DOAC",
+        "version": "1.0.0",
+        "effectiveFrom": "2026-04-04",
+        "effectiveTo": null,
+        "supersedes": [],
+        "status": "active"
+      }
+    }
+  },
+  "ser": {
+    "serId": "SER-RCT-DOAC-0001",
+    "sourceDocumentId": "EDOC-RCT-DOAC-2022",
+    "title": "Extended antithrombotic therapy after vascular revascularization",
+    "evidenceType": "rct",
+    "clinicalDomain": "cardiovascular_medicine",
+    "summary": "Extended antithrombotic therapy reduced ischemic events at the cost of higher clinically relevant bleeding.",
+    "statements": [
+      {
+        "statementId": "SES-RCT-DOAC-01",
+        "clinicalFunction": "long-term-secondary-prevention",
+        "interventionClass": "drug",
+        "interventionLabel": "Extended low-dose antithrombotic regimen",
+        "comparatorLabel": "Standard antiplatelet therapy alone",
+        "effectDirection": "mixed",
+        "strength": "moderate",
+        "certainty": "moderate",
+        "uncertainties": ["operational-variability"],
+        "decisionReadiness": "synthesis-required",
+        "timeHorizon": "1-year",
+        "outcomes": [
+          { "outcomeCode": "mace", "effectDirection": "benefit", "note": "Lower ischemic events." },
+          { "outcomeCode": "bleeding", "effectDirection": "harm", "note": "Higher bleeding risk." }
+        ],
+        "conditions": ["post-revascularization status", "acceptable bleeding risk"],
+        "exclusions": ["active bleeding", "severe thrombocytopenia"],
+        "rationale": "Benefit-harm tradeoff requires individualized assessment rather than silent activation.",
+        "operationalContext": {
+          "implementationComplexity": "low",
+          "resourceDemand": "low",
+          "costRelevance": "moderate",
+          "operationalRelevance": "moderate",
+          "resourceRequirements": [
+            { "resourceType": "outpatient_follow_up", "role": "cardiology_team", "quantity": 1, "unit": "clinic_pathway", "mandatory": true, "costCenter": "AMB", "notes": null }
+          ],
+          "constraints": ["Requires bleeding risk reassessment during follow-up."]
+        }
+      }
+    ],
+    "applicability": {
+      "clinicalDomain": "cardiovascular_medicine",
+      "careSetting": "vascular_follow_up_clinic",
+      "jurisdictions": ["us", "global"],
+      "decisionReadiness": "synthesis-required",
+      "population": {
+        "summary": "Adults after vascular revascularization with residual thrombotic risk.",
+        "ageBands": ["adult", "older_adult"],
+        "sexes": ["female", "male"],
+        "diagnoses": ["atherosclerotic cardiovascular disease"],
+        "procedures": ["vascular revascularization"],
+        "biomarkers": [],
+        "severity": "high_thrombotic_risk",
+        "comorbidities": ["diabetes mellitus"],
+        "inclusionCriteria": ["post-revascularization"],
+        "exclusionCriteria": ["active bleeding"]
+      },
+      "dimensionAssessments": [
+        { "dimension": "population-fit", "score": 2, "rationale": "Good but not universal fit." },
+        { "dimension": "intervention-fit", "score": 3, "rationale": "Drug regimen is directly aligned." },
+        { "dimension": "setting-fit", "score": 2, "rationale": "Needs structured ambulatory follow-up." },
+        { "dimension": "jurisdiction-fit", "score": 2, "rationale": "Requires formulary and policy review." },
+        { "dimension": "resource-fit", "score": 3, "rationale": "Resource burden is low." }
+      ],
+      "implementationPreconditions": ["bleeding risk review"]
+    },
+    "provenance": {
+      "sourceSystem": "manual-ingest",
+      "capturedAt": "2026-04-04T11:00:00Z",
+      "capturedBy": "icicso.evidence.curator",
+      "chainOfCustody": [
+        { "step": "derive-ser", "actor": "icicso.evidence.curator", "timestamp": "2026-04-04T11:10:00Z", "hashSha256": "ser-rct-doac-01", "note": "Derived from structured RCT example." }
+      ],
+      "legal": {
+        "licenseStatus": "licensed",
+        "attestationStatus": "attested",
+        "reviewPolicy": "dual-clinical-review",
+        "retentionClass": "clinical_evidence_permanent"
+      },
+      "versioning": {
+        "canonicalId": "CANON-SER-RCT-DOAC",
+        "version": "1.0.0",
+        "effectiveFrom": "2026-04-04",
+        "effectiveTo": null,
+        "supersedes": [],
+        "status": "active"
+      }
+    }
+  },
+  "expectedMapperBehavior": {
+    "shouldGenerateEo": true,
+    "expectedDecisionVerb": "defer_to_review",
+    "expectedReviewState": "needs-human-review"
+  }
+}

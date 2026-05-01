@@ -1,0 +1,21 @@
+{
+  "catalogId": "icicso.effect-direction.v1",
+  "code": "effect-direction",
+  "label": "Effect Direction",
+  "description": "Canonical direction of estimated effect or recommendation impact.",
+  "usageNotes": [
+    "Use at statement level and outcome-link level.",
+    "`mixed` is allowed when benefits and harms differ materially across outcomes or subgroups."
+  ],
+  "entries": [
+    { "id": "eff.benefit", "code": "benefit", "label": "Benefit", "description": "Net expected effect is beneficial for the intended target.", "usageNotes": ["Default positive recommendation direction."] },
+    { "id": "eff.harm", "code": "harm", "label": "Harm", "description": "Net expected effect is harmful or risk-increasing.", "usageNotes": ["Should commonly map to avoid/de-escalate decisions."] },
+    { "id": "eff.no-benefit", "code": "no-benefit", "label": "No Benefit", "description": "No meaningful benefit demonstrated compared with comparator or standard care.", "usageNotes": ["Distinct from harm because it may be neutral rather than detrimental."] },
+    { "id": "eff.inconclusive", "code": "inconclusive", "label": "Inconclusive", "description": "Available evidence is insufficient to determine direction reliably.", "usageNotes": ["Should lower decision readiness significantly."] },
+    { "id": "eff.mixed", "code": "mixed", "label": "Mixed", "description": "Evidence shows heterogeneous direction across outcomes, populations or contexts.", "usageNotes": ["Use when simplification to a single polarity would be misleading."] }
+  ],
+  "constraints": {
+    "uniqueFields": ["id", "code", "label"],
+    "requiredFields": ["id", "code", "label", "description", "usageNotes"]
+  }
+}

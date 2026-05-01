@@ -1,0 +1,13 @@
+{
+  "artifact_kind": "evidence-source",
+  "data": {
+    "source_id": "ESRC-ACC-0001",
+    "source_type": "guideline-body",
+    "origin": "ACC/AHA/SCAI",
+    "publisher": "JACC",
+    "language": "en",
+    "access_model": "licensed",
+    "uri": "https://example.org/source",
+    "retrieved_at": "2026-04-04T10:00:00Z"
+  }
+}

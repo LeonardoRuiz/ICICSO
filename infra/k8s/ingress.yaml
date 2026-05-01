@@ -1,0 +1,44 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: icicso-frontend
+  namespace: icicso-local
+  labels:
+    app.kubernetes.io/part-of: icicso
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: icicso.localtest.me
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: icicso-frontend
+                port:
+                  number: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: icicso-api
+  namespace: icicso-local
+  labels:
+    app.kubernetes.io/part-of: icicso
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: icicso.localtest.me
+      http:
+        paths:
+          - path: /api(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: icicso-api
+                port:
+                  number: 3100

@@ -1,0 +1,58 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: icicso-engine
+  namespace: icicso-local
+  labels:
+    app.kubernetes.io/name: icicso-engine
+    app.kubernetes.io/part-of: icicso
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: icicso-engine
+  ports:
+    - name: auth
+      port: 3101
+      targetPort: auth
+    - name: identity
+      port: 3102
+      targetPort: identity
+    - name: audit
+      port: 3103
+      targetPort: audit
+    - name: evidence
+      port: 3104
+      targetPort: evidence
+    - name: ghl
+      port: 3105
+      targetPort: ghl
+    - name: kbol
+      port: 3106
+      targetPort: kbol
+    - name: storage
+      port: 3107
+      targetPort: storage
+    - name: terminology
+      port: 3109
+      targetPort: terminology
+    - name: governance
+      port: 3110
+      targetPort: governance
+    - name: runbook
+      port: 3111
+      targetPort: runbook
+    - name: readiness
+      port: 3112
+      targetPort: readiness
+    - name: casecontrol
+      port: 3113
+      targetPort: casecontrol
+    - name: systemic
+      port: 3114
+      targetPort: systemic
+    - name: cqoi
+      port: 3115
+      targetPort: cqoi
+    - name: semantic
+      port: 8000
+      targetPort: semantic

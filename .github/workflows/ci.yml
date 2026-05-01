@@ -1,0 +1,162 @@
+name: CI - Lint & Test
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - 'feature/**'
+  pull_request:
+    branches:
+      - main
+      - develop
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: '20'
+  PNPM_VERSION: '10'
+
+jobs:
+  # ============================================================================
+  # LINT: TypeScript & JavaScript
+  # ============================================================================
+  
+  lint:
+    name: Lint Code
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install pnpm
+        run: npm install -g pnpm@${{ env.PNPM_VERSION }}
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run ESLint
+        run: pnpm lint:repo
+        continue-on-error: false
+
+  # ============================================================================
+  # TYPECHECK: TypeScript Compilation
+  # ============================================================================
+
+  typecheck:
+    name: TypeScript Typecheck
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install pnpm
+        run: npm install -g pnpm@${{ env.PNPM_VERSION }}
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run TypeScript typecheck
+        run: pnpm typecheck:repo
+
+  # ============================================================================
+  # TEST: Unit & Integration Tests
+  # ============================================================================
+
+  test:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install pnpm
+        run: npm install -g pnpm@${{ env.PNPM_VERSION }}
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run tests
+        run: pnpm test:repo
+
+  # ============================================================================
+  # TEST PYTHON: Semantic Terminology Engine
+  # ============================================================================
+
+  test-python:
+    name: Python Engine Tests
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: icicso-local/engines/13_semantic_terminology_engine
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -e .
+
+      - name: Run pytest
+        run: pytest tests -v --tb=short
+
+      - name: Upload coverage
+        uses: codecov/codecov-action@v3
+        if: always()
+        with:
+          files: ./coverage.xml
+          flags: python
+          fail_ci_if_error: false
+
+  # ============================================================================
+  # SUMMARY
+  # ============================================================================
+
+  ci-summary:
+    name: CI Summary
+    runs-on: ubuntu-latest
+    needs: [lint, typecheck, test, test-python]
+    if: always()
+    
+    steps:
+      - name: Check CI Status
+        run: |
+          if [[ "${{ needs.lint.result }}" == "failure" || 
+                "${{ needs.typecheck.result }}" == "failure" || 
+                "${{ needs.test.result }}" == "failure" ]]; then
+            echo "❌ CI Failed"
+            exit 1
+          fi
+          echo "✅ CI Passed"

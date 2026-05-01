@@ -1,0 +1,27 @@
+{
+  "catalogId": "icicso.uncertainty-sources.v1",
+  "code": "uncertainty-sources",
+  "label": "Uncertainty Sources",
+  "description": "Normalized sources of uncertainty affecting confidence, applicability or execution readiness.",
+  "usageNotes": [
+    "Use alongside certainty levels; uncertainty sources explain why confidence is not maximal.",
+    "One statement can carry multiple uncertainty source codes."
+  ],
+  "entries": [
+    { "id": "unc.selection-bias", "code": "selection-bias", "label": "Selection Bias", "description": "Bias arising from systematic differences in who entered comparison groups.", "usageNotes": ["Common in observational or non-randomized evidence."], "axis": "methodologic" },
+    { "id": "unc.confounding", "code": "confounding", "label": "Confounding", "description": "Distortion due to unmeasured or residual confounders.", "usageNotes": ["Use for comparative observational evidence limitations."], "axis": "methodologic" },
+    { "id": "unc.statistical-imprecision", "code": "statistical-imprecision", "label": "Statistical Imprecision", "description": "Wide confidence intervals or insufficient event counts.", "usageNotes": ["Use when effect estimates lack precision."], "axis": "statistical" },
+    { "id": "unc.inconsistency", "code": "inconsistency", "label": "Inconsistency", "description": "Meaningful inconsistency across studies or subgroups.", "usageNotes": ["Typical in systematic reviews and meta-analyses."], "axis": "synthesis" },
+    { "id": "unc.indirectness", "code": "indirectness", "label": "Indirectness", "description": "Mismatch between evidence and target population, intervention, comparator or outcome.", "usageNotes": ["Should influence applicability and conflict resolution."], "axis": "applicability" },
+    { "id": "unc.publication-bias", "code": "publication-bias", "label": "Publication Bias", "description": "Risk that published evidence is systematically unrepresentative.", "usageNotes": ["Common in synthesis and early translational evidence."], "axis": "synthesis" },
+    { "id": "unc.heterogeneity", "code": "heterogeneity", "label": "Heterogeneity", "description": "Clinical or statistical heterogeneity that limits portability of pooled findings.", "usageNotes": ["Different from inconsistency when variability is expected but operationally important."], "axis": "synthesis" },
+    { "id": "unc.operational-variability", "code": "operational-variability", "label": "Operational Variability", "description": "Variation in implementation capability across sites or teams.", "usageNotes": ["Use when execution quality materially affects expected effect."], "axis": "implementation" },
+    { "id": "unc.jurisdiction-mismatch", "code": "jurisdiction-mismatch", "label": "Jurisdiction Mismatch", "description": "Source recommendations were developed for a different legal or regulatory context.", "usageNotes": ["Should lower readiness before local review."], "axis": "jurisdiction" },
+    { "id": "unc.evidence-decay", "code": "evidence-decay", "label": "Evidence Decay", "description": "Aging evidence with increased probability of being outdated.", "usageNotes": ["Use when half-life or reappraisal thresholds are exceeded."], "axis": "temporal" },
+    { "id": "unc.unknown", "code": "unknown", "label": "Unknown", "description": "Uncertainty source not yet classified explicitly.", "usageNotes": ["Temporary fallback only; should be resolved during curation."], "axis": "other" }
+  ],
+  "constraints": {
+    "uniqueFields": ["id", "code", "label"],
+    "requiredFields": ["id", "code", "label", "description", "usageNotes", "axis"]
+  }
+}

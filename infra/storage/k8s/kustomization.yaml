@@ -1,0 +1,8 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: icicso-local
+resources:
+  - pvc-postgres.yaml
+  - pvc-redis.yaml
+  - pvc-documents.yaml
+  - pvc-observability.yaml

@@ -1,0 +1,2368 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Post ingesta | PIIS0003497521019743.pdf</title>
+<style>
+:root { --bg:#071015; --panel:#0d171d; --ink:#edf7f4; --muted:#a9c0bc; --line:#21343d; --accent:#68d6b0; }
+* { box-sizing:border-box }
+body { margin:0; font-family:Segoe UI,Arial,sans-serif; background:linear-gradient(180deg,#081116,#061017); color:var(--ink) }
+main { width:min(1600px,calc(100vw - clamp(12px,4vw,40px))); margin:clamp(12px,3vw,24px) auto clamp(24px,4vw,48px); display:grid; gap:clamp(12px,2vw,18px) }
+section,.card { background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:clamp(14px,2.2vw,18px) }
+h1,h2,h3 { margin:0 0 8px }
+h1 { font-size:clamp(1.55rem, 2.4vw, 2.2rem) }
+h2 { font-size:clamp(1.15rem, 1.8vw, 1.5rem) }
+h3 { font-size:clamp(1rem, 1.5vw, 1.15rem) }
+p,li { line-height:1.5 }
+.grid { display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr)) }
+.filters { display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(min(180px,100%),1fr)); margin-top:14px }
+.filter-box { display:grid; gap:6px }
+.filter-box label { color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.08em }
+.filter-box input,.filter-box select { width:100%; background:#0a1318; color:var(--ink); border:1px solid var(--line); border-radius:10px; padding:10px 12px }
+.stats { display:flex; gap:10px; flex-wrap:wrap; margin-top:12px }
+.stat { background:#0a1318; border:1px solid var(--line); border-radius:999px; padding:8px 12px; color:var(--muted); font-size:13px }
+.toolbar { display:flex; gap:10px; flex-wrap:wrap; margin-top:12px }
+.btn { background:#0a1318; color:var(--ink); border:1px solid var(--line); border-radius:10px; padding:10px 12px; cursor:pointer }
+.btn:hover { border-color:var(--accent) }
+.btn.active { border-color:var(--accent); background:#102821 }
+.modebar,.preset-row { display:flex; gap:10px; flex-wrap:wrap; margin-top:14px }
+[data-mode-panel] { display:none }
+body[data-view-mode="clinical"] [data-mode-panel~="clinical"],
+body[data-view-mode="audit"] [data-mode-panel~="audit"],
+body[data-view-mode="data"] [data-mode-panel~="data"] { display:block }
+.mobile-nav { display:none; gap:8px; overflow:auto; padding-bottom:4px }
+.mobile-nav a { white-space:nowrap; text-decoration:none }
+.chart-grid { display:grid; gap:12px; grid-template-columns:repeat(3,minmax(0,1fr)); margin-top:14px }
+.chart-card { background:#0a1318; border:1px solid var(--line); border-radius:12px; padding:14px }
+.chart-row { display:grid; grid-template-columns:minmax(92px,.9fr) minmax(120px,1.4fr) 48px; gap:10px; align-items:center; margin-top:8px; font-size:13px }
+.chart-track { height:8px; border-radius:999px; overflow:hidden; background:#13252d }
+.chart-track i { display:block; height:100%; border-radius:inherit; background:var(--accent) }
+.workbench-grid { display:grid; grid-template-columns:minmax(0,1.55fr) minmax(320px,.85fr); gap:14px; align-items:start }
+.workbench-detail { position:sticky; top:12px }
+.table-wrap { overflow:visible; border:1px solid var(--line); border-radius:14px; background:#091219; max-width:100% }
+table { width:100%; border-collapse:collapse; min-width:0 }
+table.desktop-table { min-width:0 }
+th,td { padding:12px 10px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line); font-size:clamp(12px,1.3vw,14px); line-height:1.45; overflow-wrap:anywhere; word-break:break-word }
+th { position:sticky; top:0; background:#0b151b; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; font-size:12px }
+th.sortable { cursor:pointer }
+th.sortable:hover { color:var(--ink) }
+tbody tr:nth-child(even) { background:#0a1318 }
+tbody tr.active-row { outline:2px solid var(--accent); outline-offset:-2px; background:#102127 }
+.kv { background:#0a1318; border:1px solid var(--line); border-radius:12px; padding:12px }
+.label { color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px }
+.value { word-break:break-word }
+.pill { display:inline-flex; margin:2px 6px 2px 0; padding:6px 10px; border-radius:999px; border:1px solid var(--line); background:#0a1318; color:var(--ink); font-size:12px }
+.row { display:flex; gap:12px; align-items:center; flex-wrap:wrap }
+.spread { justify-content:space-between }
+.muted { color:var(--muted); font-size:14px }
+.detail-box { background:#0a1318; border:1px solid var(--line); border-radius:12px; padding:14px }
+.detail-box h3 { margin-bottom:10px }
+.section-body[hidden] { display:none }
+table.responsive-stack thead { display:none }
+table.responsive-stack tbody { display:grid; gap:10px; padding:10px }
+table.responsive-stack tbody tr {
+  display:grid;
+  grid-template-columns:1fr;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#0a1318;
+  overflow:hidden;
+}
+table.responsive-stack tbody tr:nth-child(even) { background:#0a1318 }
+table.responsive-stack td {
+  display:grid;
+  grid-template-columns:minmax(120px, 28%) 1fr;
+  gap:10px;
+  align-items:start;
+  padding:10px 12px;
+  border-bottom:1px solid var(--line);
+}
+table.responsive-stack td:last-child { border-bottom:none }
+table.responsive-stack td::before {
+  content:attr(data-label);
+  color:var(--muted);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+@media (min-width: 1700px) {
+  main { width:min(1880px, calc(100vw - 56px)) }
+}
+@media (max-width: 1440px) and (min-width: 961px) {
+  main { width:min(100vw - 24px, 100%) }
+  .workbench-grid { grid-template-columns:1fr }
+  .workbench-detail { position:static }
+  th,td { padding:10px 8px; font-size:13px }
+}
+@media (max-width: 1700px) {
+  .row.spread { align-items:flex-start }
+  .toolbar, .stats, .row { gap:8px }
+  .pill { max-width:100%; word-break:break-word }
+  .table-wrap { border-radius:12px }
+}
+@media (max-width: 760px) {
+  main { width:min(100vw - 12px, 100%); margin:10px auto 24px }
+  section,.card { border-radius:14px }
+  .filters { grid-template-columns:1fr }
+  .chart-grid,.workbench-grid { grid-template-columns:1fr }
+  .workbench-detail { position:static }
+  .btn { width:100% }
+  .detail-box, .kv { padding:12px }
+  .mobile-nav { display:flex }
+  table.responsive-stack td {
+    grid-template-columns:1fr;
+    gap:6px;
+  }
+  table.responsive-stack td::before { margin-bottom:2px }
+}
+</style>
+</head>
+<body data-view-mode="clinical">
+<main>
+<section>
+<h1>Post ingesta del PDF</h1>
+<p>Extraccion estructurada de guideline recommendations, modelo ejecutable, constraints clinicos, entidades y EO candidates derivadas, generada desde el repo ICICSO.</p>
+<div class="modebar" aria-label="Modo de export">
+<button class="btn active" type="button" data-view-mode-button="clinical">Vista clinica</button>
+<button class="btn" type="button" data-view-mode-button="audit">Auditoria</button>
+<button class="btn" type="button" data-view-mode-button="data">Datos</button>
+</div>
+<div class="mobile-nav">
+<a class="btn" href="#summary-section">Resumen</a>
+<a class="btn" href="#priority-section">Prioridad</a>
+<a class="btn" href="#clinical-workbench">Workbench</a>
+<a class="btn" href="#candidates-section">EOs</a>
+<a class="btn" href="#reconciliation-section">Cruce</a>
+</div>
+<div class="row">
+<span class="pill">document_id: UPL-5C13D321B363</span>
+<span class="pill">guideline_recommendations: 25</span>
+<span class="pill">eo_candidates: 25</span>
+<span class="pill">document_group: STS-AATS</span>
+<span class="pill">specialty: Cirugia Cardiovascular</span>
+<span class="pill">vrn: VRN-ICICSO-L0-L1-ING-EXTERNAL-GUIDELINE-20260427-5C13D321-V001</span>
+<span class="pill">institutional_version: V001</span>
+</div>
+</section>
+<section id="summary-section" data-mode-panel="clinical audit data">
+<h2>Resumen</h2>
+<div class="grid">
+<div class="kv"><div class="label">Documento</div><div class="value">PIIS0003497521019743.pdf</div></div>
+<div class="kv"><div class="label">VRN</div><div class="value">VRN-ICICSO-L0-L1-ING-EXTERNAL-GUIDELINE-20260427-5C13D321-V001</div></div>
+<div class="kv"><div class="label">Tipo</div><div class="value">guideline</div></div>
+<div class="kv"><div class="label">Grupo</div><div class="value">STS-AATS</div></div>
+<div class="kv"><div class="label">Especialidad</div><div class="value">Cirugia Cardiovascular</div></div>
+<div class="kv"><div class="label">Subespecialidad</div><div class="value">Aorta</div></div>
+<div class="kv"><div class="label">Version</div><div class="value">V001</div></div>
+<div class="kv"><div class="label">Lineage</div><div class="value">STS-AATS-TYPE-B-AORTIC-DISSECTION-2022</div></div>
+<div class="kv"><div class="label">Path</div><div class="value">services/ingestion-orquestador/data/uploaded_documents/2026/04/27/UPL-5C13D321B363_PIIS0003497521019743.pdf</div></div>
+</div>
+</section>
+<section id="priority-section" data-mode-panel="clinical audit data">
+<div class="row spread"><h2>Prioridad Institucional</h2><button class="btn section-toggle" data-target="priority-body">Colapsar</button></div>
+<div class="section-body" id="priority-body">
+<p class="muted">Resumen compacto para orientar revision clinica sin duplicar tablas ni tarjetas extensas.</p>
+<div class="stats">
+<span class="stat">Recomendaciones: 25</span>
+<span class="stat">EO candidates: 25</span>
+<span class="stat">Temas clinicos: 1</span>
+</div>
+<div class="chart-grid">
+<div class="chart-card"><h3>Recomendaciones por peso</h3><div class="chart-row"><span>critical</span><div class="chart-track"><i style="width:100%"></i></div><strong>25</strong></div></div>
+<div class="chart-card"><h3>EO candidates por tipo</h3><div class="chart-row"><span>recommendation</span><div class="chart-track"><i style="width:100%"></i></div><strong>25</strong></div></div>
+<div class="chart-card"><h3>Temas clinicos dominantes</h3><div class="chart-row"><span>General Coronary Revascularization</span><div class="chart-track"><i style="width:100%"></i></div><strong>25</strong></div></div>
+</div>
+</div>
+</section>
+<section id="reconciliation-section" data-mode-panel="audit data">
+<div class="row spread"><h2>Reconciliacion Entre Documentos</h2><button class="btn section-toggle" data-target="reconciliation-body">Colapsar</button></div>
+<div class="section-body" id="reconciliation-body">
+<p class="muted">Comparativo del documento actual contra el corpus institucional por <code>clinical_topic</code>, para detectar densidad, peso promedio y tipos de EO por tema.</p>
+<div class="table-wrap">
+<table id="reconciliation-table" class="desktop-table responsive-stack">
+<thead>
+<tr>
+<th class="sortable">Tema Clinico</th>
+<th class="sortable">Document ID</th>
+<th class="sortable">Archivo</th>
+<th class="sortable">Grupo</th>
+<th class="sortable">Tipo</th>
+<th class="sortable">Especialidad</th>
+<th class="sortable">VRN</th>
+<th class="sortable">Recomendaciones</th>
+<th class="sortable">Peso Promedio</th>
+<th class="sortable">Confianza Promedio</th>
+<th class="sortable">Tipos de EO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>General Coronary Revascularization</td>
+<td>UPL-56EB1B5BABAC</td>
+<td>ezad426.pdf</td>
+<td>EACTS-STS</td>
+<td>guideline</td>
+<td>Cirugia Cardiovascular</td>
+<td>VRN-ICICSO-L0-L1-ING-EXTERNAL-GUIDELINE-20260427-56EB1B5B-V001</td>
+<td>430</td>
+<td>1.00</td>
+<td>0.55</td>
+<td>recommendation:422; care_pathway:8</td>
+</tr><tr>
+<td>General Coronary Revascularization</td>
+<td>UPL-DE7B49F38002</td>
+<td>PIIS0003497521005567.pdf</td>
+<td>STS-SCA-AmSECT-SABM</td>
+<td>guideline</td>
+<td>Anestesiologia</td>
+<td>VRN-ICICSO-L0-L1-ING-EXTERNAL-GUIDELINE-20260427-DE7B49F3-V001</td>
+<td>78</td>
+<td>0.97</td>
+<td>0.63</td>
+<td>recommendation:75; care_pathway:2; timing_rule:1</td>
+</tr><tr>
+<td>General Coronary Revascularization</td>
+<td>UPL-CE02A6AB5E49</td>
+<td>lawton-et-al-2021-2021-acc-aha-scai-guideline-for-coronary-artery-revascularization-a-report-of-the-american-college-of.pdf</td>
+<td>ACC-AHA-SCAI</td>
+<td>guideline</td>
+<td>Cirugia Cardiovascular</td>
+<td>VRN-ICICSO-L0-ING-ING-USER-UPLOAD-20260412-CE02A6AB-V001</td>
+<td>41</td>
+<td>1.00</td>
+<td>0.61</td>
+<td>recommendation:41</td>
+</tr><tr>
+<td>General Coronary Revascularization</td>
+<td>UPL-A05533AE4192</td>
+<td>PIIS0003497515016082.pdf</td>
+<td>STS</td>
+<td>guideline</td>
+<td>Cirugia Cardiovascular</td>
+<td>VRN-ICICSO-L0-L1-ING-EXTERNAL-GUIDELINE-20260427-A05533AE-V001</td>
+<td>33</td>
+<td>1.00</td>
+<td>0.63</td>
+<td>recommendation:33</td>
+</tr><tr>
+<td>General Coronary Revascularization</td>
+<td>UPL-5C13D321B363</td>
+<td>PIIS0003497521019743.pdf</td>
+<td>STS-AATS</td>
+<td>guideline</td>
+<td>Cirugia Cardiovascular</td>
+<td>VRN-ICICSO-L0-L1-ING-EXTERNAL-GUIDELINE-20260427-5C13D321-V001</td>
+<td>25</td>
+<td>1.00</td>
+<td>0.56</td>
+<td>recommendation:25</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="conflicts-section" data-mode-panel="audit data">
+<div class="row spread"><h2>Conflictos y Precedencia</h2><button class="btn section-toggle" data-target="conflicts-body">Colapsar</button></div>
+<div class="section-body" id="conflicts-body">
+<p class="muted">Deteccion simple de conflicto documental por <code>clinical_topic</code>. La precedencia se estima con tipo documental, peso y confianza promedio.</p>
+<div class="table-wrap">
+<table id="conflicts-table" class="desktop-table responsive-stack">
+<thead>
+<tr>
+<th class="sortable">Tema Clinico</th>
+<th class="sortable">Nivel</th>
+<th class="sortable">Documento Preferido</th>
+<th class="sortable">Archivo Preferido</th>
+<th class="sortable">Postura Preferida</th>
+<th class="sortable">Score Preferido</th>
+<th class="sortable">Documento Retador</th>
+<th class="sortable">Archivo Retador</th>
+<th class="sortable">Postura Retadora</th>
+<th class="sortable">Score Retador</th>
+<th class="sortable">Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr><td colspan="11" class="muted">Sin conflictos detectados para los temas clinicos del documento.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="clinical-workbench" data-mode-panel="clinical data">
+<div class="row spread"><h2>Workbench clinico</h2><button class="btn section-toggle" data-target="workbench-body">Colapsar</button></div>
+<div class="section-body" id="workbench-body">
+<p class="muted">Vista principal unica: filtra recomendaciones, abre presets clinicos y revisa el detalle seleccionado en el panel lateral.</p>
+<div class="workbench-grid">
+<aside class="workbench-detail">
+<div class="detail-box">
+<h3 id="detail-title">Sin seleccion</h3>
+<p id="detail-summary" class="muted">Selecciona una recomendacion o candidate para ver su desglose completo.</p>
+<div class="grid">
+<div class="kv"><div class="label">Clave del Statement</div><div class="value" id="detail-key">-</div></div>
+<div class="kv"><div class="label">Tipo</div><div class="value" id="detail-kind">-</div></div>
+<div class="kv"><div class="label">COR / LOE</div><div class="value" id="detail-cor-loe">-</div></div>
+<div class="kv"><div class="label">Peso / Confianza</div><div class="value" id="detail-weight-confidence">-</div></div>
+<div class="kv"><div class="label">Poblacion / Enfermedad</div><div class="value" id="detail-population-disease">-</div></div>
+<div class="kv"><div class="label">Tema Clinico</div><div class="value" id="detail-topic">-</div></div>
+<div class="kv"><div class="label">Estado / Tiempo / Ancla</div><div class="value" id="detail-state-time">-</div></div>
+<div class="kv"><div class="label">Intervencion / Desenlace</div><div class="value" id="detail-intervention-outcome">-</div></div>
+<div class="kv"><div class="label">Localizador Fuente</div><div class="value" id="detail-locator">-</div></div>
+</div>
+</div>
+<div class="detail-box">
+<h3>Modelo y Estado</h3>
+<div class="grid">
+<div class="kv"><div class="label">Activador</div><div class="value" id="detail-trigger">-</div></div>
+<div class="kv"><div class="label">Modelo de Activacion</div><div class="value" id="detail-trigger-model">-</div></div>
+<div class="kv"><div class="label">Restricciones de Activacion</div><div class="value" id="detail-trigger-constraints">-</div></div>
+<div class="kv"><div class="label">Action</div><div class="value" id="detail-action">-</div></div>
+<div class="kv"><div class="label">Prerequisites</div><div class="value" id="detail-prerequisites">-</div></div>
+<div class="kv"><div class="label">Contraindications</div><div class="value" id="detail-contraindications">-</div></div>
+<div class="kv"><div class="label">Conditions / Exclusions</div><div class="value" id="detail-conditions-exclusions">-</div></div>
+<div class="kv"><div class="label">Entities</div><div class="value" id="detail-entities">-</div></div>
+<div class="kv"><div class="label">EO Candidate State</div><div class="value" id="detail-candidate-state">-</div></div>
+<div class="kv"><div class="label">Rationale</div><div class="value" id="detail-rationale">-</div></div>
+</div>
+</div>
+</aside>
+<div class="workbench-main">
+<div class="row spread"><h3>Recomendaciones filtrables</h3><button class="btn section-toggle" data-target="recommendations-body">Colapsar</button></div>
+<div class="section-body" id="recommendations-body">
+<p class="muted">Vista maestra de recomendaciones con contexto clinico, semantica ejecutable, peso, confianza y trazabilidad.</p>
+<div class="filters" id="recommendation-filters">
+<div class="filter-box"><label for="rec-search">Busqueda</label><input id="rec-search" type="text" placeholder="statement, enfermedad, activador, localizador" /></div>
+<div class="filter-box"><label for="rec-cor">COR</label><select id="rec-cor"><option value="">Todos</option><option>I</option><option>IIa</option><option>IIb</option><option>III</option></select></div>
+<div class="filter-box"><label for="rec-loe">LOE</label><select id="rec-loe"><option value="">Todos</option><option>A</option><option>B-R</option><option>B-NR</option><option>C-LD</option><option>C-EO</option></select></div>
+<div class="filter-box"><label for="rec-weight">Peso</label><select id="rec-weight"><option value="">Todos</option><option>critical</option><option>high</option><option>moderate</option><option>emerging</option></select></div>
+<div class="filter-box"><label for="rec-confidence">Confianza minima</label><select id="rec-confidence"><option value="">Todas</option><option value="0.90">0.90</option><option value="0.80">0.80</option><option value="0.70">0.70</option><option value="0.60">0.60</option></select></div>
+<div class="filter-box"><label for="rec-disease">Enfermedad</label><input id="rec-disease" type="text" placeholder="STEMI, SIHD, CAD..." /></div>
+<div class="filter-box"><label for="rec-topic">Tema Clinico</label><input id="rec-topic" type="text" placeholder="Left Main, STEMI, Heart Team..." /></div>
+</div>
+<div class="preset-row" aria-label="Presets de filtros">
+<button class="btn" type="button" data-filter-preset="clear">Todo</button>
+<button class="btn" type="button" data-filter-preset="critical">Critico confiable</button>
+<button class="btn" type="button" data-filter-preset="stemi">STEMI / shock</button>
+<button class="btn" type="button" data-filter-preset="cabg">CABG</button>
+<button class="btn" type="button" data-filter-preset="timing">Timing rules</button>
+<button class="btn" type="button" data-filter-preset="audit">Pendiente auditoria</button>
+</div>
+<div class="stats"><span class="stat" id="rec-visible-count">0 visibles</span><span class="stat" id="rec-total-count">25 totales</span></div>
+<div class="toolbar"><button class="btn" id="export-rec-visible">Exportar recomendaciones visibles CSV</button></div>
+<div class="table-wrap">
+<table id="recommendations-table" class="desktop-table responsive-stack">
+<thead>
+<tr>
+<th class="sortable">Statement</th>
+<th class="sortable">Tema Clinico</th>
+<th class="sortable">COR / LOE</th>
+<th class="sortable">Contexto Clinico</th>
+<th class="sortable">Intervencion / Desenlace</th>
+<th class="sortable">Tiempo / Umbral</th>
+<th class="sortable">Peso</th>
+<th class="sortable">Confianza</th>
+<th class="sortable">Recomendacion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.58"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S001 In the sentence “Dong and colleagues92 reported outcomes of 443 patients with acute TBAD treated with TEVAR, and retrograde TAAD developed in 11 patients,” reference number 92 should be changed to reference number p.22 numbered temporal_qualifier:acute"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S001"
+data-title="PIIS0003497521019743"
+data-recommendation="In the sentence “Dong and colleagues92 reported outcomes of 443 patients with acute TBAD treated with TEVAR, and retrograde TAAD developed in 11 patients,” reference number 92 should be changed to reference number"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites="acute"
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="temporal_qualifier:acute"
+data-locator="p.22 numbered"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator; temporal-qualifiers">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S001</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.58</td>
+<td>In the sentence “Dong and colleagues92 reported outcomes of 443 patients with acute TBAD treated with TEVAR, and retrograde TAAD developed in 11 patients,” reference number 92 should be changed to reference number</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.58"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S002 Thoracic endovascular aortic repair (TEVAR) is indicated for complicated hyperacute, acute, or subacute TBADs and favorable anatomy for TEVAR p.1 narrative temporal_qualifier:acute"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S002"
+data-title="PIIS0003497521019743"
+data-recommendation="Thoracic endovascular aortic repair (TEVAR) is indicated for complicated hyperacute, acute, or subacute TBADs and favorable anatomy for TEVAR"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action="is indicated"
+data-execution-prerequisites="acute"
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="temporal_qualifier:acute"
+data-locator="p.1 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator; temporal-qualifiers">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S002</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.58</td>
+<td>Thoracic endovascular aortic repair (TEVAR) is indicated for complicated hyperacute, acute, or subacute TBADs and favorable anatomy for TEVAR</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S003 Open surgical repair is reasonable over TEVAR as a more durable treatment in patients with connective tissue disorders who have TBAD with progression of disease despite OMT p.1 narrative comparator:TEVAR as a more durable treatment in patients with connective tissue disorders who have TBAD with progression of disease despite OMT"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S003"
+data-title="PIIS0003497521019743"
+data-recommendation="Open surgical repair is reasonable over TEVAR as a more durable treatment in patients with connective tissue disorders who have TBAD with progression of disease despite OMT"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action="is reasonable"
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="comparator:TEVAR as a more durable treatment in patients with connective tissue disorders who have TBAD with progression of disease despite OMT"
+data-locator="p.1 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S003</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>Open surgical repair is reasonable over TEVAR as a more durable treatment in patients with connective tissue disorders who have TBAD with progression of disease despite OMT</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.58"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S004 Additional strong recommendations include that open surgical repair should be considered for patients with chronic TBAD with indications for intervention unless comorbidities are prohibitive p.2 narrative temporal_qualifier:chronic"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S004"
+data-title="PIIS0003497521019743"
+data-recommendation="Additional strong recommendations include that open surgical repair should be considered for patients with chronic TBAD with indications for intervention unless comorbidities are prohibitive"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites="chronic"
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="temporal_qualifier:chronic"
+data-locator="p.2 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator; temporal-qualifiers">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S004</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.58</td>
+<td>Additional strong recommendations include that open surgical repair should be considered for patients with chronic TBAD with indications for intervention unless comorbidities are prohibitive</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.58"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S005 TEVAR is reasonable for patients with chronic TBAD with indications for intervention with suitable anatomy but who are at high risk for complications of open repair due to comorbidities p.2 narrative temporal_qualifier:chronic"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S005"
+data-title="PIIS0003497521019743"
+data-recommendation="TEVAR is reasonable for patients with chronic TBAD with indications for intervention with suitable anatomy but who are at high risk for complications of open repair due to comorbidities"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action="is reasonable"
+data-execution-prerequisites="chronic"
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="temporal_qualifier:chronic"
+data-locator="p.2 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator; temporal-qualifiers">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S005</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.58</td>
+<td>TEVAR is reasonable for patients with chronic TBAD with indications for intervention with suitable anatomy but who are at high risk for complications of open repair due to comorbidities</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.58"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S006 ACUTE COMPLICATED TBAD • TEVAR is indicated for complicated hyperacute, acute, or subacute TBADs with rupture and/or malperfusion and favorable anatomy for TEVAR p.5 narrative temporal_qualifier:ACUTE"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S006"
+data-title="PIIS0003497521019743"
+data-recommendation="ACUTE COMPLICATED TBAD • TEVAR is indicated for complicated hyperacute, acute, or subacute TBADs with rupture and/or malperfusion and favorable anatomy for TEVAR"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action="is indicated"
+data-execution-prerequisites="ACUTE; acute"
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="temporal_qualifier:ACUTE"
+data-locator="p.5 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator; temporal-qualifiers">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S006</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.58</td>
+<td>ACUTE COMPLICATED TBAD • TEVAR is indicated for complicated hyperacute, acute, or subacute TBADs with rupture and/or malperfusion and favorable anatomy for TEVAR</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.58"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S007 ( IIA, B-NR) • Fenestration may be considered for complicated hyperacute, acute, or subacute TBADs p.5 narrative temporal_qualifier:acute"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S007"
+data-title="PIIS0003497521019743"
+data-recommendation="( IIA, B-NR) • Fenestration may be considered for complicated hyperacute, acute, or subacute TBADs"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action="may be considered"
+data-execution-prerequisites="acute"
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="temporal_qualifier:acute"
+data-locator="p.5 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator; temporal-qualifiers">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S007</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.58</td>
+<td>( IIA, B-NR) • Fenestration may be considered for complicated hyperacute, acute, or subacute TBADs</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.58"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S008 UNCOMPLICATED TBAD • A stepwise approach to the evaluation and treatment of acute/subacute uncomplicated TBAD should be applied that includes identification of the primary entry tear site location, defining the proximity and distance of the dissection to the LSA, calibration of the maximum orthogonal aortic diameter, and confirmation of the lack of any organ malperfusion or other indications of complicated disease p.7 narrative temporal_qualifier:acute"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S008"
+data-title="PIIS0003497521019743"
+data-recommendation="UNCOMPLICATED TBAD • A stepwise approach to the evaluation and treatment of acute/subacute uncomplicated TBAD should be applied that includes identification of the primary entry tear site location, defining the proximity and distance of the dissection to the LSA, calibration of the maximum orthogonal aortic diameter, and confirmation of the lack of any organ malperfusion or other indications of complicated disease"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites="acute"
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="temporal_qualifier:acute"
+data-locator="p.7 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator; temporal-qualifiers">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S008</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.58</td>
+<td>UNCOMPLICATED TBAD • A stepwise approach to the evaluation and treatment of acute/subacute uncomplicated TBAD should be applied that includes identification of the primary entry tear site location, defining the proximity and distance of the dissection to the LSA, calibration of the maximum orthogonal aortic diameter, and confirmation of the lack of any organ malperfusion or other indications of complicated disease</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S009 • Prophylactic TEVAR may be considered in patients with uncomplicated TBAD to reduce late aorticrelated adverse events and aortic-related death p.7 narrative outcome:reduce late aorticrelated adverse events and aortic-related death"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S009"
+data-title="PIIS0003497521019743"
+data-recommendation="• Prophylactic TEVAR may be considered in patients with uncomplicated TBAD to reduce late aorticrelated adverse events and aortic-related death"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome="reduce late aorticrelated adverse events and aortic-related death"
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action="may be considered"
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome="reduce late aorticrelated adverse events and aortic-related death"
+data-entities="outcome:reduce late aorticrelated adverse events and aortic-related death"
+data-locator="p.7 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S009</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>reduce late aorticrelated adverse events and aortic-related death</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>• Prophylactic TEVAR may be considered in patients with uncomplicated TBAD to reduce late aorticrelated adverse events and aortic-related death</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.58"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S010 ( IIB, B-NR) • Close clinical follow-up after hospital discharge is recommended for patients presenting with acute TBAD p.7 narrative temporal_qualifier:acute"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S010"
+data-title="PIIS0003497521019743"
+data-recommendation="( IIB, B-NR) • Close clinical follow-up after hospital discharge is recommended for patients presenting with acute TBAD"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action="is recommended"
+data-execution-prerequisites="acute"
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="temporal_qualifier:acute"
+data-locator="p.7 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator; temporal-qualifiers">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S010</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.58</td>
+<td>( IIB, B-NR) • Close clinical follow-up after hospital discharge is recommended for patients presenting with acute TBAD</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S011 OMT implies sustained anti-impulse therapy for control of both hypertension and heart rate while also limiting the maximum change in left ventricular pressure during early systole (ie, maximum dp/dt).39,64-67 Maintaining blood pressure 120/80 mm Hg and heart rate &lt;70 beats/min are optimal, and aand b-blockers are useful primary agents p.7 narrative statement:OMT implies sustained anti-impulse therapy for control of both hypertension and heart rate while also limiting the maxim"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S011"
+data-title="PIIS0003497521019743"
+data-recommendation="OMT implies sustained anti-impulse therapy for control of both hypertension and heart rate while also limiting the maximum change in left ventricular pressure during early systole (ie, maximum dp/dt).39,64-67 Maintaining blood pressure 120/80 mm Hg and heart rate &lt;70 beats/min are optimal, and aand b-blockers are useful primary agents"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:OMT implies sustained anti-impulse therapy for control of both hypertension and heart rate while also limiting the maxim"
+data-locator="p.7 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S011</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>OMT implies sustained anti-impulse therapy for control of both hypertension and heart rate while also limiting the maximum change in left ventricular pressure during early systole (ie, maximum dp/dt).39,64-67 Maintaining blood pressure 120/80 mm Hg and heart rate &lt;70 beats/min are optimal, and aand b-blockers are useful primary agents</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S012 Some caution is warranted in interpreting these studies, because treatment selection was not randomized, and potential confounding variables were not accounted for apart from age in the report by Shah and colleagues p.8 narrative statement:Some caution is warranted in interpreting these studies, because treatment selection was not randomized, and potential c"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S012"
+data-title="PIIS0003497521019743"
+data-recommendation="Some caution is warranted in interpreting these studies, because treatment selection was not randomized, and potential confounding variables were not accounted for apart from age in the report by Shah and colleagues"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:Some caution is warranted in interpreting these studies, because treatment selection was not randomized, and potential c"
+data-locator="p.8 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S012</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>Some caution is warranted in interpreting these studies, because treatment selection was not randomized, and potential confounding variables were not accounted for apart from age in the report by Shah and colleagues</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.58"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S013 Thus, in stable TBAD with suitable anatomy and highrisk features, preemptive TEVAR may be considered to improve late outcome p.8 narrative clinical_state:stable [eq] outcome:improve late outcome | temporal_qualifier:stable"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S013"
+data-title="PIIS0003497521019743"
+data-recommendation="Thus, in stable TBAD with suitable anatomy and highrisk features, preemptive TEVAR may be considered to improve late outcome"
+data-population=""
+data-clinical-state="stable"
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome="improve late outcome"
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model="state=stable"
+data-trigger-constraints="clinical_state:stable [eq]"
+data-execution-action="may be considered"
+data-execution-prerequisites="stable"
+data-execution-contraindications=""
+data-execution-outcome="improve late outcome"
+data-entities="outcome:improve late outcome | temporal_qualifier:stable"
+data-locator="p.8 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator; temporal-qualifiers">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S013</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>stable</td>
+<td>improve late outcome</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.58</td>
+<td>Thus, in stable TBAD with suitable anatomy and highrisk features, preemptive TEVAR may be considered to improve late outcome</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.58"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S014 CHRONIC TBAD • Open surgical repair should be considered for patients with chronic TBAD with indications for intervention, unless comorbidities are prohibitive or anatomy is not suitable for TEVAR p.9 narrative temporal_qualifier:CHRONIC"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S014"
+data-title="PIIS0003497521019743"
+data-recommendation="CHRONIC TBAD • Open surgical repair should be considered for patients with chronic TBAD with indications for intervention, unless comorbidities are prohibitive or anatomy is not suitable for TEVAR"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites="CHRONIC; chronic"
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="temporal_qualifier:CHRONIC"
+data-locator="p.9 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator; temporal-qualifiers">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S014</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.58</td>
+<td>CHRONIC TBAD • Open surgical repair should be considered for patients with chronic TBAD with indications for intervention, unless comorbidities are prohibitive or anatomy is not suitable for TEVAR</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.58"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S015 ( IIA, B-NR) • TEVAR is reasonable for patients with chronic TBAD with an indication for intervention with suitable anatomy (adequate landing zone, absence of ascending or arch aneurysm) but who are at high risk for complications of open repair due to comorbidities p.9 narrative temporal_qualifier:chronic"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S015"
+data-title="PIIS0003497521019743"
+data-recommendation="( IIA, B-NR) • TEVAR is reasonable for patients with chronic TBAD with an indication for intervention with suitable anatomy (adequate landing zone, absence of ascending or arch aneurysm) but who are at high risk for complications of open repair due to comorbidities"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action="is reasonable"
+data-execution-prerequisites="chronic"
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="temporal_qualifier:chronic"
+data-locator="p.9 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator; temporal-qualifiers">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S015</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.58</td>
+<td>( IIA, B-NR) • TEVAR is reasonable for patients with chronic TBAD with an indication for intervention with suitable anatomy (adequate landing zone, absence of ascending or arch aneurysm) but who are at high risk for complications of open repair due to comorbidities</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.62"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S016 Indications for elective intervention in the chronic setting include aneurysmal dilatation (total 55-60 mm), increasing rate of diameter (&gt;10 mm/y), and/or symptoms (pain, malperfusion).95-98 Acute redissection or rupture (ie, acute aortic syndrome) presentation should invoke intervention as appropriate for acute aortic dissection p.9 narrative temporal_qualifier:elective | temporal_qualifier:chronic | temporal_qualifier:Acute"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S016"
+data-title="PIIS0003497521019743"
+data-recommendation="Indications for elective intervention in the chronic setting include aneurysmal dilatation (total 55-60 mm), increasing rate of diameter (&gt;10 mm/y), and/or symptoms (pain, malperfusion).95-98 Acute redissection or rupture (ie, acute aortic syndrome) presentation should invoke intervention as appropriate for acute aortic dissection"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites="elective; chronic; Acute; acute"
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="temporal_qualifier:elective | temporal_qualifier:chronic | temporal_qualifier:Acute"
+data-locator="p.9 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator; temporal-qualifiers; clinical-entities">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S016</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.62</td>
+<td>Indications for elective intervention in the chronic setting include aneurysmal dilatation (total 55-60 mm), increasing rate of diameter (&gt;10 mm/y), and/or symptoms (pain, malperfusion).95-98 Acute redissection or rupture (ie, acute aortic syndrome) presentation should invoke intervention as appropriate for acute aortic dissection</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.58"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S017 TIMING OF INTERVENTION • In patients with acute uncomplicated TBAD with high-risk features, it may be reasonable to consider delaying treatment (beyond 24 hours up to 90 days) with TEVAR to reduce early adverse events and to improve late outcomes p.10 narrative outcome:reduce early adverse events and to improve late outcomes | temporal_qualifier:acute"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S017"
+data-title="PIIS0003497521019743"
+data-recommendation="TIMING OF INTERVENTION • In patients with acute uncomplicated TBAD with high-risk features, it may be reasonable to consider delaying treatment (beyond 24 hours up to 90 days) with TEVAR to reduce early adverse events and to improve late outcomes"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome="reduce early adverse events and to improve late outcomes"
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites="acute"
+data-execution-contraindications=""
+data-execution-outcome="reduce early adverse events and to improve late outcomes"
+data-entities="outcome:reduce early adverse events and to improve late outcomes | temporal_qualifier:acute"
+data-locator="p.10 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator; temporal-qualifiers">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S017</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>reduce early adverse events and to improve late outcomes</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.58</td>
+<td>TIMING OF INTERVENTION • In patients with acute uncomplicated TBAD with high-risk features, it may be reasonable to consider delaying treatment (beyond 24 hours up to 90 days) with TEVAR to reduce early adverse events and to improve late outcomes</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S018 Optimal timing of TEVAR for patients with TBAD should be individualized according to the presenting or evolving clinical and/or radiologic features p.10 narrative statement:Optimal timing of TEVAR for patients with TBAD should be individualized according to the presenting or evolving clinical"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S018"
+data-title="PIIS0003497521019743"
+data-recommendation="Optimal timing of TEVAR for patients with TBAD should be individualized according to the presenting or evolving clinical and/or radiologic features"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:Optimal timing of TEVAR for patients with TBAD should be individualized according to the presenting or evolving clinical"
+data-locator="p.10 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S018</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>Optimal timing of TEVAR for patients with TBAD should be individualized according to the presenting or evolving clinical and/or radiologic features</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.58"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S019 ( I, B-NR) • TEVAR is reasonable in patients with connective tissue disorders with acute complicated TBADs and anatomy favorable for TEVAR as a bridge to delayed open reconstruction p.10 narrative temporal_qualifier:acute"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S019"
+data-title="PIIS0003497521019743"
+data-recommendation="( I, B-NR) • TEVAR is reasonable in patients with connective tissue disorders with acute complicated TBADs and anatomy favorable for TEVAR as a bridge to delayed open reconstruction"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action="is reasonable"
+data-execution-prerequisites="acute"
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="temporal_qualifier:acute"
+data-locator="p.10 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator; temporal-qualifiers">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S019</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.58</td>
+<td>( I, B-NR) • TEVAR is reasonable in patients with connective tissue disorders with acute complicated TBADs and anatomy favorable for TEVAR as a bridge to delayed open reconstruction</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S020 antegrade LSA flow is recommended to decrease the risk of SCI p.12 narrative statement:antegrade LSA flow is recommended to decrease the risk of SCI"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S020"
+data-title="PIIS0003497521019743"
+data-recommendation="antegrade LSA flow is recommended to decrease the risk of SCI"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action="is recommended"
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:antegrade LSA flow is recommended to decrease the risk of SCI"
+data-locator="p.12 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S020</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>antegrade LSA flow is recommended to decrease the risk of SCI</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S021 ( I, B-NR) • It is reasonable to establish CSF drainage in type B dissection patients undergoing TEVAR if they are at increased risk for SCI (eg, coverage &gt;20 cm or within 2 cm of the celiac artery origin or other risk factors) and time permits (ie, nonemergent circumstances) p.12 narrative statement:( I, B-NR) • It is reasonable to establish CSF drainage in type B dissection patients undergoing TEVAR if they are at in"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S021"
+data-title="PIIS0003497521019743"
+data-recommendation="( I, B-NR) • It is reasonable to establish CSF drainage in type B dissection patients undergoing TEVAR if they are at increased risk for SCI (eg, coverage &gt;20 cm or within 2 cm of the celiac artery origin or other risk factors) and time permits (ie, nonemergent circumstances)"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action="is reasonable"
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:( I, B-NR) • It is reasonable to establish CSF drainage in type B dissection patients undergoing TEVAR if they are at in"
+data-locator="p.12 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S021</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>( I, B-NR) • It is reasonable to establish CSF drainage in type B dissection patients undergoing TEVAR if they are at increased risk for SCI (eg, coverage &gt;20 cm or within 2 cm of the celiac artery origin or other risk factors) and time permits (ie, nonemergent circumstances)</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S022 ( IIA, B-NR) • It is reasonable to establish CSF drainage in type B dissection patients who develop symptoms of paraparesis/paraplegia p.12 narrative statement:( IIA, B-NR) • It is reasonable to establish CSF drainage in type B dissection patients who develop symptoms of parapare"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S022"
+data-title="PIIS0003497521019743"
+data-recommendation="( IIA, B-NR) • It is reasonable to establish CSF drainage in type B dissection patients who develop symptoms of paraparesis/paraplegia"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action="is reasonable"
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:( IIA, B-NR) • It is reasonable to establish CSF drainage in type B dissection patients who develop symptoms of parapare"
+data-locator="p.12 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S022</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>( IIA, B-NR) • It is reasonable to establish CSF drainage in type B dissection patients who develop symptoms of paraparesis/paraplegia</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S023 Carotid-subclavian transposition should be avoided in patients with a patent pedicled left internal mammary artery bypass graft due to the risk of myocardial ischemia during the mandatory period of proximal LSA clamp with this procedure p.13 narrative statement:Carotid-subclavian transposition should be avoided in patients with a patent pedicled left internal mammary artery bypas"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S023"
+data-title="PIIS0003497521019743"
+data-recommendation="Carotid-subclavian transposition should be avoided in patients with a patent pedicled left internal mammary artery bypass graft due to the risk of myocardial ischemia during the mandatory period of proximal LSA clamp with this procedure"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action=""
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:Carotid-subclavian transposition should be avoided in patients with a patent pedicled left internal mammary artery bypas"
+data-locator="p.13 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S023</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>Carotid-subclavian transposition should be avoided in patients with a patent pedicled left internal mammary artery bypass graft due to the risk of myocardial ischemia during the mandatory period of proximal LSA clamp with this procedure</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S024 MANAGEMENT OF TBAD WITH ARCH INVOLVEMENT • Optimal medical therapy is reasonable in patients with uncomplicated TBAD and retrograde extension of dissection from a tear at or distal to the LSA, as long as retrograde extension is limited to the arch (zones 1 and ) p.14 narrative statement:MANAGEMENT OF TBAD WITH ARCH INVOLVEMENT • Optimal medical therapy is reasonable in patients with uncomplicated TBAD and"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S024"
+data-title="PIIS0003497521019743"
+data-recommendation="MANAGEMENT OF TBAD WITH ARCH INVOLVEMENT • Optimal medical therapy is reasonable in patients with uncomplicated TBAD and retrograde extension of dissection from a tear at or distal to the LSA, as long as retrograde extension is limited to the arch (zones 1 and )"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions=""
+data-exclusions=""
+data-trigger=""
+data-trigger-model=""
+data-trigger-constraints=""
+data-execution-action="is reasonable"
+data-execution-prerequisites=""
+data-execution-contraindications=""
+data-execution-outcome=""
+data-entities="statement:MANAGEMENT OF TBAD WITH ARCH INVOLVEMENT • Optimal medical therapy is reasonable in patients with uncomplicated TBAD and"
+data-locator="p.14 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S024</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>MANAGEMENT OF TBAD WITH ARCH INVOLVEMENT • Optimal medical therapy is reasonable in patients with uncomplicated TBAD and retrograde extension of dissection from a tear at or distal to the LSA, as long as retrograde extension is limited to the arch (zones 1 and )</td>
+</tr><tr class="recommendation-row"
+data-cor=""
+data-loe=""
+data-weight="critical"
+data-confidence="0.54"
+data-disease=""
+data-topic="General Coronary Revascularization"
+data-family="guideline_generic"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S025 Neither of these investigators suggest that these dissections should be treated differently in the absence of a complicated presentation, rather they espouse that complications should be treated when they occur p.14 narrative exclusion:a complicated presentation [absent] | condition:they occur [contains] condition:they occur | exclusion:a complicated presentation"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S025"
+data-title="PIIS0003497521019743"
+data-recommendation="Neither of these investigators suggest that these dissections should be treated differently in the absence of a complicated presentation, rather they espouse that complications should be treated when they occur"
+data-population=""
+data-clinical-state=""
+data-disease-full=""
+data-time-window=""
+data-event-anchor=""
+data-thresholds=""
+data-intervention=""
+data-outcome=""
+data-conditions="they occur"
+data-exclusions="a complicated presentation"
+data-trigger="they occur"
+data-trigger-model="exclusions=a complicated presentation | qualifiers=they occur"
+data-trigger-constraints="exclusion:a complicated presentation [absent] | condition:they occur [contains]"
+data-execution-action=""
+data-execution-prerequisites="they occur"
+data-execution-contraindications="a complicated presentation"
+data-execution-outcome=""
+data-entities="condition:they occur | exclusion:a complicated presentation"
+data-locator="p.14 narrative"
+data-weight-rationale="guideline, specialty-aligned, society-issued, recommendation-language"
+data-confidence-rationale="recommendation-language; source-locator">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S025</td>
+<td>General Coronary Revascularization</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>critical (1.00)</td>
+<td>0.54</td>
+<td>Neither of these investigators suggest that these dissections should be treated differently in the absence of a complicated presentation, rather they espouse that complications should be treated when they occur</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="candidates-section" data-mode-panel="audit data">
+<div class="row spread"><h2>Tabla de Candidatos EO</h2><button class="btn section-toggle" data-target="candidates-body">Colapsar</button></div>
+<div class="section-body" id="candidates-body">
+<p class="muted">Estado institucional y avance de auditoria de cada EO candidate derivado.</p>
+<div class="filters" id="candidate-filters">
+<div class="filter-box"><label for="cand-search">Busqueda</label><input id="cand-search" type="text" placeholder="statement, candidate id, localizador" /></div>
+<div class="filter-box"><label for="cand-completion">Terminacion</label><select id="cand-completion"><option value="">Todos</option><option>L1_structured</option><option>L2_audited_clinical</option><option>L3_audited_surgical</option><option>L5_executable</option></select></div>
+<div class="filter-box"><label for="cand-type">Tipo de EO</label><input id="cand-type" type="text" placeholder="recommendation, timing_rule..." /></div>
+<div class="filter-box"><label for="cand-review">Revision</label><select id="cand-review"><option value="">Todos</option><option>pending</option><option>approved</option><option>changes_requested</option><option>rejected</option><option>under_clinical_review</option><option>under_surgical_review</option></select></div>
+<div class="filter-box"><label for="cand-clinical">Clinical Audit</label><select id="cand-clinical"><option value="">Todos</option><option>pending</option><option>approved</option><option>changes_requested</option><option>rejected</option></select></div>
+<div class="filter-box"><label for="cand-surgical">Surgical Audit</label><select id="cand-surgical"><option value="">Todos</option><option>pending</option><option>approved</option><option>changes_requested</option><option>rejected</option></select></div>
+<div class="filter-box"><label for="cand-weight">Peso</label><select id="cand-weight"><option value="">Todos</option><option>critical</option><option>high</option><option>moderate</option><option>emerging</option></select></div>
+</div>
+<div class="stats"><span class="stat" id="cand-visible-count">0 visibles</span><span class="stat" id="cand-total-count">25 totales</span></div>
+<div class="toolbar"><button class="btn" id="export-cand-visible">Exportar candidates visibles CSV</button></div>
+<div class="table-wrap">
+<table id="candidates-table" class="desktop-table responsive-stack">
+<thead>
+<tr>
+<th class="sortable">Statement</th>
+<th class="sortable">Tipo / Subtipo</th>
+<th class="sortable">Nivel / Revision</th>
+<th class="sortable">Auditoria Clinica / Quirurgica</th>
+<th class="sortable">Finalizacion / Fuerza</th>
+<th class="sortable">Peso</th>
+<th class="sortable">Texto del Statement</th>
+</tr>
+</thead>
+<tbody>
+<tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="contextual_statement"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S001 EOC-2344B7110DB1 In the sentence “Dong and colleagues92 reported outcomes of 443 patients with acute TBAD treated with TEVAR, and retrograde TAAD developed in 11 patients,” reference number 92 should be changed to reference number p.22 numbered candidate"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S001"
+data-candidate-id="EOC-2344B7110DB1"
+data-statement="In the sentence “Dong and colleagues92 reported outcomes of 443 patients with acute TBAD treated with TEVAR, and retrograde TAAD developed in 11 patients,” reference number 92 should be changed to reference number"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.22 numbered"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S001</td>
+<td>recommendation / contextual_statement</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>In the sentence “Dong and colleagues92 reported outcomes of 443 patients with acute TBAD treated with TEVAR, and retrograde TAAD developed in 11 patients,” reference number 92 should be changed to reference number</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S002 EOC-7D4101AA916B Thoracic endovascular aortic repair (TEVAR) is indicated for complicated hyperacute, acute, or subacute TBADs and favorable anatomy for TEVAR p.1 narrative candidate"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S002"
+data-candidate-id="EOC-7D4101AA916B"
+data-statement="Thoracic endovascular aortic repair (TEVAR) is indicated for complicated hyperacute, acute, or subacute TBADs and favorable anatomy for TEVAR"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.1 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S002</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>Thoracic endovascular aortic repair (TEVAR) is indicated for complicated hyperacute, acute, or subacute TBADs and favorable anatomy for TEVAR</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S003 EOC-A8BDA49B69C4 Open surgical repair is reasonable over TEVAR as a more durable treatment in patients with connective tissue disorders who have TBAD with progression of disease despite OMT p.1 narrative candidate"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S003"
+data-candidate-id="EOC-A8BDA49B69C4"
+data-statement="Open surgical repair is reasonable over TEVAR as a more durable treatment in patients with connective tissue disorders who have TBAD with progression of disease despite OMT"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.1 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S003</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>Open surgical repair is reasonable over TEVAR as a more durable treatment in patients with connective tissue disorders who have TBAD with progression of disease despite OMT</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="general_recommendation"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S004 EOC-4A446DF967E7 Additional strong recommendations include that open surgical repair should be considered for patients with chronic TBAD with indications for intervention unless comorbidities are prohibitive p.2 narrative candidate"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S004"
+data-candidate-id="EOC-4A446DF967E7"
+data-statement="Additional strong recommendations include that open surgical repair should be considered for patients with chronic TBAD with indications for intervention unless comorbidities are prohibitive"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.2 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S004</td>
+<td>recommendation / general_recommendation</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>Additional strong recommendations include that open surgical repair should be considered for patients with chronic TBAD with indications for intervention unless comorbidities are prohibitive</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S005 EOC-9F7BFCDC2D01 TEVAR is reasonable for patients with chronic TBAD with indications for intervention with suitable anatomy but who are at high risk for complications of open repair due to comorbidities p.2 narrative candidate"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S005"
+data-candidate-id="EOC-9F7BFCDC2D01"
+data-statement="TEVAR is reasonable for patients with chronic TBAD with indications for intervention with suitable anatomy but who are at high risk for complications of open repair due to comorbidities"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.2 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S005</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>TEVAR is reasonable for patients with chronic TBAD with indications for intervention with suitable anatomy but who are at high risk for complications of open repair due to comorbidities</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S006 EOC-48C9ED40FD8C ACUTE COMPLICATED TBAD • TEVAR is indicated for complicated hyperacute, acute, or subacute TBADs with rupture and/or malperfusion and favorable anatomy for TEVAR p.5 narrative candidate"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S006"
+data-candidate-id="EOC-48C9ED40FD8C"
+data-statement="ACUTE COMPLICATED TBAD • TEVAR is indicated for complicated hyperacute, acute, or subacute TBADs with rupture and/or malperfusion and favorable anatomy for TEVAR"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.5 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S006</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>ACUTE COMPLICATED TBAD • TEVAR is indicated for complicated hyperacute, acute, or subacute TBADs with rupture and/or malperfusion and favorable anatomy for TEVAR</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S007 EOC-4648DBAE8F46 ( IIA, B-NR) • Fenestration may be considered for complicated hyperacute, acute, or subacute TBADs p.5 narrative candidate"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S007"
+data-candidate-id="EOC-4648DBAE8F46"
+data-statement="( IIA, B-NR) • Fenestration may be considered for complicated hyperacute, acute, or subacute TBADs"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.5 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S007</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>( IIA, B-NR) • Fenestration may be considered for complicated hyperacute, acute, or subacute TBADs</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="contextual_statement"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S008 EOC-DEC0818B0DD7 UNCOMPLICATED TBAD • A stepwise approach to the evaluation and treatment of acute/subacute uncomplicated TBAD should be applied that includes identification of the primary entry tear site location, defining the proximity and distance of the dissection to the LSA, calibration of the maximum orthogonal aortic diameter, and confirmation of the lack of any organ malperfusion or other indications of complicated disease p.7 narrative candidate"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S008"
+data-candidate-id="EOC-DEC0818B0DD7"
+data-statement="UNCOMPLICATED TBAD • A stepwise approach to the evaluation and treatment of acute/subacute uncomplicated TBAD should be applied that includes identification of the primary entry tear site location, defining the proximity and distance of the dissection to the LSA, calibration of the maximum orthogonal aortic diameter, and confirmation of the lack of any organ malperfusion or other indications of complicated disease"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.7 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S008</td>
+<td>recommendation / contextual_statement</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>UNCOMPLICATED TBAD • A stepwise approach to the evaluation and treatment of acute/subacute uncomplicated TBAD should be applied that includes identification of the primary entry tear site location, defining the proximity and distance of the dissection to the LSA, calibration of the maximum orthogonal aortic diameter, and confirmation of the lack of any organ malperfusion or other indications of complicated disease</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S009 EOC-D5BEA0BEF92B • Prophylactic TEVAR may be considered in patients with uncomplicated TBAD to reduce late aorticrelated adverse events and aortic-related death p.7 narrative candidate"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S009"
+data-candidate-id="EOC-D5BEA0BEF92B"
+data-statement="• Prophylactic TEVAR may be considered in patients with uncomplicated TBAD to reduce late aorticrelated adverse events and aortic-related death"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.7 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S009</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>• Prophylactic TEVAR may be considered in patients with uncomplicated TBAD to reduce late aorticrelated adverse events and aortic-related death</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S010 EOC-C40AB9795625 ( IIB, B-NR) • Close clinical follow-up after hospital discharge is recommended for patients presenting with acute TBAD p.7 narrative candidate"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S010"
+data-candidate-id="EOC-C40AB9795625"
+data-statement="( IIB, B-NR) • Close clinical follow-up after hospital discharge is recommended for patients presenting with acute TBAD"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.7 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S010</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>( IIB, B-NR) • Close clinical follow-up after hospital discharge is recommended for patients presenting with acute TBAD</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="contextual_statement"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S011 EOC-A4660C16B5FA OMT implies sustained anti-impulse therapy for control of both hypertension and heart rate while also limiting the maximum change in left ventricular pressure during early systole (ie, maximum dp/dt).39,64-67 Maintaining blood pressure 120/80 mm Hg and heart rate &lt;70 beats/min are optimal, and aand b-blockers are useful primary agents p.7 narrative candidate"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S011"
+data-candidate-id="EOC-A4660C16B5FA"
+data-statement="OMT implies sustained anti-impulse therapy for control of both hypertension and heart rate while also limiting the maximum change in left ventricular pressure during early systole (ie, maximum dp/dt).39,64-67 Maintaining blood pressure 120/80 mm Hg and heart rate &lt;70 beats/min are optimal, and aand b-blockers are useful primary agents"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.7 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S011</td>
+<td>recommendation / contextual_statement</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>OMT implies sustained anti-impulse therapy for control of both hypertension and heart rate while also limiting the maximum change in left ventricular pressure during early systole (ie, maximum dp/dt).39,64-67 Maintaining blood pressure 120/80 mm Hg and heart rate &lt;70 beats/min are optimal, and aand b-blockers are useful primary agents</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="contextual_statement"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S012 EOC-C62F47AAB8DC Some caution is warranted in interpreting these studies, because treatment selection was not randomized, and potential confounding variables were not accounted for apart from age in the report by Shah and colleagues p.8 narrative candidate"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S012"
+data-candidate-id="EOC-C62F47AAB8DC"
+data-statement="Some caution is warranted in interpreting these studies, because treatment selection was not randomized, and potential confounding variables were not accounted for apart from age in the report by Shah and colleagues"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.8 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S012</td>
+<td>recommendation / contextual_statement</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>Some caution is warranted in interpreting these studies, because treatment selection was not randomized, and potential confounding variables were not accounted for apart from age in the report by Shah and colleagues</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S013 EOC-160471264540 Thus, in stable TBAD with suitable anatomy and highrisk features, preemptive TEVAR may be considered to improve late outcome p.8 narrative candidate"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S013"
+data-candidate-id="EOC-160471264540"
+data-statement="Thus, in stable TBAD with suitable anatomy and highrisk features, preemptive TEVAR may be considered to improve late outcome"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.8 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S013</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>Thus, in stable TBAD with suitable anatomy and highrisk features, preemptive TEVAR may be considered to improve late outcome</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="general_recommendation"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S014 EOC-2F76EE209AF8 CHRONIC TBAD • Open surgical repair should be considered for patients with chronic TBAD with indications for intervention, unless comorbidities are prohibitive or anatomy is not suitable for TEVAR p.9 narrative candidate"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S014"
+data-candidate-id="EOC-2F76EE209AF8"
+data-statement="CHRONIC TBAD • Open surgical repair should be considered for patients with chronic TBAD with indications for intervention, unless comorbidities are prohibitive or anatomy is not suitable for TEVAR"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.9 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S014</td>
+<td>recommendation / general_recommendation</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>CHRONIC TBAD • Open surgical repair should be considered for patients with chronic TBAD with indications for intervention, unless comorbidities are prohibitive or anatomy is not suitable for TEVAR</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S015 EOC-B3847448213A ( IIA, B-NR) • TEVAR is reasonable for patients with chronic TBAD with an indication for intervention with suitable anatomy (adequate landing zone, absence of ascending or arch aneurysm) but who are at high risk for complications of open repair due to comorbidities p.9 narrative candidate"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S015"
+data-candidate-id="EOC-B3847448213A"
+data-statement="( IIA, B-NR) • TEVAR is reasonable for patients with chronic TBAD with an indication for intervention with suitable anatomy (adequate landing zone, absence of ascending or arch aneurysm) but who are at high risk for complications of open repair due to comorbidities"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.9 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S015</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>( IIA, B-NR) • TEVAR is reasonable for patients with chronic TBAD with an indication for intervention with suitable anatomy (adequate landing zone, absence of ascending or arch aneurysm) but who are at high risk for complications of open repair due to comorbidities</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="contextual_statement"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S016 EOC-47AA72DA2E9B Indications for elective intervention in the chronic setting include aneurysmal dilatation (total 55-60 mm), increasing rate of diameter (&gt;10 mm/y), and/or symptoms (pain, malperfusion).95-98 Acute redissection or rupture (ie, acute aortic syndrome) presentation should invoke intervention as appropriate for acute aortic dissection p.9 narrative candidate"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S016"
+data-candidate-id="EOC-47AA72DA2E9B"
+data-statement="Indications for elective intervention in the chronic setting include aneurysmal dilatation (total 55-60 mm), increasing rate of diameter (&gt;10 mm/y), and/or symptoms (pain, malperfusion).95-98 Acute redissection or rupture (ie, acute aortic syndrome) presentation should invoke intervention as appropriate for acute aortic dissection"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.9 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S016</td>
+<td>recommendation / contextual_statement</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>Indications for elective intervention in the chronic setting include aneurysmal dilatation (total 55-60 mm), increasing rate of diameter (&gt;10 mm/y), and/or symptoms (pain, malperfusion).95-98 Acute redissection or rupture (ie, acute aortic syndrome) presentation should invoke intervention as appropriate for acute aortic dissection</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="contextual_statement"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S017 EOC-2AA3F25A365D TIMING OF INTERVENTION • In patients with acute uncomplicated TBAD with high-risk features, it may be reasonable to consider delaying treatment (beyond 24 hours up to 90 days) with TEVAR to reduce early adverse events and to improve late outcomes p.10 narrative candidate"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S017"
+data-candidate-id="EOC-2AA3F25A365D"
+data-statement="TIMING OF INTERVENTION • In patients with acute uncomplicated TBAD with high-risk features, it may be reasonable to consider delaying treatment (beyond 24 hours up to 90 days) with TEVAR to reduce early adverse events and to improve late outcomes"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.10 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S017</td>
+<td>recommendation / contextual_statement</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>TIMING OF INTERVENTION • In patients with acute uncomplicated TBAD with high-risk features, it may be reasonable to consider delaying treatment (beyond 24 hours up to 90 days) with TEVAR to reduce early adverse events and to improve late outcomes</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="contextual_statement"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S018 EOC-C30B714A7B8B Optimal timing of TEVAR for patients with TBAD should be individualized according to the presenting or evolving clinical and/or radiologic features p.10 narrative candidate"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S018"
+data-candidate-id="EOC-C30B714A7B8B"
+data-statement="Optimal timing of TEVAR for patients with TBAD should be individualized according to the presenting or evolving clinical and/or radiologic features"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.10 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S018</td>
+<td>recommendation / contextual_statement</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>Optimal timing of TEVAR for patients with TBAD should be individualized according to the presenting or evolving clinical and/or radiologic features</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S019 EOC-2FE38F843343 ( I, B-NR) • TEVAR is reasonable in patients with connective tissue disorders with acute complicated TBADs and anatomy favorable for TEVAR as a bridge to delayed open reconstruction p.10 narrative candidate"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S019"
+data-candidate-id="EOC-2FE38F843343"
+data-statement="( I, B-NR) • TEVAR is reasonable in patients with connective tissue disorders with acute complicated TBADs and anatomy favorable for TEVAR as a bridge to delayed open reconstruction"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.10 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S019</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>( I, B-NR) • TEVAR is reasonable in patients with connective tissue disorders with acute complicated TBADs and anatomy favorable for TEVAR as a bridge to delayed open reconstruction</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S020 EOC-F714D350FCDC antegrade LSA flow is recommended to decrease the risk of SCI p.12 narrative candidate"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S020"
+data-candidate-id="EOC-F714D350FCDC"
+data-statement="antegrade LSA flow is recommended to decrease the risk of SCI"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.12 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S020</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>antegrade LSA flow is recommended to decrease the risk of SCI</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S021 EOC-1C0B219F6AC5 ( I, B-NR) • It is reasonable to establish CSF drainage in type B dissection patients undergoing TEVAR if they are at increased risk for SCI (eg, coverage &gt;20 cm or within 2 cm of the celiac artery origin or other risk factors) and time permits (ie, nonemergent circumstances) p.12 narrative candidate"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S021"
+data-candidate-id="EOC-1C0B219F6AC5"
+data-statement="( I, B-NR) • It is reasonable to establish CSF drainage in type B dissection patients undergoing TEVAR if they are at increased risk for SCI (eg, coverage &gt;20 cm or within 2 cm of the celiac artery origin or other risk factors) and time permits (ie, nonemergent circumstances)"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.12 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S021</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>( I, B-NR) • It is reasonable to establish CSF drainage in type B dissection patients undergoing TEVAR if they are at increased risk for SCI (eg, coverage &gt;20 cm or within 2 cm of the celiac artery origin or other risk factors) and time permits (ie, nonemergent circumstances)</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S022 EOC-35A6F3A22A03 ( IIA, B-NR) • It is reasonable to establish CSF drainage in type B dissection patients who develop symptoms of paraparesis/paraplegia p.12 narrative candidate"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S022"
+data-candidate-id="EOC-35A6F3A22A03"
+data-statement="( IIA, B-NR) • It is reasonable to establish CSF drainage in type B dissection patients who develop symptoms of paraparesis/paraplegia"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.12 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S022</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>( IIA, B-NR) • It is reasonable to establish CSF drainage in type B dissection patients who develop symptoms of paraparesis/paraplegia</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="contextual_statement"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S023 EOC-5E09C5523F49 Carotid-subclavian transposition should be avoided in patients with a patent pedicled left internal mammary artery bypass graft due to the risk of myocardial ischemia during the mandatory period of proximal LSA clamp with this procedure p.13 narrative candidate"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S023"
+data-candidate-id="EOC-5E09C5523F49"
+data-statement="Carotid-subclavian transposition should be avoided in patients with a patent pedicled left internal mammary artery bypass graft due to the risk of myocardial ischemia during the mandatory period of proximal LSA clamp with this procedure"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.13 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S023</td>
+<td>recommendation / contextual_statement</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>Carotid-subclavian transposition should be avoided in patients with a patent pedicled left internal mammary artery bypass graft due to the risk of myocardial ischemia during the mandatory period of proximal LSA clamp with this procedure</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="therapeutic_action"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S024 EOC-C425B7CEE1E1 MANAGEMENT OF TBAD WITH ARCH INVOLVEMENT • Optimal medical therapy is reasonable in patients with uncomplicated TBAD and retrograde extension of dissection from a tear at or distal to the LSA, as long as retrograde extension is limited to the arch (zones 1 and ) p.14 narrative candidate"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S024"
+data-candidate-id="EOC-C425B7CEE1E1"
+data-statement="MANAGEMENT OF TBAD WITH ARCH INVOLVEMENT • Optimal medical therapy is reasonable in patients with uncomplicated TBAD and retrograde extension of dissection from a tear at or distal to the LSA, as long as retrograde extension is limited to the arch (zones 1 and )"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.14 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S024</td>
+<td>recommendation / therapeutic_action</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>MANAGEMENT OF TBAD WITH ARCH INVOLVEMENT • Optimal medical therapy is reasonable in patients with uncomplicated TBAD and retrograde extension of dissection from a tear at or distal to the LSA, as long as retrograde extension is limited to the arch (zones 1 and )</td>
+</tr><tr class="candidate-row"
+data-completion="L1_structured"
+data-review="pending"
+data-clinical="pending"
+data-surgical="pending"
+data-weight="critical"
+data-eo-type="recommendation"
+data-eo-subtype="contextual_statement"
+data-text="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S025 EOC-AC7244697EA9 Neither of these investigators suggest that these dissections should be treated differently in the absence of a complicated presentation, rather they espouse that complications should be treated when they occur p.14 narrative candidate"
+data-key="STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S025"
+data-candidate-id="EOC-AC7244697EA9"
+data-statement="Neither of these investigators suggest that these dissections should be treated differently in the absence of a complicated presentation, rather they espouse that complications should be treated when they occur"
+data-finalization="candidate"
+data-strength="high"
+data-locator="p.14 narrative"
+data-rationale="guideline, specialty-aligned, society-issued, recommendation-language">
+<td>STS-AATS-TYPE-B-AORTIC-DISSECTION-2022:S025</td>
+<td>recommendation / contextual_statement</td>
+<td>L1_structured / pending</td>
+<td>pending / pending</td>
+<td>candidate / high</td>
+<td>critical (1.00)</td>
+<td>Neither of these investigators suggest that these dissections should be treated differently in the absence of a complicated presentation, rather they espouse that complications should be treated when they occur</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</main>
+<script>
+const normalize = (value) => (value || '').toLowerCase().trim();
+const sortState = new Map();
+const recommendationFilterIds = ['rec-search','rec-cor','rec-loe','rec-weight','rec-confidence','rec-disease','rec-topic'];
+const candidateFilterIds = ['cand-search','cand-completion','cand-type','cand-review','cand-clinical','cand-surgical','cand-weight'];
+
+function setViewMode(mode) {
+  document.body.dataset.viewMode = mode;
+  document.querySelectorAll('[data-view-mode-button]').forEach((button) => {
+    button.classList.toggle('active', button.dataset.viewModeButton === mode);
+  });
+}
+
+function setFieldValue(id, value) {
+  const field = document.getElementById(id);
+  if (field) field.value = value;
+}
+
+function clearWorkbenchFilters() {
+  recommendationFilterIds.concat(candidateFilterIds).forEach((id) => setFieldValue(id, ''));
+}
+
+function applyFilterPreset(preset) {
+  clearWorkbenchFilters();
+  if (preset === 'critical') {
+    setFieldValue('rec-weight', 'critical');
+    setFieldValue('cand-weight', 'critical');
+    setFieldValue('rec-confidence', '0.80');
+  }
+  if (preset === 'stemi') {
+    setFieldValue('rec-search', 'STEMI');
+    setFieldValue('cand-search', 'STEMI');
+  }
+  if (preset === 'cabg') {
+    setFieldValue('rec-search', 'CABG');
+    setFieldValue('cand-search', 'CABG');
+  }
+  if (preset === 'timing') {
+    setFieldValue('rec-search', 'hours');
+    setFieldValue('cand-type', 'timing_rule');
+  }
+  if (preset === 'audit') {
+    setFieldValue('cand-review', 'pending');
+    setFieldValue('cand-clinical', 'pending');
+    setFieldValue('cand-surgical', 'pending');
+    setViewMode('audit');
+  }
+  filterRecommendations();
+  filterCandidates();
+  document.querySelectorAll('[data-filter-preset]').forEach((button) => {
+    button.classList.toggle('active', button.dataset.filterPreset === preset);
+  });
+}
+
+function filterRecommendations() {
+  const search = normalize(document.getElementById('rec-search')?.value);
+  const cor = normalize(document.getElementById('rec-cor')?.value);
+  const loe = normalize(document.getElementById('rec-loe')?.value);
+  const weight = normalize(document.getElementById('rec-weight')?.value);
+  const disease = normalize(document.getElementById('rec-disease')?.value);
+  const topic = normalize(document.getElementById('rec-topic')?.value);
+  const minConfidence = parseFloat(document.getElementById('rec-confidence')?.value || '');
+  let visible = 0;
+
+  document.querySelectorAll('.recommendation-row').forEach((row) => {
+    const rowText = normalize(row.dataset.text);
+    const rowCor = normalize(row.dataset.cor);
+    const rowLoe = normalize(row.dataset.loe);
+    const rowWeight = normalize(row.dataset.weight);
+    const rowDisease = normalize(row.dataset.disease);
+    const rowTopic = normalize(row.dataset.topic);
+    const rowConfidence = parseFloat(row.dataset.confidence || '');
+
+    const matches =
+      (!search || rowText.includes(search)) &&
+      (!cor || rowCor === cor) &&
+      (!loe || rowLoe === loe) &&
+      (!weight || rowWeight === weight) &&
+      (!disease || rowDisease.includes(disease)) &&
+      (!topic || rowTopic.includes(topic)) &&
+      (Number.isNaN(minConfidence) || (!Number.isNaN(rowConfidence) && rowConfidence >= minConfidence));
+
+    row.style.display = matches ? '' : 'none';
+    if (matches) visible += 1;
+  });
+
+  const counter = document.getElementById('rec-visible-count');
+  if (counter) counter.textContent = `${visible} visibles`;
+}
+
+function filterCandidates() {
+  const search = normalize(document.getElementById('cand-search')?.value);
+  const completion = normalize(document.getElementById('cand-completion')?.value);
+  const eoType = normalize(document.getElementById('cand-type')?.value);
+  const review = normalize(document.getElementById('cand-review')?.value);
+  const clinical = normalize(document.getElementById('cand-clinical')?.value);
+  const surgical = normalize(document.getElementById('cand-surgical')?.value);
+  const weight = normalize(document.getElementById('cand-weight')?.value);
+  let visible = 0;
+
+  document.querySelectorAll('.candidate-row').forEach((row) => {
+    const matches =
+      (!search || normalize(row.dataset.text).includes(search)) &&
+      (!completion || normalize(row.dataset.completion) === completion) &&
+      (!eoType || normalize(row.dataset.eoType).includes(eoType) || normalize(row.dataset.eoSubtype).includes(eoType)) &&
+      (!review || normalize(row.dataset.review) === review) &&
+      (!clinical || normalize(row.dataset.clinical) === clinical) &&
+      (!surgical || normalize(row.dataset.surgical) === surgical) &&
+      (!weight || normalize(row.dataset.weight) === weight);
+
+    row.style.display = matches ? '' : 'none';
+    if (matches) visible += 1;
+  });
+
+  const counter = document.getElementById('cand-visible-count');
+  if (counter) counter.textContent = `${visible} visibles`;
+}
+
+function downloadCsv(filename, rows) {
+  const csv = rows.map((row) => row.map((cell) => {
+    const text = `${cell ?? ''}`.replaceAll('"', '""');
+    return `"${text}"`;
+  }).join(',')).join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
+
+function hydrateResponsiveTables() {
+  document.querySelectorAll('table.responsive-stack').forEach((table) => {
+    const headers = Array.from(table.querySelectorAll('thead th')).map((th) => th.textContent.trim());
+    table.querySelectorAll('tbody tr').forEach((row) => {
+      Array.from(row.children).forEach((cell, index) => {
+        if (cell instanceof HTMLElement) {
+          cell.setAttribute('data-label', headers[index] || '');
+        }
+      });
+    });
+  });
+}
+
+function exportVisibleTable(tableId, filename) {
+  const table = document.getElementById(tableId);
+  if (!table) return;
+  const header = Array.from(table.querySelectorAll('thead th')).map((th) => th.textContent.trim());
+  const bodyRows = Array.from(table.querySelectorAll('tbody tr')).filter((row) => row.style.display !== 'none');
+  const rows = [header];
+  bodyRows.forEach((row) => {
+    rows.push(Array.from(row.children).map((cell) => cell.textContent.trim()));
+  });
+  downloadCsv(filename, rows);
+}
+
+function makeTableSortable(tableId) {
+  const table = document.getElementById(tableId);
+  if (!table) return;
+  const headers = Array.from(table.querySelectorAll('thead th'));
+  const tbody = table.querySelector('tbody');
+  if (!tbody) return;
+
+  headers.forEach((header, index) => {
+    header.addEventListener('click', () => {
+      const key = `${tableId}:${index}`;
+      const current = sortState.get(key) === 'asc' ? 'desc' : 'asc';
+      sortState.clear();
+      sortState.set(key, current);
+
+      headers.forEach((th) => th.textContent = th.textContent.replace(/\s+[▲▼]$/, ''));
+      header.textContent = `${header.textContent.replace(/\s+[▲▼]$/, '')} ${current === 'asc' ? '▲' : '▼'}`;
+
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      rows.sort((a, b) => {
+        const aText = (a.children[index]?.textContent || '').trim();
+        const bText = (b.children[index]?.textContent || '').trim();
+        const aNum = Number.parseFloat(aText);
+        const bNum = Number.parseFloat(bText);
+        const bothNumeric = !Number.isNaN(aNum) && !Number.isNaN(bNum);
+        const comparison = bothNumeric ? aNum - bNum : aText.localeCompare(bText, undefined, { numeric: true, sensitivity: 'base' });
+        return current === 'asc' ? comparison : -comparison;
+      });
+      rows.forEach((row) => tbody.appendChild(row));
+    });
+  });
+}
+
+function setText(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = value && value.trim() ? value : '-';
+}
+
+function clearActiveRows() {
+  document.querySelectorAll('.active-row').forEach((row) => row.classList.remove('active-row'));
+}
+
+function findCandidateByKey(statementKey) {
+  return Array.from(document.querySelectorAll('.candidate-row')).find((row) => row.dataset.key === statementKey);
+}
+
+function renderRecommendationDetail(row) {
+  clearActiveRows();
+  row.classList.add('active-row');
+  const candidate = findCandidateByKey(row.dataset.key);
+
+  setText('detail-title', row.dataset.title || row.dataset.key);
+  setText('detail-summary', row.dataset.recommendation);
+  setText('detail-key', row.dataset.key);
+  setText('detail-kind', 'Guideline Recommendation');
+  setText('detail-cor-loe', [row.dataset.cor, row.dataset.loe].filter(Boolean).join(' / '));
+  setText('detail-weight-confidence', [row.dataset.weight, row.dataset.confidence].filter(Boolean).join(' / '));
+  setText('detail-population-disease', [row.dataset.population, row.dataset.diseaseFull].filter(Boolean).join(' / '));
+  setText('detail-topic', row.dataset.topic);
+  setText('detail-state-time', [row.dataset.clinicalState, row.dataset.timeWindow, row.dataset.eventAnchor].filter(Boolean).join(' / '));
+  setText('detail-intervention-outcome', [row.dataset.intervention, row.dataset.outcome].filter(Boolean).join(' / '));
+  setText('detail-locator', row.dataset.locator);
+  setText('detail-trigger', row.dataset.trigger);
+  setText('detail-trigger-model', row.dataset.triggerModel);
+  setText('detail-trigger-constraints', row.dataset.triggerConstraints);
+  setText('detail-action', row.dataset.executionAction);
+  setText('detail-prerequisites', row.dataset.executionPrerequisites);
+  setText('detail-contraindications', row.dataset.executionContraindications);
+  setText('detail-conditions-exclusions', [row.dataset.conditions, row.dataset.exclusions].filter(Boolean).join(' | '));
+  setText('detail-entities', row.dataset.entities);
+  setText(
+    'detail-candidate-state',
+    candidate
+      ? [candidate.dataset.completion, candidate.dataset.review, candidate.dataset.clinical, candidate.dataset.surgical, candidate.dataset.finalization].filter(Boolean).join(' / ')
+      : 'Sin EO candidate enlazado'
+  );
+  setText('detail-rationale', [row.dataset.weightRationale, row.dataset.confidenceRationale].filter(Boolean).join(' | '));
+}
+
+function renderCandidateDetail(row) {
+  clearActiveRows();
+  row.classList.add('active-row');
+
+  setText('detail-title', row.dataset.candidateId);
+  setText('detail-summary', row.dataset.statement);
+  setText('detail-key', row.dataset.key);
+  setText('detail-kind', 'EO Candidate');
+  setText('detail-cor-loe', '-');
+  setText('detail-weight-confidence', [row.dataset.weight].filter(Boolean).join(' / '));
+  setText('detail-population-disease', '-');
+  setText('detail-topic', '-');
+  setText('detail-state-time', '-');
+  setText('detail-intervention-outcome', [row.dataset.eoType, row.dataset.eoSubtype, row.dataset.strength].filter(Boolean).join(' / '));
+  setText('detail-locator', row.dataset.locator);
+  setText('detail-trigger', '-');
+  setText('detail-trigger-model', '-');
+  setText('detail-trigger-constraints', '-');
+  setText('detail-action', '-');
+  setText('detail-prerequisites', '-');
+  setText('detail-contraindications', '-');
+  setText('detail-conditions-exclusions', '-');
+  setText('detail-entities', '-');
+  setText('detail-candidate-state', [row.dataset.eoType, row.dataset.eoSubtype, row.dataset.completion, row.dataset.review, row.dataset.clinical, row.dataset.surgical, row.dataset.finalization].filter(Boolean).join(' / '));
+  setText('detail-rationale', row.dataset.rationale);
+}
+
+document.querySelectorAll('.section-toggle').forEach((button) => {
+  button.addEventListener('click', () => {
+    const target = document.getElementById(button.dataset.target);
+    if (!target) return;
+    const hidden = target.hasAttribute('hidden');
+    if (hidden) {
+      target.removeAttribute('hidden');
+      button.textContent = 'Colapsar';
+    } else {
+      target.setAttribute('hidden', '');
+      button.textContent = 'Expandir';
+    }
+  });
+});
+
+function setMobileSectionDefaults() {
+  if (!window.matchMedia('(max-width: 760px)').matches) return;
+  const keepOpen = new Set(['priority-body', 'workbench-body']);
+  document.querySelectorAll('.section-toggle').forEach((button) => {
+    const target = document.getElementById(button.dataset.target);
+    if (!target || keepOpen.has(button.dataset.target)) return;
+    target.setAttribute('hidden', '');
+    button.textContent = 'Expandir';
+  });
+}
+
+recommendationFilterIds.forEach((id) => {
+  document.getElementById(id)?.addEventListener('input', filterRecommendations);
+  document.getElementById(id)?.addEventListener('change', filterRecommendations);
+});
+candidateFilterIds.forEach((id) => {
+  document.getElementById(id)?.addEventListener('input', filterCandidates);
+  document.getElementById(id)?.addEventListener('change', filterCandidates);
+});
+document.querySelectorAll('[data-view-mode-button]').forEach((button) => {
+  button.addEventListener('click', () => setViewMode(button.dataset.viewModeButton || 'clinical'));
+});
+document.querySelectorAll('[data-filter-preset]').forEach((button) => {
+  button.addEventListener('click', () => applyFilterPreset(button.dataset.filterPreset || 'clear'));
+});
+
+document.querySelectorAll('.recommendation-row').forEach((row) => {
+  row.style.cursor = 'pointer';
+  row.addEventListener('click', () => renderRecommendationDetail(row));
+});
+document.querySelectorAll('.candidate-row').forEach((row) => {
+  row.style.cursor = 'pointer';
+  row.addEventListener('click', () => renderCandidateDetail(row));
+});
+
+document.getElementById('export-rec-visible')?.addEventListener('click', () => exportVisibleTable('recommendations-table', 'recommendaciones_visibles.csv'));
+document.getElementById('export-cand-visible')?.addEventListener('click', () => exportVisibleTable('candidates-table', 'eo_candidates_visibles.csv'));
+
+makeTableSortable('recommendations-table');
+makeTableSortable('candidates-table');
+makeTableSortable('reconciliation-table');
+makeTableSortable('conflicts-table');
+hydrateResponsiveTables();
+setMobileSectionDefaults();
+filterRecommendations();
+filterCandidates();
+document.querySelector('.recommendation-row') && renderRecommendationDetail(document.querySelector('.recommendation-row'));
+</script>
+</body>
+</html>

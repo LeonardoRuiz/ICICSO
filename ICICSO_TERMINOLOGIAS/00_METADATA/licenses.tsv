@@ -1,0 +1,27 @@
+dataset_id	access_class	license_or_access	automation_policy	unlock_requirement
+ICD10	public	WHO public ICD-10 ClaML	Automatable with source validation	None
+LOINC	credentialed	Free LOINC account and accepted LOINC terms	Do not automate without explicit credentials	LOINC_USERNAME and LOINC_PASSWORD
+SNOMED_CT	manual_license	SNOMED International / MLDS license	Manual authorized drop-in only	Approved MLDS access and accepted license
+SNOMED_CT_INTERNATIONAL	manual_license	SNOMED International / MLDS license	Manual authorized drop-in only	Approved MLDS access and accepted license
+SNOMED_CT_SPANISH	manual_license	SNOMED International / MLDS or member-country space	Manual authorized drop-in only	Approved MLDS/member-country access and accepted license
+ICD11	public	WHO ICD-11 release files	Automatable with source validation	None
+ICD10_TO_ICD11	public	WHO ICD-11 mapping release files	Automatable with source validation	None
+RXNORM	credentialed	UMLS/UTS license may be required for full release	Do not bypass UMLS/UTS login	UMLS/UTS authorized access when using full package
+RXNORM_FULL	credentialed	UMLS/UTS license required	Do not automate without explicit authorization	UMLS/UTS authorized access
+RXNORM_PRESCRIBABLE	public	NLM public prescribable release	Automatable with source validation	None
+UCUM	public	UCUM public essence file	Automatable with source validation	None
+HL7_THO	public	HL7 terminology package	Automatable with package metadata validation	None
+HL7_FHIR_R5	public	HL7 FHIR release definitions	Automatable with source validation	None
+ATC_DDD	mixed	Public web search; structured Excel/XML account-gated	Crawl public index only unless account provided	WHOCC account for structured Excel/XML
+ICD10_CM	public	CDC/NCHS public files	Automatable with source validation	None
+ICD10_PCS	public	CMS public files	Automatable with source validation	None
+HCPCS_LEVEL_II	public	CMS public quarterly update	Automatable with source validation	None
+CPT	proprietary	AMA CPT proprietary code set	Manual/licensed artifact only	AMA license or purchased data product
+MESH	public	NLM MeSH public files	Automatable with source validation	None
+UNII_GSRS	public_mixed	FDA public GSRS/UNII data; some views via precisionFDA	Automate only public sources	Chosen public data source
+FHIR_IMPLEMENTATION_REGISTRY	public_web	HL7 public web registry	No binary download expected	None
+CDA_R2_CORE	public_web	HL7 CDA public navigation and schemas	No single canonical binary expected	None
+CDA_VALUE_SETS	public_web	HL7 Terminology CDA value sets	Prefer THO package where possible	None
+CCDA_ON_FHIR	public_web	HL7 US public IG	Prefer IG package/artifact downloads when implemented	None
+US_CORE	public_web	HL7 US public IG	Prefer IG package/artifact downloads when implemented	None
+SMART_APP_LAUNCH	public_web	HL7 / SMART public IG	Prefer IG package/artifact downloads when implemented	None

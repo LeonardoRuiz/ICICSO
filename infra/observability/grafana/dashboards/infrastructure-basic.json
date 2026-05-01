@@ -1,0 +1,51 @@
+{
+  "annotations": { "list": [] },
+  "panels": [
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "id": 1,
+      "targets": [
+        { "expr": "max(pg_up)", "refId": "A" }
+      ],
+      "title": "Postgres Exporter Up",
+      "type": "stat"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+      "id": 2,
+      "targets": [
+        { "expr": "max(redis_up)", "refId": "A" }
+      ],
+      "title": "Redis Exporter Up",
+      "type": "stat"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
+      "id": 3,
+      "targets": [
+        { "expr": "sum by (service) (icicso_postgres_up)", "legendFormat": "{{service}}", "refId": "A" }
+      ],
+      "title": "Postgres Reachability by Service",
+      "type": "timeseries"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
+      "id": 4,
+      "targets": [
+        { "expr": "sum by (service) (icicso_redis_up)", "legendFormat": "{{service}}", "refId": "A" }
+      ],
+      "title": "Redis Reachability by Service",
+      "type": "timeseries"
+    }
+  ],
+  "schemaVersion": 39,
+  "tags": ["icicso", "infra"],
+  "time": { "from": "now-6h", "to": "now" },
+  "title": "ICICSO Infrastructure Basic",
+  "uid": "icicso-infrastructure",
+  "version": 1
+}

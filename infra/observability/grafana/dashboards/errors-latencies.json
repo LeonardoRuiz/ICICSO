@@ -1,0 +1,42 @@
+{
+  "annotations": { "list": [] },
+  "panels": [
+    {
+      "datasource": { "type": "loki", "uid": "loki" },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "id": 1,
+      "targets": [
+        { "expr": "sum by (service_name) (count_over_time({job=\"icicso-k8s-logs\"} |= \"\\\"level\\\":\\\"error\\\"\" [5m]))", "refId": "A" }
+      ],
+      "title": "Structured Errors by Service",
+      "type": "timeseries"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+      "id": 2,
+      "targets": [
+        { "expr": "sum(rate(icicso_api_error_count_total[5m])) + sum(rate(icicso_parser_error_count_total[5m])) + sum(rate(icicso_engine_failures_total[5m]))", "refId": "A" }
+      ],
+      "title": "Global Error Rate",
+      "type": "timeseries"
+    },
+    {
+      "datasource": { "type": "tempo", "uid": "tempo" },
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 8 },
+      "id": 3,
+      "options": { "dedupStrategy": "none", "limit": 20, "spanStartTimeShift": "", "spanEndTimeShift": "" },
+      "targets": [
+        { "queryType": "traceql", "refId": "A", "query": "{}" }
+      ],
+      "title": "Recent Traces",
+      "type": "traces"
+    }
+  ],
+  "schemaVersion": 39,
+  "tags": ["icicso", "errors"],
+  "time": { "from": "now-6h", "to": "now" },
+  "title": "ICICSO Errors and Latencies",
+  "uid": "icicso-errors-latencies",
+  "version": 1
+}

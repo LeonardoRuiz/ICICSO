@@ -1,0 +1,51 @@
+{
+  "annotations": { "list": [] },
+  "panels": [
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "id": 1,
+      "targets": [
+        { "expr": "sum by (route) (rate(icicso_engine_requests_total[5m]))", "legendFormat": "{{route}}", "refId": "A" }
+      ],
+      "title": "Engine Requests by Route",
+      "type": "timeseries"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+      "id": 2,
+      "targets": [
+        { "expr": "sum by (route, error_code) (rate(icicso_engine_failures_total[5m]))", "legendFormat": "{{route}} {{error_code}}", "refId": "A" }
+      ],
+      "title": "Engine Failures",
+      "type": "timeseries"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
+      "id": 3,
+      "targets": [
+        { "expr": "sum by (operation) (rate(icicso_rule_evaluation_total[5m]))", "legendFormat": "{{operation}}", "refId": "A" }
+      ],
+      "title": "Rule Evaluations",
+      "type": "timeseries"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
+      "id": 4,
+      "targets": [
+        { "expr": "histogram_quantile(0.95, sum by (le, route) (rate(icicso_route_resolution_duration_seconds_bucket[5m])))", "legendFormat": "{{route}} p95", "refId": "A" }
+      ],
+      "title": "Engine Latency P95",
+      "type": "timeseries"
+    }
+  ],
+  "schemaVersion": 39,
+  "tags": ["icicso", "engine"],
+  "time": { "from": "now-6h", "to": "now" },
+  "title": "ICICSO Engine Health",
+  "uid": "icicso-engine-health",
+  "version": 1
+}

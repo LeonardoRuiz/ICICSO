@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: icicso-documents-data
+  namespace: icicso-local
+  labels:
+    app.kubernetes.io/name: icicso-documents
+    app.kubernetes.io/component: document-storage
+    app.kubernetes.io/part-of: icicso
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi

@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://icicso.local/schemas/evidence/source_evidence_record.schema.json",
+  "title": "SourceEvidenceRecord",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "ser_id": {
+      "type": "string",
+      "pattern": "^SER-[A-Z0-9_-]+$"
+    },
+    "source_document_id": {
+      "type": "string",
+      "pattern": "^DOC-[A-F0-9]{12}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence_type": {
+      "$ref": "../common/enums.schema.json#/$defs/evidenceType"
+    },
+    "issuing_body": {
+      "type": ["string", "null"]
+    },
+    "jurisdiction": {
+      "type": ["string", "null"]
+    },
+    "doi": {
+      "type": ["string", "null"]
+    },
+    "publication_year": {
+      "type": ["integer", "null"],
+      "minimum": 1900,
+      "maximum": 2100
+    },
+    "population_scope": {
+      "type": ["string", "null"]
+    },
+    "methodology_framework": {
+      "type": ["string", "null"]
+    },
+    "methodological_integrity_metric": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "extractable_units_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "status": {
+      "$ref": "../common/enums.schema.json#/$defs/artifactStatus"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "vrn": {
+      "type": ["string", "null"]
+    },
+    "responsible_scientist": {
+      "type": ["string", "null"]
+    },
+    "validated_at_utc": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "hash_sha256": {
+      "type": "string",
+      "pattern": "^[A-F0-9]{64}$"
+    }
+  },
+  "required": [
+    "ser_id",
+    "source_document_id",
+    "title",
+    "evidence_type",
+    "extractable_units_count",
+    "status",
+    "version",
+    "hash_sha256"
+  ]
+}

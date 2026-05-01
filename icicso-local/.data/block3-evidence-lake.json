@@ -1,0 +1,296 @@
+{
+  "sourceEvidenceRecords": [
+    {
+      "serId": "SER-REVASC-ACC-2021",
+      "title": "2021 ACC/AHA/SCAI Coronary Artery Revascularization Guideline",
+      "authority": "ACC/AHA/SCAI",
+      "year": 2021,
+      "domain": "revascularization",
+      "status": "active",
+      "vrn": "VRN-SER-0001",
+      "hash": "69e1953ed1916331fefaaadd42bb8468776c252299d4e1dfd043bc4095680fa0",
+      "lineageParentSerId": null,
+      "createdAt": "2026-03-29T12:00:00.000Z"
+    },
+    {
+      "serId": "SER-REVASC-ESC-2018",
+      "title": "2018 ESC/EACTS Myocardial Revascularization Guideline",
+      "authority": "ESC/EACTS",
+      "year": 2018,
+      "domain": "revascularization",
+      "status": "active",
+      "vrn": "VRN-SER-0002",
+      "hash": "a12c07af429b12242f9f3c56d0063685085de88f4d60c0a85e856d8b7777824d",
+      "lineageParentSerId": null,
+      "createdAt": "2026-03-29T12:00:00.000Z"
+    },
+    {
+      "serId": "SER-DM-ADA-2024",
+      "title": "2024 ADA Standards of Care",
+      "authority": "ADA",
+      "year": 2024,
+      "domain": "diabetes",
+      "status": "active",
+      "vrn": "VRN-SER-0003",
+      "hash": "6786cd0076ec9562f98c174aeeccb04cb14ed225ccca6c469ef532441c53334a",
+      "lineageParentSerId": null,
+      "createdAt": "2026-03-29T12:00:00.000Z"
+    },
+    {
+      "serId": "SER-AKI-KDIGO-2012",
+      "title": "2012 KDIGO Acute Kidney Injury Guideline",
+      "authority": "KDIGO",
+      "year": 2012,
+      "domain": "aki",
+      "status": "active",
+      "vrn": "VRN-SER-0004",
+      "hash": "8410c2848eb789df7dc4bc2745a002c9bfcf387a13dbb2976e4ee3baaa6db375",
+      "lineageParentSerId": null,
+      "createdAt": "2026-03-29T12:00:00.000Z"
+    },
+    {
+      "serId": "SER-CKD-KDIGO-2023",
+      "title": "2023 KDIGO CKD Guideline",
+      "authority": "KDIGO",
+      "year": 2023,
+      "domain": "ckd",
+      "status": "active",
+      "vrn": "VRN-SER-0005",
+      "hash": "56aee5424cd6d1cf3a71186f38cd457a6d1f22dc43551c04b5a8916f2cfa6482",
+      "lineageParentSerId": null,
+      "createdAt": "2026-03-29T12:00:00.000Z"
+    },
+    {
+      "serId": "SER-ERAS-CARDIAC-2022",
+      "title": "2022 ERAS Cardiac Surgery Recommendations",
+      "authority": "ERAS Society",
+      "year": 2022,
+      "domain": "perioperative",
+      "status": "active",
+      "vrn": "VRN-SER-0006",
+      "hash": "47c53850c87ea1edf246af773cdfe45a767776c9625eb81f543e18209c08a86c",
+      "lineageParentSerId": null,
+      "createdAt": "2026-03-29T12:00:00.000Z"
+    },
+    {
+      "serId": "SER-PBM-STS-2022",
+      "title": "2022 STS Patient Blood Management Guidance",
+      "authority": "STS",
+      "year": 2022,
+      "domain": "blood-management",
+      "status": "active",
+      "vrn": "VRN-SER-0007",
+      "hash": "84c402736612f98d3dc7c732af38bde2efaf4b88069489cbd3082117d9e8bdd0",
+      "lineageParentSerId": null,
+      "createdAt": "2026-03-29T12:00:00.000Z"
+    }
+  ],
+  "evidenceObjects": [
+    {
+      "eoId": "EO-REVASC-002",
+      "serId": "SER-REVASC-ACC-2021",
+      "title": "CABG favorecida en enfermedad multivaso compleja",
+      "domain": "revascularization",
+      "status": "active",
+      "strength": "I-A",
+      "payload": {
+        "syntaxBand": "high",
+        "recommendation": "CABG preferred"
+      },
+      "vrn": "VRN-EO-0001",
+      "hash": "2c8c9a773d11c3217897acf3bd3b9bd1ef7f492bbc0c1573948f351af71fb992",
+      "lineageParentEoId": null,
+      "createdAt": "2026-03-29T12:00:00.000Z"
+    },
+    {
+      "eoId": "EO-REVASC-007",
+      "serId": "SER-REVASC-ESC-2018",
+      "title": "Heart team para revascularización en DM2 + multivaso",
+      "domain": "revascularization",
+      "status": "active",
+      "strength": "I-A",
+      "payload": {
+        "syntaxBand": "intermediate",
+        "recommendation": "Heart Team review"
+      },
+      "vrn": "VRN-EO-0002",
+      "hash": "700ca315283802d15f4a57826e5524e8d8e76d3c29a21bbfb9f8b89b06a8f49f",
+      "lineageParentEoId": null,
+      "createdAt": "2026-03-29T12:00:00.000Z"
+    },
+    {
+      "eoId": "EO-ACS-003",
+      "serId": "SER-REVASC-ACC-2021",
+      "title": "NSTEMI con anatomía compleja y estrategia de revascularización",
+      "domain": "acs",
+      "status": "active",
+      "strength": "I-B",
+      "payload": {
+        "condition": "NSTEMI",
+        "target": "multivessel CAD"
+      },
+      "vrn": "VRN-EO-0003",
+      "hash": "8cd9438bba39c34c681036efa65f63fc495a099cd6cceae685953492d819e821",
+      "lineageParentEoId": null,
+      "createdAt": "2026-03-29T12:00:00.000Z"
+    },
+    {
+      "eoId": "EO-AKI-001",
+      "serId": "SER-AKI-KDIGO-2012",
+      "title": "Prevención de AKI perioperatoria",
+      "domain": "aki",
+      "status": "active",
+      "strength": "I-B",
+      "payload": {
+        "risk": "cardiac surgery + CKD3"
+      },
+      "vrn": "VRN-EO-0004",
+      "hash": "9b1549154def770fc4fd941ae8db853680c98871658e487716e12041d40ae7be",
+      "lineageParentEoId": null,
+      "createdAt": "2026-03-29T12:00:00.000Z"
+    },
+    {
+      "eoId": "EO-ERAS-003",
+      "serId": "SER-ERAS-CARDIAC-2022",
+      "title": "Bundle ERAS en cirugía cardiaca",
+      "domain": "perioperative",
+      "status": "active",
+      "strength": "IIa-B",
+      "payload": {
+        "pathway": "ERAS Cardiac"
+      },
+      "vrn": "VRN-EO-0005",
+      "hash": "3c85b2ab4f58a0b621f9400b9352e2ff4a17a215fcf95f22a559af6876e87480",
+      "lineageParentEoId": null,
+      "createdAt": "2026-03-29T12:00:00.000Z"
+    },
+    {
+      "eoId": "EO-PBM-003",
+      "serId": "SER-PBM-STS-2022",
+      "title": "Manejo conservador de transfusión y anemia",
+      "domain": "blood-management",
+      "status": "active",
+      "strength": "IIa-B",
+      "payload": {
+        "focus": "PBM CABG"
+      },
+      "vrn": "VRN-EO-0006",
+      "hash": "402dacfd55c5002ca139fdf892b8070ded3fc703c70ac541cc835a4af21b706e",
+      "lineageParentEoId": null,
+      "createdAt": "2026-03-29T12:00:00.000Z"
+    },
+    {
+      "eoId": "EO-CKD-002",
+      "serId": "SER-CKD-KDIGO-2023",
+      "title": "Protección renal en ERC estadio 3",
+      "domain": "ckd",
+      "status": "active",
+      "strength": "I-B",
+      "payload": {
+        "ckdStage": "3"
+      },
+      "vrn": "VRN-EO-0007",
+      "hash": "e0432c10c2b62de21231d2ced12b7d267aa416a9b108d53cad1899efc3a94bbd",
+      "lineageParentEoId": null,
+      "createdAt": "2026-03-29T12:00:00.000Z"
+    },
+    {
+      "eoId": "EO-REVASC-003",
+      "serId": "SER-DM-ADA-2024",
+      "title": "DM2 como modulador de estrategia de revascularización",
+      "domain": "diabetes",
+      "status": "active",
+      "strength": "I-B",
+      "payload": {
+        "comorbidity": "DM2"
+      },
+      "vrn": "VRN-EO-0008",
+      "hash": "127e165efd31a4cce0a25732ba10f057a945ab1ab01b95e20d561410fabd53a9",
+      "lineageParentEoId": null,
+      "createdAt": "2026-03-29T12:00:00.000Z"
+    }
+  ],
+  "icdrRecords": [
+    {
+      "icdrId": "ICDR-REVASC-DM2-SYNTAX-001",
+      "topic": "DM2 + SYNTAX intermedio",
+      "status": "under_review",
+      "sourceA": "SER-REVASC-ACC-2021",
+      "sourceB": "SER-REVASC-ESC-2018",
+      "divergence": "ACC 2021 tiende a favorecer una lectura más fuerte hacia CABG en multivaso con complejidad creciente; ESC 2018 deja más espacio a discusión Heart Team en SYNTAX intermedio.",
+      "clinicalContext": "NSTEMI + CAD multivaso + DM2 + SYNTAX intermedio en caso CABG x3.",
+      "resolutionNote": "Mantener Heart Team obligatorio y exponer la divergencia en snapshot científico hasta consolidar CPO.",
+      "vrn": "VRN-ICDR-0001",
+      "hash": "2cf4f009fa405a0b79d54e5914ab271907ec0101f82c8f01a71a02542725fbbb",
+      "createdAt": "2026-03-29T12:00:00.000Z"
+    }
+  ],
+  "evidenceSnapshots": [
+    {
+      "snapshotId": "SNAPSHOT-CABG3-EL-0001",
+      "caseId": "CASE-CABG3-2026-00014",
+      "title": "Snapshot científico CABG x3",
+      "status": "active",
+      "serIds": [
+        "SER-REVASC-ACC-2021",
+        "SER-REVASC-ESC-2018",
+        "SER-DM-ADA-2024",
+        "SER-AKI-KDIGO-2012",
+        "SER-CKD-KDIGO-2023",
+        "SER-ERAS-CARDIAC-2022",
+        "SER-PBM-STS-2022"
+      ],
+      "eoIds": [
+        "EO-REVASC-002",
+        "EO-REVASC-007",
+        "EO-ACS-003",
+        "EO-AKI-001",
+        "EO-ERAS-003",
+        "EO-PBM-003",
+        "EO-CKD-002",
+        "EO-REVASC-003"
+      ],
+      "icdrIds": [
+        "ICDR-REVASC-DM2-SYNTAX-001"
+      ],
+      "summary": "Snapshot mínimo de revascularización, DM2, ERC3, AKI, ERAS y PBM para soportar el caso demo CABG x3 con divergencia leve ACC/ESC en SYNTAX intermedio.",
+      "vrn": "VRN-SNAPSHOT-0001",
+      "hash": "ce635f9dbde83b3118ff3aa0c8229f574e9e3e43f8e0fc98b7ffadda94a8075c",
+      "scientificDate": "2026-03-29",
+      "createdAt": "2026-03-29T12:00:00.000Z"
+    }
+  ],
+  "translationEvaluations": [
+    {
+      "eteId": "ETE-CASECABG3202600014-0001",
+      "caseId": "CASE-CABG3-2026-00014",
+      "ecs": 84,
+      "uci": 0.3,
+      "macClassification": "conditional",
+      "ddmoGateStatus": "pass",
+      "conflictCount": 1,
+      "status": "review",
+      "hash": "c9867160d2f8e8affa926f6bac924b320facc08fc48f5b3a963ebcf20bcb37f3",
+      "createdAt": "2026-05-01T18:40:49.885Z"
+    }
+  ],
+  "epistemicUncertaintyLayers": [
+    {
+      "eulId": "EUL-CASECABG3202600014-0001",
+      "caseId": "CASE-CABG3-2026-00014",
+      "eteId": "ETE-CASECABG3202600014-0001",
+      "level": "III",
+      "validationPolicy": "reinforced-validation",
+      "activationBlocked": false,
+      "requiredSignatures": [
+        "evidence-owner",
+        "specialist-reviewer",
+        "governance-duty-officer"
+      ],
+      "escalationThreshold": 0.6,
+      "rationale": "ICDR abierto mantiene fricción epistemológica reforzada; DDMO está en pass y no bloquea activación gobernada.",
+      "hash": "805d0d0676823434a037d7547392fdcfbf9615e70c911e24eb9540e1a6658760",
+      "createdAt": "2026-05-01T18:40:49.885Z"
+    }
+  ]
+}

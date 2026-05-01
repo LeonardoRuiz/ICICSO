@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://icicso.local/schemas/source/source_document.schema.json",
+  "title": "SourceDocument",
+  "description": "Documento fuente local gobernado dentro del corpus ICICSO.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "document_id",
+    "file_name",
+    "absolute_path",
+    "relative_path",
+    "document_type",
+    "layer",
+    "category",
+    "document_group",
+    "language",
+    "size_bytes",
+    "last_write_time_utc",
+    "hash_sha256",
+    "ingestion_timestamp_utc",
+    "source_status",
+    "derived_artifacts"
+  ],
+  "properties": {
+    "document_id": {
+      "type": "string",
+      "pattern": "^DOC-[A-Z0-9]{12}$"
+    },
+    "file_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "absolute_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "relative_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "extension": {
+      "type": "string"
+    },
+    "document_type": {
+      "type": "string",
+      "enum": [
+        "docx",
+        "pdf",
+        "spreadsheet",
+        "audio",
+        "other"
+      ]
+    },
+    "layer": {
+      "type": "string",
+      "enum": [
+        "ARCH",
+        "OUTPUT",
+        "L0",
+        "L1",
+        "L2",
+        "L3",
+        "L4",
+        "L5",
+        "L6",
+        "SUPPORT"
+      ]
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "architecture_core",
+        "core_output",
+        "foundation_governance",
+        "evidence_governance",
+        "translation_engine",
+        "epistemic_uncertainty",
+        "operative_orchestration",
+        "case_runtime",
+        "governance_consensus",
+        "supplementary"
+      ]
+    },
+    "document_group": {
+      "type": "string",
+      "enum": [
+        "architecture",
+        "output_artifacts",
+        "strategic_foundation",
+        "evidence",
+        "algorithmic_translation",
+        "uncertainty",
+        "orchestration",
+        "case_control",
+        "consensus",
+        "supporting_material"
+      ]
+    },
+    "language": {
+      "type": "string",
+      "minLength": 2
+    },
+    "version_detected": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "size_bytes": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "last_write_time_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "hash_sha256": {
+      "type": "string",
+      "pattern": "^[A-Fa-f0-9]{64}$"
+    },
+    "ingestion_timestamp_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source_status": {
+      "type": "string",
+      "enum": [
+        "local_source",
+        "ingested",
+        "deprecated",
+        "archived"
+      ]
+    },
+    "derived_artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  }
+}
+

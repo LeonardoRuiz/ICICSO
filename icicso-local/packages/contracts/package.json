@@ -1,0 +1,22 @@
+{
+    "name": "@icicso/contracts",
+    "version": "1.0.0",
+    "description": "Canonical type definitions and schemas for ICICSO Local",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc --watch",
+        "test": "jest",
+        "lint": "eslint src/**/*.ts",
+        "typecheck": "tsc --noEmit"
+    },
+    "dependencies": {
+        "@icicso/canonical-types": "workspace:*",
+        "zod": "^3.22.0"
+    },
+    "devDependencies": {
+        "@types/node": "^20.0.0",
+        "typescript": "^5.0.0"
+    }
+}

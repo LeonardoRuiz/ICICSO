@@ -1,0 +1,98 @@
+{
+  "seedMetadata": {
+    "seedId": "seed.registry-rwe.v1",
+    "title": "Registry / Real World Evidence Example",
+    "structuralExample": true,
+    "note": "Structured example of registry-derived evidence with limited portability."
+  },
+  "ser": {
+    "serId": "SER-REG-TAVI-0001",
+    "sourceDocumentId": "EDOC-REG-TAVI-2020",
+    "title": "Registry evidence for minimalist TAVI recovery pathway",
+    "evidenceType": "registry",
+    "clinicalDomain": "structural_heart",
+    "summary": "Registry experience suggests shorter ICU use with minimalist TAVI pathways in mature centers.",
+    "statements": [
+      {
+        "statementId": "SES-REG-TAVI-01",
+        "clinicalFunction": "postoperative-management",
+        "interventionClass": "care-bundle",
+        "interventionLabel": "Minimalist TAVI recovery bundle",
+        "effectDirection": "benefit",
+        "strength": "low",
+        "certainty": "low",
+        "decisionReadiness": "contextual-only",
+        "timeHorizon": "index-hospitalization",
+        "outcomes": [
+          { "outcomeCode": "icu-los", "effectDirection": "benefit", "note": "Lower ICU utilization in mature TAVI programs." }
+        ],
+        "conditions": ["mature structural heart program", "transfemoral TAVI"],
+        "exclusions": ["hemodynamic instability", "complex vascular access"],
+        "rationale": "Observed benefit depends heavily on center maturity and workflow discipline.",
+        "operationalContext": {
+          "implementationComplexity": "high",
+          "resourceDemand": "moderate",
+          "costRelevance": "high",
+          "operationalRelevance": "high",
+          "resourceRequirements": [
+            { "resourceType": "structural_heart_program", "role": "multidisciplinary_team", "quantity": 1, "unit": "program", "mandatory": true, "costCenter": "CV", "notes": null }
+          ],
+          "constraints": ["Requires established minimalist TAVI protocol and outcome surveillance."]
+        }
+      }
+    ],
+    "applicability": {
+      "clinicalDomain": "structural_heart",
+      "careSetting": "high_volume_tertiary_center",
+      "jurisdictions": ["global"],
+      "decisionReadiness": "contextual-only",
+      "population": {
+        "summary": "Adults undergoing transfemoral TAVI in mature centers.",
+        "ageBands": ["older_adult"],
+        "sexes": ["female", "male"],
+        "diagnoses": ["severe aortic stenosis"],
+        "procedures": ["transfemoral TAVI"],
+        "biomarkers": [],
+        "severity": "procedural_candidate",
+        "comorbidities": [],
+        "inclusionCriteria": ["mature TAVI program"],
+        "exclusionCriteria": ["need for surgical bailout"]
+      },
+      "dimensionAssessments": [
+        { "dimension": "population-fit", "score": 2, "rationale": "Population matches older TAVI cohort." },
+        { "dimension": "intervention-fit", "score": 2, "rationale": "Bundle is center-dependent." },
+        { "dimension": "setting-fit", "score": 1, "rationale": "Requires high-volume mature center." },
+        { "dimension": "jurisdiction-fit", "score": 2, "rationale": "Generalizable but still local-ops dependent." },
+        { "dimension": "resource-fit", "score": 1, "rationale": "Not portable to low-volume sites." }
+      ],
+      "implementationPreconditions": ["registry surveillance", "experienced TAVI team"]
+    },
+    "provenance": {
+      "sourceSystem": "manual-ingest",
+      "capturedAt": "2026-04-04T12:00:00Z",
+      "capturedBy": "icicso.evidence.curator",
+      "chainOfCustody": [
+        { "step": "derive-ser", "actor": "icicso.evidence.curator", "timestamp": "2026-04-04T12:00:00Z", "hashSha256": "ser-reg-tavi-01", "note": "Derived from registry example." }
+      ],
+      "legal": {
+        "licenseStatus": "licensed",
+        "attestationStatus": "attested",
+        "reviewPolicy": "cardiovascular-governance-board",
+        "retentionClass": "clinical_evidence_permanent"
+      },
+      "versioning": {
+        "canonicalId": "CANON-SER-REG-TAVI",
+        "version": "1.0.0",
+        "effectiveFrom": "2026-04-04",
+        "effectiveTo": null,
+        "supersedes": [],
+        "status": "active"
+      }
+    }
+  },
+  "expectedMapperBehavior": {
+    "shouldGenerateEo": true,
+    "expectedDecisionVerb": "defer_to_review",
+    "expectedReviewState": "needs-human-review"
+  }
+}

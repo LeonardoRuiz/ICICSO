@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://icicso.local/schemas/orchestration/clinical_pathway_object.schema.json",
+  "title": "ClinicalPathwayObject",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "cpo_id": {
+      "type": "string",
+      "pattern": "^CPO-[A-Z0-9_-]+$"
+    },
+    "gp_id": {
+      "type": "string",
+      "pattern": "^GP-[A-Z0-9_-]+$"
+    },
+    "eul_id": {
+      "type": "string",
+      "pattern": "^EUL-[A-Z0-9_-]+$"
+    },
+    "vrn": {
+      "type": "string",
+      "minLength": 1
+    },
+    "domain": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_population": {
+      "type": ["string", "null"]
+    },
+    "status": {
+      "$ref": "../common/enums.schema.json#/$defs/artifactStatus"
+    },
+    "phases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "phase_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": {
+            "type": ["string", "null"]
+          }
+        },
+        "required": ["phase_id", "label", "description"]
+      }
+    },
+    "readiness_gates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "gate_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "gate_type": {
+            "$ref": "../common/enums.schema.json#/$defs/gateType"
+          },
+          "phase_transition": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": ["gate_id", "gate_type", "phase_transition"]
+      }
+    },
+    "event_triggers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "cpo_id",
+    "gp_id",
+    "eul_id",
+    "vrn",
+    "domain",
+    "status",
+    "phases",
+    "readiness_gates",
+    "event_triggers"
+  ]
+}

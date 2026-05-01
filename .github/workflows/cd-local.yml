@@ -1,0 +1,36 @@
+name: CD Local
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy-local:
+    runs-on:
+      - self-hosted
+      - windows
+    timeout-minutes: 90
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run local CD
+        shell: pwsh
+        run: .\scripts\cd-local.ps1
+
+      - name: Upload deployment artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: icicso-cd-local-artifacts
+          path: dist/cicd
+          if-no-files-found: warn
+
+      - name: Publish summary
+        if: always()
+        shell: pwsh
+        run: |
+          if (Test-Path 'dist/cicd/smoke-summary.txt') {
+            Add-Content -Path $env:GITHUB_STEP_SUMMARY -Value "## ICICSO Local CD Summary"
+            Add-Content -Path $env:GITHUB_STEP_SUMMARY -Value ""
+            Get-Content 'dist/cicd/smoke-summary.txt' | Add-Content -Path $env:GITHUB_STEP_SUMMARY
+          }

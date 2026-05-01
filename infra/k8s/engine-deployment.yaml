@@ -1,0 +1,509 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: icicso-engine
+  namespace: icicso-local
+  labels:
+    app.kubernetes.io/name: icicso-engine
+    app.kubernetes.io/part-of: icicso
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: icicso-engine
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: icicso-engine
+        app.kubernetes.io/part-of: icicso
+    spec:
+      initContainers:
+        - name: wait-for-postgres
+          image: postgres:16-alpine
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: icicso-app-config
+            - secretRef:
+                name: icicso-app-secret
+          command:
+            - sh
+            - -lc
+            - until pg_isready -h "$POSTGRES_HOST" -p "$POSTGRES_PORT" -U "$POSTGRES_USER" -d "$POSTGRES_DB"; do echo "waiting for postgres"; sleep 2; done
+        - name: db-bootstrap
+          image: icicso/node-runtime:dev
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: icicso-app-config
+            - secretRef:
+                name: icicso-app-secret
+          command:
+            - sh
+            - -lc
+            - pnpm --filter @icicso/database db:push && pnpm --filter @icicso/database db:seed
+      containers:
+        - name: auth-service
+          image: icicso/node-runtime:dev
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: icicso-app-config
+            - secretRef:
+                name: icicso-app-secret
+          command: ["sh", "-lc", "node apps/auth-service/dist/index.js"]
+          ports:
+            - containerPort: 3101
+              name: auth
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: auth
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: auth
+            initialDelaySeconds: 20
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 40m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 192Mi
+        - name: identity-service
+          image: icicso/node-runtime:dev
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: icicso-app-config
+            - secretRef:
+                name: icicso-app-secret
+          command: ["sh", "-lc", "node apps/identity-service/dist/index.js"]
+          ports:
+            - containerPort: 3102
+              name: identity
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: identity
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: identity
+            initialDelaySeconds: 20
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 40m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 192Mi
+        - name: audit-service
+          image: icicso/node-runtime:dev
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: icicso-app-config
+            - secretRef:
+                name: icicso-app-secret
+          command: ["sh", "-lc", "node apps/audit-service/dist/index.js"]
+          ports:
+            - containerPort: 3103
+              name: audit
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: audit
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: audit
+            initialDelaySeconds: 20
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 40m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 192Mi
+        - name: evidence-lake-service
+          image: icicso/node-runtime:dev
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: icicso-app-config
+            - secretRef:
+                name: icicso-app-secret
+          command: ["sh", "-lc", "node apps/evidence-lake-service/dist/index.js"]
+          ports:
+            - containerPort: 3104
+              name: evidence
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: evidence
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: evidence
+            initialDelaySeconds: 20
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 40m
+              memory: 80Mi
+            limits:
+              cpu: 200m
+              memory: 192Mi
+        - name: ghl-service
+          image: icicso/node-runtime:dev
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: icicso-app-config
+            - secretRef:
+                name: icicso-app-secret
+          command: ["sh", "-lc", "node apps/ghl-service/dist/index.js"]
+          ports:
+            - containerPort: 3105
+              name: ghl
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: ghl
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: ghl
+            initialDelaySeconds: 20
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 40m
+              memory: 80Mi
+            limits:
+              cpu: 200m
+              memory: 192Mi
+        - name: kbol-service
+          image: icicso/node-runtime:dev
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: icicso-app-config
+            - secretRef:
+                name: icicso-app-secret
+          command: ["sh", "-lc", "node apps/kbol-service/dist/index.js"]
+          ports:
+            - containerPort: 3106
+              name: kbol
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: kbol
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: kbol
+            initialDelaySeconds: 20
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 40m
+              memory: 80Mi
+            limits:
+              cpu: 200m
+              memory: 192Mi
+        - name: storage-service
+          image: icicso/node-runtime:dev
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: icicso-app-config
+            - secretRef:
+                name: icicso-app-secret
+          command: ["sh", "-lc", "node apps/storage-service/dist/index.js"]
+          ports:
+            - containerPort: 3107
+              name: storage
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: storage
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: storage
+            initialDelaySeconds: 20
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 40m
+              memory: 80Mi
+            limits:
+              cpu: 200m
+              memory: 192Mi
+        - name: terminology-service
+          image: icicso/node-runtime:dev
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: icicso-app-config
+            - secretRef:
+                name: icicso-app-secret
+          command: ["sh", "-lc", "node apps/terminology-service/dist/index.js"]
+          ports:
+            - containerPort: 3109
+              name: terminology
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: terminology
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: terminology
+            initialDelaySeconds: 20
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 40m
+              memory: 80Mi
+            limits:
+              cpu: 200m
+              memory: 192Mi
+        - name: data-governance-service
+          image: icicso/node-runtime:dev
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: icicso-app-config
+            - secretRef:
+                name: icicso-app-secret
+          command: ["sh", "-lc", "node apps/data-governance-service/dist/index.js"]
+          ports:
+            - containerPort: 3110
+              name: governance
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: governance
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: governance
+            initialDelaySeconds: 20
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 40m
+              memory: 96Mi
+            limits:
+              cpu: 200m
+              memory: 192Mi
+        - name: runbook-service
+          image: icicso/node-runtime:dev
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: icicso-app-config
+            - secretRef:
+                name: icicso-app-secret
+          command: ["sh", "-lc", "node apps/runbook-service/dist/index.js"]
+          ports:
+            - containerPort: 3111
+              name: runbook
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: runbook
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: runbook
+            initialDelaySeconds: 20
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 40m
+              memory: 80Mi
+            limits:
+              cpu: 200m
+              memory: 192Mi
+        - name: readiness-service
+          image: icicso/node-runtime:dev
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: icicso-app-config
+            - secretRef:
+                name: icicso-app-secret
+          command: ["sh", "-lc", "node apps/readiness-service/dist/index.js"]
+          ports:
+            - containerPort: 3112
+              name: readiness
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: readiness
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: readiness
+            initialDelaySeconds: 20
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 40m
+              memory: 96Mi
+            limits:
+              cpu: 200m
+              memory: 192Mi
+        - name: case-control-service
+          image: icicso/node-runtime:dev
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: icicso-app-config
+            - secretRef:
+                name: icicso-app-secret
+          command: ["sh", "-lc", "node apps/case-control-service/dist/index.js"]
+          ports:
+            - containerPort: 3113
+              name: casecontrol
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: casecontrol
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: casecontrol
+            initialDelaySeconds: 20
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 50m
+              memory: 96Mi
+            limits:
+              cpu: 250m
+              memory: 224Mi
+        - name: systemic-risk-service
+          image: icicso/node-runtime:dev
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: icicso-app-config
+            - secretRef:
+                name: icicso-app-secret
+          command: ["sh", "-lc", "node apps/systemic-risk-service/dist/index.js"]
+          ports:
+            - containerPort: 3114
+              name: systemic
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: systemic
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: systemic
+            initialDelaySeconds: 20
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 50m
+              memory: 96Mi
+            limits:
+              cpu: 250m
+              memory: 224Mi
+        - name: cqoi-service
+          image: icicso/node-runtime:dev
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: icicso-app-config
+            - secretRef:
+                name: icicso-app-secret
+          command: ["sh", "-lc", "node apps/cqoi-service/dist/index.js"]
+          ports:
+            - containerPort: 3115
+              name: cqoi
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: cqoi
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: cqoi
+            initialDelaySeconds: 20
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 50m
+              memory: 96Mi
+            limits:
+              cpu: 250m
+              memory: 224Mi
+        - name: semantic-terminology-engine
+          image: icicso/semantic-terminology-engine:dev
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: icicso-app-config
+            - secretRef:
+                name: icicso-app-secret
+          ports:
+            - containerPort: 8000
+              name: semantic
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: semantic
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: semantic
+            initialDelaySeconds: 20
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 300m
+              memory: 384Mi

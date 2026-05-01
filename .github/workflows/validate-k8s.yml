@@ -1,0 +1,46 @@
+name: Validate Kubernetes
+
+on:
+  pull_request:
+    paths:
+      - "infra/k8s/**"
+      - "scripts/ci-local.*"
+      - ".github/workflows/validate-k8s.yml"
+  push:
+    paths:
+      - "infra/k8s/**"
+      - "scripts/ci-local.*"
+      - ".github/workflows/validate-k8s.yml"
+
+jobs:
+  validate-k8s:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Setup kubectl
+        uses: azure/setup-kubectl@v4
+        with:
+          version: v1.34.1
+
+      - name: Make shell scripts executable
+        run: chmod +x scripts/*.sh
+
+      - name: Validate manifests only
+        shell: bash
+        run: ./scripts/ci-local.sh --validate-only
+
+      - name: Upload rendered manifests
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: icicso-k8s-rendered
+          path: dist/cicd/k8s-rendered.yaml
+          if-no-files-found: warn

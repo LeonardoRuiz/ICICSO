@@ -1,0 +1,2 @@
+timestamp	dataset	url	destination	bytes	status	message
+2026-04-24T15:55:33.619285+00:00	SNOMED_CT	N/A	C:\Users\leona\OneDrive\Desktop\MxRep\ICICSO\services\ingestion-orquestador\tests\_tmp\terminology_inline_checks\case1\01_RAW\SNOMED_CT\README.txt	20	manual_required	licencia requerida

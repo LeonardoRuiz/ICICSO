@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ICICSO Repo HTML Hub</title>
+  <link rel="stylesheet" href="../../../dashboard/assets/icicso-palette.css">
+  <style>
+/* ICICSO_DARK_OVERRIDE v3 */
+:root {
+  color-scheme: dark;
+  --icicso-bg: #050c10;
+  --icicso-panel: #0b1418;
+  --icicso-panel-strong: #0a1115;
+  --icicso-panel-soft: #0f1a1f;
+  --icicso-ink: #eef8f7;
+  --icicso-ink-soft: #c8dbd9;
+  --icicso-ink-dim: #8da7a3;
+  --icicso-line: rgba(111, 153, 147, 0.22);
+  --icicso-line-strong: rgba(155, 194, 187, 0.32);
+  --icicso-accent: #5fc9bb;
+  --icicso-accent-warm: #d6a25e;
+  --icicso-accent-cool: #7fb3d5;
+  --icicso-ok: #76d8a8;
+  --icicso-warn: #d6a25e;
+  --icicso-bad: #cc6f73;
+}
+
+html, body {
+  background-color: var(--icicso-bg) !important;
+  color: var(--icicso-ink) !important;
+}
+
+body {
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif !important;
+  line-height: 1.6 !important;
+}
+
+a,
+a:visited {
+  color: var(--icicso-accent) !important;
+}
+
+a:hover {
+  color: #86ddd3 !important;
+}
+
+hr {
+  border-color: var(--icicso-line) !important;
+}
+
+table {
+  border-color: var(--icicso-line) !important;
+  background-color: var(--icicso-panel) !important;
+}
+
+th,
+td {
+  border-color: var(--icicso-line) !important;
+  color: var(--icicso-ink) !important;
+}
+
+input,
+textarea,
+select,
+button {
+  background-color: var(--icicso-panel-strong) !important;
+  color: var(--icicso-ink) !important;
+  border-color: var(--icicso-line) !important;
+}
+
+code,
+pre {
+  background-color: var(--icicso-panel-strong) !important;
+  color: var(--icicso-ink) !important;
+  border-color: var(--icicso-line) !important;
+}
+
+header,
+footer,
+nav,
+section,
+article,
+aside,
+main,
+.panel,
+.card,
+.tile,
+.box,
+.container,
+.shell,
+.hero,
+.surface,
+.module,
+.workspace,
+.table-wrap,
+.table-container,
+.panel-group {
+  background-color: var(--icicso-panel) !important;
+  color: var(--icicso-ink) !important;
+  border-color: var(--icicso-line) !important;
+}
+
+.badge,
+.chip,
+.tag,
+.pill,
+.status {
+  background-color: var(--icicso-panel-strong) !important;
+  border-color: var(--icicso-line) !important;
+  color: var(--icicso-ink) !important;
+}
+
+.shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  gap: 18px;
+  padding: 24px;
+}
+
+.panel {
+  border: 1px solid var(--icicso-line);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.45);
+}
+
+.grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.grid.primary {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.card {
+  border: 1px solid var(--icicso-line);
+  border-radius: 16px;
+  padding: 14px;
+  background: var(--icicso-panel-strong);
+  display: grid;
+  gap: 10px;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid var(--icicso-line);
+  color: var(--icicso-ink);
+  text-decoration: none;
+  transition: transform 140ms ease, border-color 140ms ease;
+}
+
+.link.primary {
+  background: var(--icicso-accent);
+  color: #031012 !important;
+  border-color: transparent;
+  box-shadow: 0 16px 30px rgba(95, 201, 187, 0.18);
+}
+
+.link.emphasis {
+  border-color: var(--icicso-line-strong);
+  background: rgba(95, 201, 187, 0.08);
+}
+
+.link:hover {
+  transform: translateY(-1px);
+  border-color: rgba(95, 201, 187, 0.6);
+}
+
+.callout {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid var(--icicso-line-strong);
+  background: rgba(15, 26, 31, 0.85);
+}
+
+.callout strong {
+  font-size: 1rem;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--icicso-line);
+  background: var(--icicso-panel-strong);
+  font-size: 0.75rem;
+  color: var(--icicso-ink-soft);
+}
+
+.health-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.health-card {
+  border: 1px solid var(--icicso-line);
+  border-radius: 14px;
+  padding: 12px;
+  background: var(--icicso-panel-strong);
+  display: grid;
+  gap: 8px;
+}
+
+.health-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--icicso-ink-dim);
+  box-shadow: 0 0 0 3px rgba(141, 180, 173, 0.12);
+}
+
+.dot.ok {
+  background: var(--icicso-ok);
+  box-shadow: 0 0 0 3px rgba(118, 216, 168, 0.18);
+}
+
+.dot.bad {
+  background: var(--icicso-bad);
+  box-shadow: 0 0 0 3px rgba(204, 111, 115, 0.18);
+}
+
+.dot.warn {
+  background: var(--icicso-warn);
+  box-shadow: 0 0 0 3px rgba(214, 162, 94, 0.18);
+}
+
+</style>
+</head>
+<body>
+  <div class="shell">
+    <section class="panel">
+      <h1>ICICSO Repo HTML Hub</h1>
+      <p>Acceso centralizado a todas las superficies HTML del repo. Esta página vive dentro de ICICSO Local para que puedas abrir todo desde el runtime.</p>
+      <div class="grid primary" style="margin-top: 14px;">
+        <div class="callout">
+          <strong>Ruta rápida (Non Plus Ultra)</strong>
+          <span class="pill">clicks recomendados</span>
+          <a class="link primary" href="file:///c:/Users/leona/OneDrive/Desktop/MxRep/ICICSO/dashboard/index.html" target="_blank" rel="noopener noreferrer">Abrir dashboard repo</a>
+          <a class="link emphasis" href="file:///c:/Users/leona/OneDrive/Desktop/MxRep/ICICSO/dashboard/document-ingestion.html" target="_blank" rel="noopener noreferrer">Consola de ingesta</a>
+          <a class="link emphasis" href="file:///c:/Users/leona/OneDrive/Desktop/MxRep/ICICSO/icicso/apps/emulator/index.html" target="_blank" rel="noopener noreferrer">Emulador canónico</a>
+          <a class="link emphasis" href="file:///c:/Users/leona/OneDrive/Desktop/MxRep/ICICSO/icicso-local/apps/desktop-emulator/index.html" target="_blank" rel="noopener noreferrer">ICICSO Local runtime</a>
+          <a class="link emphasis" href="file:///c:/Users/leona/OneDrive/Desktop/MxRep/ICICSO/icicso-local/apps/desktop-emulator/audit-links.html" target="_blank" rel="noopener noreferrer">Audit & health hub</a>
+        </div>
+        <div class="callout">
+          <strong>Checklist de conexión</strong>
+          <span class="pill">verificación</span>
+          <div class="small">1. `Gateway health` responde.</div>
+          <div class="small">2. `Ingesta health` responde.</div>
+          <div class="small">3. `Consola de ingesta` carga catálogos.</div>
+          <div class="small">4. `Emulador canónico` muestra feed.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Superficies principales</h2>
+      <div class="grid" id="coreGrid"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Health automático</h2>
+      <p>Semáforo vivo para endpoints críticos. Se actualiza al cargar y con el botón refrescar.</p>
+      <div class="actions" style="margin-top: 12px;">
+        <button class="link emphasis" id="health-refresh" type="button">Refrescar health</button>
+      </div>
+      <div class="health-grid" id="healthGrid" style="margin-top: 12px;"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Evidencia CABG (procesada)</h2>
+      <div class="grid" id="evidenceGrid"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Evidencia CABG (landing pages)</h2>
+      <details>
+        <summary>Mostrar todas las landing pages (A01-E50)</summary>
+        <div class="grid" id="landingGrid" style="margin-top: 14px;"></div>
+      </details>
+    </section>
+
+    <section class="panel">
+      <h2>Documentación y runtime</h2>
+      <div class="grid" id="docsGrid"></div>
+      <div class="callout" style="margin-top: 14px;">
+        <strong>Auditoría HTML local</strong>
+        <span class="pill">verificación</span>
+        <a class="link emphasis" href="file:///c:/Users/leona/OneDrive/Desktop/MxRep/ICICSO/docs/ICICSO_LOCAL_HTML_AUDIT.md" target="_blank" rel="noopener noreferrer">Abrir checklist de conexiones</a>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Feeds y configuraciones</h2>
+      <div class="grid" id="configGrid"></div>
+    </section>
+  </div>
+
+  <script>
+// ICICSO_LEVEL_TAGGER v2
+(function () {
+  const levelRegex = /\bL(1[0-2]|[0-9])\b/;
+  const preferredTargets = ".module-card,.continuum-node,.continuum-card,.block-card,.block-node,.workspace-card,.feed-document,.gcl-record,.slice-stage,.slice-card,.ingestion-card,.catalog-row,.catalog-card";
+  const fallbackTargets = "article,section";
+  const ignoredSelectors = "pre,code,textarea,script,style";
+
+  function applyLevel(element, level) {
+    if (!element || !level) return;
+    const cls = "l" + level.slice(1);
+    element.classList.add(cls);
+    element.setAttribute("data-level", level);
+  }
+
+  function findTarget(node) {
+    const preferred = node.closest(preferredTargets);
+    if (preferred) return preferred;
+    const fallback = node.closest(fallbackTargets);
+    return fallback || node;
+  }
+
+  function scan() {
+    const nodes = document.querySelectorAll("body *:not(script):not(style)");
+    nodes.forEach((node) => {
+      if (node.matches(ignoredSelectors)) return;
+      if (node.children && node.children.length) return;
+      const text = (node.textContent || "").trim();
+      const match = text.match(levelRegex);
+      if (!match) return;
+      const level = "L" + match[1];
+      const target = findTarget(node);
+      applyLevel(target, level);
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", scan);
+  } else {
+    scan();
+  }
+})();
+</script><script>
+// ICICSO_CATALOGS_LOADER v1
+(function () {
+  const embedded = {
+  "layers": ["ING", "SER", "EO", "EL", "DDMO", "EUL", "KBOL", "CPO", "TAM", "EVT", "RDY-G", "CAE"],
+  "continuum_stages": ["ING", "SER", "EO", "EL", "DDMO", "EUL", "KBOL", "CPO", "TAM", "EVT", "RDY-G", "CAE"],
+  "categories": [
+    "user-upload",
+    "imported",
+    "legacy",
+    "research",
+    "guideline",
+    "evidence",
+    "case",
+    "protocol",
+    "dataset",
+    "imaging",
+    "lab",
+    "surgical-report",
+    "operative-note",
+    "discharge-summary"
+  ],
+  "document_groups": [
+    "continuum-intake",
+    "CABG",
+    "Valvular",
+    "Aorta",
+    "ECMO",
+    "Shock",
+    "Trauma Toracico",
+    "Intervencionismo",
+    "TAVI",
+    "PCI",
+    "Structural Heart",
+    "Reintervencion",
+    "Hemodinamia",
+    "Arritmias",
+    "Insuficiencia Cardiaca",
+    "UCI Cardiaca",
+    "UCI Quirurgica",
+    "Anestesia Cardiaca",
+    "Rehabilitacion Cardiaca",
+    "Emergencia Cardiaca",
+    "Emergencia Toracica"
+  ],
+  "document_types": [
+    "guideline",
+    "protocol",
+    "case",
+    "dataset",
+    "imaging",
+    "lab",
+    "surgical-report",
+    "operative-note",
+    "discharge-summary",
+    "consent",
+    "device-spec",
+    "clinical-trial",
+    "registry",
+    "systematic-review",
+    "meta-analysis",
+    "cohort-study"
+  ],
+  "vrn_statuses": ["ACTIVE", "PENDING", "SUNSET"],
+  "languages": ["en", "es", "pt", "fr", "de", "it"],
+  "defaults": {
+    "layer": "ING",
+    "continuum_stage": "ING",
+    "category": "user-upload",
+    "document_group": "continuum-intake",
+    "document_type": "guideline",
+    "vrn_status": "ACTIVE",
+    "language": "en"
+  }
+}
+;
+  const candidates = [
+    "file:///c:/Users/leona/OneDrive/Desktop/MxRep/ICICSO/config/runtime/ingestion-catalogs.json",
+    "../config/runtime/ingestion-catalogs.json",
+    "../../config/runtime/ingestion-catalogs.json",
+    "../../../config/runtime/ingestion-catalogs.json"
+  ];
+  function setCatalogs(payload) {
+    if (payload && typeof payload === "object") {
+      window.ICICSO_CATALOGS = payload;
+    }
+  }
+  setCatalogs(embedded);
+  (async function () {
+    for (const url of candidates) {
+      try {
+        const resp = await fetch(url);
+        if (resp.ok) {
+          const json = await resp.json();
+          setCatalogs(json);
+          break;
+        }
+      } catch (err) {
+        // ignore
+      }
+    }
+  })();
+})();
+</script>
+<script>
+// ICICSO_HEALTH_CHECKS v1
+(function () {
+  const healthGrid = document.getElementById("healthGrid");
+  const refreshButton = document.getElementById("health-refresh");
+  const checks = [
+    { label: "Gateway health", url: "http://127.0.0.1:3100/health" },
+    { label: "Block1 overview", url: "http://127.0.0.1:3100/block1/overview" },
+    { label: "Audit events", url: "http://127.0.0.1:3100/audit/events" },
+    { label: "Ingesta health", url: "http://127.0.0.1:8000/health" },
+    { label: "Ingesta feed", url: "http://127.0.0.1:8000/api/source-documents/ingestions/feed" },
+    { label: "GCL feed", url: "http://127.0.0.1:8000/api/source-documents/governance/feed" },
+    { label: "MinIO health", url: "http://127.0.0.1:9000/minio/health/live" },
+    { label: "MinIO console", url: "http://127.0.0.1:9001" },
+    { label: "Emulador local", url: "http://127.0.0.1:8090/index.html" },
+    { label: "pgAdmin (ops)", url: "http://127.0.0.1:5050", optional: true },
+    { label: "Kafka UI (ops)", url: "http://127.0.0.1:8080", optional: true },
+  ];
+
+  function renderChecks(states) {
+    if (!healthGrid) return;
+    healthGrid.innerHTML = checks
+      .map((check) => {
+        const state = states[check.url] || { status: "warn", detail: "pendiente" };
+        const optionalNote = check.optional ? " (ops)" : "";
+        return `
+          <div class="health-card">
+            <div class="health-title">
+              <span class="dot ${state.status}"></span>
+              <span>${check.label}${optionalNote}</span>
+            </div>
+            <div class="small">${check.url}</div>
+            <div class="small">${check.optional && state.status === "bad" ? "Opcional (perfil ops)" : state.detail}</div>
+          </div>
+        `;
+      })
+      .join("");
+  }
+
+  async function probe(url) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 2500);
+    try {
+      const resp = await fetch(url, { signal: controller.signal });
+      clearTimeout(timer);
+      return {
+        status: resp.ok ? "ok" : "bad",
+        detail: resp.ok ? `OK (${resp.status})` : `Error (${resp.status})`,
+      };
+    } catch (err) {
+      clearTimeout(timer);
+      return { status: "bad", detail: "Sin respuesta" };
+    }
+  }
+
+  async function runChecks() {
+    const states = {};
+    renderChecks(states);
+    for (const check of checks) {
+      states[check.url] = { status: "warn", detail: "verificando..." };
+      renderChecks(states);
+      states[check.url] = await probe(check.url);
+      renderChecks(states);
+    }
+  }
+
+  if (refreshButton) {
+    refreshButton.addEventListener("click", runChecks);
+  }
+  runChecks();
+})();
+</script></body>
+</html>
+
+
+
+
+
+
+

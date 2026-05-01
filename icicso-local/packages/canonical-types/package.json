@@ -1,0 +1,16 @@
+{
+  "name": "@icicso/canonical-types",
+  "version": "1.0.0",
+  "description": "Canonical shared types for ICICSO Block 1 services",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}

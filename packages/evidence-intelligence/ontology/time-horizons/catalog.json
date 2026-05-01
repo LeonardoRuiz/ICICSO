@@ -1,0 +1,29 @@
+{
+  "catalogId": "icicso.time-horizons.v1",
+  "code": "time-horizons",
+  "label": "Time Horizons",
+  "description": "Canonical temporal windows used for evidence interpretation, EO execution and outcome anchoring.",
+  "usageNotes": [
+    "Use `code` as the persisted normalized horizon.",
+    "Detailed temporal offsets can be stored separately if exact timestamps are known."
+  ],
+  "entries": [
+    { "id": "time.immediate", "code": "immediate", "label": "Immediate", "description": "Immediate horizon before elapsed time accumulates.", "usageNotes": ["Use for triggers that are actioned at recognition."], "sortOrder": 1 },
+    { "id": "time.intraoperative", "code": "intraoperative", "label": "Intraoperative", "description": "Horizon limited to the ongoing operative or procedural encounter.", "usageNotes": ["Use only during the active procedure."], "sortOrder": 2 },
+    { "id": "time.postoperative-24h", "code": "postoperative-24h", "label": "Postoperative 24h", "description": "First 24 hours after surgery or procedure.", "usageNotes": ["Preferred over generic short-term when the first day matters."], "sortOrder": 3 },
+    { "id": "time.postoperative-48h", "code": "postoperative-48h", "label": "Postoperative 48h", "description": "First 48 hours after surgery or procedure.", "usageNotes": ["Useful for early recovery milestones."], "sortOrder": 4 },
+    { "id": "time.index-hospitalization", "code": "index-hospitalization", "label": "Index Hospitalization", "description": "Entire initial hospitalization episode.", "usageNotes": ["Use for LOS, bundle adherence and discharge readiness."], "sortOrder": 5 },
+    { "id": "time.icu-stay", "code": "icu-stay", "label": "ICU Stay", "description": "Duration of ICU admission or ICU phase.", "usageNotes": ["Use when timing is ICU-bounded rather than hospital-bounded."], "sortOrder": 6 },
+    { "id": "time.7-days", "code": "7-days", "label": "7 Days", "description": "Seven-day follow-up horizon.", "usageNotes": ["Use for early complications or rescue endpoints."], "sortOrder": 7 },
+    { "id": "time.30-days", "code": "30-days", "label": "30 Days", "description": "Thirty-day follow-up horizon.", "usageNotes": ["Common for perioperative quality reporting."], "sortOrder": 8 },
+    { "id": "time.90-days", "code": "90-days", "label": "90 Days", "description": "Ninety-day follow-up horizon.", "usageNotes": ["Preferred when postoperative effects extend beyond 30 days."], "sortOrder": 9 },
+    { "id": "time.6-months", "code": "6-months", "label": "6 Months", "description": "Six-month follow-up horizon.", "usageNotes": ["Useful for medium-term recovery and symptom outcomes."], "sortOrder": 10 },
+    { "id": "time.1-year", "code": "1-year", "label": "1 Year", "description": "One-year follow-up horizon.", "usageNotes": ["Common horizon for durable clinical endpoints."], "sortOrder": 11 },
+    { "id": "time.5-years", "code": "5-years", "label": "5 Years", "description": "Five-year follow-up horizon.", "usageNotes": ["Use for medium-to-long durability evidence."], "sortOrder": 12 },
+    { "id": "time.long-term", "code": "long-term", "label": "Long-term", "description": "Long-term horizon beyond fixed short and medium checkpoints.", "usageNotes": ["Use when evidence reports durable or lifetime effects without a single standard cutpoint."], "sortOrder": 13 }
+  ],
+  "constraints": {
+    "uniqueFields": ["id", "code", "label", "sortOrder"],
+    "requiredFields": ["id", "code", "label", "description", "usageNotes"]
+  }
+}

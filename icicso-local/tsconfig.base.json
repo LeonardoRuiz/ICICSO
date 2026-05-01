@@ -1,0 +1,39 @@
+{
+    "compilerOptions": {
+        "target": "ES2022",
+        "lib": [
+            "ES2022"
+        ],
+        "module": "CommonJS",
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "declaration": true,
+        "declarationMap": true,
+        "sourceMap": true,
+        "removeComments": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "strictFunctionTypes": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUncheckedIndexedAccess": true,
+        "exactOptionalPropertyTypes": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "incremental": true,
+        "tsBuildInfoFile": "node_modules/.cache/tsconfig.tsbuildinfo",
+        "baseUrl": ".",
+        "paths": {
+            "@icicso/canonical-types": ["./packages/canonical-types/dist", "./packages/canonical-types/src"],
+            "@icicso/config": ["./packages/config/dist", "./packages/config/src"],
+            "@icicso/contracts": ["./packages/contracts/dist", "./packages/contracts/src"],
+            "@icicso/database": ["./packages/database/dist", "./packages/database/src"],
+            "@icicso/logger": ["./packages/logger/dist", "./packages/logger/src"],
+            "@icicso/security": ["./packages/security/dist", "./packages/security/src"]
+        }
+    }
+}

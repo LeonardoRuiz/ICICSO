@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://icicso.local/schemas/evidence/eo.schema.json",
+  "title": "EO",
+  "description": "Objeto de evidencia computable derivado de un SER y trazable a su fuente.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "eo_id",
+    "ser_id",
+    "source_document_id",
+    "statement",
+    "domain",
+    "applicability_context",
+    "evidence_strength",
+    "created_at_utc",
+    "created_by",
+    "version_id",
+    "status"
+  ],
+  "properties": {
+    "eo_id": {
+      "type": "string",
+      "pattern": "^EO-[A-Z0-9_-]{8,}$"
+    },
+    "ser_id": {
+      "type": "string",
+      "pattern": "^SER-[A-Z0-9_-]{8,}$"
+    },
+    "source_document_id": {
+      "type": "string",
+      "pattern": "^DOC-[A-Z0-9]{12}$"
+    },
+    "statement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "domain": {
+      "type": "string",
+      "minLength": 1
+    },
+    "applicability_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "population",
+        "setting"
+      ],
+      "properties": {
+        "population": {
+          "type": "string",
+          "minLength": 1
+        },
+        "setting": {
+          "type": "string",
+          "minLength": 1
+        },
+        "inclusion_criteria": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "exclusion_criteria": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "evidence_strength": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "loe",
+        "cor"
+      ],
+      "properties": {
+        "loe": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cor": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "confidence_note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "traceability": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "source_excerpt": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "methodology_note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "created_at_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "created_by": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "superseded",
+        "deprecated"
+      ]
+    }
+  }
+}
+

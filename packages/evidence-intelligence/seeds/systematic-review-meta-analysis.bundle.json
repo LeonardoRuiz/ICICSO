@@ -1,0 +1,100 @@
+{
+  "seedMetadata": {
+    "seedId": "seed.systematic-review-meta-analysis.v1",
+    "title": "Systematic Review and Meta-analysis Example",
+    "structuralExample": true,
+    "note": "Structured synthesis example with realistic meta-analytic semantics."
+  },
+  "ser": {
+    "serId": "SER-META-SSI-0001",
+    "sourceDocumentId": "EDOC-META-SSI-2023",
+    "title": "Do not extend prophylactic antibiotics beyond indicated perioperative window in elective colorectal surgery",
+    "evidenceType": "meta-analysis",
+    "clinicalDomain": "colorectal_surgery",
+    "summary": "Extended prophylaxis beyond the standard perioperative window did not improve SSI outcomes and may increase adverse effects.",
+    "statements": [
+      {
+        "statementId": "SES-META-SSI-01",
+        "clinicalFunction": "prevention",
+        "interventionClass": "drug",
+        "interventionLabel": "Standard perioperative antimicrobial prophylaxis only",
+        "comparatorLabel": "Extended postoperative prophylaxis",
+        "effectDirection": "no-benefit",
+        "strength": "high",
+        "certainty": "moderate",
+        "decisionReadiness": "ready-with-local-review",
+        "timeHorizon": "30-days",
+        "outcomes": [
+          { "outcomeCode": "infection", "effectDirection": "no-benefit", "note": "No reduction in surgical site infection." },
+          { "outcomeCode": "adverse-event", "effectDirection": "harm", "note": "Higher drug-related adverse effects and resistance pressure." }
+        ],
+        "conditions": ["elective colorectal surgery", "routine prophylaxis indicated"],
+        "exclusions": ["existing intra-abdominal infection"],
+        "rationale": "Extended antimicrobial duration should not be carried forward as routine protocol.",
+        "operationalContext": {
+          "implementationComplexity": "low",
+          "resourceDemand": "low",
+          "costRelevance": "moderate",
+          "operationalRelevance": "high",
+          "resourceRequirements": [
+            { "resourceType": "antimicrobial-stewardship", "role": "pharmacy", "quantity": 1, "unit": "protocol", "mandatory": true, "costCenter": "PHARM", "notes": null }
+          ],
+          "constraints": ["Must align with local SSI prevention bundle."]
+        }
+      }
+    ],
+    "applicability": {
+      "clinicalDomain": "colorectal_surgery",
+      "careSetting": "perioperative_inpatient_care",
+      "jurisdictions": ["global", "latam"],
+      "decisionReadiness": "ready-with-local-review",
+      "population": {
+        "summary": "Adults undergoing elective colorectal surgery.",
+        "ageBands": ["adult", "older_adult"],
+        "sexes": ["female", "male"],
+        "diagnoses": ["colorectal neoplasm", "diverticular disease"],
+        "procedures": ["elective colorectal surgery"],
+        "biomarkers": [],
+        "severity": null,
+        "comorbidities": [],
+        "inclusionCriteria": ["elective surgery"],
+        "exclusionCriteria": ["active abdominal infection"]
+      },
+      "dimensionAssessments": [
+        { "dimension": "population-fit", "score": 3, "rationale": "Exact population match." },
+        { "dimension": "intervention-fit", "score": 3, "rationale": "Antibiotic duration policy directly aligned." },
+        { "dimension": "setting-fit", "score": 3, "rationale": "Routine perioperative setting." },
+        { "dimension": "jurisdiction-fit", "score": 2, "rationale": "Needs local stewardship validation." },
+        { "dimension": "resource-fit", "score": 3, "rationale": "Resource load is low." }
+      ],
+      "implementationPreconditions": ["local antimicrobial stewardship signoff"]
+    },
+    "provenance": {
+      "sourceSystem": "manual-ingest",
+      "capturedAt": "2026-04-04T11:30:00Z",
+      "capturedBy": "icicso.evidence.curator",
+      "chainOfCustody": [
+        { "step": "derive-ser", "actor": "icicso.evidence.curator", "timestamp": "2026-04-04T11:40:00Z", "hashSha256": "ser-meta-ssi-01", "note": "Derived from structured synthesis example." }
+      ],
+      "legal": {
+        "licenseStatus": "licensed",
+        "attestationStatus": "attested",
+        "reviewPolicy": "surgical-evidence-board",
+        "retentionClass": "clinical_evidence_permanent"
+      },
+      "versioning": {
+        "canonicalId": "CANON-SER-META-SSI",
+        "version": "1.0.0",
+        "effectiveFrom": "2026-04-04",
+        "effectiveTo": null,
+        "supersedes": [],
+        "status": "active"
+      }
+    }
+  },
+  "expectedMapperBehavior": {
+    "shouldGenerateEo": true,
+    "expectedDecisionVerb": "avoid",
+    "expectedReviewState": "specialist-approved"
+  }
+}

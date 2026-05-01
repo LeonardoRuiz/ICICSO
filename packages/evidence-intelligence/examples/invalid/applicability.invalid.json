@@ -1,0 +1,11 @@
+{
+  "artifact_kind": "applicability",
+  "data": {
+    "population_fit": { "score": 6, "rationale": "" },
+    "intervention_fit": { "score": 3, "rationale": "ok" },
+    "setting_fit": { "score": 3, "rationale": "ok" },
+    "jurisdiction_fit": { "score": 3, "rationale": "ok" },
+    "resource_fit": { "score": 3, "rationale": "ok" },
+    "overall_recommendation": "maybe"
+  }
+}

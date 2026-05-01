@@ -1,0 +1,32 @@
+{
+    "name": "@icicso/database",
+    "version": "1.0.0",
+    "description": "Database utilities and Prisma schema for ICICSO Local",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc --watch",
+        "test": "jest",
+        "lint": "eslint src/**/*.ts",
+        "typecheck": "tsc --noEmit",
+        "db:push": "prisma db push",
+        "db:migrate": "prisma migrate dev",
+        "db:generate": "prisma generate",
+        "db:seed": "tsx prisma/seed.ts"
+    },
+    "dependencies": {
+        "@icicso/canonical-types": "workspace:*",
+        "@icicso/contracts": "workspace:*",
+        "@prisma/client": "^5.0.0",
+        "prisma": "^5.0.0"
+    },
+    "devDependencies": {
+        "@types/node": "^20.0.0",
+        "typescript": "^5.0.0",
+        "tsx": "^4.0.0"
+    },
+    "prisma": {
+        "seed": "tsx prisma/seed.ts"
+    }
+}

@@ -1,0 +1,189 @@
+name: Security & Quality
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+  schedule:
+    - cron: '0 2 * * *'  # Daily at 2 AM UTC
+
+permissions:
+  security-events: write
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ============================================================================
+  # DEPENDENCY CHECK
+  # ============================================================================
+
+  dependencies:
+    name: Check Dependencies
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install pnpm
+        run: npm install -g pnpm@10
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Audit dependencies
+        run: pnpm audit --audit-level=moderate
+        continue-on-error: true
+
+  # ============================================================================
+  # CODE SECURITY SCAN
+  # ============================================================================
+
+  codeql:
+    name: CodeQL Analysis
+    runs-on: ubuntu-latest
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        language: ['javascript']
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: ${{ matrix.language }}
+          queries: security-and-quality
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v2
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
+        with:
+          category: "/language:${{ matrix.language }}"
+
+  # ============================================================================
+  # DOCKERFILE SECURITY
+  # ============================================================================
+
+  dockerfile-security:
+    name: Dockerfile Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'config'
+          scan-ref: './icicso-local'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+        continue-on-error: true
+
+      - name: Upload Trivy results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
+        continue-on-error: true
+
+  # ============================================================================
+  # SECRETS CHECK
+  # ============================================================================
+
+  secrets:
+    name: Check for Secrets
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: TruffleHog Secret Scan
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+          head: HEAD
+          extra_args: --debug --only-verified
+        continue-on-error: true
+
+  # ============================================================================
+  # COMPOSITION VALIDATION
+  # ============================================================================
+
+  composition-quality:
+    name: Code Composition Quality
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install pnpm
+        run: npm install -g pnpm@10
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check package.json integrity
+        run: |
+          for pkg in icicso-local/apps/*/package.json; do
+            echo "Validating $pkg"
+            node -e "const pkg = require('./$pkg'); if (!pkg.name || !pkg.version) throw new Error('Invalid package.json')"
+          done
+
+      - name: Verify workspace configuration
+        run: |
+          echo "Checking pnpm-workspace.yaml..."
+          test -f icicso-local/pnpm-workspace.yaml || (echo "Missing pnpm-workspace.yaml" && exit 1)
+          test -f icicso-local/tsconfig.base.json || (echo "Missing tsconfig.base.json" && exit 1)
+          echo "✅ Workspace configuration valid"
+
+  # ============================================================================
+  # SUMMARY
+  # ============================================================================
+
+  security-summary:
+    name: Security Summary
+    runs-on: ubuntu-latest
+    needs: [dependencies, codeql, dockerfile-security, secrets, composition-quality]
+    if: always()
+    
+    steps:
+      - name: Report Status
+        run: |
+          echo "## Security Check Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- Dependencies: ${{ needs.dependencies.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- CodeQL: ${{ needs.codeql.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Dockerfile: ${{ needs.dockerfile-security.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Secrets: ${{ needs.secrets.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Composition: ${{ needs.composition-quality.result }}" >> $GITHUB_STEP_SUMMARY

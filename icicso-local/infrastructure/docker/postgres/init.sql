@@ -1,0 +1,2 @@
+-- ICICSO Local PostgreSQL init placeholder.
+-- The application schema is applied via Prisma after the container starts.

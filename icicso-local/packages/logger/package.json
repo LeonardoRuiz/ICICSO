@@ -1,0 +1,16 @@
+{
+  "name": "@icicso/logger",
+  "version": "1.0.0",
+  "description": "Structured logger for ICICSO services",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}

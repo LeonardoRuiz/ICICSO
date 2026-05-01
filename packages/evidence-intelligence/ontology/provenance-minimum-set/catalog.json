@@ -1,0 +1,27 @@
+{
+  "catalogId": "icicso.provenance-minimum-set.v1",
+  "code": "provenance-minimum-set",
+  "label": "Provenance Minimum Set",
+  "description": "Minimum provenance fields required for legal defensibility and auditability.",
+  "usageNotes": [
+    "These are minimum mandatory fields, not the full provenance model.",
+    "Each field name aligns with the runtime provenance schema."
+  ],
+  "entries": [
+    { "id": "prov.source-system", "code": "source-system", "label": "Source System", "description": "System or workflow from which the artifact was captured or derived.", "usageNotes": ["Maps to `provenance.sourceSystem` in runtime objects."] },
+    { "id": "prov.captured-at", "code": "captured-at", "label": "Captured At", "description": "Timestamp of acquisition or derivation.", "usageNotes": ["Maps to `provenance.capturedAt`."] },
+    { "id": "prov.captured-by", "code": "captured-by", "label": "Captured By", "description": "Actor, service account or curator responsible for capture.", "usageNotes": ["Maps to `provenance.capturedBy`."] },
+    { "id": "prov.chain-of-custody", "code": "chain-of-custody", "label": "Chain of Custody", "description": "Ordered custody trail preserving traceability from source to normalized artifact.", "usageNotes": ["Maps to `provenance.chainOfCustody`."] },
+    { "id": "prov.license-status", "code": "license-status", "label": "License Status", "description": "Usage entitlement status for the underlying evidence source.", "usageNotes": ["Maps to `provenance.legal.licenseStatus`."] },
+    { "id": "prov.attestation-status", "code": "attestation-status", "label": "Attestation Status", "description": "Whether curation or source authenticity has been attested.", "usageNotes": ["Maps to `provenance.legal.attestationStatus`."] },
+    { "id": "prov.review-policy", "code": "review-policy", "label": "Review Policy", "description": "Governance policy applied to review and approval.", "usageNotes": ["Maps to `provenance.legal.reviewPolicy`."] },
+    { "id": "prov.canonical-id", "code": "canonical-id", "label": "Canonical ID", "description": "Stable canonical identifier across versions.", "usageNotes": ["Maps to `provenance.versioning.canonicalId`."] },
+    { "id": "prov.version", "code": "version", "label": "Version", "description": "Semantic version of the artifact.", "usageNotes": ["Maps to `provenance.versioning.version`."] },
+    { "id": "prov.effective-from", "code": "effective-from", "label": "Effective From", "description": "Date from which the artifact version is active.", "usageNotes": ["Maps to `provenance.versioning.effectiveFrom`."] },
+    { "id": "prov.status", "code": "status", "label": "Status", "description": "Lifecycle status of the artifact version.", "usageNotes": ["Maps to `provenance.versioning.status`."] }
+  ],
+  "constraints": {
+    "uniqueFields": ["id", "code", "label"],
+    "requiredFields": ["id", "code", "label", "description", "usageNotes"]
+  }
+}

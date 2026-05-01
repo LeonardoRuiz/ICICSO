@@ -1,0 +1,21 @@
+{
+  "catalogId": "icicso.applicability-dimensions.v1",
+  "code": "applicability-dimensions",
+  "label": "Applicability Dimensions",
+  "description": "Canonical dimensions used to determine whether evidence fits the target execution context.",
+  "usageNotes": [
+    "Score or adjudicate each dimension separately before computing overall applicability.",
+    "A single failed dimension can trigger local review even when others fit."
+  ],
+  "entries": [
+    { "id": "app.population-fit", "code": "population-fit", "label": "Population Fit", "description": "Fit between source population and target patient population.", "usageNotes": ["Compare age, diagnosis, severity, biomarkers and comorbidity profile."] },
+    { "id": "app.intervention-fit", "code": "intervention-fit", "label": "Intervention Fit", "description": "Fit between source intervention and target intervention as implemented.", "usageNotes": ["Include route, device generation, technique and comparator mismatch."] },
+    { "id": "app.setting-fit", "code": "setting-fit", "label": "Setting Fit", "description": "Fit between source care setting and target operational setting.", "usageNotes": ["Important across ambulatory, ward, ICU and tertiary center contexts."] },
+    { "id": "app.jurisdiction-fit", "code": "jurisdiction-fit", "label": "Jurisdiction Fit", "description": "Fit between source governance/regulatory context and target jurisdiction.", "usageNotes": ["Required for execution legality and reimbursement sensitivity."] },
+    { "id": "app.resource-fit", "code": "resource-fit", "label": "Resource Fit", "description": "Fit between source-required resources and target available resources.", "usageNotes": ["A failed resource fit should alter readiness, not clinical truth itself."] }
+  ],
+  "constraints": {
+    "uniqueFields": ["id", "code", "label"],
+    "requiredFields": ["id", "code", "label", "description", "usageNotes"]
+  }
+}

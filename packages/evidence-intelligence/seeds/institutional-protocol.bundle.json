@@ -1,0 +1,98 @@
+{
+  "seedMetadata": {
+    "seedId": "seed.institutional-protocol.v1",
+    "title": "Institutional Clinical Protocol Example",
+    "structuralExample": true,
+    "note": "Structured local protocol example designed to yield executable EO."
+  },
+  "ser": {
+    "serId": "SER-PROTO-VTE-0001",
+    "sourceDocumentId": "EDOC-PROTO-VTE-2025",
+    "title": "Institutional VTE prophylaxis protocol for major abdominal surgery",
+    "evidenceType": "protocol",
+    "clinicalDomain": "perioperative_surgery",
+    "summary": "Institutional protocol operationalizes postoperative VTE prophylaxis for major abdominal surgery.",
+    "statements": [
+      {
+        "statementId": "SES-PROTO-VTE-01",
+        "clinicalFunction": "prevention",
+        "interventionClass": "drug",
+        "interventionLabel": "Postoperative pharmacologic VTE prophylaxis",
+        "effectDirection": "benefit",
+        "strength": "high",
+        "certainty": "high",
+        "decisionReadiness": "ready-for-execution",
+        "timeHorizon": "index-hospitalization",
+        "outcomes": [
+          { "outcomeCode": "adverse-event", "effectDirection": "benefit", "note": "Reduced thromboembolic events." }
+        ],
+        "conditions": ["major abdominal surgery", "acceptable bleeding risk"],
+        "exclusions": ["active bleeding", "platelet count below local threshold"],
+        "rationale": "This protocol is already adapted to local formulary and perioperative workflow.",
+        "operationalContext": {
+          "implementationComplexity": "low",
+          "resourceDemand": "low",
+          "costRelevance": "moderate",
+          "operationalRelevance": "high",
+          "resourceRequirements": [
+            { "resourceType": "postoperative_order_set", "role": "surgical_team", "quantity": 1, "unit": "order_set", "mandatory": true, "costCenter": "WARD", "notes": null }
+          ],
+          "constraints": ["Requires daily bleeding reassessment."]
+        }
+      }
+    ],
+    "applicability": {
+      "clinicalDomain": "perioperative_surgery",
+      "careSetting": "institutional_local",
+      "jurisdictions": ["institutional-local"],
+      "decisionReadiness": "ready-for-execution",
+      "population": {
+        "summary": "Adults undergoing major abdominal surgery in the local institution.",
+        "ageBands": ["adult", "older_adult"],
+        "sexes": ["female", "male"],
+        "diagnoses": ["abdominal surgery candidate"],
+        "procedures": ["major abdominal surgery"],
+        "biomarkers": [],
+        "severity": null,
+        "comorbidities": [],
+        "inclusionCriteria": ["postoperative admission"],
+        "exclusionCriteria": ["active bleeding"]
+      },
+      "dimensionAssessments": [
+        { "dimension": "population-fit", "score": 3, "rationale": "Built for the local postoperative population." },
+        { "dimension": "intervention-fit", "score": 3, "rationale": "Exact local prophylaxis protocol." },
+        { "dimension": "setting-fit", "score": 3, "rationale": "Institutional local setting is the target." },
+        { "dimension": "jurisdiction-fit", "score": 3, "rationale": "Local protocol is authoritative for this institution." },
+        { "dimension": "resource-fit", "score": 3, "rationale": "Protocol uses existing resources." }
+      ],
+      "implementationPreconditions": ["local order set enabled"]
+    },
+    "provenance": {
+      "sourceSystem": "manual-ingest",
+      "capturedAt": "2026-04-04T12:20:00Z",
+      "capturedBy": "icicso.evidence.curator",
+      "chainOfCustody": [
+        { "step": "derive-ser", "actor": "icicso.evidence.curator", "timestamp": "2026-04-04T12:20:00Z", "hashSha256": "ser-proto-vte-01", "note": "Derived from institutional protocol example." }
+      ],
+      "legal": {
+        "licenseStatus": "institutional_use_only",
+        "attestationStatus": "attested",
+        "reviewPolicy": "institutional-governance",
+        "retentionClass": "clinical_evidence_permanent"
+      },
+      "versioning": {
+        "canonicalId": "CANON-SER-PROTO-VTE",
+        "version": "1.0.0",
+        "effectiveFrom": "2026-04-04",
+        "effectiveTo": null,
+        "supersedes": [],
+        "status": "active"
+      }
+    }
+  },
+  "expectedMapperBehavior": {
+    "shouldGenerateEo": true,
+    "expectedDecisionVerb": "recommend",
+    "expectedReviewState": "specialist-approved"
+  }
+}

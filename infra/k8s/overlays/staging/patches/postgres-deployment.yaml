@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: icicso-postgres
+spec:
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/environment: staging
+    spec:
+      containers:
+        - name: postgres
+          resources:
+            requests:
+              cpu: 150m
+              memory: 384Mi
+            limits:
+              cpu: 500m
+              memory: 1Gi

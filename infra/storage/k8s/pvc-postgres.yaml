@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: icicso-postgres-data
+  namespace: icicso-local
+  labels:
+    app.kubernetes.io/name: icicso-postgres
+    app.kubernetes.io/component: database
+    app.kubernetes.io/part-of: icicso
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi

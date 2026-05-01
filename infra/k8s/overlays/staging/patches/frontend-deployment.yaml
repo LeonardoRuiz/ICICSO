@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: icicso-frontend
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/environment: staging
+    spec:
+      containers:
+        - name: frontend
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 192Mi

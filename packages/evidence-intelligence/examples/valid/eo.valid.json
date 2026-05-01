@@ -1,0 +1,68 @@
+{
+  "artifact_kind": "eo",
+  "data": {
+    "eo_id": "EO-CABG-0001",
+    "trigger": {
+      "event": "heart-team-evaluation",
+      "clinical_function": "intervention-selection"
+    },
+    "conditions": ["adult patient", "multivessel CAD", "high anatomic complexity"],
+    "exclusions": ["prohibitive surgical risk"],
+    "decision": {
+      "verb": "recommend",
+      "effect_direction": "benefit",
+      "decision_readiness": "ready-for-execution",
+      "rationale": "Guideline-supported durable benefit in this subgroup."
+    },
+    "actions": [
+      {
+        "action_id": "ACT-001",
+        "intervention_class": "surgery",
+        "summary": "Recommend CABG evaluation and scheduling"
+      }
+    ],
+    "expected_outcomes": [
+      {
+        "outcome_class": "mortality",
+        "effect_direction": "benefit"
+      }
+    ],
+    "required_context": ["cardiac-surgery-team", "icu-capacity", "heart-team-review"],
+    "operational_constraints": {
+      "implementation_complexity": "high",
+      "resource_demand": "critical",
+      "cost_relevance": "transformational",
+      "operational_relevance": "transformational",
+      "resource_requirements": [
+        {
+          "resource_type": "operating-room",
+          "role": "cardiac-surgeon",
+          "quantity": 1,
+          "unit": "team",
+          "mandatory": true,
+          "cost_center": "or",
+          "note": null
+        }
+      ],
+      "constraints": ["Local CABG pathway approval required."]
+    },
+    "evidence_support": [
+      {
+        "artifact_type": "ser",
+        "artifact_id": "SER-CABG-0001"
+      }
+    ],
+    "confidence": {
+      "certainty": "high",
+      "uncertainty_sources": ["operational-variability"]
+    },
+    "jurisdiction": ["us"],
+    "review_status": "active",
+    "version": "1.0.0",
+    "audit_fields": {
+      "created_at": "2026-04-04T10:30:00Z",
+      "created_by": "icicso.eo.generator",
+      "updated_at": "2026-04-04T10:30:00Z"
+    }
+  }
+}

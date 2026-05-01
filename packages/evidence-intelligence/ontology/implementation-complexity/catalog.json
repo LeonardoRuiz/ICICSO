@@ -1,0 +1,20 @@
+{
+  "catalogId": "icicso.implementation-complexity.v1",
+  "code": "implementation-complexity",
+  "label": "Implementation Complexity",
+  "description": "Canonical complexity model for deploying a recommendation or executable object in real care.",
+  "usageNotes": [
+    "Use for operational planning and readiness gating.",
+    "Complexity is not evidence quality; it is an implementation attribute."
+  ],
+  "entries": [
+    { "id": "impl.low", "code": "low", "label": "Low", "description": "Requires minimal coordination and standard existing capabilities.", "usageNotes": ["Usually no new training, equipment or workflow redesign."] },
+    { "id": "impl.moderate", "code": "moderate", "label": "Moderate", "description": "Requires some coordination, protocolization or moderate workflow change.", "usageNotes": ["Typical for bundle introduction or moderate training needs."] },
+    { "id": "impl.high", "code": "high", "label": "High", "description": "Requires substantial workflow coordination, specialty resources or sustained training.", "usageNotes": ["Often associated with pathway redesign or new capabilities."] },
+    { "id": "impl.very-high", "code": "very-high", "label": "Very High", "description": "Requires major institutional capability, governance and operational transformation.", "usageNotes": ["Should trigger explicit executive or governance review."] }
+  ],
+  "constraints": {
+    "uniqueFields": ["id", "code", "label"],
+    "requiredFields": ["id", "code", "label", "description", "usageNotes"]
+  }
+}

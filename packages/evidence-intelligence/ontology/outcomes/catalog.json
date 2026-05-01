@@ -1,0 +1,36 @@
+{
+  "catalogId": "icicso.outcome-classes.v1",
+  "code": "outcome-classes",
+  "label": "Outcome Classes",
+  "description": "High-level outcome taxonomy for linking evidence to expected effects and monitoring targets.",
+  "usageNotes": [
+    "Use the high-level class here and map detailed phenotype or measure downstream.",
+    "Outcome classes are reusable across SER and EO expected outcome links."
+  ],
+  "entries": [
+    { "id": "out.mortality", "code": "mortality", "label": "Mortality", "description": "All-cause or cause-specific death.", "usageNotes": ["Preferred primary hard endpoint class when applicable."] },
+    { "id": "out.mace", "code": "mace", "label": "MACE", "description": "Major adverse cardiovascular events composite outcome.", "usageNotes": ["Keep as a composite class; component decomposition belongs in detailed metadata."] },
+    { "id": "out.stroke", "code": "stroke", "label": "Stroke", "description": "Cerebrovascular ischemic or hemorrhagic event.", "usageNotes": ["Use as standalone class even when nested within composites."] },
+    { "id": "out.mi", "code": "mi", "label": "Myocardial Infarction", "description": "Myocardial infarction event.", "usageNotes": ["Use when MI is explicit as component or outcome."] },
+    { "id": "out.bleeding", "code": "bleeding", "label": "Bleeding", "description": "Clinically relevant bleeding outcome.", "usageNotes": ["Severity grading belongs in detailed outcome metadata."] },
+    { "id": "out.infection", "code": "infection", "label": "Infection", "description": "Postoperative or clinical infection outcome.", "usageNotes": ["Includes SSI, pneumonia and bloodstream infection at high level."] },
+    { "id": "out.aki", "code": "aki", "label": "AKI", "description": "Acute kidney injury outcome.", "usageNotes": ["Use when renal failure risk is an operative or ICU concern."] },
+    { "id": "out.ventilator-time", "code": "ventilator-time", "label": "Ventilator Time", "description": "Duration of invasive or assisted ventilation.", "usageNotes": ["Duration measure; unit and threshold belong downstream."] },
+    { "id": "out.icu-los", "code": "icu-los", "label": "ICU LOS", "description": "Length of stay in intensive care.", "usageNotes": ["Use for critical care utilization impact."] },
+    { "id": "out.hospital-los", "code": "hospital-los", "label": "Hospital LOS", "description": "Length of stay during index hospitalization.", "usageNotes": ["Prefer over generic LOS when the unit is the hospital stay."] },
+    { "id": "out.readmission", "code": "readmission", "label": "Readmission", "description": "Hospital readmission after index discharge.", "usageNotes": ["Often paired with time horizon such as 30 days."] },
+    { "id": "out.reintervention", "code": "reintervention", "label": "Reintervention", "description": "Requirement for repeat procedure or unplanned intervention.", "usageNotes": ["Useful for surgical durability and rescue burden."] },
+    { "id": "out.quality-of-life", "code": "quality-of-life", "label": "Quality of Life", "description": "Patient-reported quality of life outcome.", "usageNotes": ["Instrument detail belongs in measure metadata."] },
+    { "id": "out.functional-status", "code": "functional-status", "label": "Functional Status", "description": "Ability to perform daily activities or functional recovery.", "usageNotes": ["Use for rehab and long-term recovery outcomes."] },
+    { "id": "out.symptom-burden", "code": "symptom-burden", "label": "Symptom Burden", "description": "Intensity or persistence of symptoms such as pain or dyspnea.", "usageNotes": ["Use when symptoms are direct patient-centered endpoints."] },
+    { "id": "out.cost", "code": "cost", "label": "Cost", "description": "Direct or attributable cost outcome.", "usageNotes": ["Do not use to override clinical endpoints; combine with operational relevance instead."] },
+    { "id": "out.resource-utilization", "code": "resource-utilization", "label": "Resource Utilization", "description": "Use of beds, OR time, staffing, devices or other operational resources.", "usageNotes": ["Broader than direct cost."] },
+    { "id": "out.adherence", "code": "adherence", "label": "Adherence", "description": "Adherence to guideline, bundle or recommended process.", "usageNotes": ["Process outcome, not patient outcome."] },
+    { "id": "out.diagnostic-yield", "code": "diagnostic-yield", "label": "Diagnostic Yield", "description": "Rate of clinically meaningful diagnostic findings.", "usageNotes": ["Use for screening and diagnosis evidence."] },
+    { "id": "out.adverse-event", "code": "adverse-event", "label": "Adverse Event", "description": "Generic adverse event outcome when a more specific class is not available.", "usageNotes": ["Prefer more specific classes where possible."] }
+  ],
+  "constraints": {
+    "uniqueFields": ["id", "code", "label"],
+    "requiredFields": ["id", "code", "label", "description", "usageNotes"]
+  }
+}

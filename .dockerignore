@@ -1,0 +1,65 @@
+# Dependencies
+node_modules
+__pycache__
+.venv
+venv
+env
+.pytest_cache
+
+# Build outputs
+dist
+build
+.next
+*.tgz
+
+# Version control
+.git
+.gitignore
+.github
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary files
+tmp
+temp
+.cache
+.turbo
+
+# Docker
+docker-compose.override.yml
+.dockerignore
+Dockerfile
+
+# Archives
+*.zip
+*.tar.gz
+_archive
+
+# Test coverage
+coverage
+.nyc_output
+
+# Local development
+.jarvis
+.zencoder
+.zenflow
+.vscode
+ICICSO_Local

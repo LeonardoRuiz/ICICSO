@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://icicso.local/schemas/governance/guideline_package.schema.json",
+  "title": "GuidelinePackage",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "gp_id": {
+      "type": "string",
+      "pattern": "^GP-[A-Z0-9_-]+$"
+    },
+    "domain": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subdomain": {
+      "type": ["string", "null"]
+    },
+    "eo_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^EO-[A-Z0-9_-]+$"
+      },
+      "minItems": 1
+    },
+    "icdr_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^ICDR-[A-Z0-9_-]+$"
+      }
+    },
+    "primary_population_scope": {
+      "type": ["string", "null"]
+    },
+    "status": {
+      "$ref": "../common/enums.schema.json#/$defs/artifactStatus"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "activation_hash": {
+      "type": ["string", "null"],
+      "pattern": "^[A-F0-9]{64}$"
+    },
+    "activated_at_utc": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "responsible_scientist": {
+      "type": ["string", "null"]
+    }
+  },
+  "required": [
+    "gp_id",
+    "domain",
+    "eo_ids",
+    "icdr_ids",
+    "status",
+    "version"
+  ]
+}

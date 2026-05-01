@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://icicso.local/schemas/evidence-intelligence/evidence-source.schema.json",
+  "title": "Evidence Source",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "source_id",
+    "source_type",
+    "origin",
+    "publisher",
+    "language",
+    "access_model"
+  ],
+  "properties": {
+    "source_id": { "type": "string", "pattern": "^ESRC-[A-Z0-9_-]{6,}$" },
+    "source_type": { "type": "string", "enum": ["journal", "guideline-body", "society", "hta-agency", "institution", "registry", "database"] },
+    "origin": { "type": "string", "minLength": 1 },
+    "publisher": { "type": "string", "minLength": 1 },
+    "language": { "type": "string", "minLength": 2 },
+    "access_model": { "type": "string", "enum": ["licensed", "open-access", "institutional", "restricted"] },
+    "uri": { "type": ["string", "null"], "format": "uri" },
+    "retrieved_at": { "type": ["string", "null"], "format": "date-time" }
+  }
+}

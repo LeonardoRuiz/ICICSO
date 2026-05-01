@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://icicso.local/schemas/translation/ete_result.schema.json",
+  "title": "ETEResult",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "ete_result_id": {
+      "type": "string",
+      "pattern": "^ETE-[A-Z0-9_-]+$"
+    },
+    "eo_id": {
+      "type": "string",
+      "pattern": "^EO-[A-Z0-9_-]+$"
+    },
+    "clinical_input_hash": {
+      "type": "string",
+      "pattern": "^[A-F0-9]{64}$"
+    },
+    "engine_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ruleset_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence_confidence_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "uncertainty_confidence_index": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "mac_state": {
+      "$ref": "../common/enums.schema.json#/$defs/macState"
+    },
+    "ddmo": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "field_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "criticality": {
+            "type": "string",
+            "enum": ["critical", "important", "secondary"]
+          },
+          "is_present": {
+            "type": "boolean"
+          }
+        },
+        "required": ["field_name", "criticality", "is_present"]
+      }
+    },
+    "computed_at_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "explainability_notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "ete_result_id",
+    "eo_id",
+    "clinical_input_hash",
+    "engine_version",
+    "ruleset_version",
+    "evidence_confidence_score",
+    "uncertainty_confidence_index",
+    "mac_state",
+    "ddmo",
+    "computed_at_utc",
+    "explainability_notes"
+  ]
+}

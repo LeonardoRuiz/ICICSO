@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reporte de Sync de Terminologias ICICSO</title>
+  <link rel="stylesheet" href="../assets/icicso-palette.css">
+  <style>
+    :root {
+      --bg: var(--icicso-bg);
+      --card: var(--icicso-panel);
+      --text: var(--icicso-ink);
+      --muted: var(--icicso-ink-soft);
+      --line: var(--icicso-line);
+      --accent: var(--icicso-accent);
+      --success: var(--icicso-ok);
+      --warning: var(--icicso-warn);
+      --manual: #8a6ac8;
+      --danger: var(--icicso-bad);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, #08161a 0%, #041015 100%);
+      color: var(--text);
+      font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+      font-size: 18px;
+      line-height: 1.55;
+    }
+    .page { max-width: 1480px; margin: 0 auto; padding: 28px 20px 52px; }
+    .hero, .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.28);
+    }
+    .hero { padding: 30px; margin-bottom: 22px; }
+    h1, h2 { margin: 0 0 12px; line-height: 1.22; }
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.25rem; }
+    p { margin: 0; color: var(--muted); max-width: 1040px; }
+    a { color: var(--accent); text-decoration: none; word-break: break-word; }
+    a:hover { text-decoration: underline; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .btn {
+      display: inline-flex; align-items: center; min-height: 42px; padding: 9px 14px;
+      border: 1px solid var(--line); border-radius: 999px; color: var(--text);
+      background: rgba(255,255,255,0.04); font-weight: 700;
+    }
+    .btn.primary { border-color: rgba(95, 201, 187, 0.42); color: #9de9de; background: rgba(95, 201, 187, 0.14); }
+    .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-top: 22px; }
+    .metric { border: 1px solid var(--line); border-radius: 10px; padding: 14px; background: rgba(255,255,255,0.03); color: var(--muted); }
+    .metric strong { display: block; color: var(--text); font-size: 1.8rem; line-height: 1.1; margin-bottom: 4px; }
+    .card { padding: 22px; }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+    table { border-collapse: collapse; width: 100%; min-width: 1260px; }
+    th, td { padding: 13px 12px; border-bottom: 1px solid #e7e0d5; vertical-align: top; text-align: left; }
+    th { color: var(--muted); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.05em; background: rgba(255,255,255,0.035); }
+    td span { display: block; color: var(--muted); font-size: 0.88rem; margin-top: 4px; }
+    tr:last-child td { border-bottom: 0; }
+    .status { display: inline-block; padding: 6px 9px; border-radius: 999px; color: #fff; font-size: 0.78rem; font-weight: 800; white-space: nowrap; }
+    .success { background: var(--success); }
+    .awaiting_credentials { background: var(--warning); color: #1d1600; }
+    .manual_required { background: var(--manual); }
+    .failed { background: var(--danger); }
+    .skipped { background: #5f6b75; }
+    .note { margin-top: 14px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <h1>Reporte de Sync de Terminologias ICICSO</h1>
+      <p>Estado consolidado al 2026-04-26. El reporte cruza el estado operativo local con el catalogo oficial de fuentes, versiones, licencias y rutas de ingestion para medir que falta para bajar e integrar las terminologias en bases utilizables.</p>
+      <div class="actions">
+        <a class="btn primary" href="file:///C:/Users/leona/OneDrive/Desktop/MxRep/ICICSO/dashboard/generated/terminology_content_showcase.html">Abrir consola/buscador</a>
+        <a class="btn" href="file:///C:/Users/leona/OneDrive/Desktop/MxRep/ICICSO/ICICSO_TERMINOLOGIAS/00_METADATA/download_state.json">Ver estado JSON</a>
+        <a class="btn" href="file:///C:/Users/leona/OneDrive/Desktop/MxRep/ICICSO/ICICSO_TERMINOLOGIAS/00_METADATA/sources_catalog.tsv">Ver catalogo TSV</a>
+      </div>
+      <div class="summary">
+        <div class="metric"><strong>26</strong>datasets monitoreados</div>
+<div class="metric"><strong>6</strong>success</div>
+<div class="metric"><strong>4</strong>awaiting_credentials</div>
+<div class="metric"><strong>4</strong>manual_required</div>
+<div class="metric"><strong>11</strong>skipped/tracked</div>
+<div class="metric"><strong>1</strong>failed</div>
+      </div>
+    </section>
+    <section class="card">
+      <h2>Resultado por fuente</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Dataset</th>
+              <th>Status</th>
+              <th>Intentos</th>
+              <th>Version/fecha objetivo</th>
+              <th>Bytes</th>
+              <th>Fuente oficial</th>
+              <th>Observacion</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>ICD10</strong><span>ICD-10 ClaML</span></td><td><span class="status success">SUCCESS</span></td><td>4</td><td>WHO ICD-10 2019 ClaML</td><td>9575324</td><td><a href="https://icdcdn.who.int/icd10/claml/icd102019en.xml.zip">https://icdcdn.who.int/icd10/claml/icd102019en.xml.zip</a></td><td>Local disponible y normalizable Base diagnostica historica ya usada por el parser local</td></tr>
+<tr><td><strong>LOINC</strong><span>LOINC</span></td><td><span class="status awaiting_credentials">AWAITING CREDENTIALS</span></td><td>5</td><td>2026-03-04 / LOINC 2.82</td><td>0</td><td><a href="https://loinc.org/downloads/">https://loinc.org/downloads/</a></td><td>Descarga directa requiere login LOINC; no automatizada sin credenciales Incluye Loinc.csv, loinc.xml, DocumentOntology.csv y reporte de cambios</td></tr>
+<tr><td><strong>SNOMED_CT</strong><span>SNOMED CT</span></td><td><span class="status manual_required">MANUAL REQUIRED</span></td><td>3</td><td>Legacy alias local</td><td>0</td><td><a href="https://www.snomed.org/releases">https://www.snomed.org/releases</a></td><td>Pendiente manual por licencia/autorizacion Alias local historico; conservar para compatibilidad con parsers</td></tr>
+<tr><td><strong>SNOMED_CT_INTERNATIONAL</strong><span>SNOMED CT International Edition</span></td><td><span class="status manual_required">MANUAL REQUIRED</span></td><td>1</td><td>Edicion internacional mensual; vigente 2026-04 al 2026-04-26</td><td>0</td><td><a href="https://www.snomed.org/releases">https://www.snomed.org/releases</a></td><td>Descarga real via MLDS y licencia; no publica directa La descarga efectiva se hace desde MLDS tras aprobacion</td></tr>
+<tr><td><strong>SNOMED_CT_SPANISH</strong><span>SNOMED CT Spanish Edition</span></td><td><span class="status manual_required">MANUAL REQUIRED</span></td><td>1</td><td>Ultima vigente 2025-10-31; proxima programada 2026-04-30</td><td>0</td><td><a href="https://www.snomed.org/releases">https://www.snomed.org/releases</a></td><td>Descarga real via MLDS o espacio pais miembro Prioritaria para trabajo clinico en espanol cuando este disponible</td></tr>
+<tr><td><strong>ICD11</strong><span>ICD-11 MMS</span></td><td><span class="status awaiting_credentials">AWAITING CREDENTIALS</span></td><td>4</td><td>Release 2026-01</td><td>0</td><td><a href="https://icd.who.int/browse/2026-01/mms/en">https://icd.who.int/browse/2026-01/mms/en</a></td><td>URL publica 2026-01 registrada; validar descarga binaria en runtime Derivado del navegador ICD-11 para mortalidad y morbilidad</td></tr>
+<tr><td><strong>ICD10_TO_ICD11</strong><span>ICD-10 a ICD-11</span></td><td><span class="status skipped">SKIPPED</span></td><td>2</td><td>Release 2026-01</td><td>0</td><td><a href="https://icd.who.int/browse/2026-01/mms/en">https://icd.who.int/browse/2026-01/mms/en</a></td><td>URL publica 2026-01 registrada; validar descarga binaria en runtime Util para transicion y cruces entre ICD-10 e ICD-11</td></tr>
+<tr><td><strong>RXNORM</strong><span>RxNorm Legacy Local</span></td><td><span class="status awaiting_credentials">AWAITING CREDENTIALS</span></td><td>4</td><td>Alias local current</td><td>0</td><td><a href="https://download.nlm.nih.gov/umls/kss/rxnorm/RxNorm_full_current.zip">https://download.nlm.nih.gov/umls/kss/rxnorm/RxNorm_full_current.zip</a></td><td>Redirige a UMLS/UTS cuando requiere licencia Alias local historico del downloader; se conserva por compatibilidad</td></tr>
+<tr><td><strong>RXNORM_FULL</strong><span>RxNorm Full Monthly Release</span></td><td><span class="status awaiting_credentials">AWAITING CREDENTIALS</span></td><td>1</td><td>2026-04-06</td><td>0</td><td><a href="https://download.nlm.nih.gov/umls/kss/rxnorm/RxNorm_full_current.zip">https://download.nlm.nih.gov/umls/kss/rxnorm/RxNorm_full_current.zip</a></td><td>Full release requiere acceso UMLS; no forzar descarga sin licencia Terminologia completa RxNorm en formato RRF UTF-8</td></tr>
+<tr><td><strong>RXNORM_PRESCRIBABLE</strong><span>RxNorm Prescribable Content</span></td><td><span class="status skipped">SKIPPED</span></td><td>4</td><td>2026-04-06</td><td>0</td><td><a href="https://download.nlm.nih.gov/umls/kss/rxnorm/RxNorm_full_prescribe_current.zip">https://download.nlm.nih.gov/umls/kss/rxnorm/RxNorm_full_prescribe_current.zip</a></td><td>URL publica registrada; validar descarga binaria en runtime Mas facil de usar cuando solo interesa contenido prescribible</td></tr>
+<tr><td><strong>UCUM</strong><span>UCUM</span></td><td><span class="status success">SUCCESS</span></td><td>1</td><td>Latest</td><td>545431</td><td><a href="https://ucum.org/ucum-essence.xml">https://ucum.org/ucum-essence.xml</a></td><td>Local disponible; mantener control QA por payload Necesario para unidades de LOINC y observacionales</td></tr>
+<tr><td><strong>HL7_THO</strong><span>HL7 Terminology (THO)</span></td><td><span class="status success">SUCCESS</span></td><td>2</td><td>THO 7.1.0</td><td>4745765</td><td><a href="https://terminology.hl7.org/">https://terminology.hl7.org/</a></td><td>Paquete local hl7.terminology-7.1.0.tgz disponible Repositorio central de terminologia HL7; incluye CDA, FHIR, V2, V3 y conjuntos unificados</td></tr>
+<tr><td><strong>HL7_FHIR_R5</strong><span>HL7 FHIR R5 Definitions</span></td><td><span class="status success">SUCCESS</span></td><td>2</td><td>FHIR R5 5.0.0</td><td>8109041</td><td><a href="https://www.hl7.org/fhir/definitions.json.zip">https://www.hl7.org/fhir/definitions.json.zip</a></td><td>Local disponible como paquete de definiciones; parser pendiente Definiciones maestras de recursos, perfiles y value sets</td></tr>
+<tr><td><strong>ATC_DDD</strong><span>ATC/DDD</span></td><td><span class="status success">SUCCESS</span></td><td>2</td><td>2026; ultimo update reportado 2026-01-28</td><td>14142</td><td><a href="https://atcddd.fhi.no/atc_ddd_index/">https://atcddd.fhi.no/atc_ddd_index/</a></td><td>Indice publico crawl parcial/local; descarga estructurada requiere cuenta Muy util para clasificacion farmacologica internacional y estudios de utilizacion</td></tr>
+<tr><td><strong>ICD10_CM</strong><span>ICD-10-CM</span></td><td><span class="status skipped">SKIPPED</span></td><td>4</td><td>FY 2026; actualizacion de abril de 2026 disponible</td><td>0</td><td><a href="https://www.cdc.gov/nchs/icd/icd-10-cm/files.html">https://www.cdc.gov/nchs/icd/icd-10-cm/files.html</a></td><td>Pendiente de resolver/validar URL binaria desde CDC/CMS en runtime Incluye archivos de octubre 2025 y actualizacion de abril 2026; FTP oficial disponible</td></tr>
+<tr><td><strong>ICD10_PCS</strong><span>ICD-10-PCS</span></td><td><span class="status success">SUCCESS</span></td><td>2</td><td>FY 2026; abril 1 de 2026 y FY 2026 listados</td><td>622552</td><td><a href="https://www.cms.gov/medicare/coding-billing/icd-10-codes">https://www.cms.gov/medicare/coding-billing/icd-10-codes</a></td><td>ZIP CMS abril 1 de 2026 local disponible; parser pendiente Terminologia oficial de procedimientos; relevante para actos quirurgicos y hospitalarios</td></tr>
+<tr><td><strong>HCPCS_LEVEL_II</strong><span>HCPCS Level II</span></td><td><span class="status skipped">SKIPPED</span></td><td>1</td><td>2026-03-18</td><td>0</td><td><a href="https://www.cms.gov/medicare/coding-billing/healthcare-common-procedure-system/quarterly-update">https://www.cms.gov/medicare/coding-billing/healthcare-common-procedure-system/quarterly-update</a></td><td>Downloader especifico agregado; requiere validacion de red/binario Archivo trimestral oficial para codigos alfanumericos HCPCS</td></tr>
+<tr><td><strong>CPT</strong><span>CPT</span></td><td><span class="status manual_required">MANUAL REQUIRED</span></td><td>1</td><td>Efectivo 2026-01-01; anuncio 2025-09-11</td><td>0</td><td><a href="https://www.ama-assn.org/practice-management/cpt/cpt-code-set-overview">https://www.ama-assn.org/practice-management/cpt/cpt-code-set-overview</a></td><td>Registrar enlaces oficiales y notas de licencia; no esperar descarga libre completa Muy relevante para procedimientos, pero el set completo no es de libre descarga publica</td></tr>
+<tr><td><strong>MESH</strong><span>MeSH</span></td><td><span class="status failed">FAILED</span></td><td>4</td><td>Production year 2026</td><td>0</td><td><a href="https://www.nlm.nih.gov/databases/download/mesh.html">https://www.nlm.nih.gov/databases/download/mesh.html</a></td><td>Descarga parcial/fallida en estado local; reintentar con downloader ASCII descontinuado desde enero 2026; XML anual, RDF diario, API disponible</td></tr>
+<tr><td><strong>UNII_GSRS</strong><span>UNII / GSRS</span></td><td><span class="status skipped">SKIPPED</span></td><td>2</td><td>Contenido FDA vigente 2026-04-13</td><td>0</td><td><a href="https://www.fda.gov/industry/fda-data-standards-advisory-board/fdas-global-substance-registration-system">https://www.fda.gov/industry/fda-data-standards-advisory-board/fdas-global-substance-registration-system</a></td><td>Registrar como complemento de medicamentos e ingredientes; descarga depende de la fuente publica elegida Aporta identificadores unicos de ingredientes y sustancias reguladas</td></tr>
+<tr><td><strong>FHIR_IMPLEMENTATION_REGISTRY</strong><span>FHIR Implementation Registry</span></td><td><span class="status skipped">SKIPPED</span></td><td>1</td><td>Vigente 2026-04-26</td><td>0</td><td><a href="https://build.fhir.org/registry/index.html">https://build.fhir.org/registry/index.html</a></td><td>No es un binario unico; sirve como hub oficial de artefactos FHIR publicados Punto de entrada oficial para IGs formales, conformance registry y registro de implementaciones</td></tr>
+<tr><td><strong>CDA_R2_CORE</strong><span>CDA R2.0 Core</span></td><td><span class="status skipped">SKIPPED</span></td><td>1</td><td>Normative online 2024-08-28; extension schema 2025-01-08</td><td>0</td><td><a href="https://www.hl7.org/cda/">https://www.hl7.org/cda/</a></td><td>Incluye navegacion normativa, SD format y extension schema; descarga original 2010 existe por separado Base oficial para documentos clinicos CDA y sus extensiones aprobadas</td></tr>
+<tr><td><strong>CDA_VALUE_SETS</strong><span>CDA Value Sets</span></td><td><span class="status skipped">SKIPPED</span></td><td>1</td><td>THO actual 7.1.0; referencia historica 2.0.0</td><td>0</td><td><a href="https://terminology.hl7.org/2.0.0/valuesets-cda.html">https://terminology.hl7.org/2.0.0/valuesets-cda.html</a></td><td>Guardar como referencia terminologica aunque la version visible sea historica Util para vocabularios base de CDA internacional y codificaciones heredadas de V3</td></tr>
+<tr><td><strong>CCDA_ON_FHIR</strong><span>C-CDA on FHIR</span></td><td><span class="status skipped">SKIPPED</span></td><td>1</td><td>1.2.0 STU1 activo desde 2020-10-19</td><td>0</td><td><a href="https://hl7.org/fhir/us/ccda/">https://hl7.org/fhir/us/ccda/</a></td><td>Incluye mappings, dependencias y artefactos descargables del IG Muy util para migracion y coexistencia entre documentos C-CDA y ecosistema FHIR/US Core</td></tr>
+<tr><td><strong>US_CORE</strong><span>US Core Implementation Guide</span></td><td><span class="status skipped">SKIPPED</span></td><td>1</td><td>8.0.1 STU8</td><td>0</td><td><a href="https://www.hl7.org/fhir/us/core/">https://www.hl7.org/fhir/us/core/</a></td><td>Muy relevante para perfiles clinicos, terminologia y obligaciones SMART en entornos regulados Base de referencia para perfiles FHIR del USCDI y requisitos minimos de interoperabilidad en EE.UU.</td></tr>
+<tr><td><strong>SMART_APP_LAUNCH</strong><span>SMART App Launch</span></td><td><span class="status skipped">SKIPPED</span></td><td>1</td><td>2.2.0</td><td>0</td><td><a href="https://build.fhir.org/ig/HL7/smart-app-launch/">https://build.fhir.org/ig/HL7/smart-app-launch/</a></td><td>Build continua; registrar como referencia tecnica usada por implementaciones Define .well-known/smart-configuration, scopes, launch context y paquetes para R4 y R4B</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">Los datasets con licencia o cuenta requerida quedan trazados, pero no se descargan intentando saltar autorizaciones. Los web registries e IGs sin binario unico se reportan como tracked/skipped hasta implementar un importador especifico.</p>
+    </section>
+  </div>
+</body>
+</html>

@@ -1,0 +1,1 @@
+{"specialties": ["General", "Cardiologia"], "sub_specialties": {"General": ["General"], "Cardiologia": ["General", "Arritmias"]}, "epidemics": ["N/A"], "defaults": {"specialty": "General", "sub_specialty": "General", "epidemic": "N/A"}}

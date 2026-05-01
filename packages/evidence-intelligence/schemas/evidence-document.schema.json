@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://icicso.local/schemas/evidence-intelligence/evidence-document.schema.json",
+  "title": "Evidence Document",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "source_type",
+    "evidence_type",
+    "publication_year",
+    "version_or_update",
+    "jurisdiction",
+    "specialty",
+    "clinical_domain",
+    "population",
+    "intervention",
+    "outcomes",
+    "effect_direction",
+    "certainty",
+    "clinical_functions",
+    "time_horizons",
+    "applicability",
+    "provenance",
+    "references",
+    "ingestion_metadata",
+    "hash",
+    "status"
+  ],
+  "properties": {
+    "id": { "type": "string", "pattern": "^EDOC-[A-Z0-9_-]{6,}$" },
+    "title": { "type": "string", "minLength": 5 },
+    "source_type": { "type": "string", "enum": ["journal", "guideline-body", "society", "hta-agency", "institution", "registry", "database"] },
+    "evidence_type": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "publication_year": { "type": "integer", "minimum": 1900, "maximum": 2100 },
+    "version_or_update": { "type": "string", "minLength": 1 },
+    "jurisdiction": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" } },
+    "specialty": { "type": "string", "minLength": 1 },
+    "clinical_domain": { "type": "string", "minLength": 1 },
+    "population": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["summary"],
+      "properties": {
+        "summary": { "type": "string", "minLength": 1 },
+        "age_groups": { "type": "array", "items": { "type": "string" } },
+        "diagnoses": { "type": "array", "items": { "type": "string" } },
+        "severity": { "type": ["string", "null"] }
+      }
+    },
+    "intervention": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["class", "summary"],
+      "properties": {
+        "class": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "summary": { "type": "string", "minLength": 1 }
+      }
+    },
+    "comparator": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["summary"],
+      "properties": {
+        "summary": { "type": "string", "minLength": 1 }
+      }
+    },
+    "outcomes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["outcome_class", "summary"],
+        "properties": {
+          "outcome_class": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "summary": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "effect_direction": { "type": "string", "enum": ["benefit", "harm", "no-benefit", "inconclusive", "mixed"] },
+    "certainty": { "type": "string", "enum": ["very-high", "high", "moderate", "low", "very-low", "unknown"] },
+    "clinical_functions": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" } },
+    "time_horizons": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" } },
+    "applicability": { "$ref": "https://icicso.local/schemas/evidence-intelligence/applicability.schema.json" },
+    "provenance": { "$ref": "https://icicso.local/schemas/evidence-intelligence/provenance.schema.json" },
+    "references": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["citation"],
+        "properties": {
+          "citation": { "type": "string", "minLength": 1 },
+          "doi": { "type": ["string", "null"] },
+          "uri": { "type": ["string", "null"], "format": "uri" }
+        }
+      }
+    },
+    "ingestion_metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ingested_at", "ingestion_channel"],
+      "properties": {
+        "ingested_at": { "type": "string", "format": "date-time" },
+        "ingestion_channel": { "type": "string", "minLength": 1 },
+        "parser_version": { "type": ["string", "null"] }
+      }
+    },
+    "hash": { "type": "string", "minLength": 8 },
+    "status": { "type": "string", "enum": ["draft", "classified", "structured", "approved", "deprecated"] }
+  }
+}

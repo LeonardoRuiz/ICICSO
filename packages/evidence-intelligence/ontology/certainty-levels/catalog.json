@@ -1,0 +1,22 @@
+{
+  "catalogId": "icicso.certainty-levels.v1",
+  "code": "certainty-levels",
+  "label": "Certainty Levels",
+  "description": "Canonical certainty scale used by SER and EO confidence fields.",
+  "usageNotes": [
+    "Use `unknown` only when curation cannot reliably classify certainty.",
+    "This scale is orthogonal to evidence type and evidence level."
+  ],
+  "entries": [
+    { "id": "certainty.very-high", "code": "very-high", "label": "Very High", "description": "Extremely high confidence that the estimated effect or recommendation is stable.", "usageNotes": ["Rare; reserve for exceptionally stable directive evidence or convergent mature synthesis."], "ordinal": 6 },
+    { "id": "certainty.high", "code": "high", "label": "High", "description": "High confidence that the estimated effect is close to the truth.", "usageNotes": ["Typical for mature guideline-backed recommendations."], "ordinal": 5 },
+    { "id": "certainty.moderate", "code": "moderate", "label": "Moderate", "description": "Moderate confidence with some possibility that the estimate will change.", "usageNotes": ["Default when evidence is useful but not fully stable."], "ordinal": 4 },
+    { "id": "certainty.low", "code": "low", "label": "Low", "description": "Limited confidence in the estimate or recommendation.", "usageNotes": ["Use when several uncertainty sources remain unresolved."], "ordinal": 3 },
+    { "id": "certainty.very-low", "code": "very-low", "label": "Very Low", "description": "Very limited confidence in the estimate or recommendation.", "usageNotes": ["Should strongly reduce execution readiness unless governed."], "ordinal": 2 },
+    { "id": "certainty.unknown", "code": "unknown", "label": "Unknown", "description": "Certainty has not yet been determined or cannot be assessed.", "usageNotes": ["Temporary curation state, not a desired steady-state production value."], "ordinal": 1 }
+  ],
+  "constraints": {
+    "uniqueFields": ["id", "code", "label", "ordinal"],
+    "requiredFields": ["id", "code", "label", "description", "usageNotes"]
+  }
+}

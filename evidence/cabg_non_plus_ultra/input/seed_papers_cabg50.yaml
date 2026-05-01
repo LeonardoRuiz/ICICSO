@@ -1,0 +1,650 @@
+- seed_id: A01
+  group: guideline_trunk
+  subdomain: coronary_revascularization
+  priority_rank_1_to_50: 1
+  short_label: ACC/AHA/SCAI Revascularization 2021
+  target_title: 2021 ACC/AHA/SCAI Guideline for Coronary Artery Revascularization
+  query: "\"2021 ACC/AHA/SCAI Guideline for Coronary Artery Revascularization\""
+  year_hint: 2021
+  publication_type: guideline
+  guideline_body: ACC/AHA/SCAI
+  clinical_phase: transversal
+  scenario_relevance: direct
+  index_case_fit: very_high
+- seed_id: A02
+  group: guideline_trunk
+  subdomain: acute_coronary_syndromes
+  priority_rank_1_to_50: 2
+  short_label: ACC/AHA ACS 2025
+  target_title: 2025 ACC/AHA/ACEP/NAEMSP/SCAI Guideline for Acute Coronary Syndromes
+  query: "\"2025 ACC/AHA/ACEP/NAEMSP/SCAI Guideline for Acute Coronary Syndromes\""
+  year_hint: 2025
+  publication_type: guideline
+  guideline_body: ACC/AHA/ACEP/NAEMSP/SCAI
+  clinical_phase: preop
+  scenario_relevance: direct
+  index_case_fit: very_high
+- seed_id: A03
+  group: guideline_trunk
+  subdomain: acute_coronary_syndromes
+  priority_rank_1_to_50: 3
+  short_label: ESC ACS 2023
+  target_title: 2023 ESC Guidelines for the management of acute coronary syndromes
+  query: "\"2023 ESC Guidelines for the management of acute coronary syndromes\""
+  year_hint: 2023
+  publication_type: guideline
+  guideline_body: ESC
+  clinical_phase: preop
+  scenario_relevance: direct
+  index_case_fit: very_high
+- seed_id: A04
+  group: guideline_trunk
+  subdomain: myocardial_revascularization
+  priority_rank_1_to_50: 4
+  short_label: ESC/EACTS Revascularization 2018
+  target_title: 2018 ESC/EACTS Guidelines on myocardial revascularization
+  query: "\"2018 ESC/EACTS Guidelines on myocardial revascularization\""
+  year_hint: 2018
+  publication_type: guideline
+  guideline_body: ESC/EACTS
+  clinical_phase: transversal
+  scenario_relevance: direct
+  index_case_fit: very_high
+- seed_id: A05
+  group: guideline_trunk
+  subdomain: diabetes_pharmacology
+  priority_rank_1_to_50: 5
+  short_label: ADA Pharmacologic 2026
+  target_title: Standards of Care in Diabetes 2026 Pharmacologic Approaches to Glycemic Treatment
+  query: "\"Standards of Care in Diabetes 2026\" \"Pharmacologic Approaches to Glycemic Treatment\""
+  year_hint: 2026
+  publication_type: guideline
+  guideline_body: ADA
+  clinical_phase: longitudinal
+  scenario_relevance: high
+  index_case_fit: high
+- seed_id: A06
+  group: guideline_trunk
+  subdomain: diabetes_cardiovascular
+  priority_rank_1_to_50: 6
+  short_label: ADA CVD Risk 2026
+  target_title: Standards of Care in Diabetes 2026 Cardiovascular Disease and Risk Management
+  query: "\"Standards of Care in Diabetes 2026\" \"Cardiovascular Disease and Risk Management\""
+  year_hint: 2026
+  publication_type: guideline
+  guideline_body: ADA
+  clinical_phase: longitudinal
+  scenario_relevance: high
+  index_case_fit: high
+- seed_id: A07
+  group: guideline_trunk
+  subdomain: diabetes_ckd
+  priority_rank_1_to_50: 7
+  short_label: ADA CKD Risk 2026
+  target_title: Standards of Care in Diabetes 2026 Chronic Kidney Disease and Risk Management
+  query: "\"Standards of Care in Diabetes 2026\" \"Chronic Kidney Disease and Risk Management\""
+  year_hint: 2026
+  publication_type: guideline
+  guideline_body: ADA
+  clinical_phase: longitudinal
+  scenario_relevance: high
+  index_case_fit: high
+- seed_id: A08
+  group: guideline_trunk
+  subdomain: diabetes_hospital
+  priority_rank_1_to_50: 8
+  short_label: ADA Hospital Care 2026
+  target_title: Standards of Care in Diabetes 2026 Diabetes Care in the Hospital
+  query: "\"Standards of Care in Diabetes 2026\" \"Diabetes Care in the Hospital\""
+  year_hint: 2026
+  publication_type: guideline
+  guideline_body: ADA
+  clinical_phase: icu
+  scenario_relevance: high
+  index_case_fit: high
+- seed_id: A09
+  group: guideline_trunk
+  subdomain: ckd_guideline
+  priority_rank_1_to_50: 9
+  short_label: KDIGO CKD 2024
+  target_title: KDIGO 2024 Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease
+  query: "\"KDIGO 2024\" chronic kidney disease guideline"
+  year_hint: 2024
+  publication_type: guideline
+  guideline_body: KDIGO
+  clinical_phase: longitudinal
+  scenario_relevance: high
+  index_case_fit: high
+- seed_id: A10
+  group: guideline_trunk
+  subdomain: aki_guideline
+  priority_rank_1_to_50: 10
+  short_label: KDIGO AKI 2012
+  target_title: KDIGO Clinical Practice Guideline for Acute Kidney Injury
+  query: "\"KDIGO Clinical Practice Guideline for Acute Kidney Injury\""
+  year_hint: 2012
+  publication_type: guideline
+  guideline_body: KDIGO
+  clinical_phase: icu
+  scenario_relevance: high
+  index_case_fit: high
+- seed_id: A11
+  group: guideline_trunk
+  subdomain: eras_cardiac_surgery
+  priority_rank_1_to_50: 11
+  short_label: ERAS Cardiac Surgery 2019
+  target_title: Guidelines for Perioperative Care in Cardiac Surgery Enhanced Recovery After Surgery Society Recommendations
+  query: "\"Guidelines for Perioperative Care in Cardiac Surgery\" enhanced recovery"
+  year_hint: 2019
+  publication_type: consensus
+  guideline_body: ERAS Society
+  clinical_phase: transversal
+  scenario_relevance: medium
+  index_case_fit: moderate
+- seed_id: A12
+  group: guideline_trunk
+  subdomain: patient_blood_management
+  priority_rank_1_to_50: 12
+  short_label: STS PBM Update
+  target_title: STS SCA AmSECT SABM Update to the Clinical Practice Guidelines on Patient Blood Management
+  query: "\"Patient Blood Management\" STS SCA AmSECT SABM update"
+  year_hint: 2021
+  publication_type: guideline
+  guideline_body: STS/SCA/AmSECT/SABM
+  clinical_phase: transversal
+  scenario_relevance: high
+  index_case_fit: high
+- seed_id: A13
+  group: guideline_trunk
+  subdomain: patient_blood_management
+  priority_rank_1_to_50: 13
+  short_label: EACTS PBM 2024
+  target_title: 2024 EACTS EACTAIC patient blood management guideline
+  query: "\"2024\" EACTS EACTAIC patient blood management guideline"
+  year_hint: 2024
+  publication_type: guideline
+  guideline_body: EACTS/EACTAIC
+  clinical_phase: transversal
+  scenario_relevance: high
+  index_case_fit: high
+- seed_id: A14
+  group: guideline_trunk
+  subdomain: arterial_conduits
+  priority_rank_1_to_50: 14
+  short_label: STS Arterial Conduits
+  target_title: The Society of Thoracic Surgeons Clinical Practice Guidelines on Arterial Conduits for Coronary Artery Bypass Grafting
+  query: "\"Clinical Practice Guidelines on Arterial Conduits for Coronary Artery Bypass Grafting\""
+  year_hint: 2016
+  publication_type: guideline
+  guideline_body: STS
+  clinical_phase: intraop
+  scenario_relevance: direct
+  index_case_fit: very_high
+- seed_id: A15
+  group: guideline_trunk
+  subdomain: conduit_choice_review
+  priority_rank_1_to_50: 15
+  short_label: Choice of Conduits Review
+  target_title: Expert systematic review on choice of conduits for coronary artery bypass grafting
+  query: "\"choice of conduits\" coronary artery bypass grafting systematic review"
+  year_hint: 2023
+  publication_type: review
+  guideline_body: ""
+  clinical_phase: intraop
+  scenario_relevance: direct
+  index_case_fit: high
+- seed_id: B16
+  group: revascularization
+  subdomain: dm2_multivessel
+  priority_rank_1_to_50: 16
+  short_label: FREEDOM
+  target_title: Strategies for multivessel revascularization in patients with diabetes
+  query: "\"Strategies for Multivessel Revascularization in Patients with Diabetes\""
+  year_hint: 2012
+  publication_type: RCT
+  guideline_body: ""
+  clinical_phase: longitudinal
+  scenario_relevance: direct
+  index_case_fit: very_high
+- seed_id: B17
+  group: revascularization
+  subdomain: dm2_multivessel
+  priority_rank_1_to_50: 17
+  short_label: FREEDOM Follow-On
+  target_title: Long-term survival following multivessel revascularization in patients with diabetes
+  query: "\"Long-term survival following multivessel revascularization in patients with diabetes\" FREEDOM"
+  year_hint: 2019
+  publication_type: follow-up
+  guideline_body: ""
+  clinical_phase: longitudinal
+  scenario_relevance: direct
+  index_case_fit: very_high
+- seed_id: B18
+  group: revascularization
+  subdomain: syntax_complexity
+  priority_rank_1_to_50: 18
+  short_label: SYNTAX 10-year
+  target_title: Ten-year all-cause death according to completeness of revascularization in patients with three-vessel disease and left main coronary artery disease
+  query: "SYNTAX 10-year follow-up three-vessel left main CABG PCI"
+  year_hint: 2019
+  publication_type: follow-up
+  guideline_body: ""
+  clinical_phase: longitudinal
+  scenario_relevance: direct
+  index_case_fit: very_high
+- seed_id: B19
+  group: revascularization
+  subdomain: physiology_guided_pci_vs_cabg
+  priority_rank_1_to_50: 19
+  short_label: FAME 3
+  target_title: Fractional Flow Reserve Guided PCI as Compared with Coronary Bypass Surgery
+  query: "\"Fractional Flow Reserve Guided PCI as Compared with Coronary Bypass Surgery\""
+  year_hint: 2021
+  publication_type: RCT
+  guideline_body: ""
+  clinical_phase: longitudinal
+  scenario_relevance: high
+  index_case_fit: very_high
+- seed_id: B20
+  group: revascularization
+  subdomain: physiology_guided_pci_vs_cabg
+  priority_rank_1_to_50: 20
+  short_label: FAME 3 five-year
+  target_title: Five-year outcomes of FAME 3
+  query: "\"FAME 3\" five-year outcomes CABG PCI"
+  year_hint: 2025
+  publication_type: follow-up
+  guideline_body: ""
+  clinical_phase: longitudinal
+  scenario_relevance: high
+  index_case_fit: high
+- seed_id: B21
+  group: revascularization
+  subdomain: left_main
+  priority_rank_1_to_50: 21
+  short_label: EXCEL
+  target_title: Everolimus-Eluting Stents or Bypass Surgery for Left Main Coronary Artery Disease
+  query: "\"Everolimus-Eluting Stents or Bypass Surgery for Left Main Coronary Artery Disease\""
+  year_hint: 2016
+  publication_type: RCT
+  guideline_body: ""
+  clinical_phase: longitudinal
+  scenario_relevance: medium
+  index_case_fit: moderate
+- seed_id: B22
+  group: revascularization
+  subdomain: left_main
+  priority_rank_1_to_50: 22
+  short_label: EXCEL five-year
+  target_title: Five-Year Outcomes after PCI or CABG for Left Main Coronary Disease
+  query: "\"Five-Year Outcomes after PCI or CABG for Left Main Coronary Disease\""
+  year_hint: 2019
+  publication_type: follow-up
+  guideline_body: ""
+  clinical_phase: longitudinal
+  scenario_relevance: medium
+  index_case_fit: moderate
+- seed_id: B23
+  group: revascularization
+  subdomain: left_main
+  priority_rank_1_to_50: 23
+  short_label: NOBLE five-year
+  target_title: Percutaneous coronary angioplasty versus coronary artery bypass grafting in treatment of unprotected left main stenosis 5-year outcomes from the randomised non-inferiority NOBLE trial
+  query: "\"NOBLE trial\" 5-year outcomes left main CABG PCI"
+  year_hint: 2019
+  publication_type: follow-up
+  guideline_body: ""
+  clinical_phase: longitudinal
+  scenario_relevance: medium
+  index_case_fit: moderate
+- seed_id: B24
+  group: revascularization
+  subdomain: left_main
+  priority_rank_1_to_50: 24
+  short_label: PRECOMBAT ten-year
+  target_title: Ten-Year Outcomes After Drug-Eluting Stents Versus Coronary Artery Bypass Grafting for Left Main Coronary Disease
+  query: "\"Ten-Year Outcomes\" stents versus coronary artery bypass grafting left main PRECOMBAT"
+  year_hint: 2020
+  publication_type: follow-up
+  guideline_body: ""
+  clinical_phase: longitudinal
+  scenario_relevance: medium
+  index_case_fit: moderate
+- seed_id: B25
+  group: revascularization
+  subdomain: left_main_meta_analysis
+  priority_rank_1_to_50: 25
+  short_label: Left Main IPD Meta-analysis
+  target_title: PCI versus CABG for left main coronary artery disease individual patient data pooled analysis of randomized trials
+  query: "\"left main\" CABG PCI individual patient data pooled analysis randomized trials"
+  year_hint: 2021
+  publication_type: meta-analysis
+  guideline_body: ""
+  clinical_phase: longitudinal
+  scenario_relevance: medium
+  index_case_fit: moderate
+- seed_id: B26
+  group: revascularization
+  subdomain: stable_ischemia
+  priority_rank_1_to_50: 26
+  short_label: ISCHEMIA
+  target_title: Initial Invasive or Conservative Strategy for Stable Coronary Disease
+  query: "\"Initial Invasive or Conservative Strategy for Stable Coronary Disease\""
+  year_hint: 2020
+  publication_type: RCT
+  guideline_body: ""
+  clinical_phase: longitudinal
+  scenario_relevance: medium
+  index_case_fit: indirect
+- seed_id: C27
+  group: lv_dysfunction
+  subdomain: ischemic_cardiomyopathy
+  priority_rank_1_to_50: 27
+  short_label: STICH
+  target_title: Coronary-Artery Bypass Surgery in Patients with Left Ventricular Dysfunction
+  query: "\"Coronary-Artery Bypass Surgery in Patients with Left Ventricular Dysfunction\""
+  year_hint: 2011
+  publication_type: RCT
+  guideline_body: ""
+  clinical_phase: longitudinal
+  scenario_relevance: direct
+  index_case_fit: very_high
+- seed_id: C28
+  group: lv_dysfunction
+  subdomain: ischemic_cardiomyopathy
+  priority_rank_1_to_50: 28
+  short_label: STICHES
+  target_title: Surgical Treatment for Ischemic Heart Failure Extension Study
+  query: "STICHES extension CABG ischemic cardiomyopathy 10-year outcomes"
+  year_hint: 2016
+  publication_type: follow-up
+  guideline_body: ""
+  clinical_phase: longitudinal
+  scenario_relevance: direct
+  index_case_fit: very_high
+- seed_id: C29
+  group: lv_dysfunction
+  subdomain: ischemic_cardiomyopathy
+  priority_rank_1_to_50: 29
+  short_label: STICH age
+  target_title: Ten-year outcomes after coronary artery bypass grafting according to age in patients with heart failure and left ventricular systolic dysfunction
+  query: "\"according to age\" STICH CABG left ventricular systolic dysfunction"
+  year_hint: 2016
+  publication_type: substudy
+  guideline_body: ""
+  clinical_phase: longitudinal
+  scenario_relevance: high
+  index_case_fit: high
+- seed_id: C30
+  group: lv_dysfunction
+  subdomain: ischemic_cardiomyopathy
+  priority_rank_1_to_50: 30
+  short_label: STICH hospitalization
+  target_title: CABG reduces postdischarge death and hospitalization in patients with ischemic cardiomyopathy
+  query: "STICH recurrent first cardiovascular hospitalization CABG ischemic cardiomyopathy"
+  year_hint: 2014
+  publication_type: substudy
+  guideline_body: ""
+  clinical_phase: longitudinal
+  scenario_relevance: high
+  index_case_fit: high
+- seed_id: C31
+  group: lv_dysfunction
+  subdomain: viability
+  priority_rank_1_to_50: 31
+  short_label: STICH viability
+  target_title: Myocardial viability and survival in ischemic left ventricular dysfunction
+  query: "\"Myocardial viability and survival in ischemic left ventricular dysfunction\""
+  year_hint: 2011
+  publication_type: substudy
+  guideline_body: ""
+  clinical_phase: preop
+  scenario_relevance: high
+  index_case_fit: high
+- seed_id: C32
+  group: lv_dysfunction
+  subdomain: viability
+  priority_rank_1_to_50: 32
+  short_label: STICHES viability
+  target_title: Myocardial viability and long-term outcomes in ischemic cardiomyopathy
+  query: "\"Myocardial viability\" long-term outcomes ischemic cardiomyopathy STICH"
+  year_hint: 2019
+  publication_type: substudy
+  guideline_body: ""
+  clinical_phase: preop
+  scenario_relevance: medium
+  index_case_fit: moderate
+- seed_id: C33
+  group: lv_dysfunction
+  subdomain: mode_of_death
+  priority_rank_1_to_50: 33
+  short_label: STICH mode of death
+  target_title: Mode of Death in Patients With Ischemic Heart Failure and the Effect of Coronary Artery Bypass Grafting
+  query: "\"Mode of Death\" ischemic heart failure effect of coronary artery bypass grafting"
+  year_hint: 2018
+  publication_type: substudy
+  guideline_body: ""
+  clinical_phase: longitudinal
+  scenario_relevance: medium
+  index_case_fit: high
+- seed_id: C34
+  group: lv_dysfunction
+  subdomain: heart_failure_guideline
+  priority_rank_1_to_50: 34
+  short_label: HF Guideline 2022
+  target_title: 2022 AHA ACC HFSA Guideline for the Management of Heart Failure
+  query: "\"2022 AHA ACC HFSA Guideline for the Management of Heart Failure\""
+  year_hint: 2022
+  publication_type: guideline
+  guideline_body: AHA/ACC/HFSA
+  clinical_phase: longitudinal
+  scenario_relevance: high
+  index_case_fit: high
+- seed_id: D35
+  group: conduits_technique
+  subdomain: graft_patency
+  priority_rank_1_to_50: 35
+  short_label: SVG vs LIMA patency
+  target_title: Long-term patency of saphenous vein and left internal mammary artery grafts after coronary artery bypass surgery
+  query: "\"Long-term patency\" saphenous vein left internal mammary artery grafts"
+  year_hint: 2004
+  publication_type: review
+  guideline_body: ""
+  clinical_phase: longitudinal
+  scenario_relevance: high
+  index_case_fit: high
+- seed_id: D36
+  group: conduits_technique
+  subdomain: svg_patency_antiplatelet
+  priority_rank_1_to_50: 36
+  short_label: Early SVG patency
+  target_title: Early saphenous vein graft patency after coronary artery bypass surgery and antiplatelet therapy
+  query: "\"saphenous vein graft patency\" coronary artery bypass surgery antiplatelet therapy early"
+  year_hint: 2010
+  publication_type: review
+  guideline_body: ""
+  clinical_phase: ward
+  scenario_relevance: medium
+  index_case_fit: moderate
+- seed_id: D37
+  group: conduits_technique
+  subdomain: svg_patency_antiplatelet
+  priority_rank_1_to_50: 37
+  short_label: 1-year SVG patency
+  target_title: One-year saphenous vein graft patency and antiplatelet therapy after coronary artery bypass grafting
+  query: "\"one-year\" saphenous vein graft patency antiplatelet therapy CABG"
+  year_hint: 2018
+  publication_type: review
+  guideline_body: ""
+  clinical_phase: ward
+  scenario_relevance: medium
+  index_case_fit: moderate
+- seed_id: D38
+  group: conduits_technique
+  subdomain: radial_artery
+  priority_rank_1_to_50: 38
+  short_label: Radial vs SVG NEJM 2018
+  target_title: Radial-Artery or Saphenous-Vein Grafts in Coronary-Artery Bypass Surgery
+  query: "\"Radial-Artery or Saphenous-Vein Grafts in Coronary-Artery Bypass Surgery\""
+  year_hint: 2018
+  publication_type: meta-analysis
+  guideline_body: ""
+  clinical_phase: longitudinal
+  scenario_relevance: direct
+  index_case_fit: high
+- seed_id: D39
+  group: conduits_technique
+  subdomain: radial_artery
+  priority_rank_1_to_50: 39
+  short_label: Radial pooled long-term
+  target_title: Association of Radial Artery Grafting vs Saphenous Vein Grafting With Long-term Cardiovascular Outcomes Among Patients Undergoing Coronary Artery Bypass Grafting
+  query: "\"Association of Radial Artery Grafting vs Saphenous Vein Grafting With Long-term Cardiovascular Outcomes\""
+  year_hint: 2020
+  publication_type: meta-analysis
+  guideline_body: ""
+  clinical_phase: longitudinal
+  scenario_relevance: direct
+  index_case_fit: high
+- seed_id: D40
+  group: conduits_technique
+  subdomain: radial_artery
+  priority_rank_1_to_50: 40
+  short_label: RAPCO
+  target_title: Radial artery patency and clinical outcomes long-term results of the RAPCO trial
+  query: "RAPCO long-term results radial artery patency CABG"
+  year_hint: 2022
+  publication_type: follow-up
+  guideline_body: ""
+  clinical_phase: longitudinal
+  scenario_relevance: high
+  index_case_fit: high
+- seed_id: D41
+  group: conduits_technique
+  subdomain: bita
+  priority_rank_1_to_50: 41
+  short_label: ART 10-year
+  target_title: Bilateral versus Single Internal-Thoracic-Artery Grafts at 10 Years
+  query: "\"Bilateral versus Single Internal-Thoracic-Artery Grafts at 10 Years\""
+  year_hint: 2019
+  publication_type: RCT
+  guideline_body: ""
+  clinical_phase: longitudinal
+  scenario_relevance: high
+  index_case_fit: moderate
+- seed_id: D42
+  group: conduits_technique
+  subdomain: bita_diabetes
+  priority_rank_1_to_50: 42
+  short_label: BITA skeletonization diabetes
+  target_title: Skeletonization of bilateral internal thoracic arteries and deep sternal wound infection in diabetes
+  query: "skeletonization bilateral internal thoracic arteries deep sternal wound infection diabetes CABG"
+  year_hint: 2016
+  publication_type: review
+  guideline_body: ""
+  clinical_phase: intraop
+  scenario_relevance: high
+  index_case_fit: high
+- seed_id: D43
+  group: conduits_technique
+  subdomain: onpump_offpump
+  priority_rank_1_to_50: 43
+  short_label: CORONARY 30-day
+  target_title: On-pump versus off-pump coronary-artery bypass surgery
+  query: "\"On-pump versus off-pump coronary-artery bypass surgery\""
+  year_hint: 2012
+  publication_type: RCT
+  guideline_body: ""
+  clinical_phase: icu
+  scenario_relevance: medium
+  index_case_fit: moderate
+- seed_id: D44
+  group: conduits_technique
+  subdomain: onpump_offpump
+  priority_rank_1_to_50: 44
+  short_label: CORONARY 1-year
+  target_title: One-year outcomes after off-pump or on-pump coronary-artery bypass grafting
+  query: "\"One-year outcomes after off-pump or on-pump coronary-artery bypass grafting\""
+  year_hint: 2013
+  publication_type: follow-up
+  guideline_body: ""
+  clinical_phase: longitudinal
+  scenario_relevance: medium
+  index_case_fit: moderate
+- seed_id: D45
+  group: conduits_technique
+  subdomain: onpump_offpump
+  priority_rank_1_to_50: 45
+  short_label: ROOBY
+  target_title: ROOBY trial on-pump versus off-pump coronary-artery bypass surgery
+  query: "ROOBY primary trial off-pump on-pump coronary-artery bypass surgery"
+  year_hint: 2009
+  publication_type: RCT
+  guideline_body: ""
+  clinical_phase: icu
+  scenario_relevance: medium
+  index_case_fit: moderate
+- seed_id: D46
+  group: conduits_technique
+  subdomain: onpump_offpump
+  priority_rank_1_to_50: 46
+  short_label: ROOBY five-year
+  target_title: Five-Year Outcomes after On-Pump and Off-Pump Coronary-Artery Bypass
+  query: "\"Five-Year Outcomes after On-Pump and Off-Pump Coronary-Artery Bypass\""
+  year_hint: 2016
+  publication_type: follow-up
+  guideline_body: ""
+  clinical_phase: longitudinal
+  scenario_relevance: medium
+  index_case_fit: moderate
+- seed_id: E47
+  group: perioperative_safety
+  subdomain: transfusion
+  priority_rank_1_to_50: 47
+  short_label: TRICS III
+  target_title: Restrictive or Liberal Red-Cell Transfusion for Cardiac Surgery
+  query: "\"Restrictive or Liberal Red-Cell Transfusion for Cardiac Surgery\""
+  year_hint: 2017
+  publication_type: RCT
+  guideline_body: ""
+  clinical_phase: icu
+  scenario_relevance: high
+  index_case_fit: high
+- seed_id: E48
+  group: perioperative_safety
+  subdomain: aki_prevention
+  priority_rank_1_to_50: 48
+  short_label: PrevAKI
+  target_title: PrevAKI randomized controlled trial
+  query: "PrevAKI trial acute kidney injury cardiac surgery KDIGO bundle"
+  year_hint: 2017
+  publication_type: RCT
+  guideline_body: ""
+  clinical_phase: icu
+  scenario_relevance: high
+  index_case_fit: high
+- seed_id: E49
+  group: perioperative_safety
+  subdomain: glycemic_control
+  priority_rank_1_to_50: 49
+  short_label: NICE-SUGAR
+  target_title: Intensive versus Conventional Glucose Control in Critically Ill Patients
+  query: "\"Intensive versus Conventional Glucose Control in Critically Ill Patients\""
+  year_hint: 2009
+  publication_type: RCT
+  guideline_body: ""
+  clinical_phase: icu
+  scenario_relevance: high
+  index_case_fit: high
+- seed_id: E50
+  group: perioperative_safety
+  subdomain: poaf
+  priority_rank_1_to_50: 50
+  short_label: PAPABEAR
+  target_title: Prophylactic Oral Amiodarone for the Prevention of Arrhythmia that Begin Early After Revascularization Valvular Repair or Replacement PAPABEAR
+  query: "PAPABEAR prophylactic oral amiodarone prevention arrhythmia after revascularization"
+  year_hint: 2005
+  publication_type: RCT
+  guideline_body: ""
+  clinical_phase: ward
+  scenario_relevance: high
+  index_case_fit: high

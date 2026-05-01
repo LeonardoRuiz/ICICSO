@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://icicso.local/schemas/evidence-intelligence/review-metadata.schema.json",
+  "title": "Review Metadata",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "owner",
+    "review_status",
+    "reviewed_at",
+    "review_cycle"
+  ],
+  "properties": {
+    "owner": { "type": "string", "minLength": 1 },
+    "review_status": { "type": "string", "enum": ["draft", "under-review", "approved", "active", "superseded", "deprecated"] },
+    "reviewed_at": { "type": "string", "format": "date-time" },
+    "review_cycle": { "type": "string", "minLength": 1 },
+    "approver": { "type": ["string", "null"] },
+    "notes": { "type": ["string", "null"] }
+  }
+}

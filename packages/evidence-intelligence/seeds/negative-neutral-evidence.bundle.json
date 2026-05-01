@@ -1,0 +1,99 @@
+{
+  "seedMetadata": {
+    "seedId": "seed.negative-neutral-evidence.v1",
+    "title": "Negative or Neutral Evidence Example",
+    "structuralExample": true,
+    "note": "Structured example intended to produce a non-benefit recommendation."
+  },
+  "ser": {
+    "serId": "SER-NEUTRAL-0001",
+    "sourceDocumentId": "EDOC-NEUTRAL-2021",
+    "title": "Routine prolonged ICU sedation protocol shows no benefit in stable postoperative patients",
+    "evidenceType": "systematic-review",
+    "clinicalDomain": "critical_care",
+    "summary": "Routine prolonged deep sedation in stable postoperative patients does not improve outcomes and may delay recovery.",
+    "statements": [
+      {
+        "statementId": "SES-NEUTRAL-01",
+        "clinicalFunction": "critical-care-management",
+        "interventionClass": "icu-strategy",
+        "interventionLabel": "Routine prolonged deep sedation",
+        "effectDirection": "no-benefit",
+        "strength": "high",
+        "certainty": "moderate",
+        "decisionReadiness": "ready-with-local-review",
+        "timeHorizon": "icu-stay",
+        "outcomes": [
+          { "outcomeCode": "ventilator-time", "effectDirection": "harm", "note": "Longer ventilation exposure." },
+          { "outcomeCode": "icu-los", "effectDirection": "no-benefit", "note": "No meaningful ICU LOS reduction." }
+        ],
+        "conditions": ["stable postoperative ICU patient"],
+        "exclusions": ["refractory hypoxemia", "active neuromuscular blockade requirement"],
+        "rationale": "Routine use should be avoided in stable patients absent a specific indication.",
+        "operationalContext": {
+          "implementationComplexity": "low",
+          "resourceDemand": "moderate",
+          "costRelevance": "moderate",
+          "operationalRelevance": "moderate",
+          "resourceRequirements": [
+            { "resourceType": "icu_protocol", "role": "intensivist", "quantity": 1, "unit": "protocol", "mandatory": true, "costCenter": "ICU", "notes": null }
+          ],
+          "constraints": ["Alternative light sedation protocol should be available."]
+        }
+      }
+    ],
+    "applicability": {
+      "clinicalDomain": "critical_care",
+      "careSetting": "icu",
+      "jurisdictions": ["global"],
+      "decisionReadiness": "ready-with-local-review",
+      "population": {
+        "summary": "Stable postoperative ICU adults without special sedation requirements.",
+        "ageBands": ["adult", "older_adult"],
+        "sexes": ["female", "male"],
+        "diagnoses": ["postoperative critical care admission"],
+        "procedures": ["major surgery"],
+        "biomarkers": [],
+        "severity": "stable_icu_course",
+        "comorbidities": [],
+        "inclusionCriteria": ["hemodynamic stability"],
+        "exclusionCriteria": ["refractory hypoxemia"]
+      },
+      "dimensionAssessments": [
+        { "dimension": "population-fit", "score": 3, "rationale": "Population is well defined and common." },
+        { "dimension": "intervention-fit", "score": 3, "rationale": "Sedation strategy directly represented." },
+        { "dimension": "setting-fit", "score": 3, "rationale": "Exact ICU setting." },
+        { "dimension": "jurisdiction-fit", "score": 2, "rationale": "Portable across ICU contexts." },
+        { "dimension": "resource-fit", "score": 3, "rationale": "No special resource barrier." }
+      ],
+      "implementationPreconditions": ["light sedation alternative available"]
+    },
+    "provenance": {
+      "sourceSystem": "manual-ingest",
+      "capturedAt": "2026-04-04T13:00:00Z",
+      "capturedBy": "icicso.evidence.curator",
+      "chainOfCustody": [
+        { "step": "derive-ser", "actor": "icicso.evidence.curator", "timestamp": "2026-04-04T13:00:00Z", "hashSha256": "ser-neutral-01", "note": "Derived from negative/neutral example." }
+      ],
+      "legal": {
+        "licenseStatus": "licensed",
+        "attestationStatus": "attested",
+        "reviewPolicy": "critical-care-board",
+        "retentionClass": "clinical_evidence_permanent"
+      },
+      "versioning": {
+        "canonicalId": "CANON-SER-NEUTRAL",
+        "version": "1.0.0",
+        "effectiveFrom": "2026-04-04",
+        "effectiveTo": null,
+        "supersedes": [],
+        "status": "active"
+      }
+    }
+  },
+  "expectedMapperBehavior": {
+    "shouldGenerateEo": true,
+    "expectedDecisionVerb": "avoid",
+    "expectedReviewState": "specialist-approved"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "artifact_kind": "operational-context",
+  "data": {
+    "implementation_complexity": "extreme",
+    "resource_demand": "extreme",
+    "cost_relevance": "extreme",
+    "operational_relevance": "extreme",
+    "resource_requirements": []
+  }
+}

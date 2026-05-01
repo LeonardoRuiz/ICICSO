@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://icicso.local/schemas/evidence/evidence_object.schema.json",
+  "title": "EvidenceObject",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "eo_id": {
+      "type": "string",
+      "pattern": "^EO-[A-Z0-9_-]+$"
+    },
+    "ser_id": {
+      "type": "string",
+      "pattern": "^SER-[A-Z0-9_-]+$"
+    },
+    "source_document_id": {
+      "type": "string",
+      "pattern": "^DOC-[A-F0-9]{12}$"
+    },
+    "domain": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subdomain": {
+      "type": ["string", "null"]
+    },
+    "statement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "class_of_recommendation": {
+      "type": ["string", "null"]
+    },
+    "level_of_evidence": {
+      "type": ["string", "null"]
+    },
+    "methodological_integrity_metric": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "doi": {
+      "type": ["string", "null"]
+    },
+    "population_scope": {
+      "type": ["string", "null"]
+    },
+    "publication_year": {
+      "type": ["integer", "null"],
+      "minimum": 1900,
+      "maximum": 2100
+    },
+    "status": {
+      "$ref": "../common/enums.schema.json#/$defs/artifactStatus"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "vrn": {
+      "type": ["string", "null"]
+    },
+    "hash_sha256": {
+      "type": "string",
+      "pattern": "^[A-F0-9]{64}$"
+    },
+    "citations": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "vancouver": {
+          "type": ["string", "null"]
+        },
+        "toronto": {
+          "type": ["string", "null"]
+        }
+      },
+      "required": ["vancouver", "toronto"]
+    }
+  },
+  "required": [
+    "eo_id",
+    "ser_id",
+    "source_document_id",
+    "domain",
+    "statement",
+    "status",
+    "version",
+    "hash_sha256",
+    "citations"
+  ]
+}

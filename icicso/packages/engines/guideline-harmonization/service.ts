@@ -1,0 +1,2 @@
+import { GuidelineHarmonizationEngineDescriptor } from "./types"; import type { GuidelineHarmonizationEngineContract } from "./types";
+ export const createGuidelineHarmonizationEngineService=(): GuidelineHarmonizationEngineContract=>({module:GuidelineHarmonizationEngineDescriptor,inputs:[...GuidelineHarmonizationEngineDescriptor.inputs],outputs:[...GuidelineHarmonizationEngineDescriptor.outputs]});

@@ -1,0 +1,23 @@
+{
+  "catalogId": "icicso.evidence-levels.v1",
+  "code": "evidence-levels",
+  "label": "Evidence Levels",
+  "description": "Canonical hierarchy used for source prioritization, decay policies and conflict resolution.",
+  "usageNotes": [
+    "This is ICICSO's operational hierarchy, not a verbatim import of any single external framework.",
+    "Lower `priority` means stronger default precedence in conflicts."
+  ],
+  "entries": [
+    { "id": "evlevel.directive", "code": "directive", "label": "Directive", "description": "Normative evidence directly intended to guide practice or execution.", "usageNotes": ["Includes guidelines, AUC, pathways, protocols and order sets when governed."], "priority": 1, "defaultWeight": 100 },
+    { "id": "evlevel.synthesis", "code": "synthesis", "label": "Synthesis", "description": "Systematic or quantitative synthesis of multiple eligible studies.", "usageNotes": ["Generally prevails over isolated primary studies if current and applicable."], "priority": 2, "defaultWeight": 85 },
+    { "id": "evlevel.comparative-primary", "code": "comparative-primary", "label": "Comparative Primary", "description": "Primary comparative studies such as randomized or pragmatic trials.", "usageNotes": ["Core source for effect estimates prior to synthesis."], "priority": 3, "defaultWeight": 72 },
+    { "id": "evlevel.observational", "code": "observational", "label": "Observational", "description": "Observational evidence including cohorts, case-control, registries and prognosis studies.", "usageNotes": ["Important for harms, external validity and long-term follow-up."], "priority": 4, "defaultWeight": 58 },
+    { "id": "evlevel.contextual-implementation", "code": "contextual-implementation", "label": "Contextual Implementation", "description": "Evidence centered on implementation feasibility, economics or local adaptation.", "usageNotes": ["Can constrain readiness but should not invert clinical truth."], "priority": 5, "defaultWeight": 44 },
+    { "id": "evlevel.background", "code": "background", "label": "Background", "description": "Background or low-rigor evidence that informs context but not direct execution.", "usageNotes": ["Requires explicit governance if used to close evidence gaps."], "priority": 6, "defaultWeight": 25 }
+  ],
+  "constraints": {
+    "uniqueFields": ["id", "code", "label", "priority"],
+    "requiredFields": ["id", "code", "label", "description", "usageNotes"],
+    "priorityRange": { "min": 1, "max": 9 }
+  }
+}

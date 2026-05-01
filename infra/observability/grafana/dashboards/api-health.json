@@ -1,0 +1,41 @@
+{
+  "annotations": { "list": [] },
+  "panels": [
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "id": 1,
+      "targets": [
+        { "expr": "sum by (route) (rate(icicso_api_request_count_total[5m]))", "legendFormat": "{{route}}", "refId": "A" }
+      ],
+      "title": "API Requests by Route",
+      "type": "timeseries"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+      "id": 2,
+      "targets": [
+        { "expr": "sum by (route, status_code) (rate(icicso_api_error_count_total[5m]))", "legendFormat": "{{route}} {{status_code}}", "refId": "A" }
+      ],
+      "title": "API Errors",
+      "type": "timeseries"
+    },
+    {
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 8 },
+      "id": 3,
+      "targets": [
+        { "expr": "histogram_quantile(0.95, sum by (le, route) (rate(icicso_api_request_duration_seconds_bucket[5m])))", "legendFormat": "{{route}} p95", "refId": "A" }
+      ],
+      "title": "API Latency P95 by Route",
+      "type": "timeseries"
+    }
+  ],
+  "schemaVersion": 39,
+  "tags": ["icicso", "api"],
+  "time": { "from": "now-6h", "to": "now" },
+  "title": "ICICSO API Health",
+  "uid": "icicso-api-health",
+  "version": 1
+}

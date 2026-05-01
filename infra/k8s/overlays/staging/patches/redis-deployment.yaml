@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: icicso-redis
+spec:
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/environment: staging
+    spec:
+      containers:
+        - name: redis
+          resources:
+            requests:
+              cpu: 50m
+              memory: 96Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi

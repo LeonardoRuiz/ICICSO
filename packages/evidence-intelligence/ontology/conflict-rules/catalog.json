@@ -1,0 +1,22 @@
+{
+  "catalogId": "icicso.conflict-resolution-priorities.v1",
+  "code": "conflict-resolution-priorities",
+  "label": "Conflict Resolution Priorities",
+  "description": "Normalized priorities used when two evidence artifacts or statements disagree materially.",
+  "usageNotes": [
+    "Apply in priority order until the conflict is resolved or escalated.",
+    "If priorities remain tied, route to governance instead of silently choosing."
+  ],
+  "entries": [
+    { "id": "conf.source-priority", "code": "source-priority", "label": "Source Priority", "description": "Prefer higher evidence-level sources over lower-level sources.", "usageNotes": ["Directive generally precedes synthesis; synthesis generally precedes single studies."], "priority": 1 },
+    { "id": "conf.recency-priority", "code": "recency-priority", "label": "Recency Priority", "description": "Prefer the more current artifact when methodological rigor is not lower.", "usageNotes": ["Do not let newer but weaker commentary overrule stronger mature evidence automatically."], "priority": 2 },
+    { "id": "conf.certainty-priority", "code": "certainty-priority", "label": "Certainty Priority", "description": "Prefer the statement with higher certainty when source level is comparable.", "usageNotes": ["Use certainty before implementation convenience."], "priority": 3 },
+    { "id": "conf.directness-priority", "code": "directness-priority", "label": "Directness Priority", "description": "Prefer evidence that more directly matches target population, intervention and setting.", "usageNotes": ["Critical for translational and indirect comparison evidence."], "priority": 4 },
+    { "id": "conf.jurisdiction-priority", "code": "jurisdiction-priority", "label": "Jurisdiction Priority", "description": "Prefer sources valid for the target legal or governance jurisdiction.", "usageNotes": ["Local and national sources may outrank global sources for execution legality."], "priority": 5 },
+    { "id": "conf.implementation-priority", "code": "implementation-priority", "label": "Implementation Priority", "description": "Use implementation feasibility to downgrade readiness or trigger review, not to negate stronger clinical truth.", "usageNotes": ["Operational infeasibility should create variance or adaptation records."], "priority": 6 }
+  ],
+  "constraints": {
+    "uniqueFields": ["id", "code", "label", "priority"],
+    "requiredFields": ["id", "code", "label", "description", "usageNotes", "priority"]
+  }
+}

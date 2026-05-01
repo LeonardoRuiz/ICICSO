@@ -1,0 +1,20 @@
+{
+  "artifact_kind": "ser",
+  "data": {
+    "ser_id": "",
+    "linked_source_ids": [],
+    "pico": {},
+    "population_details": null,
+    "intervention_details": null,
+    "outcome_objects": [],
+    "effect_estimates": [],
+    "follow_up_period": "",
+    "bias_limitations": "none",
+    "applicability_assessment": {},
+    "operational_relevance": "extreme",
+    "decision_readiness": "execute-now",
+    "evidence_grading": {},
+    "provenance": {},
+    "review": {}
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "seedMetadata": {
+    "seedId": "seed.coronary-revascularization-guideline.v1",
+    "title": "Coronary Revascularization Guideline Example",
+    "structuralExample": true,
+    "note": "Structured clinical example using realistic metadata and normalized evidence fields."
+  },
+  "document": {
+    "documentId": "EDOC-CABG-2021-AHA",
+    "title": "2021 ACC/AHA/SCAI Guideline for Coronary Artery Revascularization",
+    "evidenceType": "guideline",
+    "clinicalDomain": "cardiovascular_surgery",
+    "publicationDate": "2021-12-09",
+    "publication": {
+      "publisher": "ACC/AHA/SCAI",
+      "journal": "Journal of the American College of Cardiology",
+      "citation": "Lawton JS et al. 2021 ACC/AHA/SCAI Guideline for Coronary Artery Revascularization.",
+      "doi": "10.1016/j.jacc.2021.09.006",
+      "sourceUri": "https://www.jacc.org"
+    },
+    "evidenceHierarchy": "directive",
+    "effectDirection": "benefit",
+    "strength": "highest",
+    "certainty": "high",
+    "recency": {
+      "publicationYear": 2021,
+      "lastReappraisedAt": "2025-01-15T00:00:00Z",
+      "currencyStatus": "current"
+    },
+    "applicability": {
+      "clinicalDomain": "cardiovascular_surgery",
+      "careSetting": "tertiary_hospital",
+      "jurisdictions": ["us", "global"],
+      "decisionReadiness": "ready-for-execution",
+      "population": {
+        "summary": "Adults with significant left main or multivessel coronary artery disease evaluated for revascularization.",
+        "ageBands": ["adult", "older_adult"],
+        "sexes": ["female", "male"],
+        "diagnoses": ["left main coronary artery disease", "multivessel coronary artery disease"],
+        "procedures": ["coronary artery bypass grafting", "percutaneous coronary intervention"],
+        "biomarkers": [],
+        "severity": "high_anatomic_complexity",
+        "comorbidities": ["diabetes mellitus"],
+        "inclusionCriteria": ["heart team evaluation available"],
+        "exclusionCriteria": ["prohibitive surgical risk"]
+      },
+      "dimensionAssessments": [
+        { "dimension": "population-fit", "score": 3, "rationale": "Target surgical population matches source recommendation." },
+        { "dimension": "intervention-fit", "score": 3, "rationale": "CABG intervention class is directly aligned." },
+        { "dimension": "setting-fit", "score": 2, "rationale": "Requires tertiary center and perioperative ICU." },
+        { "dimension": "jurisdiction-fit", "score": 3, "rationale": "US source is acceptable baseline for adaptation." },
+        { "dimension": "resource-fit", "score": 2, "rationale": "Requires high-cost specialty resources." }
+      ],
+      "implementationPreconditions": ["cardiac surgery team", "interventional cardiology support", "perioperative ICU"]
+    },
+    "provenance": {
+      "sourceSystem": "manual_ingest",
+      "capturedAt": "2026-04-04T10:00:00Z",
+      "capturedBy": "icicso.evidence.curator",
+      "chainOfCustody": [
+        {
+          "step": "ingest",
+          "actor": "icicso.evidence.curator",
+          "timestamp": "2026-04-04T10:00:00Z",
+          "hashSha256": "cabg-guideline-hash-v1",
+          "note": "Primary source captured from licensed journal access."
+        }
+      ],
+      "legal": {
+        "licenseStatus": "licensed",
+        "attestationStatus": "attested",
+        "reviewPolicy": "dual-clinical-review",
+        "retentionClass": "clinical_evidence_permanent"
+      },
+      "versioning": {
+        "canonicalId": "CANON-CABG-REVASC",
+        "version": "1.0.0",
+        "effectiveFrom": "2026-04-04",
+        "effectiveTo": null,
+        "supersedes": [],
+        "status": "active"
+      }
+    },
+    "interoperability": [
+      { "system": "SNOMED_CT", "code": "232717009", "display": "Coronary artery bypass graft", "mapStatus": "exact" },
+      { "system": "CPT", "code": "33533", "display": "Coronary artery bypass, vein only", "mapStatus": "related" }
+    ]
+  },
+  "ser": {
+    "serId": "SER-CABG-LM-0001",
+    "sourceDocumentId": "EDOC-CABG-2021-AHA",
+    "title": "CABG preferred in selected left main disease with high complexity anatomy",
+    "evidenceType": "guideline",
+    "clinicalDomain": "cardiovascular_surgery",
+    "summary": "In patients with left main disease and high anatomical complexity, CABG is generally favored over PCI for durable outcomes.",
+    "statements": [
+      {
+        "statementId": "SES-CABG-01",
+        "clinicalFunction": "intervention-selection",
+        "interventionClass": "surgery",
+        "interventionLabel": "Coronary artery bypass grafting",
+        "comparatorLabel": "Percutaneous coronary intervention",
+        "effectDirection": "benefit",
+        "strength": "highest",
+        "certainty": "high",
+        "decisionReadiness": "ready-for-execution",
+        "timeHorizon": "1-year",
+        "outcomes": [
+          { "outcomeCode": "mortality", "effectDirection": "benefit", "note": "Lower long-term mortality in selected complex disease." },
+          { "outcomeCode": "reintervention", "effectDirection": "benefit", "note": "Lower repeat revascularization burden." }
+        ],
+        "conditions": ["adult patient", "left main or multivessel CAD", "high anatomic complexity"],
+        "exclusions": ["prohibitive surgical risk", "lack of operative candidacy"],
+        "rationale": "Heart-team selected patients with complex coronary anatomy derive durable benefit from CABG.",
+        "operationalContext": {
+          "implementationComplexity": "high",
+          "resourceDemand": "critical",
+          "costRelevance": "transformational",
+          "operationalRelevance": "transformational",
+          "resourceRequirements": [
+            { "resourceType": "operating_room", "role": "cardiac_surgeon", "quantity": 1, "unit": "team", "mandatory": true, "costCenter": "OR", "notes": null },
+            { "resourceType": "icu_bed", "role": "critical_care", "quantity": 1, "unit": "bed", "mandatory": true, "costCenter": "ICU", "notes": null }
+          ],
+          "constraints": ["Requires heart team case review before final selection."]
+        }
+      }
+    ],
+    "applicability": {
+      "clinicalDomain": "cardiovascular_surgery",
+      "careSetting": "tertiary_hospital",
+      "jurisdictions": ["us", "global"],
+      "decisionReadiness": "ready-for-execution",
+      "population": {
+        "summary": "Adults with left main CAD and high anatomic complexity suitable for surgery.",
+        "ageBands": ["adult", "older_adult"],
+        "sexes": ["female", "male"],
+        "diagnoses": ["left main coronary artery disease"],
+        "procedures": ["coronary artery bypass grafting"],
+        "biomarkers": [],
+        "severity": "high_anatomic_complexity",
+        "comorbidities": ["diabetes mellitus"],
+        "inclusionCriteria": ["acceptable surgical risk"],
+        "exclusionCriteria": ["prohibitive frailty"]
+      },
+      "dimensionAssessments": [
+        { "dimension": "population-fit", "score": 3, "rationale": "Exact fit for target CABG cohort." },
+        { "dimension": "intervention-fit", "score": 3, "rationale": "Revascularization intervention is directly targeted." },
+        { "dimension": "setting-fit", "score": 2, "rationale": "Requires advanced hospital infrastructure." },
+        { "dimension": "jurisdiction-fit", "score": 3, "rationale": "Jurisdiction is acceptable." },
+        { "dimension": "resource-fit", "score": 2, "rationale": "High but available resource load." }
+      ],
+      "implementationPreconditions": ["heart team review"]
+    },
+    "provenance": {
+      "sourceSystem": "manual_ingest",
+      "capturedAt": "2026-04-04T10:00:00Z",
+      "capturedBy": "icicso.evidence.curator",
+      "chainOfCustody": [
+        { "step": "ingest", "actor": "icicso.evidence.curator", "timestamp": "2026-04-04T10:00:00Z", "hashSha256": "ser-cabg-01", "note": "Derived from attested guideline source." }
+      ],
+      "legal": {
+        "licenseStatus": "licensed",
+        "attestationStatus": "attested",
+        "reviewPolicy": "dual-clinical-review",
+        "retentionClass": "clinical_evidence_permanent"
+      },
+      "versioning": {
+        "canonicalId": "CANON-SER-CABG-LM",
+        "version": "1.0.0",
+        "effectiveFrom": "2026-04-04",
+        "effectiveTo": null,
+        "supersedes": [],
+        "status": "active"
+      }
+    }
+  },
+  "expectedMapperBehavior": {
+    "shouldGenerateEo": true,
+    "expectedDecisionVerb": "recommend",
+    "expectedReviewState": "specialist-approved"
+  }
+}

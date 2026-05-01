@@ -1,0 +1,3 @@
+import type { VRN, case_id, cpo_id, eo_id } from "../../../shared-kernel";
+export interface CabgReferenceCase{caseId:case_id;cpoId:cpo_id;evidenceObjects:eo_id[];vrn:VRN;diagnosis:string[];procedure:string;comorbidities:string[];ejectionFraction:string;renalStatus:string}
+export const cabgReferenceCase: CabgReferenceCase={caseId:"case-cabg-x3-nstemi" as case_id,cpoId:"cpo-cabg-x3-nstemi" as cpo_id,evidenceObjects:["eo-cabg-guideline-core" as eo_id,"eo-nstemi-risk-stratification" as eo_id],vrn:"vrn-cabg-reference-001" as VRN,diagnosis:["NSTEMI","Coronary multivessel disease"],procedure:"CABG x3",comorbidities:["DM2","FEVI 35%","ERC3"],ejectionFraction:"35%",renalStatus:"ERC3"};

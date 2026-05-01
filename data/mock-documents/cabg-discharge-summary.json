@@ -1,0 +1,10 @@
+{
+  "documentId": "doc-cabg-discharge-001",
+  "title": "Resumen de alta CABG x3 NSTEMI ERC3",
+  "source": "mock-hospital-alpha",
+  "language": "es-MX",
+  "status": "certified",
+  "pages": 7,
+  "receivedAt": "2026-04-02T08:15:00-06:00",
+  "tags": ["CABG", "NSTEMI", "DM2", "ERC3", "FEVI35"]
+}

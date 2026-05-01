@@ -1,0 +1,2 @@
+import { ClinicalQualityOutcomesIntelligenceModuleDescriptor } from "./types"; import type { ClinicalQualityOutcomesIntelligenceModuleContract } from "./types";
+ export const createClinicalQualityOutcomesIntelligenceModuleService=(): ClinicalQualityOutcomesIntelligenceModuleContract=>({module:ClinicalQualityOutcomesIntelligenceModuleDescriptor,inputs:[...ClinicalQualityOutcomesIntelligenceModuleDescriptor.inputs],outputs:[...ClinicalQualityOutcomesIntelligenceModuleDescriptor.outputs]});

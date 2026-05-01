@@ -1,0 +1,13 @@
+{
+  "artifact_kind": "evidence-classification",
+  "data": {
+    "classification_id": "ECLS-000001",
+    "evidence_type": "guideline",
+    "evidence_level": "directive",
+    "clinical_functions": ["intervention-selection"],
+    "intervention_classes": ["surgery"],
+    "effect_direction": "benefit",
+    "certainty": "high",
+    "time_horizons": ["1-year"]
+  }
+}

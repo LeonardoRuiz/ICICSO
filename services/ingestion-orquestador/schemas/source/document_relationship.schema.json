@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://icicso.local/schemas/source/document_relationship.schema.json",
+  "title": "DocumentRelationship",
+  "description": "Relacion trazable entre dos artefactos del sistema.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "relationship_id",
+    "source_document_id",
+    "target_document_id",
+    "relationship_type",
+    "created_at_utc",
+    "created_by",
+    "version_id"
+  ],
+  "properties": {
+    "relationship_id": {
+      "type": "string",
+      "pattern": "^REL-[A-Z0-9_-]{8,}$"
+    },
+    "source_document_id": {
+      "type": "string",
+      "pattern": "^DOC-[A-Z0-9]{12}$"
+    },
+    "target_document_id": {
+      "type": "string",
+      "pattern": "^DOC-[A-Z0-9]{12}$"
+    },
+    "relationship_type": {
+      "type": "string",
+      "enum": [
+        "derives_from",
+        "references",
+        "supersedes",
+        "supports",
+        "conflicts_with",
+        "belongs_to_layer"
+      ]
+    },
+    "rationale": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 4000
+    },
+    "created_at_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "created_by": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version_id": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}
+

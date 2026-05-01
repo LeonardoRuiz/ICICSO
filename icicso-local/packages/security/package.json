@@ -1,0 +1,19 @@
+{
+  "name": "@icicso/security",
+  "version": "1.0.0",
+  "description": "Shared identity, JWT and RBAC utilities for ICICSO Local",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@icicso/canonical-types": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}

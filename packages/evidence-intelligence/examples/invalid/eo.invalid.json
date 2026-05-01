@@ -1,0 +1,25 @@
+{
+  "artifact_kind": "eo",
+  "data": {
+    "eo_id": "",
+    "trigger": {},
+    "conditions": "always",
+    "decision": {
+      "verb": "do-it",
+      "effect_direction": "good",
+      "decision_readiness": "ready"
+    },
+    "actions": [],
+    "expected_outcomes": [],
+    "required_context": "icu",
+    "operational_constraints": {},
+    "evidence_support": [],
+    "confidence": {
+      "certainty": "max"
+    },
+    "jurisdiction": [],
+    "review_status": "published",
+    "version": "",
+    "audit_fields": {}
+  }
+}

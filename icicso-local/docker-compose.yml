@@ -1,0 +1,698 @@
+version: '3.8'
+
+# ICICSO Local - Complete Docker Compose Configuration
+# Includes: Infrastructure (PostgreSQL, Redis, Kafka, MinIO) + All Services
+#
+# Usage:
+#   docker-compose up                          # Full stack
+#   docker-compose up --profile infra          # Only infrastructure
+#   docker-compose up --profile app            # Only applications
+#   docker-compose up -d gateway-api audit-service  # Specific services
+
+services:
+  # ============================================================================
+  # INFRASTRUCTURE LAYER
+  # ============================================================================
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: icicso-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-icicso_local}
+      POSTGRES_USER: ${POSTGRES_USER:-icicso}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-icicso-local-password}
+    ports:
+      - "${POSTGRES_PORT:-15432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./infrastructure/docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-icicso} -d ${POSTGRES_DB:-icicso_local}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - icicso-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: icicso-redis
+    ports:
+      - "${REDIS_PORT:-16379}:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - icicso-network
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.5.0
+    container_name: icicso-zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+    networks:
+      - icicso-network
+
+  kafka:
+    image: confluentinc/cp-kafka:7.5.0
+    container_name: icicso-kafka
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    ports:
+      - "9092:9092"
+      - "9101:9101"
+    healthcheck:
+      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:9092"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 15s
+    networks:
+      - icicso-network
+
+  minio:
+    image: minio/minio:latest
+    container_name: icicso-minio
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-icicso-minio}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-icicso-local-password}
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+    networks:
+      - icicso-network
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: icicso-pgadmin
+    profiles:
+      - ops
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-admin@icicso.local}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-icicso-local-password}
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    networks:
+      - icicso-network
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui:latest
+    container_name: icicso-kafka-ui
+    profiles:
+      - ops
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
+      KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
+    ports:
+      - "8080:8080"
+    depends_on:
+      - kafka
+      - zookeeper
+    networks:
+      - icicso-network
+
+  # ============================================================================
+  # APPLICATION LAYER - BLOCK 1 (Auth, Identity, Audit)
+  # ============================================================================
+
+  gateway-api:
+    build:
+      context: .
+      dockerfile: apps/gateway-api/Dockerfile
+    container_name: icicso-gateway-api
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      JWT_SECRET: ${JWT_SECRET:-replace-with-long-local-jwt-secret-minimum-24-chars}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-24h}
+      AUTH_ISSUER: ${AUTH_ISSUER:-icicso-local-auth}
+      AUTH_AUDIENCE: ${AUTH_AUDIENCE:-icicso-local-api}
+      INTERNAL_SERVICE_TOKEN: ${INTERNAL_SERVICE_TOKEN:-replace-with-long-local-internal-service-token}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-icicso}:${POSTGRES_PASSWORD:-icicso-local-password}@postgres:5432/${POSTGRES_DB:-icicso_local}
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_BUCKET: ${MINIO_BUCKET:-icicso-block2}
+      DEMO_CASE_ID: ${DEMO_CASE_ID:-CASE-CABG3-2026-00014}
+      DEMO_EPISODE_ID: ${DEMO_EPISODE_ID:-EPI-ACS-2026-02-15}
+      DEMO_ILC_ID: ${DEMO_ILC_ID:-ILC-MX-CIH-2026-0004821}
+      GATEWAY_API_PORT: ${GATEWAY_API_PORT:-3100}
+      GATEWAY_API_URL: http://gateway-api:3100
+      AUTH_SERVICE_PORT: ${AUTH_SERVICE_PORT:-3101}
+      AUTH_SERVICE_URL: http://auth-service:3101
+      IDENTITY_SERVICE_PORT: ${IDENTITY_SERVICE_PORT:-3102}
+      IDENTITY_SERVICE_URL: http://identity-service:3102
+      AUDIT_SERVICE_PORT: ${AUDIT_SERVICE_PORT:-3103}
+      AUDIT_SERVICE_URL: http://audit-service:3103
+      EVIDENCE_LAKE_SERVICE_PORT: ${EVIDENCE_LAKE_SERVICE_PORT:-3104}
+      EVIDENCE_LAKE_SERVICE_URL: http://evidence-lake-service:3104
+      GHL_SERVICE_PORT: ${GHL_SERVICE_PORT:-3105}
+      GHL_SERVICE_URL: http://ghl-service:3105
+      KBOL_SERVICE_PORT: ${KBOL_SERVICE_PORT:-3106}
+      KBOL_SERVICE_URL: http://kbol-service:3106
+      STORAGE_SERVICE_PORT: ${STORAGE_SERVICE_PORT:-3107}
+      STORAGE_SERVICE_URL: http://storage-service:3107
+      INGESTION_SERVICE_PORT: ${INGESTION_SERVICE_PORT:-3108}
+      INGESTION_SERVICE_URL: http://ingestion-service:3108
+      TERMINOLOGY_SERVICE_PORT: ${TERMINOLOGY_SERVICE_PORT:-3109}
+      TERMINOLOGY_SERVICE_URL: http://terminology-service:3109
+      DATA_GOVERNANCE_SERVICE_PORT: ${DATA_GOVERNANCE_SERVICE_PORT:-3110}
+      DATA_GOVERNANCE_SERVICE_URL: http://data-governance-service:3110
+      RUNBOOK_SERVICE_PORT: ${RUNBOOK_SERVICE_PORT:-3111}
+      RUNBOOK_SERVICE_URL: http://runbook-service:3111
+      READINESS_SERVICE_PORT: ${READINESS_SERVICE_PORT:-3112}
+      READINESS_SERVICE_URL: http://readiness-service:3112
+      CASE_CONTROL_SERVICE_PORT: ${CASE_CONTROL_SERVICE_PORT:-3113}
+      CASE_CONTROL_SERVICE_URL: http://case-control-service:3113
+      SYSTEMIC_RISK_SERVICE_PORT: ${SYSTEMIC_RISK_SERVICE_PORT:-3114}
+      SYSTEMIC_RISK_SERVICE_URL: http://systemic-risk-service:3114
+      CQOI_SERVICE_PORT: ${CQOI_SERVICE_PORT:-3115}
+      CQOI_SERVICE_URL: http://cqoi-service:3115
+    ports:
+      - "${GATEWAY_API_PORT:-3100}:3100"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - icicso-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3100/health/live"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  auth-service:
+    build:
+      context: .
+      dockerfile: apps/auth-service/Dockerfile
+    container_name: icicso-auth-service
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      JWT_SECRET: ${JWT_SECRET:-replace-with-long-local-jwt-secret-minimum-24-chars}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-24h}
+      AUTH_ISSUER: ${AUTH_ISSUER:-icicso-local-auth}
+      AUTH_AUDIENCE: ${AUTH_AUDIENCE:-icicso-local-api}
+      INTERNAL_SERVICE_TOKEN: ${INTERNAL_SERVICE_TOKEN:-replace-with-long-local-internal-service-token}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-icicso}:${POSTGRES_PASSWORD:-icicso-local-password}@postgres:5432/${POSTGRES_DB:-icicso_local}
+      AUTH_SERVICE_PORT: ${AUTH_SERVICE_PORT:-3101}
+    ports:
+      - "${AUTH_SERVICE_PORT:-3101}:3101"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - icicso-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3101/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  identity-service:
+    build:
+      context: .
+      dockerfile: apps/identity-service/Dockerfile
+    container_name: icicso-identity-service
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      JWT_SECRET: ${JWT_SECRET:-replace-with-long-local-jwt-secret-minimum-24-chars}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-24h}
+      AUTH_ISSUER: ${AUTH_ISSUER:-icicso-local-auth}
+      AUTH_AUDIENCE: ${AUTH_AUDIENCE:-icicso-local-api}
+      INTERNAL_SERVICE_TOKEN: ${INTERNAL_SERVICE_TOKEN:-replace-with-long-local-internal-service-token}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-icicso}:${POSTGRES_PASSWORD:-icicso-local-password}@postgres:5432/${POSTGRES_DB:-icicso_local}
+      IDENTITY_SERVICE_PORT: ${IDENTITY_SERVICE_PORT:-3102}
+    ports:
+      - "${IDENTITY_SERVICE_PORT:-3102}:3102"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - icicso-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3102/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  audit-service:
+    build:
+      context: .
+      dockerfile: apps/audit-service/Dockerfile
+    container_name: icicso-audit-service
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      JWT_SECRET: ${JWT_SECRET:-replace-with-long-local-jwt-secret-minimum-24-chars}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-24h}
+      AUTH_ISSUER: ${AUTH_ISSUER:-icicso-local-auth}
+      AUTH_AUDIENCE: ${AUTH_AUDIENCE:-icicso-local-api}
+      INTERNAL_SERVICE_TOKEN: ${INTERNAL_SERVICE_TOKEN:-replace-with-long-local-internal-service-token}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-icicso}:${POSTGRES_PASSWORD:-icicso-local-password}@postgres:5432/${POSTGRES_DB:-icicso_local}
+      AUDIT_SERVICE_PORT: ${AUDIT_SERVICE_PORT:-3103}
+    ports:
+      - "${AUDIT_SERVICE_PORT:-3103}:3103"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - icicso-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3103/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # ============================================================================
+  # APPLICATION LAYER - BLOCK 2 (Storage, Ingestion, Terminology, Governance)
+  # ============================================================================
+
+  storage-service:
+    build:
+      context: .
+      dockerfile: apps/storage-service/Dockerfile
+    container_name: icicso-storage-service
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      INTERNAL_SERVICE_TOKEN: ${INTERNAL_SERVICE_TOKEN:-replace-with-long-local-internal-service-token}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-icicso}:${POSTGRES_PASSWORD:-icicso-local-password}@postgres:5432/${POSTGRES_DB:-icicso_local}
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_BUCKET: ${MINIO_BUCKET:-icicso-block2}
+      STORAGE_SERVICE_PORT: ${STORAGE_SERVICE_PORT:-3107}
+    ports:
+      - "${STORAGE_SERVICE_PORT:-3107}:3107"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - icicso-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3107/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  ingestion-service:
+    build:
+      context: .
+      dockerfile: apps/ingestion-service/Dockerfile
+    container_name: icicso-ingestion-service
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      INTERNAL_SERVICE_TOKEN: ${INTERNAL_SERVICE_TOKEN:-replace-with-long-local-internal-service-token}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-icicso}:${POSTGRES_PASSWORD:-icicso-local-password}@postgres:5432/${POSTGRES_DB:-icicso_local}
+      KAFKA_BROKERS: kafka:29092
+      INGESTION_SERVICE_PORT: ${INGESTION_SERVICE_PORT:-3108}
+    ports:
+      - "${INGESTION_SERVICE_PORT:-3108}:3108"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - icicso-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3108/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  terminology-service:
+    build:
+      context: .
+      dockerfile: apps/terminology-service/Dockerfile
+    container_name: icicso-terminology-service
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      INTERNAL_SERVICE_TOKEN: ${INTERNAL_SERVICE_TOKEN:-replace-with-long-local-internal-service-token}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-icicso}:${POSTGRES_PASSWORD:-icicso-local-password}@postgres:5432/${POSTGRES_DB:-icicso_local}
+      TERMINOLOGY_SERVICE_PORT: ${TERMINOLOGY_SERVICE_PORT:-3109}
+    ports:
+      - "${TERMINOLOGY_SERVICE_PORT:-3109}:3109"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - icicso-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3109/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  data-governance-service:
+    build:
+      context: .
+      dockerfile: apps/data-governance-service/Dockerfile
+    container_name: icicso-data-governance-service
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      INTERNAL_SERVICE_TOKEN: ${INTERNAL_SERVICE_TOKEN:-replace-with-long-local-internal-service-token}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-icicso}:${POSTGRES_PASSWORD:-icicso-local-password}@postgres:5432/${POSTGRES_DB:-icicso_local}
+      DATA_GOVERNANCE_SERVICE_PORT: ${DATA_GOVERNANCE_SERVICE_PORT:-3110}
+    ports:
+      - "${DATA_GOVERNANCE_SERVICE_PORT:-3110}:3110"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - icicso-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3110/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # ============================================================================
+  # APPLICATION LAYER - BLOCK 3 & 5 (Evidence Lake, GHL, KBOL)
+  # ============================================================================
+
+  evidence-lake-service:
+    build:
+      context: .
+      dockerfile: apps/evidence-lake-service/Dockerfile
+    container_name: icicso-evidence-lake-service
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      INTERNAL_SERVICE_TOKEN: ${INTERNAL_SERVICE_TOKEN:-replace-with-long-local-internal-service-token}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-icicso}:${POSTGRES_PASSWORD:-icicso-local-password}@postgres:5432/${POSTGRES_DB:-icicso_local}
+      EVIDENCE_LAKE_SERVICE_PORT: ${EVIDENCE_LAKE_SERVICE_PORT:-3104}
+    ports:
+      - "${EVIDENCE_LAKE_SERVICE_PORT:-3104}:3104"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - icicso-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3104/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  ghl-service:
+    build:
+      context: .
+      dockerfile: apps/ghl-service/Dockerfile
+    container_name: icicso-ghl-service
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      INTERNAL_SERVICE_TOKEN: ${INTERNAL_SERVICE_TOKEN:-replace-with-long-local-internal-service-token}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-icicso}:${POSTGRES_PASSWORD:-icicso-local-password}@postgres:5432/${POSTGRES_DB:-icicso_local}
+      GHL_SERVICE_PORT: ${GHL_SERVICE_PORT:-3105}
+    ports:
+      - "${GHL_SERVICE_PORT:-3105}:3105"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - icicso-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3105/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  kbol-service:
+    build:
+      context: .
+      dockerfile: apps/kbol-service/Dockerfile
+    container_name: icicso-kbol-service
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      INTERNAL_SERVICE_TOKEN: ${INTERNAL_SERVICE_TOKEN:-replace-with-long-local-internal-service-token}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-icicso}:${POSTGRES_PASSWORD:-icicso-local-password}@postgres:5432/${POSTGRES_DB:-icicso_local}
+      KBOL_SERVICE_PORT: ${KBOL_SERVICE_PORT:-3106}
+    ports:
+      - "${KBOL_SERVICE_PORT:-3106}:3106"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - icicso-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3106/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # ============================================================================
+  # APPLICATION LAYER - BLOCK 6 (Runbook, Readiness)
+  # ============================================================================
+
+  runbook-service:
+    build:
+      context: .
+      dockerfile: apps/runbook-service/Dockerfile
+    container_name: icicso-runbook-service
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      INTERNAL_SERVICE_TOKEN: ${INTERNAL_SERVICE_TOKEN:-replace-with-long-local-internal-service-token}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-icicso}:${POSTGRES_PASSWORD:-icicso-local-password}@postgres:5432/${POSTGRES_DB:-icicso_local}
+      RUNBOOK_SERVICE_PORT: ${RUNBOOK_SERVICE_PORT:-3111}
+    ports:
+      - "${RUNBOOK_SERVICE_PORT:-3111}:3111"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - icicso-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3111/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  readiness-service:
+    build:
+      context: .
+      dockerfile: apps/readiness-service/Dockerfile
+    container_name: icicso-readiness-service
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      INTERNAL_SERVICE_TOKEN: ${INTERNAL_SERVICE_TOKEN:-replace-with-long-local-internal-service-token}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-icicso}:${POSTGRES_PASSWORD:-icicso-local-password}@postgres:5432/${POSTGRES_DB:-icicso_local}
+      READINESS_SERVICE_PORT: ${READINESS_SERVICE_PORT:-3112}
+    ports:
+      - "${READINESS_SERVICE_PORT:-3112}:3112"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - icicso-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3112/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # ============================================================================
+  # APPLICATION LAYER - BLOCK 7 (Case Control)
+  # ============================================================================
+
+  case-control-service:
+    build:
+      context: .
+      dockerfile: apps/case-control-service/Dockerfile
+    container_name: icicso-case-control-service
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      INTERNAL_SERVICE_TOKEN: ${INTERNAL_SERVICE_TOKEN:-replace-with-long-local-internal-service-token}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-icicso}:${POSTGRES_PASSWORD:-icicso-local-password}@postgres:5432/${POSTGRES_DB:-icicso_local}
+      CASE_CONTROL_SERVICE_PORT: ${CASE_CONTROL_SERVICE_PORT:-3113}
+    ports:
+      - "${CASE_CONTROL_SERVICE_PORT:-3113}:3113"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - icicso-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3113/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # ============================================================================
+  # APPLICATION LAYER - BLOCK 8 (Systemic Risk, CQOI)
+  # ============================================================================
+
+  systemic-risk-service:
+    build:
+      context: .
+      dockerfile: apps/systemic-risk-service/Dockerfile
+    container_name: icicso-systemic-risk-service
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      INTERNAL_SERVICE_TOKEN: ${INTERNAL_SERVICE_TOKEN:-replace-with-long-local-internal-service-token}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-icicso}:${POSTGRES_PASSWORD:-icicso-local-password}@postgres:5432/${POSTGRES_DB:-icicso_local}
+      SYSTEMIC_RISK_SERVICE_PORT: ${SYSTEMIC_RISK_SERVICE_PORT:-3114}
+    ports:
+      - "${SYSTEMIC_RISK_SERVICE_PORT:-3114}:3114"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - icicso-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3114/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  cqoi-service:
+    build:
+      context: .
+      dockerfile: apps/cqoi-service/Dockerfile
+    container_name: icicso-cqoi-service
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      INTERNAL_SERVICE_TOKEN: ${INTERNAL_SERVICE_TOKEN:-replace-with-long-local-internal-service-token}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-icicso}:${POSTGRES_PASSWORD:-icicso-local-password}@postgres:5432/${POSTGRES_DB:-icicso_local}
+      CQOI_SERVICE_PORT: ${CQOI_SERVICE_PORT:-3115}
+    ports:
+      - "${CQOI_SERVICE_PORT:-3115}:3115"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - icicso-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3115/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # ============================================================================
+  # FRONTEND
+  # ============================================================================
+
+  desktop-emulator:
+    build:
+      context: .
+      dockerfile: apps/desktop-emulator/Dockerfile
+    container_name: icicso-desktop-emulator
+    environment:
+      FRONTEND_HOST: 0.0.0.0
+      FRONTEND_PORT: 8090
+      NODE_ENV: ${NODE_ENV:-development}
+      BUILD_ID: ${BUILD_ID:-dev-local}
+    ports:
+      - "8090:8090"
+    depends_on:
+      - gateway-api
+    networks:
+      - icicso-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8090/health/live"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # ============================================================================
+  # OPTIONAL: Python Semantic Terminology Engine
+  # ============================================================================
+
+  semantic-terminology-engine:
+    build:
+      context: engines/13_semantic_terminology_engine
+      dockerfile: Dockerfile
+    container_name: icicso-semantic-terminology-engine
+    environment:
+      PYTHONUNBUFFERED: "1"
+      PYTHONDONTWRITEBYTECODE: "1"
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      DATABASE_URL: postgresql://${POSTGRES_USER:-icicso}:${POSTGRES_PASSWORD:-icicso-local-password}@postgres:5432/${POSTGRES_DB:-icicso_local}
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - icicso-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+# ============================================================================
+# NETWORKS & VOLUMES
+# ============================================================================
+
+networks:
+  icicso-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  minio_data:
+    driver: local

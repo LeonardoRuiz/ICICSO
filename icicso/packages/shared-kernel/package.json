@@ -1,0 +1,8 @@
+{
+  "name": "@icicso/shared-kernel",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "main": "./index.ts",
+  "types": "./index.ts"
+}

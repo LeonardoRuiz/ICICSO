@@ -1,0 +1,490 @@
+{
+  "users": [
+    {
+      "id": "17d314bc-432a-4979-92b4-dbefcd1bbc7c",
+      "userId": "USR-ADMIN-0001",
+      "email": "admin@icicso.local",
+      "passwordHash": "3eb3fe66b31e3b4d10fa70b5cad49c7112294af6ae4e476a1c405155d45aa121",
+      "fullName": "ICICSO Admin",
+      "role": "admin",
+      "isActive": true,
+      "createdAt": "2026-03-29T08:00:00.000Z"
+    },
+    {
+      "id": "921fb003-aa33-411b-801e-8ca0e141d490",
+      "userId": "USR-CLINICIAN-0001",
+      "email": "clinician@icicso.local",
+      "passwordHash": "4929fe06c404ee8c51fcdde79a8c85d96f8e408d370f871edd2e0c4e45b8a046",
+      "fullName": "ICICSO Clinician",
+      "role": "clinician",
+      "isActive": true,
+      "createdAt": "2026-03-29T08:00:00.000Z"
+    },
+    {
+      "id": "bc0f1bca-7edd-4d92-b608-52edf2b507a4",
+      "userId": "USR-GOVERNANCE-0001",
+      "email": "governance@icicso.local",
+      "passwordHash": "4a788e7f4b6b6f9e037b0f072aaafb2ce2f484f0ab6a7a11887ae83d9565a14d",
+      "fullName": "ICICSO Governance",
+      "role": "governance",
+      "isActive": true,
+      "createdAt": "2026-03-29T08:00:00.000Z"
+    }
+  ],
+  "identities": [
+    {
+      "id": "0d07423f-c574-4f6f-ba50-ad3a9cf1fb07",
+      "ilcId": "ILC-MX-CIH-2026-0004821",
+      "firstName": "Paciente",
+      "lastName": "CABG x3",
+      "birthDate": "1964-10-15T00:00:00.000Z",
+      "sex": "MALE",
+      "createdAt": "2026-03-29T08:00:00.000Z",
+      "updatedAt": "2026-03-29T08:00:00.000Z"
+    }
+  ],
+  "episodes": [
+    {
+      "id": "7d08ff92-2db8-48d3-8105-2124ec21067a",
+      "episodeId": "EPI-ACS-2026-02-15",
+      "caseId": "c9c81b5f-5d0a-49d1-806a-e0b0469904fd",
+      "longitudinalIdentityId": "0d07423f-c574-4f6f-ba50-ad3a9cf1fb07",
+      "episodeType": "ACS",
+      "status": "open",
+      "startedAt": "2026-03-29T08:00:00.000Z",
+      "createdAt": "2026-03-29T08:00:00.000Z"
+    }
+  ],
+  "cases": [
+    {
+      "id": "c9c81b5f-5d0a-49d1-806a-e0b0469904fd",
+      "caseId": "CASE-CABG3-2026-00014",
+      "patientId": "ILC-MX-CIH-2026-0004821",
+      "longitudinalIdentityId": "0d07423f-c574-4f6f-ba50-ad3a9cf1fb07",
+      "status": "active",
+      "reason": "CABG x3 + DM2 + FEVI 35% + NSTEMI + ERC3",
+      "clinicalSummary": "Caso demo de Bloque 1 para identidad longitudinal y auditoria basal.",
+      "pathwayId": "CABG_X3_PATHWAY",
+      "createdAt": "2026-03-29T08:00:00.000Z",
+      "updatedAt": "2026-03-29T08:00:00.000Z"
+    }
+  ],
+  "auditEvents": [
+    {
+      "id": "caa71bb8-0ba3-4815-96a4-448d12489446",
+      "auditEventId": "AUD-0001",
+      "eventType": "create_case",
+      "actorId": "USR-ADMIN-0001",
+      "actorEmail": "admin@icicso.local",
+      "targetCaseId": "CASE-CABG3-2026-00014",
+      "correlationId": "seed-correlation-create-case",
+      "hash": "4e2efb5ee733e49097899d47ade2516e2ccf15ce7ccbd750ab3feda0a45bca89",
+      "previousHash": null,
+      "payload": {
+        "caseId": "CASE-CABG3-2026-00014",
+        "ilcId": "ILC-MX-CIH-2026-0004821"
+      },
+      "createdAt": "2026-03-29T08:00:00.000Z"
+    },
+    {
+      "id": "6fef5526-be22-4a02-81ed-286279469472",
+      "auditEventId": "AUD-0002",
+      "eventType": "read_case",
+      "actorId": "USR-ADMIN-0001",
+      "actorEmail": "admin@icicso.local",
+      "targetCaseId": "CASE-CABG3-2026-00014",
+      "correlationId": "seed-correlation-read-case",
+      "hash": "6e441cd6bed9c132b83021b0eab8c277fa6f0bd95c0b6e50444ac8346993a00f",
+      "previousHash": "4e2efb5ee733e49097899d47ade2516e2ccf15ce7ccbd750ab3feda0a45bca89",
+      "payload": {
+        "caseId": "CASE-CABG3-2026-00014",
+        "source": "seed-demo"
+      },
+      "createdAt": "2026-03-29T08:05:00.000Z"
+    },
+    {
+      "id": "429edf0b-de60-4a74-b4b3-50374244fd7b",
+      "auditEventId": "AUD-f809c931-2468-444d-8224-94bd54769b34",
+      "eventType": "read_case",
+      "actorId": null,
+      "actorEmail": null,
+      "targetCaseId": "CASE-CABG3-2026-00014",
+      "correlationId": "5b07b556-021d-408b-b63d-e851e5ca5d22",
+      "previousHash": "6e441cd6bed9c132b83021b0eab8c277fa6f0bd95c0b6e50444ac8346993a00f",
+      "hash": "d05707d5c41095d39010c1878faa7e4c4975f0ee9c535bef7dc8ea72b0fcec87",
+      "payload": {
+        "caseId": "CASE-CABG3-2026-00014",
+        "source": "demo-case"
+      },
+      "createdAt": "2026-03-29T18:41:42.670Z"
+    },
+    {
+      "id": "3d6e2b41-41b1-499c-954b-27fdd1249344",
+      "auditEventId": "AUD-5feaea14-9303-4985-9cba-f5aa3bd57a80",
+      "eventType": "login",
+      "actorId": "USR-ADMIN-0001",
+      "actorEmail": "admin@icicso.local",
+      "targetCaseId": null,
+      "correlationId": "56473ae8-63ad-49f1-8970-c779236eb7fc",
+      "previousHash": "d05707d5c41095d39010c1878faa7e4c4975f0ee9c535bef7dc8ea72b0fcec87",
+      "hash": "30a6a877bb909ceef19ab7ec015300335093ffe654ea71287ef159c3c0629dfa",
+      "payload": {
+        "role": "admin",
+        "service": "auth-service"
+      },
+      "createdAt": "2026-03-29T18:41:42.734Z"
+    },
+    {
+      "id": "eff7acb2-ddf2-4339-a880-31da24a5a74c",
+      "auditEventId": "AUD-39e038d6-b22b-4bcf-a37c-ca85d07e4b9d",
+      "eventType": "read_case",
+      "actorId": null,
+      "actorEmail": null,
+      "targetCaseId": "CASE-CABG3-2026-00014",
+      "correlationId": "c7521709-9df4-4da9-8b43-131d748b5dc6",
+      "previousHash": "30a6a877bb909ceef19ab7ec015300335093ffe654ea71287ef159c3c0629dfa",
+      "hash": "053e10baf56bad21fe69c86101c87fb06d5cff094a3399f9ace5fbf9646aae85",
+      "payload": {
+        "caseId": "CASE-CABG3-2026-00014",
+        "source": "demo-case"
+      },
+      "createdAt": "2026-03-29T18:42:44.283Z"
+    },
+    {
+      "id": "e3cc1df2-82be-4895-ab89-ebc9b13ea2f6",
+      "auditEventId": "AUD-462f0337-2af9-4c11-8839-b89808fd6f86",
+      "eventType": "read_case",
+      "actorId": null,
+      "actorEmail": null,
+      "targetCaseId": "CASE-CABG3-2026-00014",
+      "correlationId": "cbfaf040-c58e-4921-9e30-c616b343fc89",
+      "previousHash": "053e10baf56bad21fe69c86101c87fb06d5cff094a3399f9ace5fbf9646aae85",
+      "hash": "0e39bb6ebbc5b881f40360a506867c0e05fd28993f624e14f7ed843e068e307d",
+      "payload": {
+        "caseId": "CASE-CABG3-2026-00014",
+        "source": "demo-case"
+      },
+      "createdAt": "2026-03-29T21:32:17.555Z"
+    },
+    {
+      "id": "d147d2b3-fcdf-43e3-a510-4659831c978f",
+      "auditEventId": "AUD-4fc4c701-fe56-462a-8b9e-3429d0b7ee27",
+      "eventType": "read_case",
+      "actorId": null,
+      "actorEmail": null,
+      "targetCaseId": "CASE-CABG3-2026-00014",
+      "correlationId": "01fb0adb-2a46-452a-9624-9f35d7423cae",
+      "previousHash": "0e39bb6ebbc5b881f40360a506867c0e05fd28993f624e14f7ed843e068e307d",
+      "hash": "0bb6137e49c8dec2a34753db646f63c97dafbeb9f857db6a1aadd7430d4127de",
+      "payload": {
+        "caseId": "CASE-CABG3-2026-00014",
+        "source": "demo-case"
+      },
+      "createdAt": "2026-04-05T23:08:43.491Z"
+    },
+    {
+      "id": "5388e5a0-c83c-4c5a-ae15-eae8e71b94ab",
+      "auditEventId": "AUD-328ad65c-c3fd-4137-ac95-5ebe79d0e98f",
+      "eventType": "read_case",
+      "actorId": null,
+      "actorEmail": null,
+      "targetCaseId": "CASE-CABG3-2026-00014",
+      "correlationId": "336c016a-7280-402d-aed4-d794039f9d08",
+      "previousHash": "0bb6137e49c8dec2a34753db646f63c97dafbeb9f857db6a1aadd7430d4127de",
+      "hash": "43a7735ca7587e4e0b830ce00438ee441415068461e79c8d7131651d7f9869bd",
+      "payload": {
+        "caseId": "CASE-CABG3-2026-00014",
+        "source": "demo-case"
+      },
+      "createdAt": "2026-04-05T23:44:29.239Z"
+    },
+    {
+      "id": "66c0bc49-e961-49ae-b4ae-15ed37f5f693",
+      "auditEventId": "AUD-3f43a994-cf4f-46d5-b69e-69d2df9b12a6",
+      "eventType": "read_case",
+      "actorId": null,
+      "actorEmail": null,
+      "targetCaseId": "CASE-CABG3-2026-00014",
+      "correlationId": "9950dec0-0af3-493a-ba6c-2cc02c28e95d",
+      "previousHash": "43a7735ca7587e4e0b830ce00438ee441415068461e79c8d7131651d7f9869bd",
+      "hash": "08ab9c12599c4a47ff5feec11586720c8e2331c7d5a94089ee2206ae398c0799",
+      "payload": {
+        "caseId": "CASE-CABG3-2026-00014",
+        "source": "demo-case"
+      },
+      "createdAt": "2026-04-06T05:27:25.150Z"
+    },
+    {
+      "id": "2c4c36ce-89bd-4e3d-bd19-d1a0f63f174a",
+      "auditEventId": "AUD-bae150f4-78ef-4b1c-a3c7-6959bb2e6628",
+      "eventType": "read_case",
+      "actorId": null,
+      "actorEmail": null,
+      "targetCaseId": "CASE-CABG3-2026-00014",
+      "correlationId": "b25edceb-8344-4eb4-bc10-3498f429112c",
+      "previousHash": "08ab9c12599c4a47ff5feec11586720c8e2331c7d5a94089ee2206ae398c0799",
+      "hash": "de5f6585fa0b251afe7e799e7057ddadab08043a38af7f436c61bd83407e9b0a",
+      "payload": {
+        "caseId": "CASE-CABG3-2026-00014",
+        "source": "demo-case"
+      },
+      "createdAt": "2026-04-06T05:27:36.264Z"
+    },
+    {
+      "id": "8b416e8d-f896-49af-be64-d0682916c7df",
+      "auditEventId": "AUD-a372af1e-4c3d-43d0-ab56-1860bbe29c57",
+      "eventType": "read_case",
+      "actorId": null,
+      "actorEmail": null,
+      "targetCaseId": "CASE-CABG3-2026-00014",
+      "correlationId": "bea01c71-1721-4d88-bc54-f607b5d97e50",
+      "previousHash": "de5f6585fa0b251afe7e799e7057ddadab08043a38af7f436c61bd83407e9b0a",
+      "hash": "5b3fdf721c977e53b109be2fbaedc49b55829fdc3880321769518b93ba827b2c",
+      "payload": {
+        "caseId": "CASE-CABG3-2026-00014",
+        "source": "demo-case"
+      },
+      "createdAt": "2026-04-06T06:04:02.319Z"
+    },
+    {
+      "id": "d4e32422-ae07-4d1a-b4f6-7c7db066c4db",
+      "auditEventId": "AUD-335a3298-bd47-4e63-974a-4589621b4fd4",
+      "eventType": "read_case",
+      "actorId": null,
+      "actorEmail": null,
+      "targetCaseId": "CASE-CABG3-2026-00014",
+      "correlationId": "4919b4b2-a100-404d-9f52-b5cf435a73f2",
+      "previousHash": "5b3fdf721c977e53b109be2fbaedc49b55829fdc3880321769518b93ba827b2c",
+      "hash": "a6ccad63419e003bba705836bf1f5bac2e7121af9b9805f15929705ed456757a",
+      "payload": {
+        "caseId": "CASE-CABG3-2026-00014",
+        "source": "demo-case"
+      },
+      "createdAt": "2026-04-06T15:29:35.796Z"
+    },
+    {
+      "id": "5ac518ca-a295-41bb-b49f-57d00f473c41",
+      "auditEventId": "AUD-0d759782-3587-45eb-97ba-a099bd45fcde",
+      "eventType": "read_case",
+      "actorId": null,
+      "actorEmail": null,
+      "targetCaseId": "CASE-CABG3-2026-00014",
+      "correlationId": "dfb8e37f-041e-426c-8cd8-e5c0debf4253",
+      "previousHash": "a6ccad63419e003bba705836bf1f5bac2e7121af9b9805f15929705ed456757a",
+      "hash": "11b7de465ccd961cffd9fce329671548e1255bd7587e39ac79c830e76bded3df",
+      "payload": {
+        "caseId": "CASE-CABG3-2026-00014",
+        "source": "demo-case"
+      },
+      "createdAt": "2026-04-06T15:30:10.756Z"
+    },
+    {
+      "id": "23943074-480f-4e1d-a7df-e64845f8a504",
+      "auditEventId": "AUD-6aa6349f-01ec-425d-b8ba-238a7345f67d",
+      "eventType": "read_case",
+      "actorId": null,
+      "actorEmail": null,
+      "targetCaseId": "CASE-CABG3-2026-00014",
+      "correlationId": "62a59ca9-9974-409b-bafb-be1f1d73b404",
+      "previousHash": "11b7de465ccd961cffd9fce329671548e1255bd7587e39ac79c830e76bded3df",
+      "hash": "57a4d1e1ee6a6345438cce00337ca753df6d41fdb159b9887966475d19a08461",
+      "payload": {
+        "caseId": "CASE-CABG3-2026-00014",
+        "source": "demo-case"
+      },
+      "createdAt": "2026-04-06T15:39:04.141Z"
+    },
+    {
+      "id": "159bf98d-391c-4f1c-9d07-1c4d549dd699",
+      "auditEventId": "AUD-4b2f02db-dc51-4206-9cb9-16577fe16c50",
+      "eventType": "read_case",
+      "actorId": null,
+      "actorEmail": null,
+      "targetCaseId": "CASE-CABG3-2026-00014",
+      "correlationId": "74afe15e-38a6-4448-87b6-65ec5df75bc9",
+      "previousHash": "57a4d1e1ee6a6345438cce00337ca753df6d41fdb159b9887966475d19a08461",
+      "hash": "64bcb2acb4fa626913410ed79798bb86ba69648dcd06aa4ae980f7f4f9cb18ad",
+      "payload": {
+        "caseId": "CASE-CABG3-2026-00014",
+        "source": "demo-case"
+      },
+      "createdAt": "2026-04-06T15:39:24.516Z"
+    },
+    {
+      "id": "4269a2fd-ea26-4553-9a5c-037765131879",
+      "auditEventId": "AUD-dde90987-02e4-4cc9-ab05-7ce0f4fec226",
+      "eventType": "read_case",
+      "actorId": null,
+      "actorEmail": null,
+      "targetCaseId": "CASE-CABG3-2026-00014",
+      "correlationId": "4145176e-52f1-473e-8157-f341b2ea262c",
+      "previousHash": "64bcb2acb4fa626913410ed79798bb86ba69648dcd06aa4ae980f7f4f9cb18ad",
+      "hash": "41af7cea21d402e687c9e4c3607d95a4975543bceee0a8305cd3c0ec3f3d2a1d",
+      "payload": {
+        "caseId": "CASE-CABG3-2026-00014",
+        "source": "demo-case"
+      },
+      "createdAt": "2026-04-06T16:07:35.413Z"
+    },
+    {
+      "id": "ade6827f-0db6-455d-8608-09db2e90b403",
+      "auditEventId": "AUD-1a3a2663-1f96-453c-9330-4117f5c3f07d",
+      "eventType": "read_case",
+      "actorId": null,
+      "actorEmail": null,
+      "targetCaseId": "CASE-CABG3-2026-00014",
+      "correlationId": "c8520776-9b5a-449d-99f6-049c9bb3e973",
+      "previousHash": "41af7cea21d402e687c9e4c3607d95a4975543bceee0a8305cd3c0ec3f3d2a1d",
+      "hash": "df4b493585bc40b3b4e40cda35612afe27d67ceb12dd37a88f4e47205a7f10ea",
+      "payload": {
+        "caseId": "CASE-CABG3-2026-00014",
+        "source": "demo-case"
+      },
+      "createdAt": "2026-04-06T16:07:59.444Z"
+    },
+    {
+      "id": "dfa5a9fe-e382-4c04-926e-c1fae791138e",
+      "auditEventId": "AUD-7abaa472-9104-4f94-a69a-e0e2edb54dce",
+      "eventType": "read_case",
+      "actorId": null,
+      "actorEmail": null,
+      "targetCaseId": "CASE-CABG3-2026-00014",
+      "correlationId": "da5a0154-a5e0-4873-b7fd-f6f8498b8a34",
+      "previousHash": "df4b493585bc40b3b4e40cda35612afe27d67ceb12dd37a88f4e47205a7f10ea",
+      "hash": "1fb469c584ac75b87c115f122bc6cfa894e002f4dec71a1c8b0bca64d4b334bd",
+      "payload": {
+        "caseId": "CASE-CABG3-2026-00014",
+        "source": "demo-case"
+      },
+      "createdAt": "2026-04-06T16:08:01.696Z"
+    },
+    {
+      "id": "5d94067a-677e-45b9-8e8b-aab6c58162ed",
+      "auditEventId": "AUD-8d148b54-3d01-4629-8ae2-11a9ad92fc33",
+      "eventType": "read_case",
+      "actorId": null,
+      "actorEmail": null,
+      "targetCaseId": "CASE-CABG3-2026-00014",
+      "correlationId": "7adfa5ca-54d2-4c1e-a391-5233b6d05a57",
+      "previousHash": "1fb469c584ac75b87c115f122bc6cfa894e002f4dec71a1c8b0bca64d4b334bd",
+      "hash": "844453044cfe239193521c207504d5e3504333a22ec77b06982fb7708b9840a6",
+      "payload": {
+        "caseId": "CASE-CABG3-2026-00014",
+        "source": "demo-case"
+      },
+      "createdAt": "2026-04-06T16:09:57.577Z"
+    },
+    {
+      "id": "7bb1d6af-2a86-4783-9a52-962191e46121",
+      "auditEventId": "AUD-13d155d5-0555-4b03-874c-73cea6a67d45",
+      "eventType": "read_case",
+      "actorId": null,
+      "actorEmail": null,
+      "targetCaseId": "CASE-CABG3-2026-00014",
+      "correlationId": "a918a019-c60d-477f-ba58-912de148fa0a",
+      "previousHash": "844453044cfe239193521c207504d5e3504333a22ec77b06982fb7708b9840a6",
+      "hash": "192bb99d2d63ee71a400eb71e93d0017f52ec148464061332c1c6e0db7055e03",
+      "payload": {
+        "caseId": "CASE-CABG3-2026-00014",
+        "source": "demo-case"
+      },
+      "createdAt": "2026-04-06T16:10:04.796Z"
+    },
+    {
+      "id": "f5c3f998-ffc4-4787-b782-3750e2e6b365",
+      "auditEventId": "AUD-6e18ef0d-c3fb-49d8-91fd-d47384570fb2",
+      "eventType": "read_case",
+      "actorId": null,
+      "actorEmail": null,
+      "targetCaseId": "CASE-CABG3-2026-00014",
+      "correlationId": "e27b3dcb-7fa0-4eb0-a9ad-93da93582f5d",
+      "previousHash": "192bb99d2d63ee71a400eb71e93d0017f52ec148464061332c1c6e0db7055e03",
+      "hash": "e09360ebb860525c6a36ceb2617af0e057c42bb57376c8227d1c839efd876a9f",
+      "payload": {
+        "caseId": "CASE-CABG3-2026-00014",
+        "source": "demo-case"
+      },
+      "createdAt": "2026-04-06T16:10:05.902Z"
+    },
+    {
+      "id": "68fcf087-915f-4909-bb6d-5368df74c243",
+      "auditEventId": "AUD-83f61cf7-521f-4cc9-bb98-c8c4783b6898",
+      "eventType": "read_case",
+      "actorId": null,
+      "actorEmail": null,
+      "targetCaseId": "CASE-CABG3-2026-00014",
+      "correlationId": "bc6a19d1-728c-4587-966c-d9eb775ee2ca",
+      "previousHash": "e09360ebb860525c6a36ceb2617af0e057c42bb57376c8227d1c839efd876a9f",
+      "hash": "119c7e5bd5207ce9683d3b6c4ec247a7895111a33422e06c0d2116befb37419a",
+      "payload": {
+        "caseId": "CASE-CABG3-2026-00014",
+        "source": "demo-case"
+      },
+      "createdAt": "2026-04-12T17:29:48.185Z"
+    },
+    {
+      "id": "57145152-a545-41bb-b81c-43147f22e750",
+      "auditEventId": "AUD-2fa26a5b-3efc-4b9d-a8fc-5e2145455c01",
+      "eventType": "read_case",
+      "actorId": null,
+      "actorEmail": null,
+      "targetCaseId": "CASE-CABG3-2026-00014",
+      "correlationId": "f4e2f84d-b294-4a89-abc9-ce235bf6d8b6",
+      "previousHash": "119c7e5bd5207ce9683d3b6c4ec247a7895111a33422e06c0d2116befb37419a",
+      "hash": "82b755911cc29b99aa89ae13971424ed7c58c8da9c66df6ba0fd069f2d6e04bc",
+      "payload": {
+        "caseId": "CASE-CABG3-2026-00014",
+        "source": "demo-case"
+      },
+      "createdAt": "2026-04-12T17:34:16.049Z"
+    },
+    {
+      "id": "999c7f68-c3fc-4aca-af93-716aeb4c108d",
+      "auditEventId": "AUD-37feb2c7-809a-40f0-9f6f-3eaa3ff1018f",
+      "eventType": "read_case",
+      "actorId": null,
+      "actorEmail": null,
+      "targetCaseId": "CASE-CABG3-2026-00014",
+      "correlationId": "fac920ab-403e-4352-9b2d-b9729b68508a",
+      "previousHash": "82b755911cc29b99aa89ae13971424ed7c58c8da9c66df6ba0fd069f2d6e04bc",
+      "hash": "a0f333fc3cff1a02cac9a0389b92f581d0f3fa84b821774021ebd9211b21e54e",
+      "payload": {
+        "caseId": "CASE-CABG3-2026-00014",
+        "source": "demo-case"
+      },
+      "createdAt": "2026-04-12T17:52:50.579Z"
+    },
+    {
+      "id": "bde9c24d-cb1b-4315-8a96-e80fb4b7fbf1",
+      "auditEventId": "AUD-4fd48d7f-9553-42cc-aeb2-5ecfda98942b",
+      "eventType": "read_case",
+      "actorId": null,
+      "actorEmail": null,
+      "targetCaseId": "CASE-CABG3-2026-00014",
+      "correlationId": "2495c091-6bc8-4d10-a51f-076f3dcf3a4e",
+      "previousHash": "a0f333fc3cff1a02cac9a0389b92f581d0f3fa84b821774021ebd9211b21e54e",
+      "hash": "0d6ee0a6791af262e454b319989c644a5c36147be55702a006b3c6add64c3dba",
+      "payload": {
+        "caseId": "CASE-CABG3-2026-00014",
+        "source": "demo-case"
+      },
+      "createdAt": "2026-04-12T21:35:36.522Z"
+    },
+    {
+      "id": "bc947e38-5cb9-40f0-84c6-aeb5186dc77e",
+      "auditEventId": "AUD-8a7d87fc-b187-4378-b90f-08157d4d083e",
+      "eventType": "read_case",
+      "actorId": null,
+      "actorEmail": null,
+      "targetCaseId": "CASE-CABG3-2026-00014",
+      "correlationId": "4ae6d62a-4360-405c-b289-73e62d836b60",
+      "previousHash": "0d6ee0a6791af262e454b319989c644a5c36147be55702a006b3c6add64c3dba",
+      "hash": "63ad7f401f415ddff4a130ca64c5879c8cddab2f3c3e9807736447724745f78e",
+      "payload": {
+        "caseId": "CASE-CABG3-2026-00014",
+        "source": "demo-case"
+      },
+      "createdAt": "2026-04-12T21:37:20.459Z"
+    }
+  ]
+}

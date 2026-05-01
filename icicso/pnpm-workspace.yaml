@@ -1,0 +1,11 @@
+packages:
+  - apps/*
+  - packages/*
+  - packages/domain/*
+  - packages/engines/*
+  - packages/execution/*
+  - packages/integration/*
+  - packages/intelligence/*
+  - packages/operations/*
+  - packages/simulation/*
+  - services/*

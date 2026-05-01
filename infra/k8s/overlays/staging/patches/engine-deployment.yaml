@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: icicso-engine
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/environment: staging
+    spec:
+      containers:
+        - name: auth-service
+          imagePullPolicy: Always
+        - name: identity-service
+          imagePullPolicy: Always
+        - name: audit-service
+          imagePullPolicy: Always
+        - name: evidence-lake-service
+          imagePullPolicy: Always
+        - name: ghl-service
+          imagePullPolicy: Always
+        - name: kbol-service
+          imagePullPolicy: Always
+        - name: storage-service
+          imagePullPolicy: Always
+        - name: terminology-service
+          imagePullPolicy: Always
+        - name: data-governance-service
+          imagePullPolicy: Always
+        - name: runbook-service
+          imagePullPolicy: Always
+        - name: readiness-service
+          imagePullPolicy: Always
+        - name: case-control-service
+          imagePullPolicy: Always
+        - name: systemic-risk-service
+          imagePullPolicy: Always
+        - name: cqoi-service
+          imagePullPolicy: Always
+        - name: semantic-terminology-engine
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 150m
+              memory: 256Mi
+            limits:
+              cpu: 700m
+              memory: 768Mi

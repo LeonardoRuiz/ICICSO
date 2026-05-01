@@ -1,0 +1,143 @@
+{
+  "generatedAt": "2026-04-06",
+  "allowedStates": [
+    "implemented",
+    "in-progress",
+    "planned",
+    "deprecated"
+  ],
+  "canonicalSources": {
+    "systemStatus": "SYSTEM_STATUS.md",
+    "desktopHub": "config/runtime/desktop-hub.json",
+    "alignmentAudit": "docs/audit/html-runtime-repo-alignment.md",
+    "validationScript": "scripts/Validate-DashboardLinks.ps1"
+  },
+  "surfaces": [
+    {
+      "id": "mockup-dashboard",
+      "label": "Mockup local dashboard",
+      "state": "implemented",
+      "target": "http://127.0.0.1:8090/index.html",
+      "owner": "icicso-local/apps/desktop-emulator",
+      "note": "Superficie HTML operativa principal del runtime local."
+    },
+    {
+      "id": "canon-emulator",
+      "label": "Canon emulator",
+      "state": "implemented",
+      "target": "http://127.0.0.1:8098/index.html",
+      "owner": "icicso/apps/emulator",
+      "note": "Emulador canónico separado del mockup local."
+    },
+    {
+      "id": "gateway-ready",
+      "label": "Gateway readiness",
+      "state": "implemented",
+      "target": "http://127.0.0.1:3100/health",
+      "owner": "icicso-local/apps/gateway-api",
+      "note": "Readiness del gateway; puede devolver 503 en modo degradado."
+    },
+    {
+      "id": "block1-overview",
+      "label": "Block1 overview",
+      "state": "implemented",
+      "target": "http://127.0.0.1:3100/block1/overview",
+      "owner": "icicso-local/apps/gateway-api",
+      "note": "Vista funcional del caso desde el gateway."
+    },
+    {
+      "id": "document-ingestion-console",
+      "label": "Document ingestion console",
+      "state": "implemented",
+      "target": "dashboard/document-ingestion.html",
+      "owner": "services/ingestion-orquestador",
+      "note": "Consola HTML para registrar documentos en el primer método del continuum."
+    },
+    {
+      "id": "legacy-root-dashboard",
+      "label": "Legacy root dashboard",
+      "state": "deprecated",
+      "target": "docs/audit/html-runtime-repo-alignment.md",
+      "owner": "dashboard/index.html",
+      "note": "Se conserva solo como acceso alineado a la realidad actual del repo."
+    }
+  ],
+  "repoModules": [
+    {
+      "id": "repo-icicso",
+      "label": "icicso/",
+      "state": "in-progress",
+      "target": "icicso/README.md",
+      "note": "Base canónica con scaffold útil, emulador y slice de dominio probado."
+    },
+    {
+      "id": "repo-icicso-local",
+      "label": "icicso-local/",
+      "state": "implemented",
+      "target": "icicso-local/README.md",
+      "note": "Runtime demo local que hoy sí arranca y navega en modo degradado."
+    },
+    {
+      "id": "repo-ingestion",
+      "label": "services/ingestion-orquestador/",
+      "state": "implemented",
+      "target": "services/ingestion-orquestador/README.md",
+      "note": "Módulo funcional con pruebas locales pasando."
+    },
+    {
+      "id": "repo-foundation",
+      "label": "_archive/noncanonical/08_Plataforma_Digital/icicso-foundation/",
+      "state": "deprecated",
+      "target": "_archive/noncanonical/08_Plataforma_Digital/icicso-foundation/README.md",
+      "note": "Monorepo alterno archivado como referencia técnica no canónica."
+    },
+    {
+      "id": "repo-archive",
+      "label": "_archive/deprecated_audit_20260405/",
+      "state": "deprecated",
+      "target": "docs/audit/html-runtime-repo-alignment.md",
+      "note": "Material fuera de la ruta operativa."
+    }
+  ],
+  "documentation": [
+    {
+      "label": "START_HERE",
+      "state": "implemented",
+      "target": "START_HERE.md"
+    },
+    {
+      "label": "SYSTEM_STATUS",
+      "state": "implemented",
+      "target": "SYSTEM_STATUS.md"
+    },
+    {
+      "label": "Local development runbook",
+      "state": "implemented",
+      "target": "docs/local-development.md"
+    },
+    {
+      "label": "Desktop hub operations",
+      "state": "implemented",
+      "target": "docs/desktop-hub-operations.md"
+    },
+    {
+      "label": "Alignment audit",
+      "state": "implemented",
+      "target": "docs/audit/html-runtime-repo-alignment.md"
+    }
+  ],
+  "commands": [
+    ".\\scripts\\start-icicso-mockup.ps1",
+    ".\\scripts\\Invoke-ContinuumDoctor.ps1",
+    ".\\scripts\\start-icicso-canon-emulator.ps1",
+    ".\\scripts\\Validate-DashboardLinks.ps1"
+  ],
+  "forbiddenTargets": [
+    "http://localhost:3000",
+    "http://localhost:5050",
+    "http://localhost:8888",
+    "http://localhost:9001",
+    "http://localhost:8090/index.html",
+    "http://localhost:3100/health"
+  ]
+}

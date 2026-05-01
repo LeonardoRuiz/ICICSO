@@ -1,0 +1,3308 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ICICSO Document Ingestion Console</title>
+  <link rel="stylesheet" href="./assets/icicso-palette.css">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #050c10;
+      --panel: #0b1418;
+      --panel-strong: #0a1115;
+      --ink: #eef8f7;
+      --ink-soft: #c8dbd9;
+      --line: rgba(111, 153, 147, 0.22);
+      --accent: #5fc9bb;
+      --accent-warm: #d6a25e;
+      --accent-cool: #7fb3d5;
+      --shadow: 0 22px 48px rgba(0, 0, 0, 0.45);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(95, 201, 187, 0.08), transparent 28%),
+        radial-gradient(circle at 90% 0%, rgba(127, 179, 213, 0.06), transparent 24%),
+        linear-gradient(180deg, #070c0f 0%, #050c10 55%, #030608 100%);
+      color: var(--ink);
+      font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+    }
+
+    .shell {
+      width: min(1200px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 28px 0 48px;
+      display: grid;
+      gap: 20px;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+    }
+
+    h2 {
+      margin: 0 0 8px;
+      font-size: 1.35rem;
+    }
+
+    p {
+      margin: 0;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+
+    .meta-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--panel-strong);
+      font-size: 0.85rem;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      margin-top: 14px;
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+      font-size: 0.9rem;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: var(--panel-strong);
+      color: var(--ink);
+      padding: 10px 12px;
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    button,
+    .link-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 0 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--ink);
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .primary {
+      background: var(--accent);
+      color: #031012;
+      border-color: transparent;
+    }
+
+    .status-box {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: var(--panel-strong);
+    }
+
+    .startup-note {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(214, 162, 94, 0.35);
+      background: rgba(214, 162, 94, 0.08);
+      color: var(--ink-soft);
+    }
+
+    .summary-grid,
+    .ledger-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      margin-top: 12px;
+    }
+
+    .summary-card {
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: var(--panel-strong);
+    }
+
+    .documents,
+    .ledger-grid,
+    .catalog-table {
+      display: grid;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .doc-card,
+    .ledger-card,
+    .catalog-row {
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: var(--panel-strong);
+      display: grid;
+      gap: 8px;
+    }
+
+    .doc-card h3,
+    .ledger-card h3 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .catalog-row {
+      grid-template-columns: 1.3fr 0.7fr 0.7fr 0.7fr 0.7fr;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .catalog-row.header {
+      background: transparent;
+      border: none;
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+    }
+
+    .inline-input {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--panel-strong);
+      color: var(--ink);
+      padding: 6px 8px;
+      font-size: 0.85rem;
+    }
+
+    .small {
+      font-size: 0.8rem;
+      color: var(--ink-soft);
+      word-break: break-word;
+    }
+
+    .section-intro {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .table-shell {
+      margin-top: 14px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(11, 20, 24, 0.96), rgba(7, 14, 17, 0.96));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+    }
+
+    .table-scroll {
+      overflow-x: auto;
+    }
+
+    .ingestion-table {
+      width: 100%;
+      min-width: 1120px;
+      border-collapse: collapse;
+    }
+
+    .ingestion-table th,
+    .ingestion-table td {
+      padding: 14px 16px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .ingestion-table th {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink-soft);
+      background: rgba(9, 16, 19, 0.98);
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    .ingestion-table tbody tr {
+      cursor: pointer;
+      transition: background 140ms ease, box-shadow 140ms ease;
+    }
+
+    .ingestion-table tbody tr:hover {
+      background: rgba(95, 201, 187, 0.08) !important;
+    }
+
+    .ingestion-table tbody tr.is-selected {
+      background: rgba(95, 201, 187, 0.1) !important;
+      box-shadow: inset 3px 0 0 var(--accent);
+    }
+
+    .ingestion-table tbody tr.is-fresh {
+      box-shadow: inset 3px 0 0 #76d8a8;
+    }
+
+    .doc-main {
+      display: grid;
+      gap: 6px;
+      min-width: 260px;
+    }
+
+    .doc-title {
+      font-weight: 600;
+      line-height: 1.35;
+      word-break: break-word;
+    }
+
+    .path-copy {
+      font-family: "IBM Plex Mono", "Consolas", monospace;
+      font-size: 0.76rem;
+      color: var(--ink-soft);
+      word-break: break-all;
+    }
+
+    .meta-stack {
+      display: grid;
+      gap: 6px;
+    }
+
+    .meta-value {
+      font-size: 0.92rem;
+      color: var(--ink);
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .table-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 0 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.02);
+      font-size: 0.75rem;
+      white-space: nowrap;
+    }
+
+    .table-pill.accent {
+      border-color: rgba(95, 201, 187, 0.4);
+      color: var(--accent);
+    }
+
+    .table-pill.ok {
+      border-color: rgba(118, 216, 168, 0.4);
+      color: #76d8a8;
+    }
+
+    .table-pill.warn {
+      border-color: rgba(214, 162, 94, 0.4);
+      color: var(--accent-warm);
+    }
+
+    .table-pill.cool {
+      border-color: rgba(127, 179, 213, 0.4);
+      color: var(--accent-cool);
+    }
+
+    .table-pill.bad {
+      border-color: rgba(204, 111, 115, 0.4);
+      color: #cc6f73;
+    }
+
+    .table-pair {
+      display: grid;
+      gap: 4px;
+    }
+
+    .table-note {
+      max-width: 340px;
+      white-space: pre-wrap;
+    }
+
+    .table-code {
+      margin: 0;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--ink-soft);
+      font-family: "IBM Plex Mono", "Consolas", monospace;
+      font-size: 0.75rem;
+      line-height: 1.55;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .table-action {
+      min-height: 34px;
+      padding: 0 12px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: var(--panel-strong);
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    .table-action.primary {
+      background: var(--accent);
+      color: #031012;
+      border-color: transparent;
+    }
+
+    .table-inputs {
+      display: grid;
+      gap: 8px;
+      min-width: 220px;
+    }
+
+    .table-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .table-actions .table-action {
+      flex: 1;
+      min-width: 80px;
+    }
+
+    .table-empty {
+      padding: 18px;
+      color: var(--ink-soft);
+    }
+
+    .document-detail-panel {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(5, 12, 16, 0.95);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      padding: 40px;
+      overflow-y: auto;
+    }
+
+    .detail-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .detail-header h3 {
+      margin: 0;
+      color: var(--accent);
+    }
+
+    .detail-content {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .detail-section {
+      margin-bottom: 32px;
+    }
+
+    .detail-section h4 {
+      margin: 0 0 12px 0;
+      color: var(--accent);
+      font-size: 1.1rem;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+    }
+
+    .detail-item {
+      background: var(--panel-strong);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .detail-item .label {
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .detail-item .value {
+      font-size: 1rem;
+      color: var(--ink);
+      word-break: break-word;
+    }
+
+    .detail-item .value.mono {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.9rem;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 8px;
+      border-radius: 6px;
+      margin-top: 4px;
+    }
+
+    .candidate-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .candidate-card {
+      background: var(--panel-strong);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .candidate-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .candidate-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .candidate-audits {
+      display: grid;
+      gap: 8px;
+    }
+
+    .candidate-audit-item {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.02);
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+    }
+
+    .workbench-summary {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      margin-top: 12px;
+    }
+
+    .ledger-cards {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    }
+
+    .ledger-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .ledger-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 20px rgba(95, 201, 187, 0.1);
+    }
+
+    .ledger-card .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: 12px;
+    }
+
+    .ledger-card .card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin: 0;
+    }
+
+    .ledger-card .card-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .ledger-card .card-content {
+      color: var(--ink-soft);
+      line-height: 1.5;
+    }
+
+    .ledger-card .card-meta {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+      font-size: 0.85rem;
+      color: var(--ink-dim);
+    }
+
+    .report-results {
+      margin-top: 20px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel-strong);
+    }
+
+    .report-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .report-header h3 {
+      margin: 0;
+      color: var(--accent);
+    }
+
+    .report-meta {
+      display: flex;
+      gap: 16px;
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+    }
+
+    .report-content {
+      padding: 20px;
+      max-height: 600px;
+      overflow-y: auto;
+    }
+
+    .report-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .report-table th,
+    .report-table td {
+      padding: 8px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .report-table th {
+      background: rgba(9, 16, 19, 0.98);
+      font-weight: 600;
+      position: sticky;
+      top: 0;
+    }
+
+    .analytics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .analytics-card {
+      background: var(--panel-strong);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .analytics-card .metric {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .analytics-card .label {
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+    }
+  </style>
+  <style>
+    /* ICICSO_DARK_OVERRIDE v3 */
+    :root {
+      color-scheme: dark;
+      --icicso-bg: #050c10;
+      --icicso-panel: #0b1418;
+      --icicso-panel-strong: #0a1115;
+      --icicso-panel-soft: #0f1a1f;
+      --icicso-ink: #eef8f7;
+      --icicso-ink-soft: #c8dbd9;
+      --icicso-ink-dim: #8da7a3;
+      --icicso-line: rgba(111, 153, 147, 0.22);
+      --icicso-line-strong: rgba(155, 194, 187, 0.32);
+      --icicso-accent: #5fc9bb;
+      --icicso-accent-warm: #d6a25e;
+      --icicso-accent-cool: #7fb3d5;
+      --icicso-ok: #76d8a8;
+      --icicso-warn: #d6a25e;
+      --icicso-bad: #cc6f73;
+    }
+
+    html,
+    body {
+      background-color: var(--icicso-bg) !important;
+      color: var(--icicso-ink) !important;
+    }
+
+    body {
+      font-family: "IBM Plex Sans", "Segoe UI", sans-serif !important;
+      line-height: 1.6 !important;
+    }
+
+    a,
+    a:visited {
+      color: var(--icicso-accent) !important;
+    }
+
+    a:hover {
+      color: #86ddd3 !important;
+    }
+
+    hr {
+      border-color: var(--icicso-line) !important;
+    }
+
+    table {
+      border-color: var(--icicso-line) !important;
+      background-color: var(--icicso-panel) !important;
+    }
+
+    th,
+    td {
+      border-color: var(--icicso-line) !important;
+      color: var(--icicso-ink) !important;
+    }
+
+    input,
+    textarea,
+    select,
+    button {
+      background-color: var(--icicso-panel-strong) !important;
+      color: var(--icicso-ink) !important;
+      border-color: var(--icicso-line) !important;
+    }
+
+    code,
+    pre {
+      background-color: var(--icicso-panel-strong) !important;
+      color: var(--icicso-ink) !important;
+      border-color: var(--icicso-line) !important;
+    }
+
+    header,
+    footer,
+    nav,
+    section,
+    article,
+    aside,
+    main,
+    .panel,
+    .card,
+    .tile,
+    .box,
+    .container,
+    .shell,
+    .hero,
+    .surface,
+    .module,
+    .workspace,
+    .table-wrap,
+    .table-container,
+    .panel-group {
+      background-color: var(--icicso-panel) !important;
+      color: var(--icicso-ink) !important;
+      border-color: var(--icicso-line) !important;
+    }
+
+    .badge,
+    .chip,
+    .tag,
+    .pill,
+    .status {
+      background-color: var(--icicso-panel-strong) !important;
+      border-color: var(--icicso-line) !important;
+      color: var(--icicso-ink) !important;
+    }
+
+    /* Continuum emphasis */
+    .continuum,
+    .continuum-panel,
+    .continuum-ribbon,
+    .continuum-node,
+    .continuum-card,
+    .continuum-block,
+    .block-card,
+    .block-node,
+    .module-card,
+    .workspace-card {
+      background-color: var(--icicso-panel) !important;
+      border-color: var(--icicso-line-strong) !important;
+      color: var(--icicso-ink) !important;
+    }
+
+    /* L0-L12 variance */
+    :root {
+      --l0: #6fd3c6;
+      --l1: #7fb3d5;
+      --l2: #8f9edb;
+      --l3: #a88bd3;
+      --l4: #c08ac1;
+      --l5: #d69e7a;
+      --l6: #d6a25e;
+      --l7: #c9b66a;
+      --l8: #9ecb7a;
+      --l9: #76d8a8;
+      --l10: #5fc9bb;
+      --l11: #5aa7c2;
+      --l12: #6c8bd6;
+    }
+
+    .l0,
+    .L0,
+    .level-0,
+    .level-l0,
+    .block-l0,
+    .layer-l0,
+    [data-level="L0"],
+    [data-layer="L0"] {
+      border-color: color-mix(in srgb, var(--l0) 55%, var(--icicso-line)) !important;
+      color: var(--l0) !important;
+    }
+
+    .l1,
+    .L1,
+    .level-1,
+    .level-l1,
+    .block-l1,
+    .layer-l1,
+    [data-level="L1"],
+    [data-layer="L1"] {
+      border-color: color-mix(in srgb, var(--l1) 55%, var(--icicso-line)) !important;
+      color: var(--l1) !important;
+    }
+
+    .l2,
+    .L2,
+    .level-2,
+    .level-l2,
+    .block-l2,
+    .layer-l2,
+    [data-level="L2"],
+    [data-layer="L2"] {
+      border-color: color-mix(in srgb, var(--l2) 55%, var(--icicso-line)) !important;
+      color: var(--l2) !important;
+    }
+
+    .l3,
+    .L3,
+    .level-3,
+    .level-l3,
+    .block-l3,
+    .layer-l3,
+    [data-level="L3"],
+    [data-layer="L3"] {
+      border-color: color-mix(in srgb, var(--l3) 55%, var(--icicso-line)) !important;
+      color: var(--l3) !important;
+    }
+
+    .l4,
+    .L4,
+    .level-4,
+    .level-l4,
+    .block-l4,
+    .layer-l4,
+    [data-level="L4"],
+    [data-layer="L4"] {
+      border-color: color-mix(in srgb, var(--l4) 55%, var(--icicso-line)) !important;
+      color: var(--l4) !important;
+    }
+
+    .l5,
+    .L5,
+    .level-5,
+    .level-l5,
+    .block-l5,
+    .layer-l5,
+    [data-level="L5"],
+    [data-layer="L5"] {
+      border-color: color-mix(in srgb, var(--l5) 55%, var(--icicso-line)) !important;
+      color: var(--l5) !important;
+    }
+
+    .l6,
+    .L6,
+    .level-6,
+    .level-l6,
+    .block-l6,
+    .layer-l6,
+    [data-level="L6"],
+    [data-layer="L6"] {
+      border-color: color-mix(in srgb, var(--l6) 55%, var(--icicso-line)) !important;
+      color: var(--l6) !important;
+    }
+
+    .l7,
+    .L7,
+    .level-7,
+    .level-l7,
+    .block-l7,
+    .layer-l7,
+    [data-level="L7"],
+    [data-layer="L7"] {
+      border-color: color-mix(in srgb, var(--l7) 55%, var(--icicso-line)) !important;
+      color: var(--l7) !important;
+    }
+
+    .l8,
+    .L8,
+    .level-8,
+    .level-l8,
+    .block-l8,
+    .layer-l8,
+    [data-level="L8"],
+    [data-layer="L8"] {
+      border-color: color-mix(in srgb, var(--l8) 55%, var(--icicso-line)) !important;
+      color: var(--l8) !important;
+    }
+
+    .l9,
+    .L9,
+    .level-9,
+    .level-l9,
+    .block-l9,
+    .layer-l9,
+    [data-level="L9"],
+    [data-layer="L9"] {
+      border-color: color-mix(in srgb, var(--l9) 55%, var(--icicso-line)) !important;
+      color: var(--l9) !important;
+    }
+
+    .l10,
+    .L10,
+    .level-10,
+    .level-l10,
+    .block-l10,
+    .layer-l10,
+    [data-level="L10"],
+    [data-layer="L10"] {
+      border-color: color-mix(in srgb, var(--l10) 55%, var(--icicso-line)) !important;
+      color: var(--l10) !important;
+    }
+
+    .l11,
+    .L11,
+    .level-11,
+    .level-l11,
+    .block-l11,
+    .layer-l11,
+    [data-level="L11"],
+    [data-layer="L11"] {
+      border-color: color-mix(in srgb, var(--l11) 55%, var(--icicso-line)) !important;
+      color: var(--l11) !important;
+    }
+
+    .l12,
+    .L12,
+    .level-12,
+    .level-l12,
+    .block-l12,
+    .layer-l12,
+    [data-level="L12"],
+    [data-layer="L12"] {
+      border-color: color-mix(in srgb, var(--l12) 55%, var(--icicso-line)) !important;
+      color: var(--l12) !important;
+    }
+
+    .l0 .badge,
+    .L0 .badge,
+    .l1 .badge,
+    .L1 .badge,
+    .l2 .badge,
+    .L2 .badge,
+    .l3 .badge,
+    .L3 .badge,
+    .l4 .badge,
+    .L4 .badge,
+    .l5 .badge,
+    .L5 .badge,
+    .l6 .badge,
+    .L6 .badge,
+    .l7 .badge,
+    .L7 .badge,
+    .l8 .badge,
+    .L8 .badge,
+    .l9 .badge,
+    .L9 .badge,
+    .l10 .badge,
+    .L10 .badge,
+    .l11 .badge,
+    .L11 .badge,
+    .l12 .badge,
+    .L12 .badge {
+      background-color: var(--icicso-panel-strong) !important;
+    }
+
+    .continuum-node.ok,
+    .status-ok,
+    .status-active,
+    .badge-ok {
+      border-color: rgba(118, 216, 168, 0.6) !important;
+      color: var(--icicso-ok) !important;
+    }
+
+    .continuum-node.warn,
+    .status-warn,
+    .badge-warn {
+      border-color: rgba(214, 162, 94, 0.6) !important;
+      color: var(--icicso-warn) !important;
+    }
+
+    .continuum-node.bad,
+    .status-bad,
+    .badge-bad {
+      border-color: rgba(204, 111, 115, 0.6) !important;
+      color: var(--icicso-bad) !important;
+    }
+
+    tr:nth-child(even),
+    tbody tr:nth-child(even) {
+      background-color: rgba(11, 20, 24, 0.65) !important;
+    }
+
+    tr:nth-child(odd),
+    tbody tr:nth-child(odd) {
+      background-color: rgba(9, 18, 22, 0.35) !important;
+    }
+
+    thead th {
+      background-color: rgba(11, 20, 24, 0.95) !important;
+      color: var(--icicso-ink) !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="shell">
+    <section class="panel">
+      <h1>ICICSO Document Ingestion Console</h1>
+      <p>Consola operativa para ingestar documentos, materializar SER/EO/EL y mantener catálogo con nomenclatura
+        controlada.</p>
+      <div class="meta-bar">
+        <span class="chip">API base: <strong id="api-base-label">http://127.0.0.1:8000</strong></span>
+        <span class="chip">Nomenclatura: <strong id="nomenclature-status">pendiente</strong></span>
+        <span class="chip">Catálogo: <strong id="catalog-status">sin cargar</strong></span>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Ingestar documento</h2>
+      <p>Sube un archivo y déjalo listo para su normalización posterior en VRN, SER y las capas siguientes del
+        continuum.</p>
+
+      <div class="form-grid">
+        <label class="field">API base
+          <input id="api-base" type="url" value="http://127.0.0.1:8000">
+          <div class="actions" style="margin-top: 8px;">
+            <a id="api-start-link" class="link-button" href="../scripts/start-ingestion-orquestador.cmd">Abrir launcher
+              CMD</a>
+            <a id="api-start-ps" class="link-button" href="../scripts/start-ingestion-orquestador.ps1">Abrir launcher
+              PS</a>
+            <button id="api-copy-command" type="button">Copiar comando real</button>
+          </div>
+          <div class="startup-note">
+            El navegador no puede garantizar el arranque del proceso. Si los launchers no levantan la API, ejecuta
+            manualmente:
+            <code>.\\scripts\\start-ingestion-orquestador.ps1</code>
+          </div>
+        </label>
+        <label class="field">Layer
+          <select id="layer"></select>
+        </label>
+        <label class="field">Tipo de documento
+          <select id="document-type"></select>
+        </label>
+        <label class="field">Categoría
+          <select id="category"></select>
+        </label>
+        <label class="field">Grupo documental
+          <select id="document-group"></select>
+        </label>
+        <label class="field">Idioma
+          <select id="language"></select>
+        </label>
+        <label class="field">Continuum stage
+          <select id="continuum-stage"></select>
+        </label>
+        <label class="field">Especialidad
+          <select id="ingest-specialty"></select>
+        </label>
+        <label class="field">Subespecialidad
+          <select id="ingest-sub-specialty"></select>
+        </label>
+        <label class="field">Epidemia
+          <select id="ingest-epidemic"></select>
+        </label>
+        <label class="field">VRN status
+          <select id="vrn-status"></select>
+        </label>
+      </div>
+
+      <div class="form-grid" style="margin-top: 16px;">
+        <label class="field" style="grid-column: 1 / -1;">Archivos
+          <input id="file-input" type="file" multiple>
+        </label>
+        <label class="field" style="grid-column: 1 / -1;">Notas de ingesta
+          <textarea id="notes"
+            placeholder="Contexto clínico, procedencia, próximos pasos para VRN, observaciones del operador."></textarea>
+        </label>
+      </div>
+
+      <div class="actions">
+        <button id="upload-button" class="primary" type="button">Subir al continuum</button>
+        <button id="materialize-button" type="button">Materializar SER EO EL</button>
+        <button id="governance-button" type="button">Registrar GovernanceRecord</button>
+        <button id="refresh-button" type="button">Refrescar feed</button>
+        <a class="link-button" href="./index.html">Volver al dashboard raíz</a>
+        <a class="link-button" href="..\\..\\ICICSO Local\\Abrir ICICSO Mockup Local.cmd">Abrir ICICSO Local</a>
+      </div>
+
+      <div id="status-box" class="status-box">Esperando archivo.</div>
+    </section>
+
+    <section class="panel">
+      <h2>Editar documento seleccionado</h2>
+      <p>Renombra o reubica el archivo dentro de `uploaded_documents`, y ajusta metadata operativa.</p>
+      <div class="form-grid">
+        <label class="field">Nuevo nombre de archivo
+          <input id="edit-file-name" type="text" placeholder="opcional">
+        </label>
+        <label class="field">Mover a carpeta (relativa)
+          <input id="edit-move-to" type="text" placeholder="ej. cardiologia/2026">
+        </label>
+        <label class="field">Categoría
+          <input id="edit-category" type="text" placeholder="opcional">
+        </label>
+        <label class="field">Grupo documental
+          <input id="edit-document-group" type="text" placeholder="opcional">
+        </label>
+        <label class="field">Idioma
+          <input id="edit-language" type="text" placeholder="opcional">
+        </label>
+        <label class="field">Notas
+          <input id="edit-notes" type="text" placeholder="opcional">
+        </label>
+      </div>
+      <div class="actions">
+        <button id="edit-save" type="button">Guardar cambios</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Estado sincronizado</h2>
+      <div class="section-intro">
+        <p>Los documentos recientes se presentan como tabla operativa para lectura rápida, selección y edición.</p>
+        <span class="chip">Vista: <strong>tabla</strong></span>
+      </div>
+      <div id="summary-grid" class="summary-grid"></div>
+      <div id="documents" class="documents"></div>
+      <div id="previews" class="documents"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Log de ingesta</h2>
+      <p>Registro detallado por archivo (payload + respuesta).</p>
+      <div id="ingestion-log" class="documents"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Ledger GCL</h2>
+      <p>Registro de gobernanza con VRN activos. Click en cualquier registro para ver detalles completos del documento y
+        su historial.</p>
+      <div class="form-grid" style="margin-bottom: 16px;">
+        <label class="field">Filtrar por tipo
+          <select id="ledger-filter-type">
+            <option value="">Todos los tipos</option>
+            <option value="CR">CR (Change Record)</option>
+            <option value="deprecation">Deprecation</option>
+          </select>
+        </label>
+        <label class="field">Filtrar por severidad
+          <select id="ledger-filter-severity">
+            <option value="">Todas las severidades</option>
+            <option value="moderate">Moderate</option>
+            <option value="high">High</option>
+            <option value="low">Low</option>
+          </select>
+        </label>
+        <label class="field">Buscar VRN/Documento
+          <input id="ledger-search" type="text" placeholder="VRN, documento, descripción...">
+        </label>
+        <label class="field">Vista
+          <select id="ledger-view-mode">
+            <option value="table">Tabla compacta</option>
+            <option value="cards">Cards detalladas</option>
+          </select>
+        </label>
+      </div>
+      <div id="ledger-summary" class="summary-grid"></div>
+      <div id="ledger-records" class="ledger-grid"></div>
+      <div id="document-detail-view" class="document-detail-panel" style="display: none;">
+        <div class="detail-header">
+          <h3 id="detail-title">Detalles del Documento</h3>
+          <button id="detail-close" class="link-button">× Cerrar</button>
+        </div>
+        <div id="detail-content" class="detail-content"></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>EO Candidates Workbench</h2>
+      <p>Vista operativa para auditar candidatos EO por nivel de terminación, estado de revisión, especialidad y firmante.</p>
+      <div class="form-grid" style="margin-bottom: 16px;">
+        <label class="field">Completion level
+          <select id="eo-filter-level">
+            <option value="">Todos</option>
+            <option value="L1_structured">L1_structured</option>
+            <option value="L2_audited_clinical">L2_audited_clinical</option>
+            <option value="L3_audited_surgical">L3_audited_surgical</option>
+            <option value="L5_executable">L5_executable</option>
+          </select>
+        </label>
+        <label class="field">Review state
+          <select id="eo-filter-review">
+            <option value="">Todos</option>
+            <option value="pending">pending</option>
+            <option value="approved">approved</option>
+            <option value="changes_requested">changes_requested</option>
+            <option value="under_clinical_review">under_clinical_review</option>
+            <option value="under_surgical_review">under_surgical_review</option>
+          </select>
+        </label>
+        <label class="field">Especialidad
+          <select id="eo-filter-specialty">
+            <option value="">Todas</option>
+          </select>
+        </label>
+        <label class="field">Firmante / texto
+          <input id="eo-filter-signer" type="text" placeholder="firmante, statement, documento...">
+        </label>
+      </div>
+      <div id="eo-summary" class="workbench-summary"></div>
+      <div id="eo-workbench" class="catalog-table"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Reportes y Analytics</h2>
+      <p>Genera reportes tabulados y análisis de los documentos y registros de gobernanza por especialidad, categoría y otros criterios.</p>
+
+      <div class="form-grid" style="margin-bottom: 16px;">
+        <label class="field">Tipo de Reporte
+          <select id="report-type">
+            <option value="documents">Documentos por Especialidad</option>
+            <option value="governance">Registros de Gobernanza</option>
+            <option value="combined">Vista Combinada (Docs + Gov)</option>
+            <option value="timeline">Timeline de Actividad</option>
+          </select>
+        </label>
+        <label class="field">Especialidad
+          <select id="report-specialty">
+            <option value="">Todas las especialidades</option>
+          </select>
+        </label>
+        <label class="field">Categoría
+          <select id="report-category">
+            <option value="">Todas las categorías</option>
+          </select>
+        </label>
+        <label class="field">Estado VRN
+          <select id="report-vrn-status">
+            <option value="">Todos los estados</option>
+            <option value="ACTIVE">ACTIVE</option>
+            <option value="PENDING">PENDING</option>
+            <option value="SUNSET">SUNSET</option>
+          </select>
+        </label>
+        <label class="field">Formato
+          <select id="report-format">
+            <option value="table">Tabla HTML</option>
+            <option value="json">JSON</option>
+            <option value="csv">CSV</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="actions">
+        <button id="generate-report" class="primary" type="button">Generar Reporte</button>
+        <button id="export-report" type="button">Exportar</button>
+        <button id="clear-report" type="button">Limpiar</button>
+      </div>
+
+      <div id="report-results" class="report-results" style="display: none;">
+        <div class="report-header">
+          <h3 id="report-title">Reporte Generado</h3>
+          <div class="report-meta">
+            <span id="report-count">0 registros</span>
+            <span id="report-generated">Generado: -</span>
+          </div>
+        </div>
+        <div id="report-content" class="report-content"></div>
+      </div>
+    </section>
+      <div class="form-grid" style="margin-top: 12px;">
+        <label class="field">Especialidad
+          <select id="filter-specialty"></select>
+        </label>
+        <label class="field">Subespecialidad
+          <select id="filter-sub-specialty"></select>
+        </label>
+        <label class="field">Epidemia
+          <select id="filter-epidemic"></select>
+        </label>
+        <label class="field">Idioma
+          <select id="filter-language"></select>
+        </label>
+        <label class="field">Buscar
+          <input id="filter-query" type="text" placeholder="archivo, ruta, categoría">
+        </label>
+        <label class="field">Layer
+          <select id="filter-layer"></select>
+        </label>
+        <label class="field">Categoría
+          <select id="filter-category"></select>
+        </label>
+        <label class="field">Grupo documental
+          <select id="filter-group"></select>
+        </label>
+      </div>
+      <div class="actions">
+        <button id="catalog-refresh" type="button">Actualizar catálogo</button>
+      </div>
+      <div id="catalog-table" class="catalog-table"></div>
+    </section>
+  </div>
+
+  <script>
+    const apiBaseInput = document.getElementById("api-base");
+    const apiBaseLabel = document.getElementById("api-base-label");
+    const apiStartLink = document.getElementById("api-start-link");
+    const apiStartPs = document.getElementById("api-start-ps");
+    const apiCopyCommand = document.getElementById("api-copy-command");
+    const statusBox = document.getElementById("status-box");
+    const nomenclatureStatus = document.getElementById("nomenclature-status");
+    const catalogStatus = document.getElementById("catalog-status");
+    const layerSelect = document.getElementById("layer");
+    const documentTypeSelect = document.getElementById("document-type");
+    const categorySelect = document.getElementById("category");
+    const groupSelect = document.getElementById("document-group");
+    const continuumStageSelect = document.getElementById("continuum-stage");
+    const vrnStatusSelect = document.getElementById("vrn-status");
+    const ingestSpecialty = document.getElementById("ingest-specialty");
+    const ingestSubSpecialty = document.getElementById("ingest-sub-specialty");
+    const ingestEpidemic = document.getElementById("ingest-epidemic");
+    const ingestLanguage = document.getElementById("language");
+    const filterSpecialty = document.getElementById("filter-specialty");
+    const filterSubSpecialty = document.getElementById("filter-sub-specialty");
+    const filterEpidemic = document.getElementById("filter-epidemic");
+    const filterLanguage = document.getElementById("filter-language");
+    const filterQuery = document.getElementById("filter-query");
+    const filterLayer = document.getElementById("filter-layer");
+    const filterCategory = document.getElementById("filter-category");
+    const filterGroup = document.getElementById("filter-group");
+    const summaryGrid = document.getElementById("summary-grid");
+    const documentsNode = document.getElementById("documents");
+    const previewsNode = document.getElementById("previews");
+    const ledgerSummary = document.getElementById("ledger-summary");
+    const ledgerRecords = document.getElementById("ledger-records");
+    const eoSummary = document.getElementById("eo-summary");
+    const eoWorkbench = document.getElementById("eo-workbench");
+    const catalogTable = document.getElementById("catalog-table");
+    const ingestionLog = document.getElementById("ingestion-log");
+    const detailContentNode = document.getElementById("detail-content");
+    let catalogLastRefresh = null;
+    let lastUploadedDocumentId = null;
+    const ingestionEvents = [];
+
+    let nomenclature = null;
+    let selectedDocumentId = null;
+    let catalogItems = [];
+    const embeddedCatalogs = {
+      layers: ["ING", "SER", "EO", "EL", "DDMO", "EUL", "KBOL", "CPO", "TAM", "EVT", "RDY-G", "CAE"],
+      continuum_stages: ["ING", "SER", "EO", "EL", "DDMO", "EUL", "KBOL", "CPO", "TAM", "EVT", "RDY-G", "CAE"],
+      categories: [
+        "user-upload",
+        "imported",
+        "legacy",
+        "research",
+        "guideline",
+        "evidence",
+        "case",
+        "protocol",
+        "dataset",
+        "imaging",
+        "lab",
+        "surgical-report",
+        "operative-note",
+        "discharge-summary",
+      ],
+      document_groups: [
+        "continuum-intake",
+        "CABG",
+        "Valvular",
+        "Aorta",
+        "ECMO",
+        "Shock",
+        "Trauma Toracico",
+        "Intervencionismo",
+        "TAVI",
+        "PCI",
+        "Structural Heart",
+        "Reintervencion",
+        "Hemodinamia",
+        "Arritmias",
+        "Insuficiencia Cardiaca",
+        "UCI Cardiaca",
+        "UCI Quirurgica",
+        "Anestesia Cardiaca",
+        "Rehabilitacion Cardiaca",
+        "Emergencia Cardiaca",
+        "Emergencia Toracica",
+      ],
+      document_types: [
+        "guideline",
+        "protocol",
+        "case",
+        "dataset",
+        "imaging",
+        "lab",
+        "surgical-report",
+        "operative-note",
+        "discharge-summary",
+        "consent",
+        "device-spec",
+        "clinical-trial",
+        "registry",
+        "systematic-review",
+        "meta-analysis",
+        "cohort-study",
+      ],
+      vrn_statuses: ["ACTIVE", "PENDING", "SUNSET"],
+      languages: ["en", "es", "pt", "fr", "de", "it"],
+      defaults: {
+        layer: "ING",
+        continuum_stage: "ING",
+        category: "user-upload",
+        document_group: "continuum-intake",
+        document_type: "guideline",
+        vrn_status: "ACTIVE",
+        language: "en",
+      },
+    };
+    let catalogs = window.ICICSO_CATALOGS || embeddedCatalogs;
+    const embeddedNomenclature = {
+      specialties: [
+        "Cardiologia",
+        "Cirugia Cardiovascular",
+        "Cirugia Toracica",
+        "Cardiologia Intervencionista",
+        "Cirugia de Rescate",
+      ],
+      sub_specialties: {
+        Cardiologia: ["Hemodinamia", "Arritmias", "Insuficiencia Cardiaca", "Imagen Cardiaca", "ICU Cardio"],
+        "Cirugia Cardiovascular": ["CABG", "Valvular", "Aorta", "Transplante", "ECMO"],
+        "Cirugia Toracica": ["Pulmon", "Mediastino", "Esofago", "Trauma Toracico", "Oncologia Toracica"],
+        "Cardiologia Intervencionista": ["PCI", "TAVI", "Structural Heart", "FOP/ASD Closure", "Shock Intervencionista"],
+        "Cirugia de Rescate": ["Reintervencion", "Complicaciones", "Shock", "Hemorragia", "ECMO de Rescate"],
+      },
+      epidemics: ["N/A"],
+      defaults: {
+        specialty: "Cardiologia",
+        sub_specialty: "Hemodinamia",
+        epidemic: "N/A",
+      },
+    };
+
+    function getApiBase() {
+      const stored = localStorage.getItem("icicso.ingestionBase");
+      return (apiBaseInput.value || stored || "http://127.0.0.1:8000").replace(/\/+$/, "");
+    }
+
+    function setStatus(message, tone = "info") {
+      statusBox.textContent = message;
+      statusBox.style.borderColor = tone === "error" ? "rgba(204, 111, 115, 0.7)" : "rgba(111, 153, 147, 0.35)";
+    }
+
+    function pushIngestionLog(entry) {
+      ingestionEvents.unshift(entry);
+      if (ingestionEvents.length > 25) {
+        ingestionEvents.pop();
+      }
+      renderIngestionLog();
+    }
+
+    function renderIngestionLog() {
+      if (!ingestionLog) return;
+      const rowsHtml = ingestionEvents.map((entry) => `
+        <tr>
+          <td>
+            <div class="table-pair">
+              <strong>${escapeHtml(entry.file_name || "-")}</strong>
+              <span class="table-pill ${String(entry.status || "").includes("ERROR") ? "bad" : "ok"}">${escapeHtml(entry.status || "-")}</span>
+            </div>
+          </td>
+          <td><pre class="table-code">${escapeHtml(entry.payload || "-")}</pre></td>
+          <td><pre class="table-code">${escapeHtml(entry.response || "-")}</pre></td>
+        </tr>
+      `).join("");
+      renderTable(
+        ingestionLog,
+        ["Archivo", "Payload", "Respuesta"],
+        rowsHtml,
+        "Sin registros aún.",
+        1160,
+      );
+    }
+
+    async function updateApiHealth() {
+      const apiBase = getApiBase();
+      try {
+        const response = await fetchWithTimeout(`${apiBase}/api/health`, {}, 4000);
+        if (!response.ok) {
+          apiBaseLabel.textContent = `${apiBase} (down)`;
+          apiBaseLabel.style.color = "var(--icicso-bad)";
+          return false;
+        }
+        apiBaseLabel.textContent = apiBase;
+        apiBaseLabel.style.color = "var(--icicso-ok)";
+        return true;
+      } catch {
+        apiBaseLabel.textContent = `${apiBase} (down)`;
+        apiBaseLabel.style.color = "var(--icicso-bad)";
+        return false;
+      }
+    }
+
+    function updateApiStartLink() {
+      if (!apiStartLink) return;
+      apiStartLink.title = "Abrir launcher CMD local";
+      apiStartLink.addEventListener("click", () => {
+        setStatus("Launcher CMD abierto. Si la API no sube, ejecuta el script manualmente en PowerShell.");
+        setTimeout(() => updateApiHealth(), 8000);
+      });
+      if (apiStartPs) {
+        apiStartPs.title = "Abrir launcher PowerShell local";
+        apiStartPs.addEventListener("click", () => {
+          setStatus("Launcher PowerShell abierto. Si la API no sube, ejecuta el script manualmente en PowerShell.");
+          setTimeout(() => updateApiHealth(), 8000);
+        });
+      }
+    }
+
+    async function fetchWithTimeout(url, options = {}, timeoutMs = 12000) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), timeoutMs);
+      try {
+        const response = await fetch(url, { ...options, signal: controller.signal });
+        clearTimeout(timer);
+        return response;
+      } catch (error) {
+        clearTimeout(timer);
+        throw error;
+      }
+    }
+
+    function populateSelect(select, options, placeholder = "Selecciona") {
+      select.innerHTML = "";
+      const placeholderOption = document.createElement("option");
+      placeholderOption.value = "";
+      placeholderOption.textContent = placeholder;
+      select.appendChild(placeholderOption);
+      options.forEach((value) => {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = value;
+        select.appendChild(option);
+      });
+    }
+
+    function enforceControlled(select, options, label) {
+      const value = select.value;
+      if (value && !options.includes(value)) {
+        throw new Error(`Valor fuera de catálogo en ${label}: ${value}`);
+      }
+    }
+
+    function refreshSubSpecialties(root, target, selectedValue) {
+      if (!nomenclature || !nomenclature.sub_specialties) {
+        populateSelect(target, [], "Sin subespecialidad");
+        return;
+      }
+      const options = nomenclature.sub_specialties[root] || [];
+      populateSelect(target, options, "Selecciona subespecialidad");
+      if (selectedValue && options.includes(selectedValue)) {
+        target.value = selectedValue;
+      }
+    }
+
+    async function loadCatalogs() {
+      try {
+        const response = await fetch("../config/runtime/ingestion-catalogs.json");
+        if (response.ok) {
+          catalogs = await response.json();
+        }
+      } catch (error) {
+        catalogs = embeddedCatalogs;
+      }
+    }
+
+    async function loadNomenclature() {
+      await loadCatalogs();
+      const apiBase = getApiBase();
+      apiBaseLabel.textContent = apiBase;
+      try {
+        const response = await fetch(`${apiBase}/api/source-documents/nomenclature`);
+        if (!response.ok) throw new Error("No se pudo cargar nomenclatura");
+        nomenclature = await response.json();
+      } catch (error) {
+        try {
+          const fallback = await fetch("../config/runtime/ingestion-nomenclature.json");
+          if (fallback.ok) {
+            nomenclature = await fallback.json();
+          }
+        } catch (fallbackError) {
+          nomenclature = embeddedNomenclature;
+        }
+      }
+
+      if (!nomenclature) {
+        nomenclatureStatus.textContent = "sin datos";
+        populateSelect(ingestSpecialty, [], "Sin especialidad");
+        populateSelect(filterSpecialty, [], "Sin especialidad");
+        populateSelect(ingestEpidemic, [], "Sin epidemia");
+        populateSelect(filterEpidemic, [], "Sin epidemia");
+        return;
+      }
+
+      nomenclatureStatus.textContent = "activa";
+      const specialties = nomenclature.specialties || [];
+      const epidemics = nomenclature.epidemics || [];
+
+      populateSelect(ingestSpecialty, specialties, "Selecciona especialidad");
+      populateSelect(filterSpecialty, specialties, "Todas las especialidades");
+      populateSelect(ingestEpidemic, epidemics, "Selecciona epidemia");
+      populateSelect(filterEpidemic, epidemics, "Todas las epidemias");
+      populateSelect(ingestLanguage, catalogs.languages, "Selecciona idioma");
+      populateSelect(filterLanguage, catalogs.languages, "Todos los idiomas");
+      populateSelect(layerSelect, catalogs.layers, "Selecciona layer");
+      populateSelect(filterLayer, catalogs.layers, "Todas las layers");
+      populateSelect(documentTypeSelect, catalogs.document_types, "Selecciona tipo");
+      populateSelect(categorySelect, catalogs.categories, "Selecciona categoría");
+      populateSelect(filterCategory, catalogs.categories, "Todas las categorías");
+      populateSelect(groupSelect, catalogs.document_groups, "Selecciona grupo");
+      populateSelect(filterGroup, catalogs.document_groups, "Todos los grupos");
+      populateSelect(continuumStageSelect, catalogs.continuum_stages, "Selecciona stage");
+      populateSelect(vrnStatusSelect, catalogs.vrn_statuses, "Selecciona status");
+
+      const defaults = nomenclature.defaults || {};
+      if (defaults.specialty) ingestSpecialty.value = defaults.specialty;
+      refreshSubSpecialties(ingestSpecialty.value, ingestSubSpecialty, defaults.sub_specialty);
+      if (defaults.epidemic) ingestEpidemic.value = defaults.epidemic;
+      refreshSubSpecialties(filterSpecialty.value, filterSubSpecialty);
+      ingestLanguage.value = catalogs.defaults?.language || "en";
+      filterLanguage.value = "";
+      layerSelect.value = catalogs.defaults?.layer || "ING";
+      filterLayer.value = "";
+      documentTypeSelect.value = catalogs.defaults?.document_type || "guideline";
+      categorySelect.value = catalogs.defaults?.category || "user-upload";
+      filterCategory.value = "";
+      groupSelect.value = catalogs.defaults?.document_group || "continuum-intake";
+      filterGroup.value = "";
+      continuumStageSelect.value = catalogs.defaults?.continuum_stage || "ING";
+      vrnStatusSelect.value = catalogs.defaults?.vrn_status || "ACTIVE";
+    }
+
+    ingestSpecialty.addEventListener("change", () => refreshSubSpecialties(ingestSpecialty.value, ingestSubSpecialty));
+    filterSpecialty.addEventListener("change", () => refreshSubSpecialties(filterSpecialty.value, filterSubSpecialty));
+    apiBaseInput.addEventListener("change", () => {
+      localStorage.setItem("icicso.ingestionBase", getApiBase());
+      loadNomenclature();
+    });
+
+    if (apiCopyCommand) {
+      apiCopyCommand.addEventListener("click", async () => {
+        const command = "powershell -ExecutionPolicy Bypass -File .\\scripts\\start-ingestion-orquestador.ps1";
+        try {
+          await navigator.clipboard.writeText(command);
+          setStatus("Comando copiado al portapapeles.");
+        } catch {
+          setStatus("No se pudo copiar el comando.", "error");
+        }
+      });
+    }
+
+    async function uploadDocument() {
+      const apiBase = getApiBase();
+      const fileInput = document.getElementById("file-input");
+      if (!fileInput.files.length) {
+        setStatus("Selecciona un archivo para subir.", "error");
+        return;
+      }
+      const files = Array.from(fileInput.files);
+      try {
+        enforceControlled(layerSelect, catalogs.layers, "Layer");
+        enforceControlled(categorySelect, catalogs.categories, "Categoría");
+        enforceControlled(groupSelect, catalogs.document_groups, "Grupo documental");
+        enforceControlled(continuumStageSelect, catalogs.continuum_stages, "Continuum stage");
+        enforceControlled(documentTypeSelect, catalogs.document_types, "Tipo de documento");
+        if (ingestSpecialty.value && nomenclature?.specialties && !nomenclature.specialties.includes(ingestSpecialty.value)) {
+          throw new Error(`Especialidad fuera de catálogo: ${ingestSpecialty.value}`);
+        }
+        if (ingestSubSpecialty.value && nomenclature?.sub_specialties) {
+          const allowed = nomenclature.sub_specialties[ingestSpecialty.value] || [];
+          if (!allowed.includes(ingestSubSpecialty.value)) {
+            throw new Error(`Subespecialidad fuera de catálogo: ${ingestSubSpecialty.value}`);
+          }
+        }
+      } catch (error) {
+        setStatus(error instanceof Error ? error.message : "Valores fuera de catálogo.", "error");
+        return;
+      }
+
+      let okCount = 0;
+      let failCount = 0;
+      for (let index = 0; index < files.length; index += 1) {
+        const file = files[index];
+        setStatus(`Subiendo ${index + 1}/${files.length}: ${file.name}`);
+        const contentBase64 = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(String(reader.result).split(",")[1] || "");
+          reader.onerror = () => reject(new Error("No se pudo leer el archivo"));
+          reader.readAsDataURL(file);
+        });
+        const payload = {
+          file_name: file.name,
+          content_base64: contentBase64,
+          layer: layerSelect.value || "ING",
+          category: categorySelect.value || "user-upload",
+          document_group: groupSelect.value || "continuum-intake",
+          language: ingestLanguage.value || "en",
+          continuum_stage: continuumStageSelect.value || "ING",
+          document_type: documentTypeSelect.value || "guideline",
+          ingestion_notes: document.getElementById("notes").value.trim() || null,
+          specialty: ingestSpecialty.value || null,
+          sub_specialty: ingestSubSpecialty.value || null,
+          epidemic_focus: ingestEpidemic.value || null,
+        };
+
+        try {
+          const response = await fetchWithTimeout(`${apiBase}/api/source-documents/ingestions`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          }, 15000);
+          if (!response.ok) {
+            const detail = await response.text();
+            failCount += 1;
+            setStatus(`Error en ${file.name}: ${detail}`, "error");
+            pushIngestionLog({
+              file_name: file.name,
+              status: `ERROR (${response.status})`,
+              payload: JSON.stringify(payload, null, 2),
+              response: detail,
+            });
+            continue;
+          }
+          const result = await response.json();
+          selectedDocumentId = result.document?.document_id || null;
+          lastUploadedDocumentId = selectedDocumentId;
+          okCount += 1;
+          pushIngestionLog({
+            file_name: file.name,
+            status: "OK",
+            payload: JSON.stringify(payload, null, 2),
+            response: JSON.stringify(result, null, 2),
+          });
+        } catch (error) {
+          failCount += 1;
+          setStatus(`Error en ${file.name}: ${error instanceof Error ? error.message : "timeout"}`, "error");
+          pushIngestionLog({
+            file_name: file.name,
+            status: "ERROR (timeout)",
+            payload: JSON.stringify(payload, null, 2),
+            response: error instanceof Error ? error.message : "timeout",
+          });
+          continue;
+        }
+      }
+      setStatus(`Carga completada. OK: ${okCount} · Fallos: ${failCount}.`);
+      await refreshAll();
+    }
+
+    async function materialize() {
+      if (!selectedDocumentId) {
+        setStatus("Selecciona un documento del feed para materializar.", "error");
+        return;
+      }
+      const apiBase = getApiBase();
+      setStatus("Materializando SER EO EL...");
+      const response = await fetchWithTimeout(`${apiBase}/api/source-documents/ingestions/${selectedDocumentId}/materialize`, { method: "POST" });
+      if (!response.ok) {
+        const detail = await response.text();
+        setStatus(`Error al materializar: ${detail}`, "error");
+        return;
+      }
+      setStatus("Materialización completada.");
+      await refreshAll();
+    }
+
+    async function registerGovernance() {
+      if (!selectedDocumentId) {
+        setStatus("Selecciona un documento del feed para gobernanza.", "error");
+        return;
+      }
+      const apiBase = getApiBase();
+      const payload = {
+        description: `Registro gobernado desde consola para ${selectedDocumentId}`,
+        activate_vrn: true,
+        vrn_status: document.getElementById("vrn-status").value,
+      };
+      setStatus("Registrando GovernanceRecord...");
+      const response = await fetchWithTimeout(`${apiBase}/api/source-documents/ingestions/${selectedDocumentId}/governance`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) {
+        const detail = await response.text();
+        setStatus(`Error al registrar governance: ${detail}`, "error");
+        return;
+      }
+      setStatus("Governance record registrado.");
+      await refreshAll();
+    }
+
+    async function refreshFeed() {
+      const apiBase = getApiBase();
+      const response = await fetchWithTimeout(`${apiBase}/api/source-documents/ingestions/feed`);
+      if (!response.ok) {
+        throw new Error("No se pudo cargar feed");
+      }
+      return response.json();
+    }
+
+    async function refreshLedger() {
+      const apiBase = getApiBase();
+      const response = await fetchWithTimeout(`${apiBase}/api/source-documents/governance/feed`);
+      if (!response.ok) {
+        throw new Error("No se pudo cargar ledger");
+      }
+      return response.json();
+    }
+
+    async function refreshAuditFeed() {
+      const apiBase = getApiBase();
+      const response = await fetchWithTimeout(`${apiBase}/api/source-documents/audit/feed`);
+      if (!response.ok) {
+        throw new Error("No se pudo cargar audit feed");
+      }
+      return response.json();
+    }
+
+    async function refreshCatalog() {
+      const apiBase = getApiBase();
+      const params = new URLSearchParams();
+      if (filterSpecialty.value) params.set("specialty", filterSpecialty.value);
+      if (filterSubSpecialty.value) params.set("sub_specialty", filterSubSpecialty.value);
+      if (filterEpidemic.value) params.set("epidemic_focus", filterEpidemic.value);
+      if (filterLanguage.value) params.set("language", filterLanguage.value);
+      if (filterLayer.value) params.set("layer", filterLayer.value);
+      if (filterCategory.value) params.set("category", filterCategory.value);
+      if (filterGroup.value) params.set("document_group", filterGroup.value);
+      if (filterQuery.value) params.set("query", filterQuery.value);
+      const response = await fetchWithTimeout(`${apiBase}/api/source-documents/catalog?${params.toString()}`);
+      if (!response.ok) {
+        throw new Error("No se pudo cargar catálogo");
+      }
+      const page = await response.json();
+      catalogItems = page.items || [];
+      catalogStatus.textContent = `${page.total || catalogItems.length} docs`;
+      catalogLastRefresh = new Date().toISOString();
+      localStorage.setItem("icicso.catalog.cache", JSON.stringify({
+        items: catalogItems,
+        total: page.total || catalogItems.length,
+        refreshed_at: catalogLastRefresh,
+      }));
+      renderCatalog();
+    }
+
+    async function refreshCatalogFallback() {
+      const apiBase = getApiBase();
+      const [manifestResponse, uploadsResponse] = await Promise.allSettled([
+        fetchWithTimeout(`${apiBase}/api/source-documents`),
+        fetchWithTimeout(`${apiBase}/api/source-documents/ingestions`),
+      ]);
+      const manifest = manifestResponse.status === "fulfilled" && manifestResponse.value.ok
+        ? await manifestResponse.value.json()
+        : [];
+      const uploads = uploadsResponse.status === "fulfilled" && uploadsResponse.value.ok
+        ? await uploadsResponse.value.json()
+        : [];
+      catalogItems = [...manifest, ...uploads];
+      catalogStatus.textContent = `${catalogItems.length} docs (fallback)`;
+      renderCatalog();
+    }
+
+    function renderSummary(feed) {
+      summaryGrid.innerHTML = "";
+      const summaryItems = [
+        ["Docs subidos", feed.uploaded_documents],
+        ["Continuum ready", feed.continuum_ready_documents],
+        ["Layers", Object.keys(feed.layers || {}).length],
+        ["Sync", feed.generated_at_utc || "pending"],
+      ];
+      summaryItems.forEach(([label, value]) => {
+        const card = document.createElement("div");
+        card.className = "summary-card";
+        card.innerHTML = `<div class="small">${label}</div><strong>${value ?? "-"}</strong>`;
+        summaryGrid.appendChild(card);
+      });
+    }
+
+    function getCandidateRows() {
+      const reports = window.auditFeed?.reports || [];
+      const docs = window.ingestionFeed?.latest_documents || [];
+      const docMap = new Map(docs.map((doc) => [doc.document_id, doc]));
+
+      return reports.flatMap((report) => {
+        const sourceDoc = docMap.get(report.document_id) || null;
+        const auditsByCandidate = (report.eo_candidate_audits || []).reduce((accumulator, audit) => {
+          const bucket = accumulator.get(audit.candidate_id) || [];
+          bucket.push(audit);
+          accumulator.set(audit.candidate_id, bucket);
+          return accumulator;
+        }, new Map());
+
+        return (report.eo_candidates || []).map((candidate) => ({
+          ...candidate,
+          document: sourceDoc,
+          document_id: report.document_id,
+          file_name: report.file_name || sourceDoc?.file_name || report.document_id,
+          specialty: sourceDoc?.specialty || "No clasificada",
+          audits: auditsByCandidate.get(candidate.candidate_id) || [],
+        }));
+      });
+    }
+
+    function renderEoWorkbench() {
+      const rows = getCandidateRows();
+      const levelFilter = document.getElementById("eo-filter-level").value;
+      const reviewFilter = document.getElementById("eo-filter-review").value;
+      const specialtyFilter = document.getElementById("eo-filter-specialty").value;
+      const signerFilter = document.getElementById("eo-filter-signer").value.trim().toLowerCase();
+
+      const specialties = [...new Set(rows.map((row) => row.specialty).filter(Boolean))].sort();
+      const specialtySelect = document.getElementById("eo-filter-specialty");
+      const currentValue = specialtySelect.value;
+      specialtySelect.innerHTML = '<option value="">Todas</option>' + specialties.map((item) => `<option value="${item}">${item}</option>`).join("");
+      specialtySelect.value = specialties.includes(currentValue) ? currentValue : "";
+
+      const filtered = rows.filter((row) => {
+        if (levelFilter && row.completion_level !== levelFilter) return false;
+        if (reviewFilter && row.review_state !== reviewFilter) return false;
+        if (specialtyFilter && row.specialty !== specialtyFilter) return false;
+        if (signerFilter) {
+          const auditSigners = row.audits.map((audit) => `${audit.signed_by} ${audit.comments || ""}`).join(" ").toLowerCase();
+          const haystack = `${row.statement_text} ${row.file_name} ${row.candidate_id} ${auditSigners}`.toLowerCase();
+          if (!haystack.includes(signerFilter)) return false;
+        }
+        return true;
+      });
+
+      const summaryItems = [
+        ["Candidates", filtered.length],
+        ["L5", filtered.filter((row) => row.completion_level === "L5_executable").length],
+        ["Pending", filtered.filter((row) => row.review_state === "pending").length],
+        ["Approved", filtered.filter((row) => row.review_state === "approved").length],
+      ];
+      eoSummary.innerHTML = summaryItems
+        .map(([label, value]) => `<div class="summary-card"><div class="small">${label}</div><strong>${value}</strong></div>`)
+        .join("");
+
+      const rowsHtml = filtered.map((row) => `
+        <tr>
+          <td>
+            <div class="table-pair">
+              <strong>${escapeHtml(row.file_name || row.document_id)}</strong>
+              <div class="small">${escapeHtml(row.candidate_id)}</div>
+              <div class="small">${escapeHtml(row.statement_key)}</div>
+            </div>
+          </td>
+          <td>
+            <div class="table-pair">
+              <span class="table-pill accent">${escapeHtml(row.completion_level || "L1_structured")}</span>
+              <span class="table-pill cool">${escapeHtml(row.review_state || "pending")}</span>
+              <span class="table-pill ${row.finalization_status === "ready_for_execution" ? "ok" : "warn"}">${escapeHtml(row.finalization_status || "candidate")}</span>
+            </div>
+          </td>
+          <td>
+            <div class="table-pair">
+              <div>${escapeHtml(row.specialty || "No clasificada")}</div>
+              <div class="small">Clinical: ${escapeHtml(row.clinical_audit_state || "pending")} · Surgical: ${escapeHtml(row.surgical_audit_state || "pending")}</div>
+            </div>
+          </td>
+          <td class="table-note">${escapeHtml(row.statement_text || "-")}</td>
+          <td>
+            <div class="table-pair">
+              ${row.audits.length
+                ? row.audits.map((audit) => `<div class="small">${escapeHtml(audit.audit_kind)} · ${escapeHtml(audit.decision)} · ${escapeHtml(audit.signed_by)}</div>`).join("")
+                : '<div class="small">Sin auditorías</div>'}
+            </div>
+          </td>
+          <td>
+            <div class="table-actions">
+              <button class="table-action" data-audit-candidate="${escapeHtml(row.candidate_id)}" data-document-id="${escapeHtml(row.document_id)}" data-audit-kind="clinical" data-decision="approved">Clínica</button>
+              <button class="table-action" data-audit-candidate="${escapeHtml(row.candidate_id)}" data-document-id="${escapeHtml(row.document_id)}" data-audit-kind="surgical" data-decision="approved">Quirúrgica</button>
+              <button class="table-action" data-view-doc="${escapeHtml(row.document_id)}" data-vrn="${escapeHtml(row.document?.vrn || "")}">Detalle</button>
+            </div>
+          </td>
+        </tr>
+      `).join("");
+
+      renderTable(
+        eoWorkbench,
+        ["Documento / Candidate", "Estado", "Especialidad", "Statement", "Auditorías", "Acción"],
+        rowsHtml,
+        "Sin EO candidates con los filtros actuales.",
+        1480,
+      );
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function formatBytes(value) {
+      if (typeof value !== "number" || Number.isNaN(value) || value <= 0) {
+        return "-";
+      }
+      const units = ["B", "KB", "MB", "GB"];
+      let size = value;
+      let unitIndex = 0;
+      while (size >= 1024 && unitIndex < units.length - 1) {
+        size /= 1024;
+        unitIndex += 1;
+      }
+      return `${size.toFixed(size >= 10 || unitIndex === 0 ? 0 : 1)} ${units[unitIndex]}`;
+    }
+
+    function formatUtc(value) {
+      if (!value) return "-";
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return value;
+      return new Intl.DateTimeFormat("es-MX", {
+        dateStyle: "medium",
+        timeStyle: "short",
+      }).format(date);
+    }
+
+    async function fetchAuditReportByDocumentId(documentId) {
+      if (!documentId) return null;
+      const apiBase = getApiBase();
+      const response = await fetchWithTimeout(`${apiBase}/api/source-documents/ingestions/${documentId}/audit`);
+      if (!response.ok) {
+        return null;
+      }
+      return response.json();
+    }
+
+    function renderCandidateSection(report, documentId) {
+      const candidates = report?.eo_candidates || [];
+      const audits = report?.eo_candidate_audits || [];
+      const auditsByCandidate = audits.reduce((accumulator, audit) => {
+        const bucket = accumulator.get(audit.candidate_id) || [];
+        bucket.push(audit);
+        accumulator.set(audit.candidate_id, bucket);
+        return accumulator;
+      }, new Map());
+
+      if (!candidates.length) {
+        return `
+          <div class="detail-section">
+            <h4>EO Candidates</h4>
+            <div class="detail-item">
+              <div class="value">No hay EO candidates todavía. Materializa el documento para generarlos.</div>
+              <div class="actions" style="margin-top:12px;">
+                <button class="table-action primary" data-materialize-doc="${escapeHtml(documentId || "")}">Materializar ahora</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      const cards = candidates.map((candidate) => {
+        const candidateAudits = auditsByCandidate.get(candidate.candidate_id) || [];
+        const auditHtml = candidateAudits.length
+          ? `
+            <div class="candidate-audits">
+              ${candidateAudits.map((audit) => `
+                <div class="candidate-audit-item">
+                  <strong>${escapeHtml(audit.audit_kind)}</strong> · ${escapeHtml(audit.decision)} · ${escapeHtml(audit.signed_by)} · ${escapeHtml(formatUtc(audit.signed_at))}
+                  ${audit.comments ? `<div style="margin-top:6px;">${escapeHtml(audit.comments)}</div>` : ""}
+                </div>
+              `).join("")}
+            </div>
+          `
+          : `<div class="small">Sin auditorías registradas.</div>`;
+
+        return `
+          <div class="candidate-card">
+            <div class="candidate-head">
+              <div>
+                <strong>${escapeHtml(candidate.statement_key)}</strong>
+                <div class="small">${escapeHtml(candidate.canonical_title || "")}</div>
+              </div>
+              <div class="badge-row">
+                <span class="table-pill accent">${escapeHtml(candidate.completion_level || "L1_structured")}</span>
+                <span class="table-pill cool">${escapeHtml(candidate.review_state || "pending")}</span>
+                <span class="table-pill ${candidate.finalization_status === "ready_for_execution" ? "ok" : "warn"}">${escapeHtml(candidate.finalization_status || "candidate")}</span>
+              </div>
+            </div>
+            <div>${escapeHtml(candidate.statement_text || "")}</div>
+            <div class="small">Clinical: ${escapeHtml(candidate.clinical_audit_state || "pending")} · Surgical: ${escapeHtml(candidate.surgical_audit_state || "pending")} · Strength: ${escapeHtml(candidate.evidence_strength || "n/a")}</div>
+            <div class="candidate-actions">
+              <button class="table-action" data-audit-candidate="${escapeHtml(candidate.candidate_id)}" data-document-id="${escapeHtml(documentId || "")}" data-audit-kind="clinical" data-decision="approved">Aprobar clínica</button>
+              <button class="table-action" data-audit-candidate="${escapeHtml(candidate.candidate_id)}" data-document-id="${escapeHtml(documentId || "")}" data-audit-kind="surgical" data-decision="approved">Aprobar quirúrgica</button>
+              <button class="table-action" data-audit-candidate="${escapeHtml(candidate.candidate_id)}" data-document-id="${escapeHtml(documentId || "")}" data-audit-kind="clinical" data-decision="changes_requested">Pedir cambios clínica</button>
+              <button class="table-action" data-audit-candidate="${escapeHtml(candidate.candidate_id)}" data-document-id="${escapeHtml(documentId || "")}" data-audit-kind="surgical" data-decision="changes_requested">Pedir cambios quirúrgica</button>
+            </div>
+            ${auditHtml}
+          </div>
+        `;
+      }).join("");
+
+      return `
+        <div class="detail-section">
+          <h4>EO Candidates</h4>
+          <div class="actions" style="margin-bottom:12px;">
+            <button class="table-action primary" data-materialize-doc="${escapeHtml(documentId || "")}">Re-materializar</button>
+          </div>
+          <div class="candidate-grid">${cards}</div>
+        </div>
+      `;
+    }
+
+    async function submitCandidateAudit(documentId, candidateId, auditKind, decision) {
+      const signedBy = window.prompt(`Firmante para auditoría ${auditKind}:`, auditKind === "clinical" ? "clinician-ui" : "surgeon-ui");
+      if (!signedBy) return;
+      const comments = window.prompt(`Comentario para ${candidateId}:`, decision === "approved" ? "Aprobado desde dashboard." : "Cambios solicitados desde dashboard.");
+      const apiBase = getApiBase();
+      const response = await fetchWithTimeout(
+        `${apiBase}/api/source-documents/ingestions/${documentId}/eo-candidates/${candidateId}/audits`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            audit_kind: auditKind,
+            decision,
+            comments,
+            requested_changes: decision === "changes_requested" ? ["review-dashboard-request"] : [],
+            signed_by: signedBy,
+          }),
+        },
+      );
+      if (!response.ok) {
+        const detail = await response.text();
+        throw new Error(detail || "No se pudo registrar la auditoría.");
+      }
+      return response.json();
+    }
+
+    function renderTable(container, columns, rowsHtml, emptyMessage, minWidth = 1120) {
+      if (!container) return;
+      if (!rowsHtml || !rowsHtml.trim()) {
+        container.innerHTML = `<div class="doc-card">${emptyMessage}</div>`;
+        return;
+      }
+      container.innerHTML = `
+        <div class="table-shell">
+          <div class="table-scroll">
+            <table class="ingestion-table" style="min-width: ${minWidth}px;">
+              <thead>
+                <tr>${columns.map((label) => `<th>${label}</th>`).join("")}</tr>
+              </thead>
+              <tbody>${rowsHtml}</tbody>
+            </table>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderDocuments(feed) {
+      const documents = feed.latest_documents || [];
+      const tableRows = documents.map((doc) => {
+        const isSelected = selectedDocumentId === doc.document_id;
+        const isFresh = lastUploadedDocumentId && doc.document_id === lastUploadedDocumentId;
+        const rowClass = [isSelected ? "is-selected" : "", isFresh ? "is-fresh" : ""].filter(Boolean).join(" ");
+        return `
+          <tr class="${rowClass}" data-doc-row="${escapeHtml(doc.document_id)}">
+            <td>
+              <div class="doc-main">
+                <div class="doc-title">${escapeHtml(doc.file_name || doc.document_id)}</div>
+                <div class="path-copy">${escapeHtml(doc.relative_path || "-")}</div>
+                <div class="badge-row">
+                  <span class="table-pill accent">${escapeHtml(doc.layer || "-")}</span>
+                  <span class="table-pill cool">${escapeHtml(doc.document_type || "-")}</span>
+                  <span class="table-pill">${escapeHtml(doc.category || "-")}</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="meta-stack">
+                <div class="meta-value">${escapeHtml(doc.vrn || "pending")}</div>
+                <div class="badge-row">
+                  <span class="table-pill ${doc.vrn_status === "ACTIVE" ? "ok" : "warn"}">${escapeHtml(doc.vrn_status || "PENDING")}</span>
+                  <span class="table-pill">${escapeHtml(doc.institutional_version || "V001")}</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="meta-stack">
+                <div class="meta-value">${escapeHtml(doc.specialty || "-")}</div>
+                <div class="small">${escapeHtml(doc.sub_specialty || "-")}</div>
+                <div class="small">${escapeHtml(doc.epidemic_focus || "N/A")}</div>
+              </div>
+            </td>
+            <td>
+              <div class="meta-stack">
+                <div class="meta-value">${escapeHtml(doc.source_status || "-")}</div>
+                <div class="small">${escapeHtml(doc.source_origin || "-")}</div>
+              </div>
+            </td>
+            <td>
+              <div class="meta-stack">
+                <div class="meta-value">${formatBytes(doc.size_bytes)}</div>
+                <div class="small">${escapeHtml(doc.language || "-")} · ${escapeHtml(doc.extension || "-")}</div>
+              </div>
+            </td>
+            <td>
+              <div class="meta-stack">
+                <div class="meta-value">${formatUtc(doc.ingestion_timestamp_utc)}</div>
+                <div class="small">${escapeHtml(doc.document_id || "-")}</div>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join("");
+
+      renderTable(
+        documentsNode,
+        ["Documento", "VRN", "Clasificación", "Origen", "Tamaño", "Ingesta"],
+        tableRows,
+        "Sin documentos aún.",
+      );
+
+      documentsNode.querySelectorAll("[data-doc-row]").forEach((row) => {
+        row.addEventListener("click", () => {
+          const doc = documents.find((item) => item.document_id === row.dataset.docRow);
+          if (!doc) return;
+          selectedDocumentId = doc.document_id;
+          setStatus(`Seleccionado: ${doc.file_name}`);
+          fillEditForm(doc);
+          renderDocuments(feed);
+        });
+      });
+    }
+
+    function renderPreviews(feed) {
+      const latest = feed.latest_documents || [];
+      const rowsHtml = latest.map((doc) => `
+        <tr data-preview-row="${escapeHtml(doc.document_id)}">
+          <td>
+            <div class="table-pair">
+              <strong>${escapeHtml(doc.file_name || doc.document_id)}</strong>
+              <div class="small">${escapeHtml(doc.document_id || "-")}</div>
+            </div>
+          </td>
+          <td><span class="table-pill accent">${escapeHtml(doc.continuum_stage || "ING")}</span></td>
+          <td>
+            <button class="table-action" data-preview-button="${escapeHtml(doc.document_id)}">Ver preview</button>
+          </td>
+          <td>
+            <pre class="table-code" id="preview-${escapeHtml(doc.document_id)}">Pendiente.</pre>
+          </td>
+        </tr>
+      `).join("");
+
+      renderTable(
+        previewsNode,
+        ["Documento", "Stage", "Acción", "Preview"],
+        rowsHtml,
+        "Sin previews aún.",
+        980,
+      );
+
+      previewsNode.querySelectorAll("[data-preview-button]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          const apiBase = getApiBase();
+          const documentId = button.getAttribute("data-preview-button");
+          const response = await fetch(`${apiBase}/api/source-documents/ingestions/${documentId}/continuum`);
+          const preview = await response.json();
+          const target = previewsNode.querySelector(`#preview-${CSS.escape(documentId)}`);
+          if (target) {
+            target.textContent = JSON.stringify(preview, null, 2);
+          }
+        });
+      });
+    }
+
+    function renderLedger(feed) {
+      ledgerSummary.innerHTML = "";
+      const summaryItems = [
+        ["Records", feed.total_records],
+        ["VRN activos", feed.active_vrn_count],
+        ["Sync", feed.generated_at_utc || "pending"],
+      ];
+      summaryItems.forEach(([label, value]) => {
+        const card = document.createElement("div");
+        card.className = "summary-card";
+        card.innerHTML = `<div class="small">${label}</div><strong>${value ?? "-"}</strong>`;
+        ledgerSummary.appendChild(card);
+      });
+
+      const records = feed.records || [];
+      const viewMode = document.getElementById("ledger-view-mode").value;
+
+      if (viewMode === "cards") {
+        renderLedgerCards(records);
+      } else {
+        renderLedgerTable(records);
+      }
+    }
+
+    function renderLedgerTable(records) {
+      const filteredRecords = filterLedgerRecords(records);
+      const rowsHtml = filteredRecords.map((record) => `
+        <tr class="ledger-row" data-vrn="${escapeHtml(record.vrn)}" data-record-id="${escapeHtml(record.governance_record_id)}">
+          <td><span class="table-pill cool">${escapeHtml(record.record_type || "-")}</span></td>
+          <td><span class="table-pill ${record.severity === "high" ? "bad" : record.severity === "medium" ? "warn" : "ok"}">${escapeHtml(record.severity || "-")}</span></td>
+          <td>
+            <div class="table-pair">
+              <strong>${escapeHtml(record.vrn || "-")}</strong>
+              <div class="small">${escapeHtml(record.vrn_status || "-")}</div>
+            </div>
+          </td>
+          <td class="table-note">${escapeHtml(record.description || "-")}</td>
+          <td>${formatUtc(record.created_at_utc || record.timestamp_utc || "")}</td>
+          <td>
+            <button class="table-action primary view-detail" data-vrn="${escapeHtml(record.vrn)}" data-record-id="${escapeHtml(record.governance_record_id)}">Ver detalles</button>
+          </td>
+        </tr>
+      `).join("");
+      renderTable(
+        ledgerRecords,
+        ["Record", "Severidad", "VRN", "Descripción", "Fecha", "Acción"],
+        rowsHtml,
+        "Sin registros con los filtros actuales.",
+        1100,
+      );
+    }
+
+    function renderLedgerCards(records) {
+      const filteredRecords = filterLedgerRecords(records);
+      const cardsHtml = filteredRecords.map((record) => `
+        <div class="ledger-card" data-vrn="${escapeHtml(record.vrn)}" data-record-id="${escapeHtml(record.governance_record_id)}">
+          <div class="card-header">
+            <h4 class="card-title">${escapeHtml(record.vrn || "Sin VRN")}</h4>
+            <div class="card-badges">
+              <span class="table-pill cool">${escapeHtml(record.record_type || "-")}</span>
+              <span class="table-pill ${record.severity === "high" ? "bad" : record.severity === "medium" ? "warn" : "ok"}">${escapeHtml(record.severity || "-")}</span>
+            </div>
+          </div>
+          <div class="card-content">
+            ${escapeHtml(record.description || "Sin descripción")}
+          </div>
+          <div class="card-meta">
+            <div>Creado: ${formatUtc(record.created_at_utc || record.timestamp_utc || "")}</div>
+            <div>Status: ${escapeHtml(record.vrn_status || "-")}</div>
+          </div>
+        </div>
+      `).join("");
+
+      ledgerRecords.innerHTML = filteredRecords.length > 0 ?
+        `<div class="ledger-cards">${cardsHtml}</div>` :
+        '<div class="table-empty">Sin registros con los filtros actuales.</div>';
+    }
+
+    function filterLedgerRecords(records) {
+      const typeFilter = document.getElementById("ledger-filter-type").value;
+      const severityFilter = document.getElementById("ledger-filter-severity").value;
+      const searchTerm = document.getElementById("ledger-search").value.toLowerCase();
+
+      return records.filter(record => {
+        if (typeFilter && record.record_type !== typeFilter) return false;
+        if (severityFilter && record.severity !== severityFilter) return false;
+        if (searchTerm) {
+          const searchableText = `${record.vrn} ${record.description} ${record.governance_record_id} ${record.source_file_name || ""}`.toLowerCase();
+          if (!searchableText.includes(searchTerm)) return false;
+        }
+        return true;
+      });
+    }
+
+    async function showDocumentDetail(vrn, recordId, docId = null) {
+      const ledgerFeed = window.ledgerFeed;
+      const ingestionFeed = window.ingestionFeed;
+
+      if (!ingestionFeed) {
+        setStatus("Datos de ingesta no disponibles. Refresca la página.", "error");
+        return;
+      }
+
+      // Encontrar el registro del ledger si existe
+      const ledgerRecord = recordId && ledgerFeed ? ledgerFeed.records.find(r => r.governance_record_id === recordId || r.vrn === vrn) : null;
+
+      // Encontrar el documento - primero por VRN, luego por docId
+      let documentData = null;
+      if (vrn && ingestionFeed.latest_documents) {
+        documentData = ingestionFeed.latest_documents.find(d => d.vrn === vrn);
+      }
+      if (!documentData && docId && catalogItems) {
+        documentData = catalogItems.find(d => d.document_id === docId);
+      }
+
+      if (!documentData && !ledgerRecord) {
+        setStatus("No se encontró información del documento.", "error");
+        return;
+      }
+
+      const resolvedDocumentId = docId || documentData?.document_id || ledgerRecord?.source_document_id || null;
+      const auditReport = await fetchAuditReportByDocumentId(resolvedDocumentId);
+
+      // Construir el contenido del detalle
+      const detailContent = document.getElementById("detail-content");
+      const titleElement = document.getElementById("detail-title");
+
+      const displayTitle = vrn || docId || (documentData ? documentData.file_name : "Documento");
+      titleElement.textContent = `Detalles: ${displayTitle}`;
+
+      let contentHtml = "";
+
+      if (ledgerRecord) {
+        contentHtml += `
+        <div class="detail-section">
+          <h4>Registro de Gobernanza</h4>
+          <div class="detail-grid">
+            <div class="detail-item">
+              <div class="label">ID del Registro</div>
+              <div class="value mono">${ledgerRecord.governance_record_id}</div>
+            </div>
+            <div class="detail-item">
+              <div class="label">Tipo de Registro</div>
+              <div class="value">${ledgerRecord.record_type || "N/A"}</div>
+            </div>
+            <div class="detail-item">
+              <div class="label">Severidad</div>
+              <div class="value">${ledgerRecord.severity || "N/A"}</div>
+            </div>
+            <div class="detail-item">
+              <div class="label">Estado VRN</div>
+              <div class="value">${ledgerRecord.vrn_status || "N/A"}</div>
+            </div>
+            <div class="detail-item">
+              <div class="label">Creado por</div>
+              <div class="value">${ledgerRecord.created_by || "N/A"}</div>
+            </div>
+            <div class="detail-item">
+              <div class="label">Fecha de Creación</div>
+              <div class="value">${formatUtc(ledgerRecord.created_at)}</div>
+            </div>
+            <div class="detail-item">
+              <div class="label">Vigente Desde</div>
+              <div class="value">${formatUtc(ledgerRecord.effective_from)}</div>
+            </div>
+            <div class="detail-item">
+              <div class="label">Vigente Hasta</div>
+              <div class="value">${ledgerRecord.effective_to ? formatUtc(ledgerRecord.effective_to) : "Indefinido"}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <h4>Descripción del Registro</h4>
+          <div class="detail-item">
+            <div class="value">${ledgerRecord.description || "Sin descripción"}</div>
+          </div>
+        </div>
+        `;
+      }
+
+      if (documentData) {
+        contentHtml += `
+        <div class="detail-section">
+          <h4>Información del Documento</h4>
+          <div class="detail-grid">
+            <div class="detail-item">
+              <div class="label">ID del Documento</div>
+              <div class="value mono">${documentData.document_id || "N/A"}</div>
+            </div>
+            <div class="detail-item">
+              <div class="label">Nombre del Archivo</div>
+              <div class="value">${documentData.file_name || "N/A"}</div>
+            </div>
+            <div class="detail-item">
+              <div class="label">Tamaño</div>
+              <div class="value">${documentData.size_bytes ? formatBytes(documentData.size_bytes) : "N/A"}</div>
+            </div>
+            <div class="detail-item">
+              <div class="label">Tipo MIME</div>
+              <div class="value">${documentData.document_type || "N/A"}</div>
+            </div>
+            <div class="detail-item">
+              <div class="label">Idioma</div>
+              <div class="value">${documentData.language || "N/A"}</div>
+            </div>
+            <div class="detail-item">
+              <div class="label">Layer</div>
+              <div class="value">${documentData.layer || "N/A"}</div>
+            </div>
+            <div class="detail-item">
+              <div class="label">Categoría</div>
+              <div class="value">${documentData.category || "N/A"}</div>
+            </div>
+            <div class="detail-item">
+              <div class="label">Grupo Documental</div>
+              <div class="value">${documentData.document_group || "N/A"}</div>
+            </div>
+            <div class="detail-item">
+              <div class="label">Stage del Continuum</div>
+              <div class="value">${documentData.continuum_stage || "N/A"}</div>
+            </div>
+            <div class="detail-item">
+              <div class="label">Especialidad</div>
+              <div class="value">${documentData.specialty || "No clasificada"}</div>
+            </div>
+            <div class="detail-item">
+              <div class="label">Subespecialidad</div>
+              <div class="value">${documentData.sub_specialty || "No clasificada"}</div>
+            </div>
+            <div class="detail-item">
+              <div class="label">Enfoque Epidémico</div>
+              <div class="value">${documentData.epidemic_focus || "No especificado"}</div>
+            </div>
+            <div class="detail-item">
+              <div class="label">Estado VRN</div>
+              <div class="value">${documentData.vrn_status || "PENDING"}</div>
+            </div>
+            ${documentData.hash_sha256 ? `
+            <div class="detail-item">
+              <div class="label">Hash SHA256</div>
+              <div class="value mono">${documentData.hash_sha256}</div>
+            </div>
+            ` : ""}
+            <div class="detail-item">
+              <div class="label">Fecha de Ingestión</div>
+              <div class="value">${formatUtc(documentData.ingestion_timestamp_utc)}</div>
+            </div>
+            <div class="detail-item">
+              <div class="label">Última Modificación</div>
+              <div class="value">${formatUtc(documentData.last_write_time_utc)}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <h4>Ruta del Archivo</h4>
+          <div class="detail-item">
+            <div class="label">Ruta Absoluta</div>
+            <div class="value mono">${documentData.absolute_path || "N/A"}</div>
+          </div>
+          <div class="detail-item">
+            <div class="label">Ruta Relativa</div>
+            <div class="value mono">${documentData.relative_path || "N/A"}</div>
+          </div>
+        </div>
+
+        ${documentData.derived_artifacts ? `
+        <div class="detail-section">
+          <h4>Artefactos Derivados</h4>
+          <div class="detail-item">
+            <div class="value">${(documentData.derived_artifacts || []).join(", ") || "Ninguno"}</div>
+          </div>
+        </div>
+        ` : ""}
+        `;
+      }
+
+      if (ledgerRecord && ledgerRecord.affected_entities) {
+        contentHtml += `
+        <div class="detail-section">
+          <h4>Entidades Afectadas</h4>
+          <div class="detail-item">
+            <div class="value">${(ledgerRecord.affected_entities || []).join(", ") || "Ninguna"}</div>
+          </div>
+        </div>
+        `;
+      }
+
+      if (resolvedDocumentId) {
+        contentHtml += renderCandidateSection(auditReport, resolvedDocumentId);
+      }
+
+      detailContent.innerHTML = contentHtml;
+      document.getElementById("document-detail-view").style.display = "block";
+    }
+
+    function generateReport() {
+      const reportType = document.getElementById("report-type").value;
+      const specialty = document.getElementById("report-specialty").value;
+      const category = document.getElementById("report-category").value;
+      const vrnStatus = document.getElementById("report-vrn-status").value;
+      const format = document.getElementById("report-format").value;
+
+      const ingestionFeed = window.ingestionFeed;
+      const ledgerFeed = window.ledgerFeed;
+
+      if (!ingestionFeed && !ledgerFeed) {
+        setStatus("No hay datos disponibles para generar el reporte.", "error");
+        return;
+      }
+
+      let reportData = [];
+      let reportTitle = "";
+      let columns = [];
+
+      switch (reportType) {
+        case "documents":
+          reportTitle = "Documentos por Especialidad";
+          columns = ["Documento", "Especialidad", "Subespecialidad", "Categoría", "Estado VRN", "Fecha Ingestión"];
+          reportData = (ingestionFeed?.latest_documents || [])
+            .filter(doc => (!specialty || doc.specialty === specialty) &&
+                          (!category || doc.category === category) &&
+                          (!vrnStatus || doc.vrn_status === vrnStatus))
+            .map(doc => [
+              doc.file_name || doc.document_id,
+              doc.specialty || "No clasificada",
+              doc.sub_specialty || "No especificada",
+              doc.category || "N/A",
+              doc.vrn_status || "PENDING",
+              formatUtc(doc.ingestion_timestamp_utc)
+            ]);
+          break;
+
+        case "governance":
+          reportTitle = "Registros de Gobernanza";
+          columns = ["VRN", "Tipo", "Severidad", "Descripción", "Estado", "Fecha"];
+          reportData = (ledgerFeed?.records || [])
+            .filter(record => (!vrnStatus || record.vrn_status === vrnStatus))
+            .map(record => [
+              record.vrn,
+              record.record_type,
+              record.severity,
+              record.description,
+              record.vrn_status,
+              formatUtc(record.created_at)
+            ]);
+          break;
+
+        case "combined":
+          reportTitle = "Vista Combinada (Documentos + Gobernanza)";
+          columns = ["Documento", "VRN", "Especialidad", "Tipo Gov", "Severidad", "Estado VRN", "Fecha"];
+          const combinedData = [];
+
+          (ingestionFeed?.latest_documents || []).forEach(doc => {
+            if ((!specialty || doc.specialty === specialty) &&
+                (!category || doc.category === category) &&
+                (!vrnStatus || doc.vrn_status === vrnStatus)) {
+
+              const govRecord = ledgerFeed?.records.find(r => r.vrn === doc.vrn);
+
+              combinedData.push([
+                doc.file_name || doc.document_id,
+                doc.vrn || "Sin VRN",
+                doc.specialty || "No clasificada",
+                govRecord?.record_type || "Sin registro",
+                govRecord?.severity || "N/A",
+                doc.vrn_status || "PENDING",
+                formatUtc(doc.ingestion_timestamp_utc)
+              ]);
+            }
+          });
+          reportData = combinedData;
+          break;
+
+        case "timeline":
+          reportTitle = "Timeline de Actividad";
+          columns = ["Fecha", "Tipo", "Descripción", "Entidad", "Estado"];
+          const timelineData = [];
+
+          (ingestionFeed?.latest_documents || []).forEach(doc => {
+            timelineData.push([
+              formatUtc(doc.ingestion_timestamp_utc),
+              "INGESTIÓN",
+              `Documento: ${doc.file_name || doc.document_id}`,
+              doc.document_id,
+              doc.vrn_status || "PENDING"
+            ]);
+          });
+
+          (ledgerFeed?.records || []).forEach(record => {
+            timelineData.push([
+              formatUtc(record.created_at),
+              "GOVERNANZA",
+              record.description,
+              record.vrn,
+              record.vrn_status
+            ]);
+          });
+
+          reportData = timelineData.sort((a, b) => new Date(b[0]) - new Date(a[0]));
+          break;
+      }
+
+      displayReport(reportTitle, columns, reportData, format);
+    }
+
+    function displayReport(title, columns, data, format) {
+      const resultsDiv = document.getElementById("report-results");
+      const titleElement = document.getElementById("report-title");
+      const countElement = document.getElementById("report-count");
+      const generatedElement = document.getElementById("report-generated");
+      const contentElement = document.getElementById("report-content");
+
+      titleElement.textContent = title;
+      countElement.textContent = `${data.length} registros`;
+      generatedElement.textContent = `Generado: ${new Date().toLocaleString()}`;
+
+      if (format === "table" || format === "html") {
+        const tableHtml = `
+          <table class="report-table">
+            <thead>
+              <tr>
+                ${columns.map(col => `<th>${col}</th>`).join("")}
+              </tr>
+            </thead>
+            <tbody>
+              ${data.map(row => `
+                <tr>
+                  ${row.map(cell => `<td>${escapeHtml(cell || "")}</td>`).join("")}
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        `;
+        contentElement.innerHTML = tableHtml;
+      } else if (format === "json") {
+        const jsonData = data.map(row => {
+          const obj = {};
+          columns.forEach((col, i) => obj[col] = row[i]);
+          return obj;
+        });
+        contentElement.innerHTML = `<pre class="table-code">${JSON.stringify(jsonData, null, 2)}</pre>`;
+      } else if (format === "csv") {
+        const csvContent = [columns.join(",")].concat(
+          data.map(row => row.map(cell => `"${(cell || "").replace(/"/g, '""')}"`).join(","))
+        ).join("\n");
+        contentElement.innerHTML = `<pre class="table-code">${csvContent}</pre>`;
+      }
+
+      resultsDiv.style.display = "block";
+      setStatus(`Reporte generado: ${data.length} registros.`, "info");
+    }
+
+    function exportReport() {
+      const contentElement = document.getElementById("report-content");
+      const format = document.getElementById("report-format").value;
+      const title = document.getElementById("report-title").textContent;
+
+      if (!contentElement.innerHTML.trim()) {
+        setStatus("No hay reporte para exportar.", "error");
+        return;
+      }
+
+      let mimeType, extension, content;
+
+      if (format === "json") {
+        mimeType = "application/json";
+        extension = "json";
+        content = contentElement.querySelector("pre").textContent;
+      } else if (format === "csv") {
+        mimeType = "text/csv";
+        extension = "csv";
+        content = contentElement.querySelector("pre").textContent;
+      } else {
+        mimeType = "text/html";
+        extension = "html";
+        content = contentElement.innerHTML;
+      }
+
+      const blob = new Blob([content], { type: mimeType });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${title.replace(/[^a-z0-9]/gi, "_").toLowerCase()}_${new Date().toISOString().split("T")[0]}.${extension}`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      setStatus("Reporte exportado exitosamente.", "info");
+    }
+
+    function clearReport() {
+      document.getElementById("report-results").style.display = "none";
+      document.getElementById("report-content").innerHTML = "";
+      setStatus("Reporte limpiado.", "info");
+    }
+
+    function populateReportFilters() {
+      const specialtySelect = document.getElementById("report-specialty");
+      const categorySelect = document.getElementById("report-category");
+
+      if (window.ingestionFeed?.latest_documents) {
+        const specialties = [...new Set(window.ingestionFeed.latest_documents
+          .map(d => d.specialty)
+          .filter(s => s))];
+        const categories = [...new Set(window.ingestionFeed.latest_documents
+          .map(d => d.category)
+          .filter(c => c))];
+
+        specialtySelect.innerHTML = '<option value="">Todas las especialidades</option>' +
+          specialties.map(s => `<option value="${s}">${s}</option>`).join("");
+
+        categorySelect.innerHTML = '<option value="">Todas las categorías</option>' +
+          categories.map(c => `<option value="${c}">${c}</option>`).join("");
+      }
+    }
+
+    function renderCatalog() {
+      const rowsHtml = catalogItems.map((doc) => {
+        const isFresh = lastUploadedDocumentId && doc.document_id === lastUploadedDocumentId;
+        return `
+          <tr class="${isFresh ? "is-fresh" : ""}" data-catalog-row="${escapeHtml(doc.document_id)}">
+            <td>
+              <div class="doc-main">
+                <div class="doc-title">${escapeHtml(doc.file_name || doc.document_id)}</div>
+                <div class="path-copy">${escapeHtml(doc.relative_path || "-")}</div>
+              </div>
+            </td>
+            <td>
+              <div class="table-inputs">
+                <input class="inline-input" data-field="specialty" value="${escapeHtml(doc.specialty || "")}" placeholder="Especialidad">
+                <input class="inline-input" data-field="sub_specialty" value="${escapeHtml(doc.sub_specialty || "")}" placeholder="Subespecialidad">
+                <input class="inline-input" data-field="epidemic_focus" value="${escapeHtml(doc.epidemic_focus || "")}" placeholder="Epidemia">
+              </div>
+            </td>
+            <td>
+              <div class="table-pair">
+                <span class="table-pill accent">${escapeHtml(doc.layer || "-")}</span>
+                <span class="table-pill cool">${escapeHtml(doc.category || "-")}</span>
+                <span class="table-pill">${escapeHtml(doc.document_group || "-")}</span>
+              </div>
+            </td>
+            <td>
+              <div class="table-pair">
+                <div class="small">${escapeHtml(doc.language || "-")}</div>
+                <div class="small">${formatUtc(doc.ingestion_timestamp_utc || doc.last_write_time_utc || "")}</div>
+              </div>
+            </td>
+            <td>
+              <div class="table-actions">
+                <button class="table-action primary" data-save-doc="${escapeHtml(doc.document_id)}">Guardar</button>
+                <button class="table-action" data-view-doc="${escapeHtml(doc.document_id)}" data-vrn="${escapeHtml(doc.vrn || "")}">Ver detalles</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join("");
+
+      renderTable(
+        catalogTable,
+        ["Documento", "Clasificación editable", "Metadatos", "Sync", "Acción"],
+        rowsHtml,
+        "Sin documentos en catálogo con los filtros actuales.",
+        1180,
+      );
+
+      catalogTable.querySelectorAll("[data-save-doc]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          const apiBase = getApiBase();
+          const docId = button.getAttribute("data-save-doc");
+          const row = button.closest("tr");
+          const updates = {
+            specialty: row.querySelector("[data-field='specialty']").value || "",
+            sub_specialty: row.querySelector("[data-field='sub_specialty']").value || "",
+            epidemic_focus: row.querySelector("[data-field='epidemic_focus']").value || "",
+          };
+          const response = await fetch(`${apiBase}/api/source-documents/ingestions/${docId}/classification`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(updates),
+          });
+          if (!response.ok) {
+            setStatus("Error al actualizar clasificación.", "error");
+            return;
+          }
+          setStatus("Clasificación actualizada.");
+          await refreshCatalog();
+        });
+      });
+
+      catalogTable.querySelectorAll("[data-view-doc]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const docId = button.getAttribute("data-view-doc");
+          const vrn = button.getAttribute("data-vrn");
+          showDocumentDetail(vrn, null, docId); // Pasar docId como tercer parámetro
+        });
+      });
+    }
+
+    function fillEditForm(doc) {
+      document.getElementById("edit-file-name").value = "";
+      document.getElementById("edit-move-to").value = "";
+      document.getElementById("edit-category").value = doc.category || "";
+      document.getElementById("edit-document-group").value = doc.document_group || "";
+      document.getElementById("edit-language").value = doc.language || "";
+      document.getElementById("edit-notes").value = doc.ingestion_notes || "";
+    }
+
+    async function saveMetadata() {
+      if (!selectedDocumentId) {
+        setStatus("Selecciona un documento para editar.", "error");
+        return;
+      }
+      const apiBase = getApiBase();
+      const payload = {
+        file_name: document.getElementById("edit-file-name").value.trim() || null,
+        move_to: document.getElementById("edit-move-to").value.trim() || null,
+        category: document.getElementById("edit-category").value.trim() || null,
+        document_group: document.getElementById("edit-document-group").value.trim() || null,
+        language: document.getElementById("edit-language").value.trim() || null,
+        ingestion_notes: document.getElementById("edit-notes").value.trim() || null,
+      };
+      const response = await fetchWithTimeout(`${apiBase}/api/source-documents/ingestions/${selectedDocumentId}/metadata`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) {
+        const detail = await response.text();
+        setStatus(`Error al guardar: ${detail}`, "error");
+        return;
+      }
+      setStatus("Metadata actualizada.");
+      await refreshAll();
+    }
+
+    async function refreshAll() {
+      await updateApiHealth();
+      try {
+        const feed = await refreshFeed();
+        window.ingestionFeed = feed; // Almacenar globalmente
+        renderSummary(feed);
+        renderDocuments(feed);
+        renderPreviews(feed);
+      } catch (error) {
+        setStatus("Error al leer feed.", "error");
+      }
+
+      try {
+        const ledger = await refreshLedger();
+        window.ledgerFeed = ledger; // Almacenar globalmente
+        renderLedger(ledger);
+      } catch (error) {
+        setStatus("Error al leer ledger.", "error");
+      }
+
+      try {
+        const auditFeed = await refreshAuditFeed();
+        window.auditFeed = auditFeed;
+        renderEoWorkbench();
+      } catch (error) {
+        setStatus("Error al leer audit feed.", "error");
+      }
+
+      try {
+        await refreshCatalog();
+      } catch (error) {
+        const cached = localStorage.getItem("icicso.catalog.cache");
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          catalogItems = parsed.items || [];
+          catalogStatus.textContent = `${parsed.total || catalogItems.length} docs (cache)`;
+          renderCatalog();
+          setStatus("Catálogo cargado desde cache local.", "info");
+          return;
+        }
+        try {
+          await refreshCatalogFallback();
+          setStatus("Catálogo cargado desde fallback.", "info");
+        } catch {
+          setStatus("Error al leer catálogo.", "error");
+        }
+      }
+
+      // Poblar filtros de reportes después de cargar datos
+      populateReportFilters();
+    }
+
+    document.getElementById("upload-button").addEventListener("click", uploadDocument);
+    document.getElementById("materialize-button").addEventListener("click", materialize);
+    document.getElementById("governance-button").addEventListener("click", registerGovernance);
+    document.getElementById("refresh-button").addEventListener("click", refreshAll);
+    document.getElementById("catalog-refresh").addEventListener("click", refreshCatalog);
+    document.getElementById("edit-save").addEventListener("click", saveMetadata);
+
+    filterQuery.addEventListener("input", refreshCatalog);
+    filterSubSpecialty.addEventListener("change", refreshCatalog);
+    filterEpidemic.addEventListener("change", refreshCatalog);
+    filterLanguage.addEventListener("change", refreshCatalog);
+    filterLayer.addEventListener("change", refreshCatalog);
+    filterCategory.addEventListener("change", refreshCatalog);
+    filterGroup.addEventListener("change", refreshCatalog);
+
+    // Event listeners para filtros del ledger
+    document.getElementById("ledger-filter-type").addEventListener("change", () => {
+      if (window.ledgerFeed) renderLedger(window.ledgerFeed);
+    });
+    document.getElementById("ledger-filter-severity").addEventListener("change", () => {
+      if (window.ledgerFeed) renderLedger(window.ledgerFeed);
+    });
+    document.getElementById("ledger-search").addEventListener("input", () => {
+      if (window.ledgerFeed) renderLedger(window.ledgerFeed);
+    });
+    document.getElementById("ledger-view-mode").addEventListener("change", () => {
+      if (window.ledgerFeed) renderLedger(window.ledgerFeed);
+    });
+
+    // Event listener para cerrar el panel de detalles
+    document.getElementById("detail-close").addEventListener("click", () => {
+      document.getElementById("document-detail-view").style.display = "none";
+    });
+
+    detailContentNode.addEventListener("click", async (event) => {
+      const materializeButton = event.target.closest("[data-materialize-doc]");
+      if (materializeButton) {
+        const documentId = materializeButton.getAttribute("data-materialize-doc");
+        if (!documentId) return;
+        selectedDocumentId = documentId;
+        await materialize();
+        await showDocumentDetail(null, null, documentId);
+        return;
+      }
+
+      const auditButton = event.target.closest("[data-audit-candidate]");
+      if (auditButton) {
+        const documentId = auditButton.getAttribute("data-document-id");
+        const candidateId = auditButton.getAttribute("data-audit-candidate");
+        const auditKind = auditButton.getAttribute("data-audit-kind");
+        const decision = auditButton.getAttribute("data-decision");
+        if (!documentId || !candidateId || !auditKind || !decision) return;
+        try {
+          auditButton.disabled = true;
+          await submitCandidateAudit(documentId, candidateId, auditKind, decision);
+          setStatus(`Auditoría ${auditKind} registrada para ${candidateId}.`, "info");
+          await refreshAll();
+          await showDocumentDetail(null, null, documentId);
+        } catch (error) {
+          setStatus(`Error de auditoría: ${error instanceof Error ? error.message : "falló la solicitud"}`, "error");
+        } finally {
+          auditButton.disabled = false;
+        }
+      }
+    });
+
+    eoWorkbench.addEventListener("click", async (event) => {
+      const viewButton = event.target.closest("[data-view-doc]");
+      if (viewButton) {
+        const docId = viewButton.getAttribute("data-view-doc");
+        const vrn = viewButton.getAttribute("data-vrn");
+        await showDocumentDetail(vrn, null, docId);
+        return;
+      }
+
+      const auditButton = event.target.closest("[data-audit-candidate]");
+      if (auditButton) {
+        const documentId = auditButton.getAttribute("data-document-id");
+        const candidateId = auditButton.getAttribute("data-audit-candidate");
+        const auditKind = auditButton.getAttribute("data-audit-kind");
+        const decision = auditButton.getAttribute("data-decision");
+        if (!documentId || !candidateId || !auditKind || !decision) return;
+        try {
+          auditButton.disabled = true;
+          await submitCandidateAudit(documentId, candidateId, auditKind, decision);
+          setStatus(`Auditoría ${auditKind} registrada para ${candidateId}.`, "info");
+          await refreshAll();
+        } catch (error) {
+          setStatus(`Error de auditoría: ${error instanceof Error ? error.message : "falló la solicitud"}`, "error");
+        } finally {
+          auditButton.disabled = false;
+        }
+      }
+    });
+
+    // Event delegation para clicks en registros del ledger
+    ledgerRecords.addEventListener("click", (event) => {
+      const ledgerRow = event.target.closest(".ledger-row, .ledger-card");
+      const viewDetailBtn = event.target.closest(".view-detail");
+
+      if (viewDetailBtn) {
+        // Click en botón "Ver detalles"
+        const vrn = viewDetailBtn.getAttribute("data-vrn");
+        const recordId = viewDetailBtn.getAttribute("data-record-id");
+        showDocumentDetail(vrn, recordId);
+      } else if (ledgerRow && !viewDetailBtn) {
+        // Click en fila/card del ledger (no en el botón)
+        const vrn = ledgerRow.getAttribute("data-vrn");
+        const recordId = ledgerRow.getAttribute("data-record-id");
+        if (vrn && recordId) {
+          showDocumentDetail(vrn, recordId);
+        }
+      }
+    });
+
+    // Event listeners para reportes
+    document.getElementById("generate-report").addEventListener("click", generateReport);
+    document.getElementById("export-report").addEventListener("click", exportReport);
+    document.getElementById("clear-report").addEventListener("click", clearReport);
+    document.getElementById("eo-filter-level").addEventListener("change", renderEoWorkbench);
+    document.getElementById("eo-filter-review").addEventListener("change", renderEoWorkbench);
+    document.getElementById("eo-filter-specialty").addEventListener("change", renderEoWorkbench);
+    document.getElementById("eo-filter-signer").addEventListener("input", renderEoWorkbench);
+
+    loadNomenclature().then(refreshAll);
+    updateApiStartLink();
+    renderIngestionLog();
+
+    setInterval(() => {
+      refreshCatalog().catch(() => { });
+      updateApiHealth();
+    }, 30000);
+  </script>
+  <script>
+    // ICICSO_LEVEL_TAGGER v2
+    (function () {
+      const levelRegex = /\bL(1[0-2]|[0-9])\b/;
+      const preferredTargets = ".module-card,.continuum-node,.continuum-card,.block-card,.block-node,.workspace-card,.feed-document,.gcl-record,.slice-stage,.slice-card,.ingestion-card,.catalog-row,.catalog-card";
+      const fallbackTargets = "article,section";
+      const ignoredSelectors = "pre,code,textarea,script,style";
+
+      function applyLevel(element, level) {
+        if (!element || !level) return;
+        const cls = "l" + level.slice(1);
+        element.classList.add(cls);
+        element.setAttribute("data-level", level);
+      }
+
+      function findTarget(node) {
+        const preferred = node.closest(preferredTargets);
+        if (preferred) return preferred;
+        const fallback = node.closest(fallbackTargets);
+        return fallback || node;
+      }
+
+      function scan() {
+        const nodes = document.querySelectorAll("body *:not(script):not(style)");
+        nodes.forEach((node) => {
+          if (node.matches(ignoredSelectors)) return;
+          if (node.children && node.children.length) return;
+          const text = (node.textContent || "").trim();
+          const match = text.match(levelRegex);
+          if (!match) return;
+          const level = "L" + match[1];
+          const target = findTarget(node);
+          applyLevel(target, level);
+        });
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", scan);
+      } else {
+        scan();
+      }
+    })();
+  </script>
+  <script>
+    // ICICSO_CATALOGS_LOADER v1
+    (function () {
+      const embedded = {
+        "layers": ["ING", "SER", "EO", "EL", "DDMO", "EUL", "KBOL", "CPO", "TAM", "EVT", "RDY-G", "CAE"],
+        "continuum_stages": ["ING", "SER", "EO", "EL", "DDMO", "EUL", "KBOL", "CPO", "TAM", "EVT", "RDY-G", "CAE"],
+        "categories": [
+          "user-upload",
+          "imported",
+          "legacy",
+          "research",
+          "guideline",
+          "evidence",
+          "case",
+          "protocol",
+          "dataset",
+          "imaging",
+          "lab",
+          "surgical-report",
+          "operative-note",
+          "discharge-summary"
+        ],
+        "document_groups": [
+          "continuum-intake",
+          "CABG",
+          "Valvular",
+          "Aorta",
+          "ECMO",
+          "Shock",
+          "Trauma Toracico",
+          "Intervencionismo",
+          "TAVI",
+          "PCI",
+          "Structural Heart",
+          "Reintervencion",
+          "Hemodinamia",
+          "Arritmias",
+          "Insuficiencia Cardiaca",
+          "UCI Cardiaca",
+          "UCI Quirurgica",
+          "Anestesia Cardiaca",
+          "Rehabilitacion Cardiaca",
+          "Emergencia Cardiaca",
+          "Emergencia Toracica"
+        ],
+        "document_types": [
+          "guideline",
+          "protocol",
+          "case",
+          "dataset",
+          "imaging",
+          "lab",
+          "surgical-report",
+          "operative-note",
+          "discharge-summary",
+          "consent",
+          "device-spec",
+          "clinical-trial",
+          "registry",
+          "systematic-review",
+          "meta-analysis",
+          "cohort-study"
+        ],
+        "vrn_statuses": ["ACTIVE", "PENDING", "SUNSET"],
+        "languages": ["en", "es", "pt", "fr", "de", "it"],
+        "defaults": {
+          "layer": "ING",
+          "continuum_stage": "ING",
+          "category": "user-upload",
+          "document_group": "continuum-intake",
+          "document_type": "guideline",
+          "vrn_status": "ACTIVE",
+          "language": "en"
+        }
+      }
+        ;
+      const candidates = [
+        "file:///c:/Users/leona/OneDrive/Desktop/MxRep/ICICSO/config/runtime/ingestion-catalogs.json",
+        "../config/runtime/ingestion-catalogs.json",
+        "../../config/runtime/ingestion-catalogs.json",
+        "../../../config/runtime/ingestion-catalogs.json"
+      ];
+      function setCatalogs(payload) {
+        if (payload && typeof payload === "object") {
+          window.ICICSO_CATALOGS = payload;
+        }
+      }
+      setCatalogs(embedded);
+      (async function () {
+        for (const url of candidates) {
+          try {
+            const resp = await fetch(url);
+            if (resp.ok) {
+              const json = await resp.json();
+              setCatalogs(json);
+              break;
+            }
+          } catch (err) {
+            // ignore
+          }
+        }
+      })();
+    })();
+  </script>
+</body>
+
+</html>

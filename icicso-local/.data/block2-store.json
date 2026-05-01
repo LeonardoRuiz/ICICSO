@@ -1,0 +1,1278 @@
+{
+  "documents": [
+    {
+      "documentId": "doc-48bc3981-fd33-4e80-a62f-7c82689862c1",
+      "caseId": "CASE-CABG3-2026-00014",
+      "episodeId": "EPI-ACS-2026-02-15",
+      "ilcId": "ILC-MX-CIH-2026-0004821",
+      "title": "Diagnósticos estructurados CABG x3",
+      "fileName": "cabg-diagnosticos.json",
+      "documentType": "note",
+      "sourceSystem": "EHR",
+      "ingestionMethod": "upload",
+      "rawFormat": "json",
+      "language": "es",
+      "sensitivityClass": "confidential",
+      "sensitivityReason": "Metadata documental con identificacion de caso clinico.",
+      "ingestionTimestamp": "2026-03-29T23:57:59.313Z",
+      "rawHash": "7005978bd5d62e6372eae612ef3124fa665be1a10d4afb27c5a75279825ba9e7",
+      "storageObjectId": "minio://icicso-block2/CASE-CABG3-2026-00014/note/7005978bd5d62e63.json",
+      "minioBucket": "icicso-block2",
+      "minioObjectKey": "CASE-CABG3-2026-00014/note/7005978bd5d62e63.json",
+      "storageUrl": "http://127.0.0.1:9000/icicso-block2/CASE-CABG3-2026-00014/note/7005978bd5d62e63.json",
+      "sizeBytes": 154,
+      "ingestionStatus": "parsed",
+      "payload": {
+        "diagnoses": [
+          "NSTEMI",
+          "CAD multivaso",
+          "DM2",
+          "ERC estadio 3",
+          "HTA"
+        ],
+        "summary": "Paciente con NSTEMI y enfermedad coronaria multivaso candidato a CABG x3."
+      }
+    },
+    {
+      "documentId": "doc-391fb519-db1f-4933-88fa-d2299dae7337",
+      "caseId": "CASE-CABG3-2026-00014",
+      "episodeId": "EPI-ACS-2026-02-15",
+      "ilcId": "ILC-MX-CIH-2026-0004821",
+      "title": "Laboratorios ingreso ACS",
+      "fileName": "cabg-labs.json",
+      "documentType": "lab",
+      "sourceSystem": "LIS",
+      "ingestionMethod": "upload",
+      "rawFormat": "json",
+      "language": "es",
+      "sensitivityClass": "restricted",
+      "sensitivityReason": "Contiene datos clinicos directos y resultados observacionales.",
+      "ingestionTimestamp": "2026-03-29T23:57:59.394Z",
+      "rawHash": "97d8362c099bd88c4c4ab5ce167ec6b846cbc2d8c3058fe9ee1c887d886ad777",
+      "storageObjectId": "minio://icicso-block2/CASE-CABG3-2026-00014/lab/97d8362c099bd88c.json",
+      "minioBucket": "icicso-block2",
+      "minioObjectKey": "CASE-CABG3-2026-00014/lab/97d8362c099bd88c.json",
+      "storageUrl": "http://127.0.0.1:9000/icicso-block2/CASE-CABG3-2026-00014/lab/97d8362c099bd88c.json",
+      "sizeBytes": 277,
+      "ingestionStatus": "parsed",
+      "payload": {
+        "observations": [
+          {
+            "name": "Troponina hs",
+            "value": 185,
+            "unit": "ng/L",
+            "observedAt": "2026-03-28T08:00:00.000Z"
+          },
+          {
+            "name": "Creatinina",
+            "value": 1.8,
+            "unit": "mg/dL",
+            "observedAt": "2026-03-28T08:00:00.000Z"
+          },
+          {
+            "name": "HbA1c",
+            "value": 8.4,
+            "unit": "%",
+            "observedAt": "2026-03-28T08:00:00.000Z"
+          }
+        ]
+      }
+    },
+    {
+      "documentId": "doc-9fb6a6fe-437e-4361-9fd0-bbd15c27e05d",
+      "caseId": "CASE-CABG3-2026-00014",
+      "episodeId": "EPI-ACS-2026-02-15",
+      "ilcId": "ILC-MX-CIH-2026-0004821",
+      "title": "Ecocardiograma preoperatorio",
+      "fileName": "cabg-echo.json",
+      "documentType": "imaging",
+      "sourceSystem": "PACS",
+      "ingestionMethod": "upload",
+      "rawFormat": "json",
+      "language": "es",
+      "sensitivityClass": "restricted",
+      "sensitivityReason": "Contiene datos clinicos directos y resultados observacionales.",
+      "ingestionTimestamp": "2026-03-29T23:57:59.452Z",
+      "rawHash": "2692a7e9ab8f455a4c5d7a91cd2fb6b67241bf0211b935e6681e73e41021def8",
+      "storageObjectId": "minio://icicso-block2/CASE-CABG3-2026-00014/imaging/2692a7e9ab8f455a.json",
+      "minioBucket": "icicso-block2",
+      "minioObjectKey": "CASE-CABG3-2026-00014/imaging/2692a7e9ab8f455a.json",
+      "storageUrl": "http://127.0.0.1:9000/icicso-block2/CASE-CABG3-2026-00014/imaging/2692a7e9ab8f455a.json",
+      "sizeBytes": 154,
+      "ingestionStatus": "parsed",
+      "payload": {
+        "modality": "US",
+        "studyDescription": "Ecocardiograma transtoracico",
+        "studyDate": "2026-03-28T09:00:00.000Z",
+        "measurements": {
+          "fevi": {
+            "value": 35,
+            "unit": "%"
+          }
+        }
+      }
+    },
+    {
+      "documentId": "doc-d9748b70-2b31-4ee6-bf81-48b786a70ecf",
+      "caseId": "CASE-CABG3-2026-00014",
+      "episodeId": "EPI-ACS-2026-02-15",
+      "ilcId": "ILC-MX-CIH-2026-0004821",
+      "title": "Medicación activa",
+      "fileName": "cabg-medications.json",
+      "documentType": "medication",
+      "sourceSystem": "EHR",
+      "ingestionMethod": "upload",
+      "rawFormat": "json",
+      "language": "es",
+      "sensitivityClass": "restricted",
+      "sensitivityReason": "Contiene datos clinicos directos y resultados observacionales.",
+      "ingestionTimestamp": "2026-03-29T23:57:59.470Z",
+      "rawHash": "ab86df5a0f34a656795de36d90d536a3f466d604ad28c87b2f3bb4abee8b9bff",
+      "storageObjectId": "minio://icicso-block2/CASE-CABG3-2026-00014/medication/ab86df5a0f34a656.json",
+      "minioBucket": "icicso-block2",
+      "minioObjectKey": "CASE-CABG3-2026-00014/medication/ab86df5a0f34a656.json",
+      "storageUrl": "http://127.0.0.1:9000/icicso-block2/CASE-CABG3-2026-00014/medication/ab86df5a0f34a656.json",
+      "sizeBytes": 208,
+      "ingestionStatus": "parsed",
+      "payload": {
+        "medications": [
+          {
+            "name": "Aspirina 100 mg VO diario"
+          },
+          {
+            "name": "Clopidogrel 75 mg VO diario"
+          },
+          {
+            "name": "Atorvastatina 80 mg VO nocturna"
+          },
+          {
+            "name": "Metoprolol 50 mg VO cada 12 h"
+          },
+          {
+            "name": "Insulina basal-bolo"
+          }
+        ]
+      }
+    },
+    {
+      "documentId": "doc-554c23b7-bfd7-4a79-b932-ab4b09a36d1e",
+      "caseId": "CASE-CABG3-2026-00014",
+      "episodeId": "EPI-ACS-2026-02-15",
+      "ilcId": "ILC-MX-CIH-2026-0004821",
+      "title": "Consentimiento base simulado",
+      "fileName": "cabg-consent.json",
+      "documentType": "consent",
+      "sourceSystem": "manual_entry",
+      "ingestionMethod": "upload",
+      "rawFormat": "json",
+      "language": "es",
+      "sensitivityClass": "highly_sensitive",
+      "sensitivityReason": "Incluye consentimiento o autorizacion clinica firmada.",
+      "ingestionTimestamp": "2026-03-29T23:57:59.508Z",
+      "rawHash": "1efe74c29a9b777e0cf807cf395af9e4ae3719d113a7a4cf06a4914b5ab3f383",
+      "storageObjectId": "minio://icicso-block2/CASE-CABG3-2026-00014/consent/1efe74c29a9b777e.json",
+      "minioBucket": "icicso-block2",
+      "minioObjectKey": "CASE-CABG3-2026-00014/consent/1efe74c29a9b777e.json",
+      "storageUrl": "http://127.0.0.1:9000/icicso-block2/CASE-CABG3-2026-00014/consent/1efe74c29a9b777e.json",
+      "sizeBytes": 126,
+      "ingestionStatus": "parsed",
+      "payload": {
+        "consentGranted": true,
+        "statement": "Consentimiento informado basal para procedimiento CABG x3 y uso interno de dataset demo."
+      }
+    }
+  ],
+  "parsedVariables": [
+    {
+      "parsedVariableId": "pv-10b48cf9-348f-4aa6-ac53-408ca777321d",
+      "documentId": "doc-48bc3981-fd33-4e80-a62f-7c82689862c1",
+      "variableType": "diagnosis",
+      "variableName": "NSTEMI",
+      "rawText": "NSTEMI",
+      "normalizedValue": "NSTEMI",
+      "parsingConfidence": 0.96,
+      "extractionMethod": "json_path",
+      "manualOverrideFlag": false,
+      "timestampExtracted": "2026-03-29T23:57:59.313Z",
+      "terminologyCode": "57054005",
+      "terminologySystem": "SNOMED"
+    },
+    {
+      "parsedVariableId": "pv-bfb1ce39-6a63-485a-a6b5-1bfc893baa2b",
+      "documentId": "doc-48bc3981-fd33-4e80-a62f-7c82689862c1",
+      "variableType": "diagnosis",
+      "variableName": "CAD multivaso",
+      "rawText": "CAD multivaso",
+      "normalizedValue": "CAD multivaso",
+      "parsingConfidence": 0.96,
+      "extractionMethod": "json_path",
+      "manualOverrideFlag": false,
+      "timestampExtracted": "2026-03-29T23:57:59.313Z",
+      "terminologyCode": "194828000",
+      "terminologySystem": "SNOMED"
+    },
+    {
+      "parsedVariableId": "pv-b31da56d-26b5-4470-bea3-a430740642ef",
+      "documentId": "doc-48bc3981-fd33-4e80-a62f-7c82689862c1",
+      "variableType": "diagnosis",
+      "variableName": "DM2",
+      "rawText": "DM2",
+      "normalizedValue": "DM2",
+      "parsingConfidence": 0.96,
+      "extractionMethod": "json_path",
+      "manualOverrideFlag": false,
+      "timestampExtracted": "2026-03-29T23:57:59.313Z",
+      "terminologyCode": "44054006",
+      "terminologySystem": "SNOMED"
+    },
+    {
+      "parsedVariableId": "pv-6f9b26bd-a355-4453-bee5-0951dcc09dc2",
+      "documentId": "doc-48bc3981-fd33-4e80-a62f-7c82689862c1",
+      "variableType": "diagnosis",
+      "variableName": "ERC estadio 3",
+      "rawText": "ERC estadio 3",
+      "normalizedValue": "ERC estadio 3",
+      "parsingConfidence": 0.96,
+      "extractionMethod": "json_path",
+      "manualOverrideFlag": false,
+      "timestampExtracted": "2026-03-29T23:57:59.313Z",
+      "terminologyCode": "433144002",
+      "terminologySystem": "SNOMED"
+    },
+    {
+      "parsedVariableId": "pv-6e0a66a4-d2b8-4015-865c-94fd5bb498ff",
+      "documentId": "doc-48bc3981-fd33-4e80-a62f-7c82689862c1",
+      "variableType": "diagnosis",
+      "variableName": "HTA",
+      "rawText": "HTA",
+      "normalizedValue": "HTA",
+      "parsingConfidence": 0.96,
+      "extractionMethod": "json_path",
+      "manualOverrideFlag": false,
+      "timestampExtracted": "2026-03-29T23:57:59.313Z",
+      "terminologyCode": "38341003",
+      "terminologySystem": "SNOMED"
+    },
+    {
+      "parsedVariableId": "pv-33dd6a1a-20f4-4ab3-9573-f0ea0f8dcd82",
+      "documentId": "doc-391fb519-db1f-4933-88fa-d2299dae7337",
+      "variableType": "lab",
+      "variableName": "Troponina",
+      "rawText": "Troponina hs: 185 ng/L",
+      "normalizedValue": 185,
+      "unit": "ng/L",
+      "parsingConfidence": 0.97,
+      "extractionMethod": "json_path",
+      "manualOverrideFlag": false,
+      "timestampExtracted": "2026-03-28T08:00:00.000Z",
+      "terminologyCode": "89579-7",
+      "terminologySystem": "LOINC"
+    },
+    {
+      "parsedVariableId": "pv-fe2a326b-5bef-4294-bcc1-e70009ec19de",
+      "documentId": "doc-391fb519-db1f-4933-88fa-d2299dae7337",
+      "variableType": "lab",
+      "variableName": "Creatinina",
+      "rawText": "Creatinina: 1.8 mg/dL",
+      "normalizedValue": 1.8,
+      "unit": "mg/dL",
+      "parsingConfidence": 0.97,
+      "extractionMethod": "json_path",
+      "manualOverrideFlag": false,
+      "timestampExtracted": "2026-03-28T08:00:00.000Z",
+      "terminologyCode": "2160-0",
+      "terminologySystem": "LOINC"
+    },
+    {
+      "parsedVariableId": "pv-7abc2f79-68be-418a-9f4d-b88a97fe9cbe",
+      "documentId": "doc-391fb519-db1f-4933-88fa-d2299dae7337",
+      "variableType": "lab",
+      "variableName": "HbA1c",
+      "rawText": "HbA1c: 8.4 %",
+      "normalizedValue": 8.4,
+      "unit": "%",
+      "parsingConfidence": 0.97,
+      "extractionMethod": "json_path",
+      "manualOverrideFlag": false,
+      "timestampExtracted": "2026-03-28T08:00:00.000Z",
+      "terminologyCode": "4548-4",
+      "terminologySystem": "LOINC"
+    },
+    {
+      "parsedVariableId": "pv-f70ec38e-02c9-4bc0-8d6a-a53e507740ba",
+      "documentId": "doc-9fb6a6fe-437e-4361-9fd0-bbd15c27e05d",
+      "variableType": "measurement",
+      "variableName": "FEVI",
+      "rawText": "FEVI 35%",
+      "normalizedValue": 35,
+      "unit": "%",
+      "parsingConfidence": 0.96,
+      "extractionMethod": "dicom_measurement",
+      "manualOverrideFlag": false,
+      "timestampExtracted": "2026-03-28T09:00:00.000Z",
+      "terminologyCode": "33878-0",
+      "terminologySystem": "LOINC"
+    },
+    {
+      "parsedVariableId": "pv-3ac2d781-85f1-4274-ba90-a96394b6b2e2",
+      "documentId": "doc-d9748b70-2b31-4ee6-bf81-48b786a70ecf",
+      "variableType": "medication",
+      "variableName": "Medicación activa",
+      "rawText": "Aspirina 100 mg VO diario, Clopidogrel 75 mg VO diario, Atorvastatina 80 mg VO nocturna, Metoprolol 50 mg VO cada 12 h, Insulina basal-bolo",
+      "normalizedValue": [
+        "Aspirina 100 mg VO diario",
+        "Clopidogrel 75 mg VO diario",
+        "Atorvastatina 80 mg VO nocturna",
+        "Metoprolol 50 mg VO cada 12 h",
+        "Insulina basal-bolo"
+      ],
+      "parsingConfidence": 0.94,
+      "extractionMethod": "json_path",
+      "manualOverrideFlag": false,
+      "timestampExtracted": "2026-03-29T23:57:59.470Z",
+      "terminologyCode": "182904002",
+      "terminologySystem": "SNOMED"
+    },
+    {
+      "parsedVariableId": "pv-aeecd6a4-a699-4e5b-9da4-69e7e6a97cc0",
+      "documentId": "doc-554c23b7-bfd7-4a79-b932-ab4b09a36d1e",
+      "variableType": "consent",
+      "variableName": "Consentimiento base",
+      "rawText": "Consentimiento informado basal para procedimiento CABG x3 y uso interno de dataset demo.",
+      "normalizedValue": true,
+      "parsingConfidence": 0.95,
+      "extractionMethod": "json_path",
+      "manualOverrideFlag": false,
+      "timestampExtracted": "2026-03-29T23:57:59.508Z",
+      "terminologyCode": "309370004",
+      "terminologySystem": "SNOMED"
+    }
+  ],
+  "provenanceRecords": [
+    {
+      "provenanceId": "prov-82a899f1-fa6d-4356-9907-be9ca7b4b36c",
+      "parsedVariableId": "pv-10b48cf9-348f-4aa6-ac53-408ca777321d",
+      "sourceDocumentId": "doc-48bc3981-fd33-4e80-a62f-7c82689862c1",
+      "sourceSystem": "EHR",
+      "acquisitionMethod": "upload:json_path",
+      "institutionId": "ICICSO-DEMO",
+      "timestampAcquired": "2026-03-29T23:57:59.313Z",
+      "timestampRecorded": "2026-03-29T23:57:59.313Z",
+      "methodDescription": "Parsed from note using json_path.",
+      "reliabilityLevel": "validated_internal",
+      "transformationHistory": [
+        "structured.diagnoses"
+      ]
+    },
+    {
+      "provenanceId": "prov-feed9734-351f-4141-8d4e-7f6cb4476007",
+      "parsedVariableId": "pv-bfb1ce39-6a63-485a-a6b5-1bfc893baa2b",
+      "sourceDocumentId": "doc-48bc3981-fd33-4e80-a62f-7c82689862c1",
+      "sourceSystem": "EHR",
+      "acquisitionMethod": "upload:json_path",
+      "institutionId": "ICICSO-DEMO",
+      "timestampAcquired": "2026-03-29T23:57:59.313Z",
+      "timestampRecorded": "2026-03-29T23:57:59.313Z",
+      "methodDescription": "Parsed from note using json_path.",
+      "reliabilityLevel": "validated_internal",
+      "transformationHistory": [
+        "structured.diagnoses"
+      ]
+    },
+    {
+      "provenanceId": "prov-9ebe593d-1933-49f3-b850-a3ea05b985dd",
+      "parsedVariableId": "pv-b31da56d-26b5-4470-bea3-a430740642ef",
+      "sourceDocumentId": "doc-48bc3981-fd33-4e80-a62f-7c82689862c1",
+      "sourceSystem": "EHR",
+      "acquisitionMethod": "upload:json_path",
+      "institutionId": "ICICSO-DEMO",
+      "timestampAcquired": "2026-03-29T23:57:59.313Z",
+      "timestampRecorded": "2026-03-29T23:57:59.313Z",
+      "methodDescription": "Parsed from note using json_path.",
+      "reliabilityLevel": "validated_internal",
+      "transformationHistory": [
+        "structured.diagnoses"
+      ]
+    },
+    {
+      "provenanceId": "prov-ff790b33-d027-4fd2-8aaa-cfbbeeadf6ef",
+      "parsedVariableId": "pv-6f9b26bd-a355-4453-bee5-0951dcc09dc2",
+      "sourceDocumentId": "doc-48bc3981-fd33-4e80-a62f-7c82689862c1",
+      "sourceSystem": "EHR",
+      "acquisitionMethod": "upload:json_path",
+      "institutionId": "ICICSO-DEMO",
+      "timestampAcquired": "2026-03-29T23:57:59.313Z",
+      "timestampRecorded": "2026-03-29T23:57:59.313Z",
+      "methodDescription": "Parsed from note using json_path.",
+      "reliabilityLevel": "validated_internal",
+      "transformationHistory": [
+        "structured.diagnoses"
+      ]
+    },
+    {
+      "provenanceId": "prov-c00d3742-ec9e-4705-aadd-97c5b5fe0931",
+      "parsedVariableId": "pv-6e0a66a4-d2b8-4015-865c-94fd5bb498ff",
+      "sourceDocumentId": "doc-48bc3981-fd33-4e80-a62f-7c82689862c1",
+      "sourceSystem": "EHR",
+      "acquisitionMethod": "upload:json_path",
+      "institutionId": "ICICSO-DEMO",
+      "timestampAcquired": "2026-03-29T23:57:59.313Z",
+      "timestampRecorded": "2026-03-29T23:57:59.313Z",
+      "methodDescription": "Parsed from note using json_path.",
+      "reliabilityLevel": "validated_internal",
+      "transformationHistory": [
+        "structured.diagnoses"
+      ]
+    },
+    {
+      "provenanceId": "prov-510e2746-a905-47c7-b93a-bc0c5cfb6aa5",
+      "parsedVariableId": "pv-33dd6a1a-20f4-4ab3-9573-f0ea0f8dcd82",
+      "sourceDocumentId": "doc-391fb519-db1f-4933-88fa-d2299dae7337",
+      "sourceSystem": "LIS",
+      "acquisitionMethod": "upload:json_path",
+      "institutionId": "ICICSO-DEMO",
+      "timestampAcquired": "2026-03-28T08:00:00.000Z",
+      "timestampRecorded": "2026-03-29T23:57:59.394Z",
+      "methodDescription": "Parsed from lab using json_path.",
+      "reliabilityLevel": "validated_internal",
+      "transformationHistory": [
+        "structured.observations"
+      ]
+    },
+    {
+      "provenanceId": "prov-781d1d1e-089c-48e6-a308-c707b7c09fe1",
+      "parsedVariableId": "pv-fe2a326b-5bef-4294-bcc1-e70009ec19de",
+      "sourceDocumentId": "doc-391fb519-db1f-4933-88fa-d2299dae7337",
+      "sourceSystem": "LIS",
+      "acquisitionMethod": "upload:json_path",
+      "institutionId": "ICICSO-DEMO",
+      "timestampAcquired": "2026-03-28T08:00:00.000Z",
+      "timestampRecorded": "2026-03-29T23:57:59.394Z",
+      "methodDescription": "Parsed from lab using json_path.",
+      "reliabilityLevel": "validated_internal",
+      "transformationHistory": [
+        "structured.observations"
+      ]
+    },
+    {
+      "provenanceId": "prov-6eab5503-a92a-40d3-8e6e-dacdfb0977c9",
+      "parsedVariableId": "pv-7abc2f79-68be-418a-9f4d-b88a97fe9cbe",
+      "sourceDocumentId": "doc-391fb519-db1f-4933-88fa-d2299dae7337",
+      "sourceSystem": "LIS",
+      "acquisitionMethod": "upload:json_path",
+      "institutionId": "ICICSO-DEMO",
+      "timestampAcquired": "2026-03-28T08:00:00.000Z",
+      "timestampRecorded": "2026-03-29T23:57:59.394Z",
+      "methodDescription": "Parsed from lab using json_path.",
+      "reliabilityLevel": "validated_internal",
+      "transformationHistory": [
+        "structured.observations"
+      ]
+    },
+    {
+      "provenanceId": "prov-43b097b3-5afd-498b-9963-b297d75f35d4",
+      "parsedVariableId": "pv-f70ec38e-02c9-4bc0-8d6a-a53e507740ba",
+      "sourceDocumentId": "doc-9fb6a6fe-437e-4361-9fd0-bbd15c27e05d",
+      "sourceSystem": "PACS",
+      "acquisitionMethod": "upload:dicom_measurement",
+      "institutionId": "ICICSO-DEMO",
+      "timestampAcquired": "2026-03-28T09:00:00.000Z",
+      "timestampRecorded": "2026-03-29T23:57:59.452Z",
+      "methodDescription": "Parsed from imaging using dicom_measurement.",
+      "reliabilityLevel": "validated_internal",
+      "transformationHistory": [
+        "structured.measurements.fevi"
+      ]
+    },
+    {
+      "provenanceId": "prov-584213f5-5f7f-452e-8e26-0591993f0b05",
+      "parsedVariableId": "pv-3ac2d781-85f1-4274-ba90-a96394b6b2e2",
+      "sourceDocumentId": "doc-d9748b70-2b31-4ee6-bf81-48b786a70ecf",
+      "sourceSystem": "EHR",
+      "acquisitionMethod": "upload:json_path",
+      "institutionId": "ICICSO-DEMO",
+      "timestampAcquired": "2026-03-29T23:57:59.470Z",
+      "timestampRecorded": "2026-03-29T23:57:59.470Z",
+      "methodDescription": "Parsed from medication using json_path.",
+      "reliabilityLevel": "validated_internal",
+      "transformationHistory": [
+        "structured.medications"
+      ]
+    },
+    {
+      "provenanceId": "prov-0da58fe5-2247-4dd9-bca3-a628efef58d0",
+      "parsedVariableId": "pv-aeecd6a4-a699-4e5b-9da4-69e7e6a97cc0",
+      "sourceDocumentId": "doc-554c23b7-bfd7-4a79-b932-ab4b09a36d1e",
+      "sourceSystem": "manual_entry",
+      "acquisitionMethod": "upload:json_path",
+      "institutionId": "ICICSO-DEMO",
+      "timestampAcquired": "2026-03-29T23:57:59.508Z",
+      "timestampRecorded": "2026-03-29T23:57:59.508Z",
+      "methodDescription": "Parsed from consent using json_path.",
+      "reliabilityLevel": "high",
+      "transformationHistory": [
+        "structured.consent"
+      ]
+    }
+  ],
+  "terminologyMappings": [
+    {
+      "mappingId": "map-de3432fd-8e02-403c-adb2-fd543771f9df",
+      "parsedVariableId": "pv-10b48cf9-348f-4aa6-ac53-408ca777321d",
+      "sourceValue": "NSTEMI",
+      "sourceSystem": "diagnosis",
+      "normalizedCode": "I21.4",
+      "normalizedSystem": "ICD-10",
+      "mappingConfidence": 0.95,
+      "mappingMethod": "catalog-match",
+      "canonicalTerm": "NSTEMI",
+      "versionRegistryReference": "block2.demo.v1"
+    },
+    {
+      "mappingId": "map-4680b12d-df61-4878-8aed-a81ce0c4a145",
+      "parsedVariableId": "pv-10b48cf9-348f-4aa6-ac53-408ca777321d",
+      "sourceValue": "NSTEMI",
+      "sourceSystem": "diagnosis",
+      "normalizedCode": "57054005",
+      "normalizedSystem": "SNOMED",
+      "mappingConfidence": 0.95,
+      "mappingMethod": "catalog-match",
+      "canonicalTerm": "NSTEMI",
+      "versionRegistryReference": "block2.demo.v1"
+    },
+    {
+      "mappingId": "map-440c7fdc-10e7-48da-852a-60c7e32b0079",
+      "parsedVariableId": "pv-bfb1ce39-6a63-485a-a6b5-1bfc893baa2b",
+      "sourceValue": "CAD multivaso",
+      "sourceSystem": "diagnosis",
+      "normalizedCode": "I25.10",
+      "normalizedSystem": "ICD-10",
+      "mappingConfidence": 0.95,
+      "mappingMethod": "catalog-match",
+      "canonicalTerm": "CAD multivaso",
+      "versionRegistryReference": "block2.demo.v1"
+    },
+    {
+      "mappingId": "map-cc25f2e2-3378-478a-8c0d-19ed3ecf9ef9",
+      "parsedVariableId": "pv-bfb1ce39-6a63-485a-a6b5-1bfc893baa2b",
+      "sourceValue": "CAD multivaso",
+      "sourceSystem": "diagnosis",
+      "normalizedCode": "194828000",
+      "normalizedSystem": "SNOMED",
+      "mappingConfidence": 0.95,
+      "mappingMethod": "catalog-match",
+      "canonicalTerm": "CAD multivaso",
+      "versionRegistryReference": "block2.demo.v1"
+    },
+    {
+      "mappingId": "map-cdf93734-f407-4577-baaf-619d69ef46d6",
+      "parsedVariableId": "pv-b31da56d-26b5-4470-bea3-a430740642ef",
+      "sourceValue": "DM2",
+      "sourceSystem": "diagnosis",
+      "normalizedCode": "E11.9",
+      "normalizedSystem": "ICD-10",
+      "mappingConfidence": 0.95,
+      "mappingMethod": "catalog-match",
+      "canonicalTerm": "DM2",
+      "versionRegistryReference": "block2.demo.v1"
+    },
+    {
+      "mappingId": "map-f1fe935b-30d5-4f6a-b1dc-b827c058ebb6",
+      "parsedVariableId": "pv-b31da56d-26b5-4470-bea3-a430740642ef",
+      "sourceValue": "DM2",
+      "sourceSystem": "diagnosis",
+      "normalizedCode": "44054006",
+      "normalizedSystem": "SNOMED",
+      "mappingConfidence": 0.95,
+      "mappingMethod": "catalog-match",
+      "canonicalTerm": "DM2",
+      "versionRegistryReference": "block2.demo.v1"
+    },
+    {
+      "mappingId": "map-d7e019c8-67d2-4dac-b1d8-030976aba67c",
+      "parsedVariableId": "pv-6f9b26bd-a355-4453-bee5-0951dcc09dc2",
+      "sourceValue": "ERC estadio 3",
+      "sourceSystem": "diagnosis",
+      "normalizedCode": "N18.30",
+      "normalizedSystem": "ICD-10",
+      "mappingConfidence": 0.95,
+      "mappingMethod": "catalog-match",
+      "canonicalTerm": "ERC estadio 3",
+      "versionRegistryReference": "block2.demo.v1"
+    },
+    {
+      "mappingId": "map-191b2e62-79c7-4517-9f51-d26f489fcaa7",
+      "parsedVariableId": "pv-6f9b26bd-a355-4453-bee5-0951dcc09dc2",
+      "sourceValue": "ERC estadio 3",
+      "sourceSystem": "diagnosis",
+      "normalizedCode": "433144002",
+      "normalizedSystem": "SNOMED",
+      "mappingConfidence": 0.95,
+      "mappingMethod": "catalog-match",
+      "canonicalTerm": "ERC estadio 3",
+      "versionRegistryReference": "block2.demo.v1"
+    },
+    {
+      "mappingId": "map-418e286b-f2c5-4b51-ada8-13fadff9013c",
+      "parsedVariableId": "pv-6e0a66a4-d2b8-4015-865c-94fd5bb498ff",
+      "sourceValue": "HTA",
+      "sourceSystem": "diagnosis",
+      "normalizedCode": "I10",
+      "normalizedSystem": "ICD-10",
+      "mappingConfidence": 0.95,
+      "mappingMethod": "catalog-match",
+      "canonicalTerm": "HTA",
+      "versionRegistryReference": "block2.demo.v1"
+    },
+    {
+      "mappingId": "map-e62f3e57-a8c1-4e40-9513-26c74ed863b9",
+      "parsedVariableId": "pv-6e0a66a4-d2b8-4015-865c-94fd5bb498ff",
+      "sourceValue": "HTA",
+      "sourceSystem": "diagnosis",
+      "normalizedCode": "38341003",
+      "normalizedSystem": "SNOMED",
+      "mappingConfidence": 0.95,
+      "mappingMethod": "catalog-match",
+      "canonicalTerm": "HTA",
+      "versionRegistryReference": "block2.demo.v1"
+    },
+    {
+      "mappingId": "map-72513a40-a0d1-4e62-80a5-95b9bde71443",
+      "parsedVariableId": "pv-33dd6a1a-20f4-4ab3-9573-f0ea0f8dcd82",
+      "sourceValue": "Troponina",
+      "sourceSystem": "lab",
+      "normalizedCode": "89579-7",
+      "normalizedSystem": "LOINC",
+      "mappingConfidence": 0.95,
+      "mappingMethod": "catalog-match",
+      "canonicalTerm": "Troponina",
+      "versionRegistryReference": "block2.demo.v1"
+    },
+    {
+      "mappingId": "map-a4d15238-5711-45fc-8f20-649a5ea7ac65",
+      "parsedVariableId": "pv-33dd6a1a-20f4-4ab3-9573-f0ea0f8dcd82",
+      "sourceValue": "Troponina",
+      "sourceSystem": "lab",
+      "normalizedCode": "ng/L",
+      "normalizedSystem": "UCUM",
+      "mappingConfidence": 0.99,
+      "mappingMethod": "unit-match",
+      "canonicalTerm": "Troponina",
+      "versionRegistryReference": "block2.demo.v1"
+    },
+    {
+      "mappingId": "map-87b4a50b-13b0-4abb-be32-cd789e4dcd49",
+      "parsedVariableId": "pv-fe2a326b-5bef-4294-bcc1-e70009ec19de",
+      "sourceValue": "Creatinina",
+      "sourceSystem": "lab",
+      "normalizedCode": "2160-0",
+      "normalizedSystem": "LOINC",
+      "mappingConfidence": 0.95,
+      "mappingMethod": "catalog-match",
+      "canonicalTerm": "Creatinina",
+      "versionRegistryReference": "block2.demo.v1"
+    },
+    {
+      "mappingId": "map-35aea57b-7d7c-4bb4-9e9c-322d32a43c33",
+      "parsedVariableId": "pv-fe2a326b-5bef-4294-bcc1-e70009ec19de",
+      "sourceValue": "Creatinina",
+      "sourceSystem": "lab",
+      "normalizedCode": "mg/dL",
+      "normalizedSystem": "UCUM",
+      "mappingConfidence": 0.99,
+      "mappingMethod": "unit-match",
+      "canonicalTerm": "Creatinina",
+      "versionRegistryReference": "block2.demo.v1"
+    },
+    {
+      "mappingId": "map-d0630782-9964-49aa-8b81-24e9d27bdafc",
+      "parsedVariableId": "pv-7abc2f79-68be-418a-9f4d-b88a97fe9cbe",
+      "sourceValue": "HbA1c",
+      "sourceSystem": "lab",
+      "normalizedCode": "4548-4",
+      "normalizedSystem": "LOINC",
+      "mappingConfidence": 0.95,
+      "mappingMethod": "catalog-match",
+      "canonicalTerm": "HbA1c",
+      "versionRegistryReference": "block2.demo.v1"
+    },
+    {
+      "mappingId": "map-ce64368b-f0d3-414f-988b-1944b529f4e4",
+      "parsedVariableId": "pv-7abc2f79-68be-418a-9f4d-b88a97fe9cbe",
+      "sourceValue": "HbA1c",
+      "sourceSystem": "lab",
+      "normalizedCode": "%",
+      "normalizedSystem": "UCUM",
+      "mappingConfidence": 0.99,
+      "mappingMethod": "unit-match",
+      "canonicalTerm": "HbA1c",
+      "versionRegistryReference": "block2.demo.v1"
+    },
+    {
+      "mappingId": "map-8df7628b-5ef6-4377-be85-5d32b15f33e1",
+      "parsedVariableId": "pv-f70ec38e-02c9-4bc0-8d6a-a53e507740ba",
+      "sourceValue": "FEVI",
+      "sourceSystem": "measurement",
+      "normalizedCode": "33878-0",
+      "normalizedSystem": "LOINC",
+      "mappingConfidence": 0.95,
+      "mappingMethod": "catalog-match",
+      "canonicalTerm": "FEVI",
+      "versionRegistryReference": "block2.demo.v1"
+    },
+    {
+      "mappingId": "map-c1f1fd93-54ae-4355-aa63-a4d713013f2d",
+      "parsedVariableId": "pv-f70ec38e-02c9-4bc0-8d6a-a53e507740ba",
+      "sourceValue": "FEVI",
+      "sourceSystem": "measurement",
+      "normalizedCode": "%",
+      "normalizedSystem": "UCUM",
+      "mappingConfidence": 0.99,
+      "mappingMethod": "unit-match",
+      "canonicalTerm": "FEVI",
+      "versionRegistryReference": "block2.demo.v1"
+    },
+    {
+      "mappingId": "map-ee7dca5a-db06-439d-8235-6e4e13273c09",
+      "parsedVariableId": "pv-3ac2d781-85f1-4274-ba90-a96394b6b2e2",
+      "sourceValue": "Medicación activa",
+      "sourceSystem": "medication",
+      "normalizedCode": "182904002",
+      "normalizedSystem": "SNOMED",
+      "mappingConfidence": 0.95,
+      "mappingMethod": "catalog-match",
+      "canonicalTerm": "Medicación activa",
+      "versionRegistryReference": "block2.demo.v1"
+    },
+    {
+      "mappingId": "map-f0377a6a-a9b5-4fc0-930c-3c605677f157",
+      "parsedVariableId": "pv-aeecd6a4-a699-4e5b-9da4-69e7e6a97cc0",
+      "sourceValue": "Consentimiento base",
+      "sourceSystem": "consent",
+      "normalizedCode": "309370004",
+      "normalizedSystem": "SNOMED",
+      "mappingConfidence": 0.95,
+      "mappingMethod": "catalog-match",
+      "canonicalTerm": "Consentimiento base",
+      "versionRegistryReference": "block2.demo.v1"
+    }
+  ],
+  "certificationRecords": [
+    {
+      "certificationId": "cert-87994971-da4a-4c92-a936-c14a19b785ef",
+      "caseId": "CASE-CABG3-2026-00014",
+      "parsedVariableId": "pv-10b48cf9-348f-4aa6-ac53-408ca777321d",
+      "completenessStatus": "complete",
+      "semanticValidity": "valid",
+      "sourceVerified": true,
+      "reliabilityScore": 0.97,
+      "sensitivityClass": "confidential",
+      "timestampCertified": "2026-03-29T23:57:59.511Z",
+      "certifierId": "data-governance-service",
+      "certificationHash": "8bf3e1046dec71ddd265cd59ad1c7e78ec63b058683567ac4e598bf3c002fc81",
+      "certificationVersion": "block2.v1"
+    },
+    {
+      "certificationId": "cert-359f6d06-2816-4ac2-9d2d-cdcb79fa631a",
+      "caseId": "CASE-CABG3-2026-00014",
+      "parsedVariableId": "pv-bfb1ce39-6a63-485a-a6b5-1bfc893baa2b",
+      "completenessStatus": "complete",
+      "semanticValidity": "valid",
+      "sourceVerified": true,
+      "reliabilityScore": 0.97,
+      "sensitivityClass": "confidential",
+      "timestampCertified": "2026-03-29T23:57:59.511Z",
+      "certifierId": "data-governance-service",
+      "certificationHash": "f4252e457dae9313c39b807e34ef9aaf741c0aed46af942d6be37dc0aca343a8",
+      "certificationVersion": "block2.v1"
+    },
+    {
+      "certificationId": "cert-8368d112-5eb0-484d-84be-b9b44963aba1",
+      "caseId": "CASE-CABG3-2026-00014",
+      "parsedVariableId": "pv-b31da56d-26b5-4470-bea3-a430740642ef",
+      "completenessStatus": "complete",
+      "semanticValidity": "valid",
+      "sourceVerified": true,
+      "reliabilityScore": 0.97,
+      "sensitivityClass": "confidential",
+      "timestampCertified": "2026-03-29T23:57:59.511Z",
+      "certifierId": "data-governance-service",
+      "certificationHash": "3c5495deace52fe9c1df7bf21804048afb6cd4d241b4cb562e6da2b3306714f2",
+      "certificationVersion": "block2.v1"
+    },
+    {
+      "certificationId": "cert-7031a005-133d-4e03-b80a-5661ca266177",
+      "caseId": "CASE-CABG3-2026-00014",
+      "parsedVariableId": "pv-6f9b26bd-a355-4453-bee5-0951dcc09dc2",
+      "completenessStatus": "complete",
+      "semanticValidity": "valid",
+      "sourceVerified": true,
+      "reliabilityScore": 0.97,
+      "sensitivityClass": "confidential",
+      "timestampCertified": "2026-03-29T23:57:59.511Z",
+      "certifierId": "data-governance-service",
+      "certificationHash": "de3e564b34e68eced6475180633337c276e115100820438055e8f51e94570d3a",
+      "certificationVersion": "block2.v1"
+    },
+    {
+      "certificationId": "cert-f1bdbaa3-467d-4595-a0c0-9373c7ff8dea",
+      "caseId": "CASE-CABG3-2026-00014",
+      "parsedVariableId": "pv-6e0a66a4-d2b8-4015-865c-94fd5bb498ff",
+      "completenessStatus": "complete",
+      "semanticValidity": "valid",
+      "sourceVerified": true,
+      "reliabilityScore": 0.97,
+      "sensitivityClass": "confidential",
+      "timestampCertified": "2026-03-29T23:57:59.511Z",
+      "certifierId": "data-governance-service",
+      "certificationHash": "8b42d748c84f1d08fb14c8f7008b295c451ee4465f90a60ba69e4eec1a4346ea",
+      "certificationVersion": "block2.v1"
+    },
+    {
+      "certificationId": "cert-168953e0-4df4-45f6-ab15-3d1864d3e90f",
+      "caseId": "CASE-CABG3-2026-00014",
+      "parsedVariableId": "pv-33dd6a1a-20f4-4ab3-9573-f0ea0f8dcd82",
+      "completenessStatus": "complete",
+      "semanticValidity": "valid",
+      "sourceVerified": true,
+      "reliabilityScore": 0.97,
+      "sensitivityClass": "restricted",
+      "timestampCertified": "2026-03-29T23:57:59.511Z",
+      "certifierId": "data-governance-service",
+      "certificationHash": "f8ad85252076e2ffd475e30ac425b09c1b3133e2f722e92f77468f8f344eadfd",
+      "certificationVersion": "block2.v1"
+    },
+    {
+      "certificationId": "cert-9dcf9155-2301-4113-b737-87a95ffaa691",
+      "caseId": "CASE-CABG3-2026-00014",
+      "parsedVariableId": "pv-fe2a326b-5bef-4294-bcc1-e70009ec19de",
+      "completenessStatus": "complete",
+      "semanticValidity": "valid",
+      "sourceVerified": true,
+      "reliabilityScore": 0.97,
+      "sensitivityClass": "restricted",
+      "timestampCertified": "2026-03-29T23:57:59.511Z",
+      "certifierId": "data-governance-service",
+      "certificationHash": "d44ea62ccc1f12b0676fd2042b2f53924fbf9f60ddcc79e4b9fa85bac17d8ee6",
+      "certificationVersion": "block2.v1"
+    },
+    {
+      "certificationId": "cert-54dcc74c-ec33-493e-bdad-cfbcf7d6002e",
+      "caseId": "CASE-CABG3-2026-00014",
+      "parsedVariableId": "pv-7abc2f79-68be-418a-9f4d-b88a97fe9cbe",
+      "completenessStatus": "complete",
+      "semanticValidity": "valid",
+      "sourceVerified": true,
+      "reliabilityScore": 0.97,
+      "sensitivityClass": "restricted",
+      "timestampCertified": "2026-03-29T23:57:59.511Z",
+      "certifierId": "data-governance-service",
+      "certificationHash": "faff9bbe6dd3e9f7944cbb21e04251183c93fa489e24554ed8ad93e1fe947640",
+      "certificationVersion": "block2.v1"
+    },
+    {
+      "certificationId": "cert-c2f647e8-c2d9-438c-80aa-bf228d6b8cd2",
+      "caseId": "CASE-CABG3-2026-00014",
+      "parsedVariableId": "pv-f70ec38e-02c9-4bc0-8d6a-a53e507740ba",
+      "completenessStatus": "complete",
+      "semanticValidity": "valid",
+      "sourceVerified": true,
+      "reliabilityScore": 0.97,
+      "sensitivityClass": "restricted",
+      "timestampCertified": "2026-03-29T23:57:59.511Z",
+      "certifierId": "data-governance-service",
+      "certificationHash": "a2485d3220ef4cbfbfb7aba703a467f7f99792190fbe7662cd89d64a864a997b",
+      "certificationVersion": "block2.v1"
+    },
+    {
+      "certificationId": "cert-0c4c3a22-d36e-4ce3-82fc-3c0cc11413b0",
+      "caseId": "CASE-CABG3-2026-00014",
+      "parsedVariableId": "pv-3ac2d781-85f1-4274-ba90-a96394b6b2e2",
+      "completenessStatus": "complete",
+      "semanticValidity": "valid",
+      "sourceVerified": true,
+      "reliabilityScore": 0.96,
+      "sensitivityClass": "restricted",
+      "timestampCertified": "2026-03-29T23:57:59.511Z",
+      "certifierId": "data-governance-service",
+      "certificationHash": "a51e1be1be537dd7899fe5e61d993168c381d5c003b696c63836ee08892150eb",
+      "certificationVersion": "block2.v1"
+    },
+    {
+      "certificationId": "cert-49a48e17-e485-478c-b66b-d113f020c712",
+      "caseId": "CASE-CABG3-2026-00014",
+      "parsedVariableId": "pv-aeecd6a4-a699-4e5b-9da4-69e7e6a97cc0",
+      "completenessStatus": "complete",
+      "semanticValidity": "valid",
+      "sourceVerified": true,
+      "reliabilityScore": 0.91,
+      "sensitivityClass": "highly_sensitive",
+      "timestampCertified": "2026-03-29T23:57:59.511Z",
+      "certifierId": "data-governance-service",
+      "certificationHash": "0b463de4ef850c08b9c389a6c34fda5f4e19da4af2a083d5f5ac4fef9701139f",
+      "certificationVersion": "block2.v1"
+    }
+  ],
+  "datasetStatuses": [
+    {
+      "caseId": "CASE-CABG3-2026-00014",
+      "certificationStatus": "PASS",
+      "blockingReasons": [],
+      "missingVariables": [],
+      "lastCertificationTimestamp": "2026-03-29T23:57:59.511Z",
+      "readinessForEte": true,
+      "dataCompletenessIndex": 100,
+      "dataReliabilityTier": "Nivel 1 (interno validado)",
+      "eteEligibleVariableIds": [
+        "pv-10b48cf9-348f-4aa6-ac53-408ca777321d",
+        "pv-bfb1ce39-6a63-485a-a6b5-1bfc893baa2b",
+        "pv-b31da56d-26b5-4470-bea3-a430740642ef",
+        "pv-6f9b26bd-a355-4453-bee5-0951dcc09dc2",
+        "pv-6e0a66a4-d2b8-4015-865c-94fd5bb498ff",
+        "pv-33dd6a1a-20f4-4ab3-9573-f0ea0f8dcd82",
+        "pv-fe2a326b-5bef-4294-bcc1-e70009ec19de",
+        "pv-7abc2f79-68be-418a-9f4d-b88a97fe9cbe",
+        "pv-f70ec38e-02c9-4bc0-8d6a-a53e507740ba",
+        "pv-3ac2d781-85f1-4274-ba90-a96394b6b2e2",
+        "pv-aeecd6a4-a699-4e5b-9da4-69e7e6a97cc0"
+      ],
+      "softFlags": []
+    }
+  ],
+  "ingestionEvents": [
+    {
+      "eventId": "evt-36f5ec93-8e6f-4508-a625-d612b3184132",
+      "eventType": "document.ingested",
+      "caseId": "CASE-CABG3-2026-00014",
+      "documentId": "doc-48bc3981-fd33-4e80-a62f-7c82689862c1",
+      "emittedAt": "2026-03-29T23:57:59.383Z",
+      "payload": {
+        "parsedVariableIds": [
+          "pv-10b48cf9-348f-4aa6-ac53-408ca777321d",
+          "pv-bfb1ce39-6a63-485a-a6b5-1bfc893baa2b",
+          "pv-b31da56d-26b5-4470-bea3-a430740642ef",
+          "pv-6f9b26bd-a355-4453-bee5-0951dcc09dc2",
+          "pv-6e0a66a4-d2b8-4015-865c-94fd5bb498ff"
+        ],
+        "documentType": "note",
+        "rawFormat": "json",
+        "mappingCount": 10,
+        "certificationStatus": "FAIL"
+      }
+    },
+    {
+      "eventId": "evt-0d35eb44-a980-4762-a8b9-376f3d877760",
+      "eventType": "document.ingested",
+      "caseId": "CASE-CABG3-2026-00014",
+      "documentId": "doc-391fb519-db1f-4933-88fa-d2299dae7337",
+      "emittedAt": "2026-03-29T23:57:59.430Z",
+      "payload": {
+        "parsedVariableIds": [
+          "pv-33dd6a1a-20f4-4ab3-9573-f0ea0f8dcd82",
+          "pv-fe2a326b-5bef-4294-bcc1-e70009ec19de",
+          "pv-7abc2f79-68be-418a-9f4d-b88a97fe9cbe"
+        ],
+        "documentType": "lab",
+        "rawFormat": "json",
+        "mappingCount": 6,
+        "certificationStatus": "FAIL"
+      }
+    },
+    {
+      "eventId": "evt-6f983ea3-91a3-4a8b-ba90-061c5c5d2b11",
+      "eventType": "document.ingested",
+      "caseId": "CASE-CABG3-2026-00014",
+      "documentId": "doc-9fb6a6fe-437e-4361-9fd0-bbd15c27e05d",
+      "emittedAt": "2026-03-29T23:57:59.464Z",
+      "payload": {
+        "parsedVariableIds": [
+          "pv-f70ec38e-02c9-4bc0-8d6a-a53e507740ba"
+        ],
+        "documentType": "imaging",
+        "rawFormat": "json",
+        "mappingCount": 2,
+        "certificationStatus": "FAIL"
+      }
+    },
+    {
+      "eventId": "evt-4e7c96a8-40c3-439b-ae32-debd0e2648c0",
+      "eventType": "document.ingested",
+      "caseId": "CASE-CABG3-2026-00014",
+      "documentId": "doc-d9748b70-2b31-4ee6-bf81-48b786a70ecf",
+      "emittedAt": "2026-03-29T23:57:59.493Z",
+      "payload": {
+        "parsedVariableIds": [
+          "pv-3ac2d781-85f1-4274-ba90-a96394b6b2e2"
+        ],
+        "documentType": "medication",
+        "rawFormat": "json",
+        "mappingCount": 1,
+        "certificationStatus": "FAIL"
+      }
+    },
+    {
+      "eventId": "evt-a989289a-2908-45d6-a2bf-68f397a38367",
+      "eventType": "document.ingested",
+      "caseId": "CASE-CABG3-2026-00014",
+      "documentId": "doc-554c23b7-bfd7-4a79-b932-ab4b09a36d1e",
+      "emittedAt": "2026-03-29T23:57:59.519Z",
+      "payload": {
+        "parsedVariableIds": [
+          "pv-aeecd6a4-a699-4e5b-9da4-69e7e6a97cc0"
+        ],
+        "documentType": "consent",
+        "rawFormat": "json",
+        "mappingCount": 1,
+        "certificationStatus": "PASS"
+      }
+    }
+  ],
+  "terminologyCatalog": [
+    {
+      "canonicalKey": "nstemi",
+      "display": "NSTEMI",
+      "category": "diagnosis",
+      "synonyms": [
+        "NSTEMI",
+        "IAMSEST",
+        "infarto agudo de miocardio sin elevacion del st"
+      ],
+      "systems": [
+        {
+          "system": "ICD-10",
+          "code": "I21.4",
+          "display": "Non-ST elevation myocardial infarction"
+        },
+        {
+          "system": "SNOMED",
+          "code": "57054005",
+          "display": "Acute non-ST segment elevation myocardial infarction"
+        }
+      ]
+    },
+    {
+      "canonicalKey": "cad multivaso",
+      "display": "CAD multivaso",
+      "category": "diagnosis",
+      "synonyms": [
+        "CAD multivaso",
+        "enfermedad coronaria multivaso",
+        "multivessel coronary artery disease"
+      ],
+      "systems": [
+        {
+          "system": "ICD-10",
+          "code": "I25.10",
+          "display": "Atherosclerotic heart disease"
+        },
+        {
+          "system": "SNOMED",
+          "code": "194828000",
+          "display": "Triple vessel coronary artery disease"
+        }
+      ]
+    },
+    {
+      "canonicalKey": "dm2",
+      "display": "DM2",
+      "category": "diagnosis",
+      "synonyms": [
+        "DM2",
+        "diabetes mellitus tipo 2",
+        "type 2 diabetes mellitus"
+      ],
+      "systems": [
+        {
+          "system": "ICD-10",
+          "code": "E11.9",
+          "display": "Type 2 diabetes mellitus without complications"
+        },
+        {
+          "system": "SNOMED",
+          "code": "44054006",
+          "display": "Type 2 diabetes mellitus"
+        }
+      ]
+    },
+    {
+      "canonicalKey": "erc estadio 3",
+      "display": "ERC estadio 3",
+      "category": "diagnosis",
+      "synonyms": [
+        "ERC 3",
+        "ERC estadio 3",
+        "enfermedad renal cronica estadio 3",
+        "ckd stage 3"
+      ],
+      "systems": [
+        {
+          "system": "ICD-10",
+          "code": "N18.30",
+          "display": "Chronic kidney disease, stage 3 unspecified"
+        },
+        {
+          "system": "SNOMED",
+          "code": "433144002",
+          "display": "Chronic kidney disease stage 3"
+        }
+      ]
+    },
+    {
+      "canonicalKey": "hta",
+      "display": "HTA",
+      "category": "diagnosis",
+      "synonyms": [
+        "HTA",
+        "hipertension arterial",
+        "hypertension"
+      ],
+      "systems": [
+        {
+          "system": "ICD-10",
+          "code": "I10",
+          "display": "Essential primary hypertension"
+        },
+        {
+          "system": "SNOMED",
+          "code": "38341003",
+          "display": "Hypertensive disorder"
+        }
+      ]
+    },
+    {
+      "canonicalKey": "troponina",
+      "display": "Troponina",
+      "category": "lab",
+      "synonyms": [
+        "troponina",
+        "troponina hs",
+        "high sensitivity troponin"
+      ],
+      "systems": [
+        {
+          "system": "LOINC",
+          "code": "89579-7",
+          "display": "Troponin I.cardiac [Mass/volume] in Serum or Plasma by High sensitivity method"
+        },
+        {
+          "system": "UCUM",
+          "code": "ng/L",
+          "display": "nanogram per liter"
+        }
+      ]
+    },
+    {
+      "canonicalKey": "creatinina",
+      "display": "Creatinina",
+      "category": "lab",
+      "synonyms": [
+        "creatinina",
+        "serum creatinine"
+      ],
+      "systems": [
+        {
+          "system": "LOINC",
+          "code": "2160-0",
+          "display": "Creatinine [Mass/volume] in Serum or Plasma"
+        },
+        {
+          "system": "UCUM",
+          "code": "mg/dL",
+          "display": "milligram per deciliter"
+        }
+      ]
+    },
+    {
+      "canonicalKey": "hba1c",
+      "display": "HbA1c",
+      "category": "lab",
+      "synonyms": [
+        "hba1c",
+        "hemoglobina glucosilada",
+        "hemoglobina glicosilada",
+        "glycated hemoglobin"
+      ],
+      "systems": [
+        {
+          "system": "LOINC",
+          "code": "4548-4",
+          "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+        },
+        {
+          "system": "UCUM",
+          "code": "%",
+          "display": "percent"
+        }
+      ]
+    },
+    {
+      "canonicalKey": "fevi",
+      "display": "FEVI",
+      "category": "measurement",
+      "synonyms": [
+        "fevi",
+        "lvef",
+        "fraccion de eyeccion del ventriculo izquierdo"
+      ],
+      "systems": [
+        {
+          "system": "LOINC",
+          "code": "33878-0",
+          "display": "Left ventricular ejection fraction by US"
+        },
+        {
+          "system": "UCUM",
+          "code": "%",
+          "display": "percent"
+        }
+      ]
+    },
+    {
+      "canonicalKey": "medicacion activa",
+      "display": "Medicación activa",
+      "category": "medication",
+      "synonyms": [
+        "medicacion activa",
+        "active medication",
+        "tratamiento activo"
+      ],
+      "systems": [
+        {
+          "system": "SNOMED",
+          "code": "182904002",
+          "display": "Drug therapy"
+        }
+      ]
+    },
+    {
+      "canonicalKey": "consentimiento base",
+      "display": "Consentimiento base",
+      "category": "consent",
+      "synonyms": [
+        "consentimiento base",
+        "consentimiento informado",
+        "base consent"
+      ],
+      "systems": [
+        {
+          "system": "SNOMED",
+          "code": "309370004",
+          "display": "Consent given for procedure"
+        }
+      ]
+    }
+  ],
+  "essentialVariables": [
+    "nstemi",
+    "cad multivaso",
+    "dm2",
+    "erc estadio 3",
+    "hta",
+    "troponina",
+    "creatinina",
+    "hba1c",
+    "fevi",
+    "medicacion activa",
+    "consentimiento base"
+  ]
+}

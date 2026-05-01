@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://icicso.local/schemas/evidence-intelligence/conflict-rule.schema.json",
+  "title": "Conflict Rule",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "rule_id",
+    "priority_code",
+    "priority_order",
+    "description",
+    "resolution_action"
+  ],
+  "properties": {
+    "rule_id": { "type": "string", "pattern": "^CRULE-[A-Z0-9_-]{6,}$" },
+    "priority_code": { "type": "string", "enum": ["source-priority", "recency-priority", "certainty-priority", "directness-priority", "jurisdiction-priority", "implementation-priority"] },
+    "priority_order": { "type": "integer", "minimum": 1, "maximum": 20 },
+    "description": { "type": "string", "minLength": 1 },
+    "resolution_action": { "type": "string", "enum": ["prefer-left", "prefer-right", "defer-review", "reduce-readiness", "mark-unresolved"] },
+    "requires_governance_review": { "type": "boolean" }
+  }
+}

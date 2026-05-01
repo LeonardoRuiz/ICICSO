@@ -1,0 +1,37 @@
+{
+  "catalogId": "icicso.clinical-functions.v1",
+  "code": "clinical-functions",
+  "label": "Clinical Functions",
+  "description": "Canonical taxonomy of the clinical purpose served by an evidence statement or executable object.",
+  "usageNotes": [
+    "One evidence statement should carry one primary clinical function.",
+    "Secondary functions can be modeled later as relationships, not duplicate primary labels."
+  ],
+  "entries": [
+    { "id": "cf.screening", "code": "screening", "label": "Screening", "description": "Identify patients at risk or likely to have latent disease before overt presentation.", "usageNotes": ["Use for asymptomatic or surveillance-entry populations."] },
+    { "id": "cf.diagnosis", "code": "diagnosis", "label": "Diagnosis", "description": "Confirm, exclude or refine the presence of disease or syndrome.", "usageNotes": ["Primary home for diagnostic-test and imaging-test evidence."] },
+    { "id": "cf.severity-stratification", "code": "severity-stratification", "label": "Severity Stratification", "description": "Classify disease severity, burden or stage.", "usageNotes": ["Separate from future risk prediction."] },
+    { "id": "cf.risk-stratification", "code": "risk-stratification", "label": "Risk Stratification", "description": "Estimate probability of future adverse outcomes or benefit/harm tradeoffs.", "usageNotes": ["Use for prognostic scores, models and risk thresholds."] },
+    { "id": "cf.eligibility", "code": "eligibility", "label": "Eligibility", "description": "Determine whether a patient qualifies for a treatment, pathway or procedure.", "usageNotes": ["Typical for AUC and protocol inclusion logic."] },
+    { "id": "cf.intervention-selection", "code": "intervention-selection", "label": "Intervention Selection", "description": "Choose among competing interventions or treatment strategies.", "usageNotes": ["Primary function for surgery vs device vs drug selection rules."] },
+    { "id": "cf.perioperative-optimization", "code": "perioperative-optimization", "label": "Perioperative Optimization", "description": "Optimize patient condition, preparation and workflow around an operative episode.", "usageNotes": ["Includes ERAS preop readiness and multidisciplinary preparation."] },
+    { "id": "cf.intraoperative-management", "code": "intraoperative-management", "label": "Intraoperative Management", "description": "Guide decisions made during a procedure or operation.", "usageNotes": ["Includes anesthesia, device deployment and operative rescue strategies."] },
+    { "id": "cf.postoperative-management", "code": "postoperative-management", "label": "Postoperative Management", "description": "Guide immediate and early post-procedure care.", "usageNotes": ["Use for analgesia, nutrition, mobilization and routine postoperative care."] },
+    { "id": "cf.critical-care-management", "code": "critical-care-management", "label": "Critical Care Management", "description": "Direct ICU-level management for unstable or high-acuity patients.", "usageNotes": ["Distinct from routine postoperative ward management."] },
+    { "id": "cf.rehabilitation", "code": "rehabilitation", "label": "Rehabilitation", "description": "Support functional recovery, conditioning or return to baseline activity.", "usageNotes": ["Use for rehab strategy or structured recovery programs."] },
+    { "id": "cf.follow-up", "code": "follow-up", "label": "Follow-up", "description": "Guide scheduled clinical reassessment after index care.", "usageNotes": ["Use when the main goal is interval monitoring rather than recurrence detection alone."] },
+    { "id": "cf.complication-management", "code": "complication-management", "label": "Complication Management", "description": "Detect, classify and manage adverse events or complications.", "usageNotes": ["Use for rescue bundles, escalation rules and reintervention triggers."] },
+    { "id": "cf.surveillance", "code": "surveillance", "label": "Surveillance", "description": "Ongoing surveillance for recurrence, deterioration or delayed complications.", "usageNotes": ["Distinct from generic follow-up because the objective is event detection."] },
+    { "id": "cf.escalation", "code": "escalation", "label": "Escalation", "description": "Increase intensity of care or move to higher-acuity interventions.", "usageNotes": ["Typically coupled to thresholds or failure criteria."] },
+    { "id": "cf.de-escalation", "code": "de-escalation", "label": "De-escalation", "description": "Reduce intensity, monitoring or treatment burden safely.", "usageNotes": ["Use for ventilator liberation, antimicrobial narrowing or ICU step-down."] },
+    { "id": "cf.palliative-transition", "code": "palliative-transition", "label": "Palliative Transition", "description": "Transition care goals toward palliation or comfort-focused management.", "usageNotes": ["Use only when the evidence explicitly addresses goal-of-care shift."] },
+    { "id": "cf.prevention", "code": "prevention", "label": "Prevention", "description": "Prevent primary, perioperative or secondary adverse events.", "usageNotes": ["Includes prophylaxis and preventive bundle recommendations."] },
+    { "id": "cf.discharge-planning", "code": "discharge-planning", "label": "Discharge Planning", "description": "Determine readiness, timing and structure of discharge transitions.", "usageNotes": ["Use for discharge milestones, home monitoring and follow-up readiness."] },
+    { "id": "cf.long-term-secondary-prevention", "code": "long-term-secondary-prevention", "label": "Long-term Secondary Prevention", "description": "Reduce recurrence or long-term adverse outcomes after an index event.", "usageNotes": ["Applies to chronic prevention after surgery, MI, stroke or cancer therapy."] }
+  ],
+  "constraints": {
+    "uniqueFields": ["id", "code", "label"],
+    "requiredFields": ["id", "code", "label", "description", "usageNotes"],
+    "codePattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+  }
+}

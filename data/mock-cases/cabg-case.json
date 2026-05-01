@@ -1,0 +1,18 @@
+{
+  "id": "case-cabg-x3-nstemi-erc3",
+  "title": "Caso Mock Activo",
+  "diagnosis": "CABG x3 + DM2 + FEVI 35% + NSTEMI + ERC3",
+  "fields": [
+    { "label": "dataset certificado", "value": "CABG_CERT_V2026.04 / 98.7% consistencia" },
+    { "label": "EO aplicables", "value": "12 objetos priorizados / 3 conflictos latentes" },
+    { "label": "ECS", "value": "ECS-CABG-NSTEMI-042 con trazabilidad completa" },
+    { "label": "UCI", "value": "alta complejidad / ventana 72h" },
+    { "label": "nivel EUL", "value": "EUL-3 vigilado" },
+    { "label": "GP activo", "value": "GP-ACS-CABG-RENAL-01" },
+    { "label": "CPO activo", "value": "CPO-POST-CABG-NSTEMI" },
+    { "label": "TAM fase", "value": "stabilize-and-translate" },
+    { "label": "EVT activos", "value": "EVT-NSTEMI, EVT-RENAL-RISK, EVT-LOW-EF" },
+    { "label": "RDY-G disponibles", "value": "8 ready-governance prompts" },
+    { "label": "ESL emitidos", "value": "2 emitidos / 1 pendiente de cierre" }
+  ]
+}

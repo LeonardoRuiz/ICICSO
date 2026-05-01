@@ -1,0 +1,10 @@
+{
+  "artifact_kind": "conflict-rule",
+  "data": {
+    "rule_id": "",
+    "priority_code": "first",
+    "priority_order": "1",
+    "description": "",
+    "resolution_action": "pick"
+  }
+}

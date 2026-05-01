@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ICICSO Terminology Console</title>
+  <link rel="stylesheet" href="../assets/icicso-palette.css">
+  <style>
+    :root {
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 16px;
+      --shadow: 0 28px 60px rgba(0, 0, 0, 0.34);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      color: var(--ink);
+      font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+      font-size: 18px;
+      line-height: 1.58;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at top left, rgba(95, 201, 187, 0.12), transparent 24%),
+        radial-gradient(circle at top right, rgba(127, 179, 213, 0.08), transparent 18%),
+        linear-gradient(180deg, #08161a 0%, #041015 100%);
+    }
+
+    .page {
+      width: min(1640px, calc(100vw - 20px));
+      margin: 12px auto 36px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero,
+    .panel,
+    .sidebar-card,
+    .detail-card {
+      background: linear-gradient(180deg, rgba(10, 23, 28, 0.96), rgba(7, 16, 20, 0.94));
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+    }
+
+    .hero,
+    .panel,
+    .sidebar-card,
+    .detail-card {
+      padding: 22px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 10px;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0 0 12px;
+      font-family: "Space Grotesk", "IBM Plex Sans", sans-serif;
+      letter-spacing: -0.03em;
+      line-height: 1.08;
+    }
+
+    h1 { font-size: clamp(2.5rem, 4.8vw, 4.5rem); }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.12rem; }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(320px, 0.85fr);
+      gap: 16px;
+      align-items: start;
+    }
+
+    .hero-actions,
+    .main-tabs,
+    .modebar,
+    .chip-row,
+    .dataset-tabs,
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .pill,
+    .tab,
+    .mode-tab,
+    .chip,
+    .dataset-tab,
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+    }
+
+    .pill:hover,
+    .tab:hover,
+    .mode-tab:hover,
+    .chip:hover,
+    .dataset-tab:hover,
+    .btn:hover {
+      transform: translateY(-1px);
+      border-color: var(--line-strong);
+    }
+
+    .tab.active,
+    .mode-tab.active,
+    .chip.active,
+    .dataset-tab.active {
+      background: rgba(95, 201, 187, 0.14);
+      border-color: rgba(95, 201, 187, 0.38);
+      color: #91e7db;
+    }
+
+    [data-mode-panel] { display: none; }
+    body[data-workbench-mode="clinical"] [data-mode-panel~="clinical"],
+    body[data-workbench-mode="data"] [data-mode-panel~="data"],
+    body[data-workbench-mode="operation"] [data-mode-panel~="operation"] {
+      display: block;
+    }
+
+    .insight-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .insight-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.03);
+      padding: 14px;
+    }
+
+    .chart-row {
+      display: grid;
+      grid-template-columns: minmax(92px, 0.9fr) minmax(120px, 1.4fr) 48px;
+      gap: 10px;
+      align-items: center;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .chart-track {
+      height: 8px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .chart-track i {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--accent);
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.03);
+      padding: 16px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 1.9rem;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .ok { color: var(--ok); }
+    .warn { color: var(--warn); }
+    .bad { color: var(--bad); }
+    .manual { color: #bfa6f4; }
+    .muted { color: var(--muted); }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: minmax(340px, 0.95fr) minmax(0, 1.65fr);
+      gap: 18px;
+    }
+
+    .sidebar {
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .filter-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+    }
+
+    .field label {
+      color: var(--dim);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: var(--panel-strong);
+      color: var(--ink);
+      padding: 12px 14px;
+      font: inherit;
+    }
+
+    .ops-grid,
+    .roadmap-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .op-card,
+    .roadmap-item {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.03);
+      padding: 12px 14px;
+    }
+
+    .op-card strong,
+    .roadmap-item strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+      font-size: 0.95rem;
+    }
+
+    .dataset-list {
+      display: grid;
+      gap: 10px;
+      max-height: 760px;
+      overflow: auto;
+      padding-right: 4px;
+    }
+
+    .dataset-item {
+      padding: 14px 16px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.03);
+      cursor: pointer;
+      transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+    }
+
+    .dataset-item:hover {
+      transform: translateY(-1px);
+      border-color: var(--line-strong);
+    }
+
+    .dataset-item.active {
+      border-color: rgba(95, 201, 187, 0.38);
+      background:
+        linear-gradient(135deg, rgba(95, 201, 187, 0.10), rgba(127, 179, 213, 0.06)),
+        rgba(255, 255, 255, 0.03);
+    }
+
+    .dataset-headline {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .dataset-name {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .dataset-sub {
+      display: block;
+      margin-top: 4px;
+      color: var(--dim);
+      font-size: 13px;
+    }
+
+    .dataset-desc {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    .detail {
+      display: grid;
+      gap: 14px;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .meta-box {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.03);
+      padding: 12px 14px;
+    }
+
+    .meta-box span {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--dim);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .meta-box strong {
+      color: var(--ink);
+      font-size: 0.98rem;
+      word-break: break-word;
+    }
+
+    .callout {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--muted);
+    }
+
+    .callout.warning {
+      border-color: rgba(214, 162, 94, 0.3);
+      background: rgba(214, 162, 94, 0.08);
+    }
+
+    .callout.danger {
+      border-color: rgba(204, 111, 115, 0.3);
+      background: rgba(204, 111, 115, 0.08);
+    }
+
+    .dataset-summary {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .summary-stat {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.03);
+      padding: 12px 14px;
+    }
+
+    .summary-stat span {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--dim);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .summary-stat strong {
+      color: var(--ink);
+      font-size: 1rem;
+    }
+
+    .workbench {
+      display: grid;
+      gap: 14px;
+    }
+
+    .workbench-top {
+      display: grid;
+      grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .column-panel,
+    .row-detail {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.03);
+      padding: 14px;
+    }
+
+    .column-panel h3,
+    .row-detail h3 {
+      margin-bottom: 10px;
+    }
+
+    .column-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .column-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      font-size: 12px;
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    .column-toggle input {
+      width: 14px;
+      height: 14px;
+      accent-color: var(--accent);
+    }
+
+    .row-detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .detail-kv {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.02);
+      padding: 10px 12px;
+    }
+
+    .detail-kv span {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--dim);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .detail-kv strong {
+      display: block;
+      color: var(--ink);
+      font-size: 0.98rem;
+      line-height: 1.45;
+      word-break: break-word;
+      white-space: pre-wrap;
+    }
+
+    .description-block {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .description-block strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--ink);
+      font-size: 1rem;
+    }
+
+    .table-shell {
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    table {
+      width: 100%;
+      min-width: 820px;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      padding: 12px 10px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--dim);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      position: sticky;
+      top: 0;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    th:first-child,
+    td:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 1;
+      background: rgba(7, 16, 20, 0.98);
+    }
+
+    th:first-child {
+      z-index: 2;
+    }
+
+    tr[data-row-index] {
+      cursor: pointer;
+    }
+
+    tr[data-row-index]:hover td {
+      background: rgba(95, 201, 187, 0.06);
+    }
+
+    tr.is-selected td {
+      background: rgba(95, 201, 187, 0.12);
+    }
+
+    .pagination {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 12px;
+    }
+
+    .pagination-meta {
+      color: var(--dim);
+      font-size: 13px;
+    }
+
+    .empty {
+      padding: 18px;
+      border-radius: var(--radius-md);
+      border: 1px dashed var(--line);
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    code {
+      font-family: "IBM Plex Mono", Consolas, monospace;
+      font-size: 12px;
+      color: var(--accent-warm);
+      word-break: break-word;
+    }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 1220px) {
+      .hero-grid,
+      .workspace,
+      .insight-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      html, body { font-size: 17px; }
+      .page { width: min(100vw - 12px, 100%); margin: 6px auto 20px; }
+      .hero, .panel, .sidebar-card, .detail-card { padding: 16px; }
+      .filter-grid,
+      .meta-grid,
+      .metrics,
+      .dataset-summary,
+      .insight-grid,
+      .workbench-top,
+      .row-detail-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body data-workbench-mode="clinical">
+  <div class="page">
+    <section class="hero">
+      <span class="eyebrow">Datos completos</span>
+      <div class="hero-grid">
+        <div>
+          <h1>Terminology Console</h1>
+          <p>Esta consola ya trabaja sobre los registros completos exportados de lo que se bajó al repo. Para cada terminología descargada puedes ver la tabla completa, buscar dentro de sus filas, ordenar columnas y paginar. Para las pendientes, se mantiene el estado operativo con el requisito exacto de desbloqueo.</p>
+          <div class="hero-actions" style="margin-top:16px;">
+            <a class="pill" href="./terminology_sync_report_latest.html">Reporte operativo</a>
+            <a class="pill" href="file:///C:/Users/leona/OneDrive/Desktop/MxRep/ICICSO/ICICSO_TERMINOLOGIAS/00_METADATA/download_state.json">Estado JSON</a>
+            <a class="pill" href="file:///C:/Users/leona/OneDrive/Desktop/MxRep/ICICSO/logs/download_log.tsv">Log TSV</a>
+          </div>
+          <div class="modebar" id="modebar" style="margin-top:16px;" aria-label="Modo de trabajo">
+            <button class="mode-tab active" data-mode="clinical">Vista clínica</button>
+            <button class="mode-tab" data-mode="data">Datos</button>
+            <button class="mode-tab" data-mode="operation">Operación</button>
+          </div>
+          <div class="main-tabs" id="mainTabs" data-mode-panel="data operation" style="margin-top:16px;">
+            <button class="tab" data-tab="all">Todo</button>
+            <button class="tab active" data-tab="downloaded">Descargadas</button>
+            <button class="tab" data-tab="pending">Pendientes</button>
+            <button class="tab" data-tab="qa">QA</button>
+          </div>
+        </div>
+        <div class="metrics">
+          <div class="metric"><strong id="metricDatasets">0</strong>datasets</div>
+          <div class="metric"><strong class="ok" id="metricDownloaded">0</strong>descargadas</div>
+          <div class="metric"><strong class="warn" id="metricPending">0</strong>pendientes</div>
+          <div class="metric"><strong id="metricRows">0</strong>filas visibles</div>
+        </div>
+      </div>
+      <div class="insight-grid" id="insightPanel" data-mode-panel="clinical data"></div>
+    </section>
+
+    <section class="panel">
+      <div class="workspace">
+        <aside class="sidebar">
+          <div class="sidebar-card" data-mode-panel="clinical data">
+            <span class="eyebrow">Filtros</span>
+            <h2>Exploración</h2>
+            <div class="filter-grid" style="margin-top:12px;">
+              <div class="field">
+                <label for="globalSearch">Buscar</label>
+                <input id="globalSearch" type="text" placeholder="ICD10, code, ValueSet, A02..." />
+              </div>
+              <div class="field">
+                <label for="statusFilter">Estado</label>
+                <select id="statusFilter">
+                  <option value="all">Todos</option>
+                  <option value="success">Success</option>
+                  <option value="awaiting_credentials">Awaiting credentials</option>
+                  <option value="manual_required">Manual required</option>
+                  <option value="skipped">Tracked / skipped</option>
+                  <option value="failed">Failed</option>
+                </select>
+              </div>
+            </div>
+            <div class="chip-row" style="margin-top:14px;">
+              <button class="chip" data-quick="success">Disponibles</button>
+              <button class="chip" data-quick="awaiting_credentials">Con credenciales</button>
+              <button class="chip" data-quick="manual_required">Licencia manual</button>
+              <button class="chip" data-quick="skipped">Trazadas</button>
+              <button class="chip" data-quick="qa">QA</button>
+            </div>
+            <div class="chip-row" style="margin-top:10px;">
+              <button class="chip" data-preset="diagnosticos">Diagnósticos</button>
+              <button class="chip" data-preset="medicacion">Medicación</button>
+              <button class="chip" data-preset="interoperabilidad">Interoperabilidad</button>
+              <button class="chip" data-preset="observacionales">Observacionales</button>
+              <button class="chip" data-preset="clear">Limpiar</button>
+            </div>
+          </div>
+
+          <div class="sidebar-card" data-mode-panel="operation">
+            <span class="eyebrow">Acciones</span>
+            <h2>Operación</h2>
+            <p>Desde un HTML local no conviene ejecutar PowerShell directo. Aquí quedan botones para copiar el comando correcto y correrlo a discreción.</p>
+            <div id="operationsPanel" class="ops-grid"></div>
+          </div>
+
+          <div class="sidebar-card" data-mode-panel="clinical data">
+            <span class="eyebrow">Datasets</span>
+            <div id="datasetList" class="dataset-list"></div>
+          </div>
+
+          <div class="sidebar-card" data-mode-panel="operation">
+            <span class="eyebrow">Roadmap</span>
+            <h2>Cobertura futura</h2>
+            <p>La misma consola está pensada para crecer a observacionales, diagnósticos, semántica clínica, medicación e interoperabilidad.</p>
+            <div id="roadmapPanel" class="roadmap-list"></div>
+          </div>
+        </aside>
+
+        <main class="detail" id="detailView"></main>
+      </div>
+    </section>
+  </div>
+
+  <script src="./terminology_console_data.js"></script>
+  <script>
+    const rawPayload = window.TERMINOLOGY_CONSOLE_DATA || { datasets: [], state: {} };
+    const exportedDatasets = rawPayload.datasets || [];
+    const stateMap = rawPayload.state || {};
+    const operations = rawPayload.operations || [];
+    const roadmap = rawPayload.roadmap || [];
+
+    const state = {
+      mainTab: "downloaded",
+      statusFilter: "all",
+      search: "",
+      activeDataset: "",
+      rowSearch: "",
+      mode: "clinical",
+      page: 1,
+      perPage: 50,
+      sortColumn: "",
+      sortDirection: "asc",
+      selectedRowIndex: 0,
+      visibleColumnsByDataset: {}
+    };
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    function buildDatasetEntries() {
+      const existing = new Set(exportedDatasets.map(item => item.id));
+      const pending = Object.entries(stateMap)
+        .filter(([id]) => !existing.has(id))
+        .map(([id, value]) => ({
+          id,
+          title: value.title || value.standard || id,
+          kind: value.status === "manual_required" ? "pending" : "pending",
+          columns: [],
+          rows: [],
+          row_count: 0,
+          path: value.path || "",
+          short_desc: value.short_desc || value.source_notes || value.download_observation || "Fuente trazada en el catalogo oficial.",
+          domain: value.domain || value.subtopic || "general",
+          scope: value.scope || value.format || "sin alcance definido",
+          future_role: value.future_role || value.ingest_strategy || "pendiente de integracion",
+          state: value
+        }));
+
+      return exportedDatasets.map(item => ({ ...item, state: stateMap[item.id] || {} })).concat(pending);
+    }
+
+    const datasets = buildDatasetEntries();
+    if (!state.activeDataset && datasets.length) {
+      state.activeDataset = (datasets.find(item => item.kind === "downloaded") || datasets[0]).id;
+    }
+
+    const els = {
+      datasetList: document.getElementById("datasetList"),
+      detailView: document.getElementById("detailView"),
+      globalSearch: document.getElementById("globalSearch"),
+      statusFilter: document.getElementById("statusFilter"),
+      mainTabs: document.getElementById("mainTabs"),
+      metricDatasets: document.getElementById("metricDatasets"),
+      metricDownloaded: document.getElementById("metricDownloaded"),
+      metricPending: document.getElementById("metricPending"),
+      metricRows: document.getElementById("metricRows"),
+      insightPanel: document.getElementById("insightPanel"),
+      modebar: document.getElementById("modebar"),
+      operationsPanel: document.getElementById("operationsPanel"),
+      roadmapPanel: document.getElementById("roadmapPanel")
+    };
+
+    function statusOf(dataset) {
+      return dataset.state.status || (dataset.kind === "downloaded" ? "success" : dataset.kind === "qa" ? "success" : "awaiting_credentials");
+    }
+
+    function statusClass(status) {
+      if (status === "success") return "ok";
+      if (status === "awaiting_credentials") return "warn";
+      if (status === "manual_required") return "manual";
+      if (status === "failed") return "bad";
+      return "muted";
+    }
+
+    function titleCaseStatus(status) {
+      return String(status || "").replaceAll("_", " ").toUpperCase();
+    }
+
+    function matchesMainTab(dataset) {
+      if (state.mainTab === "all") return true;
+      if (state.mainTab === "downloaded") return dataset.kind === "downloaded";
+      if (state.mainTab === "pending") return statusOf(dataset) === "awaiting_credentials" || statusOf(dataset) === "manual_required" || statusOf(dataset) === "skipped" || statusOf(dataset) === "failed";
+      if (state.mainTab === "qa") return dataset.kind === "qa";
+      return true;
+    }
+
+    function matchesStatus(dataset) {
+      return state.statusFilter === "all" || statusOf(dataset) === state.statusFilter;
+    }
+
+    function matchesGlobalSearch(dataset) {
+      if (!state.search) return true;
+      const text = JSON.stringify(dataset).toLowerCase();
+      return text.includes(state.search.toLowerCase());
+    }
+
+    function filteredDatasets() {
+      return datasets.filter(dataset => matchesMainTab(dataset) && matchesStatus(dataset) && matchesGlobalSearch(dataset));
+    }
+
+    function renderOperations() {
+      els.operationsPanel.innerHTML = operations.map(item => `
+        <div class="op-card">
+          <strong>${escapeHtml(item.label)}</strong>
+          <p>${escapeHtml(item.description)}</p>
+          <div class="chip-row" style="margin-top:10px;">
+            <button class="btn" data-copy-command="${escapeHtml(item.command)}">Copiar comando</button>
+          </div>
+          <p style="margin-top:10px;"><code>${escapeHtml(item.command)}</code></p>
+        </div>
+      `).join("");
+
+      els.operationsPanel.querySelectorAll("[data-copy-command]").forEach(button => {
+        button.addEventListener("click", async () => {
+          const command = button.getAttribute("data-copy-command") || "";
+          try {
+            await navigator.clipboard.writeText(command);
+            button.textContent = "Copiado";
+            setTimeout(() => { button.textContent = "Copiar comando"; }, 1200);
+          } catch {
+            button.textContent = "Copia manual";
+          }
+        });
+      });
+    }
+
+    function renderRoadmap() {
+      els.roadmapPanel.innerHTML = roadmap.map(item => `
+        <div class="roadmap-item">
+          <strong>${escapeHtml(item.track)}</strong>
+          <p>${escapeHtml(item.summary)}</p>
+        </div>
+      `).join("");
+    }
+
+    function ensureActiveDataset(items) {
+      if (!items.some(item => item.id === state.activeDataset)) {
+        state.activeDataset = items[0]?.id || "";
+      }
+    }
+
+    function renderMetrics(items) {
+      els.metricDatasets.textContent = String(items.length);
+      els.metricDownloaded.textContent = String(items.filter(item => item.kind === "downloaded").length);
+      els.metricPending.textContent = String(items.filter(item => {
+        const status = statusOf(item);
+        return status === "awaiting_credentials" || status === "manual_required" || status === "skipped";
+      }).length);
+      const visibleRows = items.reduce((acc, item) => acc + (item.row_count || 0), 0);
+      els.metricRows.textContent = visibleRows.toLocaleString("en-US");
+    }
+
+    function chartRows(entries) {
+      if (!entries.length) {
+        return '<p class="muted">Sin datos para los filtros actuales.</p>';
+      }
+      const max = Math.max(...entries.map(([, count]) => count), 1);
+      return entries.map(([label, count]) => `
+        <div class="chart-row">
+          <span>${escapeHtml(label)}</span>
+          <div class="chart-track"><i style="width:${Math.max(6, Math.round((count / max) * 100))}%"></i></div>
+          <strong>${count.toLocaleString("en-US")}</strong>
+        </div>
+      `).join("");
+    }
+
+    function countBy(items, resolver) {
+      return items.reduce((accumulator, item) => {
+        const key = resolver(item) || "general";
+        accumulator.set(key, (accumulator.get(key) || 0) + 1);
+        return accumulator;
+      }, new Map());
+    }
+
+    function topEntries(map, limit = 6) {
+      return Array.from(map.entries()).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).slice(0, limit);
+    }
+
+    function renderInsights(items) {
+      const byStatus = topEntries(countBy(items, statusOf));
+      const byDomain = topEntries(countBy(items, item => item.domain));
+      const byRows = items
+        .filter(item => item.row_count)
+        .map(item => [item.id, item.row_count])
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 6);
+
+      els.insightPanel.innerHTML = `
+        <div class="insight-card">
+          <h3>Estado operativo</h3>
+          ${chartRows(byStatus)}
+        </div>
+        <div class="insight-card">
+          <h3>Dominio clínico</h3>
+          ${chartRows(byDomain)}
+        </div>
+        <div class="insight-card">
+          <h3>Volumen navegable</h3>
+          ${chartRows(byRows)}
+        </div>
+      `;
+    }
+
+    function renderDatasetList(items) {
+      if (!items.length) {
+        els.datasetList.innerHTML = '<div class="empty">No hay datasets que coincidan con los filtros.</div>';
+        return;
+      }
+      els.datasetList.innerHTML = items.map(item => `
+        <button class="dataset-item ${item.id === state.activeDataset ? "active" : ""}" data-id="${item.id}">
+          <div class="dataset-headline">
+            <div>
+              <div class="dataset-name">${escapeHtml(item.id)}</div>
+              <span class="dataset-sub">${escapeHtml(item.title)}</span>
+              <span class="dataset-desc">${escapeHtml(item.short_desc || "Sin descripción corta todavía.")}</span>
+            </div>
+            <span class="status-pill ${statusClass(statusOf(item))}">${titleCaseStatus(statusOf(item))}</span>
+          </div>
+          <div class="chip-row" style="margin-top:10px;">
+            <span class="chip">${escapeHtml(item.kind)}</span>
+            <span class="chip">${escapeHtml(item.domain || "general")}</span>
+            <span class="chip">${(item.row_count || 0).toLocaleString("en-US")} filas</span>
+          </div>
+        </button>
+      `).join("");
+
+      els.datasetList.querySelectorAll("[data-id]").forEach(button => {
+        button.addEventListener("click", () => {
+          state.activeDataset = button.dataset.id;
+          state.page = 1;
+          state.rowSearch = "";
+          state.sortColumn = "";
+          state.selectedRowIndex = 0;
+          render();
+        });
+      });
+    }
+
+    function getActiveDataset(items) {
+      return items.find(item => item.id === state.activeDataset);
+    }
+
+    function rowMatchesSearch(row) {
+      if (!state.rowSearch) return true;
+      return JSON.stringify(row).toLowerCase().includes(state.rowSearch.toLowerCase());
+    }
+
+    function sortRows(dataset, rows) {
+      if (!state.sortColumn) return rows;
+      const sorted = [...rows];
+      sorted.sort((a, b) => {
+        const left = String(a[state.sortColumn] ?? "").toLowerCase();
+        const right = String(b[state.sortColumn] ?? "").toLowerCase();
+        if (left < right) return state.sortDirection === "asc" ? -1 : 1;
+        if (left > right) return state.sortDirection === "asc" ? 1 : -1;
+        return 0;
+      });
+      return sorted;
+    }
+
+    function paginate(rows) {
+      const totalPages = Math.max(1, Math.ceil(rows.length / state.perPage));
+      if (state.page > totalPages) state.page = totalPages;
+      const start = (state.page - 1) * state.perPage;
+      return {
+        totalPages,
+        pagedRows: rows.slice(start, start + state.perPage),
+        start: rows.length ? start + 1 : 0,
+        end: Math.min(start + state.perPage, rows.length)
+      };
+    }
+
+    function getVisibleColumns(dataset) {
+      if (!dataset.columns?.length) return [];
+      const current = state.visibleColumnsByDataset[dataset.id];
+      if (!current?.length) {
+        state.visibleColumnsByDataset[dataset.id] = [...dataset.columns];
+        return dataset.columns;
+      }
+      return current.filter(column => dataset.columns.includes(column));
+    }
+
+    function setVisibleColumns(dataset, columns) {
+      state.visibleColumnsByDataset[dataset.id] = columns.length ? columns : [dataset.columns[0]];
+    }
+
+    function renderMetaBoxes(dataset) {
+      const entries = [
+        ["Estado", statusOf(dataset)],
+        ["Filas", (dataset.row_count || 0).toLocaleString("en-US")],
+        ["Archivo", dataset.path || "N/A"],
+        ["Origen", dataset.state.url || dataset.source || "N/A"],
+        ["Bytes", String(dataset.state.bytes ?? dataset.bytes ?? 0)],
+        ["Actualizado", dataset.state.updated_at || "N/A"]
+      ];
+
+      if (dataset.package) {
+        entries.push(["Paquete", `${dataset.package.name || ""} ${dataset.package.version || ""}`.trim()]);
+      }
+      if (dataset.classification) {
+        entries.push(["Clasificación", dataset.classification]);
+      }
+
+      return `
+        <div class="meta-grid">
+          ${entries.map(([label, value]) => `
+            <div class="meta-box">
+              <span>${escapeHtml(label)}</span>
+              <strong>${escapeHtml(value)}</strong>
+            </div>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    function renderDatasetSummary(dataset, filteredCount, visibleColumns) {
+      return `
+        <div class="dataset-summary">
+          <div class="summary-stat">
+            <span>Filas dataset</span>
+            <strong>${(dataset.row_count || 0).toLocaleString("en-US")}</strong>
+          </div>
+          <div class="summary-stat">
+            <span>Filas filtradas</span>
+            <strong>${filteredCount.toLocaleString("en-US")}</strong>
+          </div>
+          <div class="summary-stat">
+            <span>Columnas visibles</span>
+            <strong>${visibleColumns.length}</strong>
+          </div>
+          <div class="summary-stat">
+            <span>Orden activo</span>
+            <strong>${state.sortColumn ? `${escapeHtml(state.sortColumn)} ${state.sortDirection}` : "sin orden"}</strong>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderColumnPanel(dataset, visibleColumns) {
+      return `
+        <div class="column-panel">
+          <h3>Columnas visibles</h3>
+          <p>Activa solo lo que necesitas para leer el dataset con menos ruido visual.</p>
+          <div class="chip-row" style="margin-top:10px;">
+            <button class="btn" id="showAllColumns">Todas</button>
+            <button class="btn" id="showCoreColumns">Compacta</button>
+          </div>
+          <div class="column-list">
+            ${dataset.columns.map(column => `
+              <label class="column-toggle">
+                <input type="checkbox" data-column-toggle="${escapeHtml(column)}" ${visibleColumns.includes(column) ? "checked" : ""}>
+                <span>${escapeHtml(column)}</span>
+              </label>
+            `).join("")}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderRowDetail(dataset, rows, visibleColumns) {
+      const safeIndex = Math.min(state.selectedRowIndex, Math.max(rows.length - 1, 0));
+      state.selectedRowIndex = safeIndex;
+      const row = rows[safeIndex];
+      if (!row) {
+        return `
+          <div class="row-detail">
+            <h3>Detalle del registro</h3>
+            <div class="empty">No hay filas para mostrar con los filtros actuales.</div>
+          </div>
+        `;
+      }
+      return `
+        <div class="row-detail">
+          <h3>Detalle del registro</h3>
+          <p>Fila seleccionada: ${(safeIndex + 1).toLocaleString("en-US")} de ${rows.length.toLocaleString("en-US")}</p>
+          <div class="row-detail-grid" style="margin-top:12px;">
+            ${visibleColumns.map(column => `
+              <div class="detail-kv">
+                <span>${escapeHtml(column)}</span>
+                <strong>${escapeHtml(row[column] ?? "")}</strong>
+              </div>
+            `).join("")}
+          </div>
+        </div>
+      `;
+    }
+
+    function renderTable(dataset) {
+      if (!dataset.columns?.length || !dataset.rows?.length) {
+        return '<div class="empty">Este dataset no tiene filas navegables disponibles en esta sesión.</div>';
+      }
+
+      const visibleColumns = getVisibleColumns(dataset);
+      const filtered = dataset.rows.filter(rowMatchesSearch);
+      const ordered = sortRows(dataset, filtered);
+      const pager = paginate(ordered);
+      const selectedWithinPage = Math.max(0, state.selectedRowIndex - (pager.start ? pager.start - 1 : 0));
+
+      return `
+        ${renderDatasetSummary(dataset, filtered.length, visibleColumns)}
+        <div class="toolbar">
+          <div class="field" style="min-width:260px;">
+            <label for="rowSearch">Buscar dentro del dataset</label>
+            <input id="rowSearch" type="text" value="${escapeHtml(state.rowSearch)}" placeholder="Buscar dentro de ${escapeHtml(dataset.id)}..." />
+          </div>
+          <div class="field" style="width:140px;">
+            <label for="perPage">Filas por página</label>
+            <select id="perPage">
+              ${[25, 50, 100, 250].map(size => `<option value="${size}" ${size === state.perPage ? "selected" : ""}>${size}</option>`).join("")}
+            </select>
+          </div>
+          <button class="btn" id="exportCsv">Exportar CSV</button>
+          <button class="btn" id="exportJson">Exportar JSON</button>
+        </div>
+        <div class="workbench">
+          <div class="workbench-top">
+            ${renderColumnPanel(dataset, visibleColumns)}
+            ${renderRowDetail(dataset, ordered, visibleColumns)}
+          </div>
+        <div class="table-shell">
+          <table>
+            <thead>
+              <tr>${visibleColumns.map(column => `<th data-column="${escapeHtml(column)}">${escapeHtml(column)}</th>`).join("")}</tr>
+            </thead>
+            <tbody>
+              ${pager.pagedRows.map((row, rowIndex) => `
+                <tr data-row-index="${rowIndex}" class="${rowIndex === selectedWithinPage ? "is-selected" : ""}">${visibleColumns.map(column => `<td>${escapeHtml(row[column] ?? "")}</td>`).join("")}</tr>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination">
+          <div class="pagination-meta">
+            Mostrando ${pager.start}-${pager.end} de ${filtered.length.toLocaleString("en-US")} filas
+          </div>
+          <div class="chip-row">
+            <button class="btn" id="prevPage" ${state.page <= 1 ? "disabled" : ""}>Anterior</button>
+            <span class="status-pill">Página ${state.page} / ${pager.totalPages}</span>
+            <button class="btn" id="nextPage" ${state.page >= pager.totalPages ? "disabled" : ""}>Siguiente</button>
+          </div>
+        </div>
+        </div>
+      `;
+    }
+
+    function downloadText(filename, content, type) {
+      const blob = new Blob([content], { type });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function renderDetail(dataset) {
+      if (!dataset) {
+        els.detailView.innerHTML = '<div class="detail-card"><div class="empty">Selecciona un dataset para ver su detalle.</div></div>';
+        return;
+      }
+
+      const status = statusOf(dataset);
+      const tone = dataset.kind === "qa" ? "danger" : (status === "awaiting_credentials" || status === "manual_required" ? "warning" : "");
+      const note = dataset.kind === "downloaded"
+        ? "Vista completa disponible. Puedes buscar, ordenar y paginar las filas reales exportadas desde el archivo local."
+        : dataset.kind === "qa"
+          ? "Hallazgo de QA visible: el payload existe pero su calidad o formato no es el esperado."
+          : status === "skipped"
+            ? "Dataset ya validado dentro del alcance, pero todavía sin downloader específico implementado."
+          : "Dataset aún no descargado en forma navegable. Se muestra la condición exacta para desbloquearlo.";
+
+      els.detailView.innerHTML = `
+        <section class="detail-card">
+          <span class="eyebrow">${escapeHtml(dataset.id)}</span>
+          <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start;">
+            <div>
+              <h2>${escapeHtml(dataset.title)}</h2>
+              <p>${escapeHtml(note)}</p>
+            </div>
+            <span class="status-pill ${statusClass(status)}">${titleCaseStatus(status)}</span>
+          </div>
+          <div style="margin-top:14px;">
+            ${renderMetaBoxes(dataset)}
+          </div>
+          <div class="description-block">
+            <strong>Qué es y para qué sirve</strong>
+            <p>${escapeHtml(dataset.short_desc || "Sin descripción corta todavía.")}</p>
+            <div class="chip-row" style="margin-top:10px;">
+              <span class="chip">${escapeHtml(dataset.domain || "general")}</span>
+              <span class="chip">${escapeHtml(dataset.scope || "sin alcance definido")}</span>
+              <span class="chip">${escapeHtml(dataset.future_role || "sin rol futuro definido")}</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="detail-card">
+          <div class="dataset-tabs" id="datasetTabs">
+            <button class="dataset-tab active" data-view="table">Tabla</button>
+            <button class="dataset-tab" data-view="notes">Notas</button>
+          </div>
+          <div data-view-panel="table" style="margin-top:14px;">
+            ${renderTable(dataset)}
+          </div>
+          <div data-view-panel="notes" class="hidden" style="margin-top:14px;">
+            <div class="callout ${tone}">
+              <strong>Lectura operativa:</strong><br>
+              ${dataset.kind === "downloaded"
+                ? "Este dataset ya se puede consumir desde consola con datos completos exportados del archivo local."
+                : dataset.kind === "qa"
+                  ? "La consola lo muestra completo para QA, pero no debe interpretarse todavía como terminología semánticamente válida."
+                  : `Para desbloquear este dataset: ${dataset.state.last_error || dataset.state.note || "revisar credenciales o licencia"}.`
+              }
+            </div>
+          </div>
+        </section>
+      `;
+
+      const rowSearch = document.getElementById("rowSearch");
+      if (rowSearch) {
+        rowSearch.addEventListener("input", (event) => {
+          state.rowSearch = event.target.value.trim();
+          state.page = 1;
+          renderDetail(dataset);
+        });
+      }
+
+      const perPage = document.getElementById("perPage");
+      if (perPage) {
+        perPage.addEventListener("change", (event) => {
+          state.perPage = Number(event.target.value);
+          state.page = 1;
+          renderDetail(dataset);
+        });
+      }
+
+      document.querySelectorAll("th[data-column]").forEach(th => {
+        th.addEventListener("click", () => {
+          const column = th.dataset.column;
+          if (state.sortColumn === column) {
+            state.sortDirection = state.sortDirection === "asc" ? "desc" : "asc";
+          } else {
+            state.sortColumn = column;
+            state.sortDirection = "asc";
+          }
+          renderDetail(dataset);
+        });
+      });
+
+      document.querySelectorAll("[data-column-toggle]").forEach(input => {
+        input.addEventListener("change", () => {
+          const visible = Array.from(document.querySelectorAll("[data-column-toggle]:checked")).map(node => node.getAttribute("data-column-toggle"));
+          setVisibleColumns(dataset, visible);
+          renderDetail(dataset);
+        });
+      });
+
+      const showAllColumns = document.getElementById("showAllColumns");
+      const showCoreColumns = document.getElementById("showCoreColumns");
+      if (showAllColumns) {
+        showAllColumns.addEventListener("click", () => {
+          setVisibleColumns(dataset, [...dataset.columns]);
+          renderDetail(dataset);
+        });
+      }
+      if (showCoreColumns) {
+        showCoreColumns.addEventListener("click", () => {
+          setVisibleColumns(dataset, dataset.columns.slice(0, Math.min(4, dataset.columns.length)));
+          renderDetail(dataset);
+        });
+      }
+
+      document.querySelectorAll("tr[data-row-index]").forEach(row => {
+        row.addEventListener("click", () => {
+          const pageStart = (state.page - 1) * state.perPage;
+          state.selectedRowIndex = pageStart + Number(row.dataset.rowIndex || 0);
+          renderDetail(dataset);
+        });
+      });
+
+      const prev = document.getElementById("prevPage");
+      const next = document.getElementById("nextPage");
+      if (prev) prev.addEventListener("click", () => { state.page -= 1; renderDetail(dataset); });
+      if (next) next.addEventListener("click", () => { state.page += 1; renderDetail(dataset); });
+
+      const exportCsv = document.getElementById("exportCsv");
+      const exportJson = document.getElementById("exportJson");
+      if (exportCsv) {
+        exportCsv.addEventListener("click", () => {
+          const visibleColumns = getVisibleColumns(dataset);
+          const lines = [
+            visibleColumns.join(","),
+            ...dataset.rows.map(row => visibleColumns.map(column => {
+              const value = String(row[column] ?? "");
+              return /[",\n]/.test(value) ? `"${value.replace(/"/g, '""')}"` : value;
+            }).join(","))
+          ];
+          downloadText(`${dataset.id.toLowerCase()}_full.csv`, lines.join("\n"), "text/csv;charset=utf-8");
+        });
+      }
+      if (exportJson) {
+        exportJson.addEventListener("click", () => {
+          downloadText(`${dataset.id.toLowerCase()}_full.json`, JSON.stringify(dataset.rows, null, 2), "application/json;charset=utf-8");
+        });
+      }
+
+      const tabs = document.querySelectorAll("#datasetTabs .dataset-tab");
+      const panels = document.querySelectorAll("[data-view-panel]");
+      tabs.forEach(tab => {
+        tab.addEventListener("click", () => {
+          tabs.forEach(item => item.classList.toggle("active", item === tab));
+          panels.forEach(panel => panel.classList.toggle("hidden", panel.dataset.viewPanel !== tab.dataset.view));
+        });
+      });
+    }
+
+    function render() {
+      const items = filteredDatasets();
+      ensureActiveDataset(items);
+      renderMetrics(items);
+      renderInsights(items);
+      renderDatasetList(items);
+      renderDetail(getActiveDataset(items));
+      document.querySelectorAll("#mainTabs .tab").forEach(tab => {
+        tab.classList.toggle("active", tab.dataset.tab === state.mainTab);
+      });
+      document.body.dataset.workbenchMode = state.mode;
+      document.querySelectorAll("[data-mode]").forEach(button => {
+        button.classList.toggle("active", button.dataset.mode === state.mode);
+      });
+      document.querySelectorAll("[data-preset]").forEach(button => {
+        button.classList.toggle("active", button.dataset.preset === state.search);
+      });
+    }
+
+    document.querySelectorAll("#mainTabs .tab").forEach(tab => {
+      tab.addEventListener("click", () => {
+        state.mainTab = tab.dataset.tab;
+        state.page = 1;
+        render();
+      });
+    });
+
+    document.querySelectorAll("[data-mode]").forEach(button => {
+      button.addEventListener("click", () => {
+        state.mode = button.dataset.mode;
+        render();
+      });
+    });
+
+    els.globalSearch.addEventListener("input", (event) => {
+      state.search = event.target.value.trim();
+      state.page = 1;
+      render();
+    });
+
+    els.statusFilter.addEventListener("change", (event) => {
+      state.statusFilter = event.target.value;
+      state.page = 1;
+      render();
+    });
+
+    document.querySelectorAll("[data-quick]").forEach(button => {
+      button.addEventListener("click", () => {
+        const value = button.dataset.quick;
+        if (value === "qa") {
+          state.mainTab = "qa";
+          state.statusFilter = "all";
+        } else if (value === "success") {
+          state.mainTab = "downloaded";
+          state.statusFilter = "success";
+        } else if (value === "skipped") {
+          state.mainTab = "pending";
+          state.statusFilter = "skipped";
+        } else {
+          state.mainTab = "pending";
+          state.statusFilter = value;
+        }
+        els.statusFilter.value = state.statusFilter;
+        state.page = 1;
+        render();
+      });
+    });
+
+    document.querySelectorAll("[data-preset]").forEach(button => {
+      button.addEventListener("click", () => {
+        const preset = button.dataset.preset;
+        if (preset === "clear") {
+          state.search = "";
+          state.statusFilter = "all";
+          state.mainTab = "downloaded";
+        } else {
+          state.search = preset;
+          state.statusFilter = "all";
+          state.mainTab = "all";
+        }
+        els.globalSearch.value = state.search;
+        els.statusFilter.value = state.statusFilter;
+        state.page = 1;
+        render();
+      });
+    });
+
+    renderOperations();
+    renderRoadmap();
+    render();
+  </script>
+</body>
+</html>

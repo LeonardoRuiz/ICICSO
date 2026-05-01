@@ -1,0 +1,40 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+
+processors:
+  batch:
+    send_batch_size: 512
+    timeout: 5s
+  resource:
+    attributes:
+      - key: deployment.environment
+        value: local
+        action: upsert
+      - key: service.namespace
+        value: icicso
+        action: upsert
+
+exporters:
+  otlp:
+    endpoint: tempo:4317
+    tls:
+      insecure: true
+  debug: {}
+  prometheus:
+    endpoint: 0.0.0.0:9464
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [resource, batch]
+      exporters: [otlp, debug]
+    metrics:
+      receivers: [otlp]
+      processors: [resource, batch]
+      exporters: [prometheus, debug]
