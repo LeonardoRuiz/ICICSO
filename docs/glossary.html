@@ -7,626 +7,380 @@
   <style>
     :root {
       color-scheme: dark;
-      --bg: #080a09;
-      --panel: #111614;
-      --panel-raised: #151b18;
-      --panel-soft: #0d1110;
-      --ink: #eff5ee;
-      --muted: #9aa8a1;
-      --line: #27312d;
-      --green: #39d0b1;
-      --green-strong: #8ef2d9;
-      --blue: #8bb8ff;
-      --amber: #f4c46b;
-      --red: #ff8d7e;
-      --purple: #c8a7ff;
-      --shadow: 0 18px 44px rgba(0, 0, 0, 0.42);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --bg: #202124;
+      --surface: #2b2f33;
+      --surface-alt: #333333;
+      --text: #e6e6e6;
+      --muted: #b8b8b8;
+      --line: #3f3f3f;
+      --accent: #8ab4a6;
+      --accent-soft: rgba(138, 180, 166, 0.18);
+      --warning: #d6b36a;
+      --medical: #d28a8a;
+      --evidence: #8ab4a6;
+      --governance: #d6b36a;
+      --technical: #a7c7e7;
+      font-family: Inter, Arial, sans-serif;
     }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      background:
-        linear-gradient(180deg, #0d1110 0%, #080a09 46%, #060807 100%);
-      color: var(--ink);
-    }
-
-    a {
-      color: var(--green-strong);
-      text-decoration-thickness: 1px;
-      text-underline-offset: 3px;
-    }
-
-    .shell {
-      min-height: 100vh;
-      display: grid;
-      grid-template-rows: auto 1fr;
-    }
-
-    header {
-      border-bottom: 1px solid var(--line);
-      background: rgba(8, 10, 9, 0.9);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      backdrop-filter: blur(14px);
-    }
-
-    .header-inner {
-      max-width: 1440px;
-      margin: 0 auto;
-      padding: 18px 24px 16px;
-      display: grid;
-      gap: 14px;
-    }
-
-    .title-row {
-      display: flex;
-      gap: 16px;
-      align-items: end;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(1.35rem, 2vw, 2.1rem);
-      line-height: 1.05;
-      letter-spacing: 0;
-    }
-
-    .meta {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      color: var(--muted);
-      font-size: 0.86rem;
-      align-items: center;
-    }
-
-    .badge {
-      border: 1px solid var(--line);
-      background: #0f1412;
-      border-radius: 999px;
-      padding: 4px 9px;
-      white-space: nowrap;
-    }
-
-    .badge.link-strong {
-      color: var(--ink);
-      background: #14362f;
-      border-color: rgba(57, 208, 177, 0.62);
-      text-decoration: none;
-    }
-
-    .controls {
-      display: grid;
-      grid-template-columns: minmax(220px, 1fr) auto;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .search-wrap {
-      position: relative;
-    }
-
-    .search-wrap::before {
-      content: "";
-      position: absolute;
-      left: 13px;
-      top: 50%;
-      width: 12px;
-      height: 12px;
-      border: 2px solid var(--muted);
-      border-radius: 50%;
-      transform: translateY(-58%);
-    }
-
-    .search-wrap::after {
-      content: "";
-      position: absolute;
-      left: 24px;
-      top: 53%;
-      width: 7px;
-      height: 2px;
-      background: var(--muted);
-      transform: rotate(45deg);
-      transform-origin: left center;
-    }
-
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: var(--bg); color: var(--text); }
+    body { line-height: 1.55; }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    .page { max-width: 1400px; margin: 0 auto; padding: 24px 20px 40px; }
+    .hero, .panel, .detail, .entry { border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+    .hero { padding: 22px; display: grid; gap: 14px; }
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: clamp(1.7rem, 3vw, 2.6rem); }
+    .meta, .filter-row, .stats, .links { display: flex; flex-wrap: wrap; gap: 10px; }
+    .meta span, .meta a, .chip { border: 1px solid var(--line); background: var(--surface-alt); border-radius: 999px; padding: 6px 10px; color: var(--muted); text-decoration: none; }
+    .panel { margin-top: 18px; padding: 18px; display: grid; gap: 14px; }
+    .controls { display: grid; grid-template-columns: minmax(220px, 1fr) auto; gap: 12px; }
     input[type="search"] {
-      width: 100%;
-      height: 42px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 0 14px 0 42px;
-      color: var(--ink);
-      background: #0d1210;
-      font: inherit;
-      outline: none;
+      width: 100%; min-height: 42px; padding: 0 14px; border-radius: 8px;
+      border: 1px solid var(--line); background: #262a2e; color: var(--text); font: inherit;
     }
-
-    input[type="search"]:focus {
-      border-color: var(--green);
-      box-shadow: 0 0 0 3px rgba(57, 208, 177, 0.15);
-    }
-
-    .filters {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
+    .filter-row { align-items: stretch; }
     button.filter {
-      border: 1px solid var(--line);
-      background: #0d1210;
-      color: var(--muted);
-      height: 36px;
-      border-radius: 8px;
-      padding: 0 12px;
-      font: inherit;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      white-space: nowrap;
+      min-height: 38px; border-radius: 8px; border: 1px solid var(--line);
+      background: #262a2e; color: var(--muted); font: inherit; padding: 0 12px; cursor: pointer;
     }
-
-    button.filter[aria-pressed="true"] {
-      background: #153d36;
-      border-color: var(--green);
-      color: var(--green-strong);
-    }
-
-    .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: currentColor;
-      opacity: 0.8;
-    }
-
-    main {
-      max-width: 1440px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 22px 24px 30px;
-      display: grid;
-      grid-template-columns: minmax(320px, 430px) minmax(0, 1fr);
-      gap: 18px;
-    }
-
-    .knowledge-strip {
-      max-width: 1440px;
-      width: calc(100% - 48px);
-      margin: 20px auto 0;
-      border: 1px solid rgba(57, 208, 177, 0.3);
-      background: linear-gradient(180deg, #13211d 0%, #0f1513 100%);
-      border-radius: 8px;
-      padding: 18px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.35fr) minmax(360px, 0.9fr);
-      gap: 18px;
-      box-shadow: var(--shadow);
-    }
-
-    .knowledge-copy {
-      min-width: 0;
-      display: grid;
-      gap: 10px;
-      align-content: start;
-    }
-
-    .eyebrow {
-      color: var(--green-strong);
-      font-size: 0.76rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    .knowledge-copy h2 {
-      margin: 0;
-      font-size: clamp(1.3rem, 2.6vw, 2.4rem);
-      line-height: 1.04;
-      letter-spacing: 0;
-    }
-
-    .knowledge-copy p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.55;
-      max-width: 92ch;
-    }
-
-    .knowledge-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-      margin-top: 4px;
-    }
-
-    .action-link {
-      border: 1px solid var(--line);
-      background: #0d1210;
-      color: var(--ink);
-      border-radius: 8px;
-      min-height: 38px;
-      padding: 9px 12px;
-      display: inline-flex;
-      align-items: center;
-      text-decoration: none;
-    }
-
-    .action-link.primary {
-      background: #153d36;
-      border-color: var(--green);
-      color: var(--green-strong);
-      font-weight: 700;
-    }
-
-    .clinical-metrics {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 9px;
-    }
-
-    .clinical-metric {
-      border: 1px solid var(--line);
-      background: rgba(8, 10, 9, 0.48);
-      border-radius: 8px;
-      padding: 11px;
-      min-width: 0;
-    }
-
-    .clinical-metric strong {
-      display: block;
-      font-size: 1.25rem;
-      line-height: 1;
-    }
-
-    .clinical-metric span {
-      display: block;
-      color: var(--muted);
-      font-size: 0.76rem;
-      margin-top: 7px;
-      text-transform: uppercase;
-    }
-
-    .clinical-examples {
-      grid-column: 1 / -1;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-      margin-top: 2px;
-    }
-
-    .clinical-example {
-      border: 1px solid var(--line);
-      color: var(--muted);
-      background: #0d1210;
-      border-radius: 999px;
-      padding: 5px 8px;
-      font-size: 0.78rem;
-      max-width: 100%;
-      overflow-wrap: anywhere;
-    }
-
-    .results,
-    .detail {
-      min-height: calc(100vh - 160px);
-    }
-
-    .results {
-      display: grid;
-      align-content: start;
-      gap: 10px;
-    }
-
-    .result-count {
-      color: var(--muted);
-      font-size: 0.88rem;
-      padding: 0 2px 4px;
-    }
-
-    .entry-list {
-      display: grid;
-      gap: 8px;
-    }
-
-    .entry-button {
-      text-align: left;
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, #131917 0%, #101512 100%);
-      border-radius: 8px;
-      padding: 12px 13px;
-      cursor: pointer;
-      box-shadow: none;
-      transition: border-color 140ms ease, box-shadow 140ms ease, transform 140ms ease;
-    }
-
-    .entry-button:hover,
-    .entry-button:focus-visible {
-      border-color: rgba(57, 208, 177, 0.62);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.32);
-      transform: translateY(-1px);
-      outline: none;
-    }
-
-    .entry-button.active {
-      border-color: var(--green);
-      box-shadow: inset 3px 0 0 var(--green);
-    }
-
-    .entry-title {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 7px;
-    }
-
-    .entry-title strong {
-      font-size: 1rem;
-      line-height: 1.2;
-    }
-
-    .entry-button p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.45;
-      font-size: 0.92rem;
-    }
-
-    .category {
-      font-size: 0.74rem;
-      line-height: 1;
-      border-radius: 999px;
-      padding: 5px 8px;
-      white-space: nowrap;
-      border: 1px solid transparent;
-    }
-
-    .category.medical {
-      color: var(--red);
-      background: rgba(255, 141, 126, 0.12);
-      border-color: rgba(255, 141, 126, 0.34);
-    }
-
-    .category.evidence {
-      color: var(--green-strong);
-      background: rgba(57, 208, 177, 0.12);
-      border-color: rgba(57, 208, 177, 0.35);
-    }
-
-    .category.technical {
-      color: var(--blue);
-      background: rgba(139, 184, 255, 0.12);
-      border-color: rgba(139, 184, 255, 0.35);
-    }
-
-    .category.governance {
-      color: var(--amber);
-      background: rgba(244, 196, 107, 0.12);
-      border-color: rgba(244, 196, 107, 0.35);
-    }
-
-    .detail {
-      position: sticky;
-      top: 126px;
-      align-self: start;
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, #151b18 0%, #101512 100%);
-      border-radius: 8px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .detail-head {
-      padding: 22px 24px 18px;
-      border-bottom: 1px solid var(--line);
-      background: linear-gradient(180deg, #18211d 0%, #111714 100%);
-    }
-
-    .detail-head h2 {
-      margin: 0 0 10px;
-      font-size: clamp(1.5rem, 3vw, 2.45rem);
-      line-height: 1.05;
-      letter-spacing: 0;
-    }
-
-    .detail-head p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 1rem;
-      line-height: 1.55;
-      max-width: 72ch;
-    }
-
-    .detail-body {
-      padding: 20px 24px 24px;
-      display: grid;
-      gap: 18px;
-    }
-
-    .field {
-      display: grid;
-      gap: 6px;
-    }
-
-    .field-label {
-      color: var(--muted);
-      text-transform: uppercase;
-      font-size: 0.72rem;
-      letter-spacing: 0.06em;
-      font-weight: 700;
-    }
-
-    .field-value {
-      margin: 0;
-      line-height: 1.62;
-      font-size: 0.98rem;
-    }
-
-    .link-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .link-list a {
-      border: 1px solid var(--line);
-      background: #0d1210;
-      border-radius: 8px;
-      padding: 7px 9px;
-      font-size: 0.88rem;
-      text-decoration: none;
-      max-width: 100%;
-      overflow-wrap: anywhere;
-    }
-
-    .empty {
-      border: 1px dashed var(--line);
-      border-radius: 8px;
-      padding: 20px;
-      color: var(--muted);
-      background: rgba(17, 22, 20, 0.7);
-    }
-
-    mark {
-      background: rgba(244, 196, 107, 0.28);
-      color: var(--ink);
-      padding: 0 2px;
-      border-radius: 3px;
-    }
-
+    button.filter[aria-pressed="true"] { background: var(--accent-soft); color: var(--text); border-color: var(--accent); }
+    .layout { margin-top: 18px; display: grid; grid-template-columns: minmax(320px, 440px) minmax(0, 1fr); gap: 18px; }
+    .list { display: grid; gap: 10px; align-content: start; }
+    .entry { padding: 14px; display: grid; gap: 8px; cursor: pointer; }
+    .entry.active { border-color: var(--accent); box-shadow: inset 3px 0 0 var(--accent); }
+    .entry-top { display: flex; justify-content: space-between; gap: 12px; align-items: start; }
+    .badge { border-radius: 999px; padding: 4px 8px; font-size: 0.78rem; border: 1px solid transparent; }
+    .badge.evidence { color: var(--evidence); border-color: rgba(138, 180, 166, 0.35); background: rgba(138, 180, 166, 0.12); }
+    .badge.governance { color: var(--governance); border-color: rgba(214, 179, 106, 0.35); background: rgba(214, 179, 106, 0.12); }
+    .badge.medical { color: var(--medical); border-color: rgba(210, 138, 138, 0.35); background: rgba(210, 138, 138, 0.12); }
+    .badge.technical { color: var(--technical); border-color: rgba(167, 199, 231, 0.35); background: rgba(167, 199, 231, 0.12); }
+    .detail { padding: 20px; display: grid; gap: 16px; align-content: start; min-height: 560px; }
+    .field { display: grid; gap: 6px; }
+    .label { color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .empty { border: 1px dashed var(--line); border-radius: 8px; padding: 16px; color: var(--muted); }
+    mark { background: rgba(214, 179, 106, 0.28); color: var(--text); border-radius: 3px; padding: 0 2px; }
     @media (max-width: 980px) {
-      .controls {
-        grid-template-columns: 1fr;
-      }
-
-      .filters {
-        justify-content: flex-start;
-      }
-
-      main {
-        grid-template-columns: 1fr;
-      }
-
-      .knowledge-strip {
-        grid-template-columns: 1fr;
-        width: calc(100% - 28px);
-      }
-
-      .detail {
-        position: static;
-        min-height: auto;
-      }
-
-      .results {
-        min-height: auto;
-      }
+      .controls, .layout { grid-template-columns: 1fr; }
     }
-
-    @media (max-width: 560px) {
-      .header-inner,
-      main {
-        padding-left: 14px;
-        padding-right: 14px;
-      }
-
-      .filters {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      button.filter {
-        justify-content: center;
-      }
-
-      .entry-title {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .detail-head,
-      .detail-body {
-        padding-left: 16px;
-        padding-right: 16px;
-      }
+    @media (max-width: 640px) {
+      .page { padding-left: 14px; padding-right: 14px; }
+      .filter-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      button.filter { width: 100%; }
     }
   </style>
 </head>
 <body>
-  <div class="shell">
-    <header>
-      <div class="header-inner">
-        <div class="title-row">
-          <div>
-            <h1>Glosario ICICSO</h1>
-          </div>
-          <div class="meta">
-            <span class="badge" id="entryTotal">0 términos</span>
-            <a class="badge link-strong" href="clinical-concepts.html">Índice clínico amplio</a>
-            <a class="badge" href="glossary.md">Markdown fuente</a>
-            <a class="badge" href="glossary-candidates.md">Candidatos auto</a>
-            <span class="badge" id="syncState">Snapshot local</span>
-          </div>
-        </div>
-        <div class="controls">
-          <div class="search-wrap">
-            <input id="searchInput" type="search" autocomplete="off" placeholder="Buscar término, fuente, dominio, EO, CABG, queratocono...">
-          </div>
-          <div class="filters" role="toolbar" aria-label="Filtros del glosario">
-            <button class="filter" type="button" data-filter="all" aria-pressed="true"><span class="dot"></span>Todos</button>
-            <button class="filter" type="button" data-filter="medical" aria-pressed="false"><span class="dot"></span>Médico</button>
-            <button class="filter" type="button" data-filter="evidence" aria-pressed="false"><span class="dot"></span>Evidencia</button>
-            <button class="filter" type="button" data-filter="technical" aria-pressed="false"><span class="dot"></span>Técnico</button>
-            <button class="filter" type="button" data-filter="governance" aria-pressed="false"><span class="dot"></span>Gobernanza</button>
-          </div>
-        </div>
+  <div class="page">
+    <section class="hero">
+      <div>
+        <h1>Glosario ICICSO</h1>
+        <p>Vista canónica navegable del glosario vivo del repo. Esta versión deja los controles dentro del flujo normal de lectura, sin filtros flotantes y con taxonomía visible y auditable.</p>
       </div>
-    </header>
-
-    <section class="knowledge-strip" aria-label="Índice clínico ICICSO">
-      <div class="knowledge-copy">
-        <span class="eyebrow">Capa amplia generada automáticamente</span>
-        <h2>93,519 conceptos clínicos extraídos del repo</h2>
-        <p>El glosario de esta página es la capa curada. El volumen clínico completo vive en el índice clínico: diagnósticos, procedimientos quirúrgicos, medicamentos/clases, candidatos EO, triggers y conceptos route-ready para futuros motores de ICICSO.</p>
-        <div class="knowledge-actions">
-          <a class="action-link primary" href="clinical-concepts.html">Abrir explorador clínico</a>
-          <a class="action-link" href="generated/clinical-concepts-search.json">JSON de búsqueda</a>
-          <a class="action-link" href="clinical-concepts.md">Resumen del barrido</a>
-        </div>
-      </div>
-      <div class="clinical-metrics">
-        <div class="clinical-metric"><strong>11,559</strong><span>Diagnósticos</span></div>
-        <div class="clinical-metric"><strong>79,202</strong><span>Procedimientos</span></div>
-        <div class="clinical-metric"><strong>1,024</strong><span>Candidatos EO</span></div>
-        <div class="clinical-metric"><strong>2,091</strong><span>Route-ready ICICSO</span></div>
-        <div class="clinical-examples">
-          <span class="clinical-example">Acute myocardial infarction · I21</span><span class="clinical-example">Acute myocardial infarction, unspecified · I21.9</span><span class="clinical-example">Cerebral infarction · I63</span><span class="clinical-example">Keratoconus · H18.6</span><span class="clinical-example">CABG</span>
-        </div>
+      <div class="meta">
+        <span id="entryTotal">0 términos</span>
+        <a href="clinical-concepts.html">Índice clínico</a>
+        <a href="glossary.md">Markdown fuente</a>
+        <a href="glossary-candidates.md">Candidatos auto</a>
+        <span id="syncState">Snapshot local</span>
       </div>
     </section>
 
-    <main>
-      <section class="results" aria-label="Resultados">
-        <div class="result-count" id="resultCount"></div>
-        <div class="entry-list" id="entryList"></div>
-      </section>
+    <section class="panel" aria-label="Controles del glosario">
+      <div class="controls">
+        <input id="searchInput" type="search" placeholder="Buscar término, dominio, fuente, binding o artefacto">
+        <div class="filter-row" id="filterRow" role="toolbar" aria-label="Filtros del glosario"></div>
+      </div>
+      <div class="stats" id="stats"></div>
+    </section>
 
+    <section class="layout">
+      <div class="list">
+        <div id="resultCount" class="label"></div>
+        <div id="entryList"></div>
+      </div>
       <article class="detail" id="detailPanel" aria-live="polite"></article>
-    </main>
+    </section>
   </div>
 
-  <script id="glossaryData" type="application/json">{"generatedAt":"2026-04-29T18:46:08.628Z","entries":[{"id":"icicso","title":"ICICSO","section":"Entradas canónicas iniciales","shortDefinition":"continuum canónico para transformar evidencia clínica en artefactos estructurados, versionados, auditables y reutilizables.","longDefinition":"ICICSO no es una sola app ni sólo un backend. Es un repositorio de trabajo que modela una cadena de transformación: documentos y fuentes clínicas entran al sistema, se normalizan, se convierten en artefactos canónicos y alimentan capas posteriores de gobernanza, decisión, readiness y ejecución.","type":"concepto raíz del repo.","primarySource":"[docs/WHAT_ICICSO_IS.md](WHAT_ICICSO_IS.md)","mentions":"[README.md](../README.md), [START_HERE.md](../START_HERE.md), [SYSTEM_STATUS.md](../SYSTEM_STATUS.md)","terminologyRelation":"","searchText":"icicso entradas canónicas iniciales continuum canónico para transformar evidencia clínica en artefactos estructurados, versionados, auditables y reutilizables. icicso no es una sola app ni sólo un backend. es un repositorio de trabajo que modela una cadena de transformación: documentos y fuentes clínicas entran al sistema, se normalizan, se convierten en artefactos canónicos y alimentan capas posteriores de gobernanza, decisión, readiness y ejecución. concepto raíz del repo. docs/what_icicso_is.md readme.md, start_here.md, system_status.md","category":"governance"},{"id":"continuum-canonico","title":"Continuum canónico","section":"Entradas canónicas iniciales","shortDefinition":"secuencia institucional de capas por las que ICICSO transforma evidencia en ejecución gobernada.","longDefinition":"El continuum organiza el diseño por capas `L0-L12`, desde fundación/gobernanza hasta downstream, federación y exportación. En el estado actual del repo, el slice con evidencia real de ejecución es principalmente `ING -> SER -> EO -> EL`; el resto existe en diferentes grados de especificación, scaffold o runtime local.","type":"arquitectura/capa.","primarySource":"[services/ingestion-orquestador/docs/ICICSO_CANONICAL_CONTINUUM.md](../services/ingestion-orquestador/docs/ICICSO_CANONICAL_CONTINUUM.md)","mentions":"[docs/WHAT_ICICSO_IS.md](WHAT_ICICSO_IS.md), [SYSTEM_STATUS.md](../SYSTEM_STATUS.md), [icicso/docs/continuum/README.md](../icicso/docs/continuum/README.md)","terminologyRelation":"","searchText":"continuum canónico entradas canónicas iniciales secuencia institucional de capas por las que icicso transforma evidencia en ejecución gobernada. el continuum organiza el diseño por capas l0-l12, desde fundación/gobernanza hasta downstream, federación y exportación. en el estado actual del repo, el slice con evidencia real de ejecución es principalmente ing -> ser -> eo -> el; el resto existe en diferentes grados de especificación, scaffold o runtime local. arquitectura/capa. services/ingestion-orquestador/docs/icicso_canonical_continuum.md docs/what_icicso_is.md, system_status.md, icicso/docs/continuum/readme.md","category":"governance"},{"id":"ing","title":"ING","section":"Entradas canónicas iniciales","shortDefinition":"etapa de ingesta documental.","longDefinition":"Representa la entrada inicial de documentos y fuentes clínicas al flujo ICICSO. En el repo aparece como la primera etapa del slice probado `ING -> SER -> EO -> EL`, conectada con catálogo documental, ingesta, materialización y auditoría.","type":"etapa del continuum.","primarySource":"[README.md](../README.md)","mentions":"[START_HERE.md](../START_HERE.md), [SYSTEM_STATUS.md](../SYSTEM_STATUS.md), [services/ingestion-orquestador/README.md](../services/ingestion-orquestador/README.md)","terminologyRelation":"","searchText":"ing entradas canónicas iniciales etapa de ingesta documental. representa la entrada inicial de documentos y fuentes clínicas al flujo icicso. en el repo aparece como la primera etapa del slice probado ing -> ser -> eo -> el, conectada con catálogo documental, ingesta, materialización y auditoría. etapa del continuum. readme.md start_here.md, system_status.md, services/ingestion-orquestador/readme.md","category":"technical"},{"id":"ser","title":"SER","section":"Entradas canónicas iniciales","shortDefinition":"registro estructurado de evidencia fuente.","longDefinition":"`SER` captura evidencia validada y versionada antes de convertirse en un `EO`. En `packages/evidence-intelligence`, un `StructuredEvidenceRecord` contiene documento fuente, dominio clínico, statements, aplicabilidad, contexto operacional y provenance.","type":"artefacto de evidencia.","primarySource":"[packages/evidence-intelligence/src/models/ser.ts](../packages/evidence-intelligence/src/models/ser.ts)","mentions":"[icicso/packages/domain/ser/README.md](../icicso/packages/domain/ser/README.md), [services/ingestion-orquestador/docs/ICICSO_ENTITY_MODEL.md](../services/ingestion-orquestador/docs/ICICSO_ENTITY_MODEL.md), [packages/evidence-intelligence/docs/eo-mapper-v1.md](../packages/evidence-intelligence/docs/eo-mapper-v1.md)","terminologyRelation":"","searchText":"ser entradas canónicas iniciales registro estructurado de evidencia fuente. ser captura evidencia validada y versionada antes de convertirse en un eo. en packages/evidence-intelligence, un structuredevidencerecord contiene documento fuente, dominio clínico, statements, aplicabilidad, contexto operacional y provenance. artefacto de evidencia. packages/evidence-intelligence/src/models/ser.ts icicso/packages/domain/ser/readme.md, services/ingestion-orquestador/docs/icicso_entity_model.md, packages/evidence-intelligence/docs/eo-mapper-v1.md","category":"evidence"},{"id":"eo","title":"EO","section":"Entradas canónicas iniciales","shortDefinition":"objeto de evidencia ejecutable, derivado de un `SER`.","longDefinition":"`EO` transforma una declaración estructurada de evidencia en un objeto con trigger, condiciones, exclusiones, decisión, acción, outcomes esperados, confianza, soporte, trazabilidad, restricciones operativas y estado de revisión. No es una orden médica autónoma: es un artefacto auditable que puede alimentar capas posteriores.","type":"artefacto de evidencia.","primarySource":"[packages/evidence-intelligence/src/models/eo.ts](../packages/evidence-intelligence/src/models/eo.ts)","mentions":"[icicso/packages/domain/eo/README.md](../icicso/packages/domain/eo/README.md), [packages/evidence-intelligence/docs/eo-mapper-v1.md](../packages/evidence-intelligence/docs/eo-mapper-v1.md), [services/ingestion-orquestador/schemas/evidence/evidence_object.schema.json](../services/ingestion-orquestador/schemas/evidence/evidence_object.schema.json)","terminologyRelation":"","searchText":"eo entradas canónicas iniciales objeto de evidencia ejecutable, derivado de un ser. eo transforma una declaración estructurada de evidencia en un objeto con trigger, condiciones, exclusiones, decisión, acción, outcomes esperados, confianza, soporte, trazabilidad, restricciones operativas y estado de revisión. no es una orden médica autónoma: es un artefacto auditable que puede alimentar capas posteriores. artefacto de evidencia. packages/evidence-intelligence/src/models/eo.ts icicso/packages/domain/eo/readme.md, packages/evidence-intelligence/docs/eo-mapper-v1.md, services/ingestion-orquestador/schemas/evidence/evidence_object.schema.json","category":"governance"},{"id":"el","title":"EL","section":"Entradas canónicas iniciales","shortDefinition":"Evidence Lake, registro canónico consultable de `EO`.","longDefinition":"`EL` persiste e indexa Evidence Objects para consulta, trazabilidad y reutilización. En el canon actual funciona como destino posterior de `EO` dentro del slice `SER -> EO -> EL`.","type":"artefacto/registro de evidencia.","primarySource":"[icicso/packages/domain/evidence-lake/README.md](../icicso/packages/domain/evidence-lake/README.md)","mentions":"[START_HERE.md](../START_HERE.md), [SYSTEM_STATUS.md](../SYSTEM_STATUS.md), [icicso/packages/domain/ser/test-ser-eo-el-pipeline.ts](../icicso/packages/domain/ser/test-ser-eo-el-pipeline.ts)","terminologyRelation":"","searchText":"el entradas canónicas iniciales evidence lake, registro canónico consultable de eo. el persiste e indexa evidence objects para consulta, trazabilidad y reutilización. en el canon actual funciona como destino posterior de eo dentro del slice ser -> eo -> el. artefacto/registro de evidencia. icicso/packages/domain/evidence-lake/readme.md start_here.md, system_status.md, icicso/packages/domain/ser/test-ser-eo-el-pipeline.ts","category":"evidence"},{"id":"evidence-statement","title":"Evidence statement","section":"Entradas canónicas iniciales","shortDefinition":"declaración clínica estructurada dentro de un `SER`.","longDefinition":"Es la unidad semántica que el mapper puede convertir en `EO`. Contiene función clínica, clase de intervención, comparador, dirección del efecto, fuerza, certeza, condiciones, exclusiones, outcomes y contexto operacional.","type":"entidad interna de evidencia.","primarySource":"[packages/evidence-intelligence/src/models/ser.ts](../packages/evidence-intelligence/src/models/ser.ts)","mentions":"[packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json](../packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json), [packages/evidence-intelligence/seeds/colorectal-eras.bundle.json](../packages/evidence-intelligence/seeds/colorectal-eras.bundle.json)","terminologyRelation":"","searchText":"evidence statement entradas canónicas iniciales declaración clínica estructurada dentro de un ser. es la unidad semántica que el mapper puede convertir en eo. contiene función clínica, clase de intervención, comparador, dirección del efecto, fuerza, certeza, condiciones, exclusiones, outcomes y contexto operacional. entidad interna de evidencia. packages/evidence-intelligence/src/models/ser.ts packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json, packages/evidence-intelligence/seeds/colorectal-eras.bundle.json","category":"evidence"},{"id":"canon-semantico-operacional","title":"Canon semántico-operacional","section":"Entradas canónicas iniciales","shortDefinition":"conjunto de contratos y catálogos que hacen estable la interpretación de evidencia.","longDefinition":"Vive principalmente en `packages/evidence-intelligence`: `ontology/` define catálogos controlados; `schemas/` define contratos validables; `src/models`, `src/validators` y `src/mappers` dan comportamiento operativo a la transformación de evidencia.","type":"arquitectura de dominio.","primarySource":"[packages/evidence-intelligence/docs/architecture.md](../packages/evidence-intelligence/docs/architecture.md)","mentions":"[packages/evidence-intelligence/docs/ontology-v1.md](../packages/evidence-intelligence/docs/ontology-v1.md), [packages/evidence-intelligence/src/models](../packages/evidence-intelligence/src/models)","terminologyRelation":"","searchText":"canon semántico-operacional entradas canónicas iniciales conjunto de contratos y catálogos que hacen estable la interpretación de evidencia. vive principalmente en packages/evidence-intelligence: ontology/ define catálogos controlados; schemas/ define contratos validables; src/models, src/validators y src/mappers dan comportamiento operativo a la transformación de evidencia. arquitectura de dominio. packages/evidence-intelligence/docs/architecture.md packages/evidence-intelligence/docs/ontology-v1.md, packages/evidence-intelligence/src/models","category":"evidence"},{"id":"mapper-ser-eo","title":"Mapper SER -> EO","section":"Entradas canónicas iniciales","shortDefinition":"transformación de un `StructuredEvidenceRecord` en un `EvidenceObject`.","longDefinition":"Convierte un statement de `SER` en un `EO` usando reglas de inferencia: deriva trigger, condiciones, decisión, acciones, outcomes, confianza, conflictos y estado de revisión. En v1, un statement genera un EO a la vez y no resuelve silenciosamente conflictos.","type":"transformación/engine de dominio.","primarySource":"[packages/evidence-intelligence/docs/eo-mapper-v1.md](../packages/evidence-intelligence/docs/eo-mapper-v1.md)","mentions":"[packages/evidence-intelligence/src/mappers/ser-to-eo.ts](../packages/evidence-intelligence/src/mappers/ser-to-eo.ts), [packages/evidence-intelligence/tests/mapping.test.ts](../packages/evidence-intelligence/tests/mapping.test.ts)","terminologyRelation":"","searchText":"mapper ser -> eo entradas canónicas iniciales transformación de un structuredevidencerecord en un evidenceobject. convierte un statement de ser en un eo usando reglas de inferencia: deriva trigger, condiciones, decisión, acciones, outcomes, confianza, conflictos y estado de revisión. en v1, un statement genera un eo a la vez y no resuelve silenciosamente conflictos. transformación/engine de dominio. packages/evidence-intelligence/docs/eo-mapper-v1.md packages/evidence-intelligence/src/mappers/ser-to-eo.ts, packages/evidence-intelligence/tests/mapping.test.ts","category":"governance"},{"id":"trigger","title":"Trigger","section":"Entradas canónicas iniciales","shortDefinition":"evento o situación que activa la aplicabilidad de un `EO`.","longDefinition":"En un `EO`, el trigger combina un evento con una función clínica. El mapper lo deriva del dominio clínico y de la función clínica primaria del statement.","type":"campo de `EO`.","primarySource":"[packages/evidence-intelligence/src/models/eo.ts](../packages/evidence-intelligence/src/models/eo.ts)","mentions":"[packages/evidence-intelligence/examples/valid/eo.valid.json](../packages/evidence-intelligence/examples/valid/eo.valid.json), [packages/evidence-intelligence/docs/eo-mapper-v1.md](../packages/evidence-intelligence/docs/eo-mapper-v1.md)","terminologyRelation":"","searchText":"trigger entradas canónicas iniciales evento o situación que activa la aplicabilidad de un eo. en un eo, el trigger combina un evento con una función clínica. el mapper lo deriva del dominio clínico y de la función clínica primaria del statement. campo de eo. packages/evidence-intelligence/src/models/eo.ts packages/evidence-intelligence/examples/valid/eo.valid.json, packages/evidence-intelligence/docs/eo-mapper-v1.md","category":"technical"},{"id":"decision-readiness","title":"Decision readiness","section":"Entradas canónicas iniciales","shortDefinition":"estado que indica si una evidencia está lista para ejecución, revisión o síntesis.","longDefinition":"ICICSO usa este campo para separar evidencia accionable de evidencia que requiere revisión humana, síntesis adicional o sólo contexto. Aparece en SER, EO y perfiles de aplicabilidad.","type":"estado de decisión.","primarySource":"[packages/evidence-intelligence/src/models/eo.ts](../packages/evidence-intelligence/src/models/eo.ts)","mentions":"[packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json](../packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json), [packages/evidence-intelligence/seeds/cardiovascular-rct.bundle.json](../packages/evidence-intelligence/seeds/cardiovascular-rct.bundle.json)","terminologyRelation":"","searchText":"decision readiness entradas canónicas iniciales estado que indica si una evidencia está lista para ejecución, revisión o síntesis. icicso usa este campo para separar evidencia accionable de evidencia que requiere revisión humana, síntesis adicional o sólo contexto. aparece en ser, eo y perfiles de aplicabilidad. estado de decisión. packages/evidence-intelligence/src/models/eo.ts packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json, packages/evidence-intelligence/seeds/cardiovascular-rct.bundle.json","category":"governance"},{"id":"inference-trace","title":"Inference trace","section":"Entradas canónicas iniciales","shortDefinition":"rastro ordenado que explica cómo el sistema derivó campos de un `EO`.","longDefinition":"El `inferenceTrace` permite auditar la transformación de `SER` a `EO`: cada paso registra una decisión de inferencia y su racionalidad. Es clave para que un `EO` generado no sea una caja negra.","type":"trazabilidad/inferencia.","primarySource":"[packages/evidence-intelligence/src/models/eo.ts](../packages/evidence-intelligence/src/models/eo.ts)","mentions":"[packages/evidence-intelligence/docs/eo-mapper-v1.md](../packages/evidence-intelligence/docs/eo-mapper-v1.md)","terminologyRelation":"","searchText":"inference trace entradas canónicas iniciales rastro ordenado que explica cómo el sistema derivó campos de un eo. el inferencetrace permite auditar la transformación de ser a eo: cada paso registra una decisión de inferencia y su racionalidad. es clave para que un eo generado no sea una caja negra. trazabilidad/inferencia. packages/evidence-intelligence/src/models/eo.ts packages/evidence-intelligence/docs/eo-mapper-v1.md","category":"technical"},{"id":"conflict-marker","title":"Conflict marker","section":"Entradas canónicas iniciales","shortDefinition":"marca explícita de conflicto o debilidad semántica en un `EO`.","longDefinition":"ICICSO no debe resolver silenciosamente conflictos. El mapper puede marcar conflictos como dirección de efecto mixta, baja aplicabilidad, evidencia antigua o fuerza insuficiente, elevando el estado a revisión humana cuando corresponde.","type":"señal de revisión.","primarySource":"[packages/evidence-intelligence/src/models/eo.ts](../packages/evidence-intelligence/src/models/eo.ts)","mentions":"[packages/evidence-intelligence/docs/eo-mapper-v1.md](../packages/evidence-intelligence/docs/eo-mapper-v1.md), [packages/evidence-intelligence/seeds/conflictive-evidence.bundle.json](../packages/evidence-intelligence/seeds/conflictive-evidence.bundle.json)","terminologyRelation":"","searchText":"conflict marker entradas canónicas iniciales marca explícita de conflicto o debilidad semántica en un eo. icicso no debe resolver silenciosamente conflictos. el mapper puede marcar conflictos como dirección de efecto mixta, baja aplicabilidad, evidencia antigua o fuerza insuficiente, elevando el estado a revisión humana cuando corresponde. señal de revisión. packages/evidence-intelligence/src/models/eo.ts packages/evidence-intelligence/docs/eo-mapper-v1.md, packages/evidence-intelligence/seeds/conflictive-evidence.bundle.json","category":"governance"},{"id":"provenance","title":"Provenance","section":"Entradas canónicas iniciales","shortDefinition":"cadena de trazabilidad legal y técnica de un artefacto.","longDefinition":"En ICICSO, provenance registra origen, captura, actor, cadena de custodia, licencia, política de revisión, retención y versionado. Es un campo estructural de SER, EO y otros artefactos de evidencia.","type":"trazabilidad/legal.","primarySource":"[packages/evidence-intelligence/src/models/provenance.ts](../packages/evidence-intelligence/src/models/provenance.ts)","mentions":"[packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json](../packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json), [packages/evidence-intelligence/docs/architecture.md](../packages/evidence-intelligence/docs/architecture.md)","terminologyRelation":"","searchText":"provenance entradas canónicas iniciales cadena de trazabilidad legal y técnica de un artefacto. en icicso, provenance registra origen, captura, actor, cadena de custodia, licencia, política de revisión, retención y versionado. es un campo estructural de ser, eo y otros artefactos de evidencia. trazabilidad/legal. packages/evidence-intelligence/src/models/provenance.ts packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json, packages/evidence-intelligence/docs/architecture.md","category":"governance"},{"id":"vrn","title":"VRN","section":"Entradas canónicas iniciales","shortDefinition":"identificador de registro/versionado usado para gobernar artefactos.","longDefinition":"`VRN` aparece como parte de la gobernanza de entidades y del continuum. Se usa para vincular versiones activas, estados, decisiones y trazabilidad institucional.","type":"versionado/gobernanza.","primarySource":"[services/ingestion-orquestador/docs/ICICSO_ENTITY_MODEL.md](../services/ingestion-orquestador/docs/ICICSO_ENTITY_MODEL.md)","mentions":"[services/ingestion-orquestador/docs/ICICSO_CANONICAL_CONTINUUM.md](../services/ingestion-orquestador/docs/ICICSO_CANONICAL_CONTINUUM.md), [services/ingestion-orquestador/app/services/vrn_policy_service.py](../services/ingestion-orquestador/app/services/vrn_policy_service.py)","terminologyRelation":"","searchText":"vrn entradas canónicas iniciales identificador de registro/versionado usado para gobernar artefactos. vrn aparece como parte de la gobernanza de entidades y del continuum. se usa para vincular versiones activas, estados, decisiones y trazabilidad institucional. versionado/gobernanza. services/ingestion-orquestador/docs/icicso_entity_model.md services/ingestion-orquestador/docs/icicso_canonical_continuum.md, services/ingestion-orquestador/app/services/vrn_policy_service.py","category":"governance"},{"id":"terminology-binding","title":"Terminology binding","section":"Entradas canónicas iniciales","shortDefinition":"vínculo entre un concepto usado por ICICSO y un sistema terminológico externo.","longDefinition":"El binding terminológico permite que un término clínico generado o usado por ICICSO pueda apuntar a sistemas como SNOMED CT, ICD-10, LOINC, RxNorm, ATC, UCUM o CPT. En el glosario, el binding es evidencia complementaria; no convierte el glosario en catálogo externo.","type":"interoperabilidad/terminología.","primarySource":"[services/ingestion-orquestador/docs/ICICSO_ENTITY_MODEL.md](../services/ingestion-orquestador/docs/ICICSO_ENTITY_MODEL.md)","mentions":"[packages/evidence-intelligence/docs/architecture.md](../packages/evidence-intelligence/docs/architecture.md), [ICICSO_TERMINOLOGIAS/README.md](../ICICSO_TERMINOLOGIAS/README.md)","terminologyRelation":"","searchText":"terminology binding entradas canónicas iniciales vínculo entre un concepto usado por icicso y un sistema terminológico externo. el binding terminológico permite que un término clínico generado o usado por icicso pueda apuntar a sistemas como snomed ct, icd-10, loinc, rxnorm, atc, ucum o cpt. en el glosario, el binding es evidencia complementaria; no convierte el glosario en catálogo externo. interoperabilidad/terminología. services/ingestion-orquestador/docs/icicso_entity_model.md packages/evidence-intelligence/docs/architecture.md, icicso_terminologias/readme.md","category":"evidence"},{"id":"cabg","title":"CABG","section":"Términos médicos generados por ICICSO","shortDefinition":"cirugía de revascularización coronaria usada como intervención en ejemplos ICICSO.","longDefinition":"En los seeds de revascularización, `CABG` aparece como intervención quirúrgica recomendada para adultos seleccionados con enfermedad de tronco coronario izquierdo o enfermedad coronaria multivaso con alta complejidad anatómica. ICICSO la modela como acción derivable desde un `SER` hacia un `EO`, con restricciones operativas como equipo de cirugía cardíaca, quirófano e ICU.","type":"término médico generado/usado por artefactos ICICSO.","primarySource":"[packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json](../packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json)","mentions":"[packages/evidence-intelligence/examples/valid/eo.valid.json](../packages/evidence-intelligence/examples/valid/eo.valid.json), [packages/evidence-intelligence/tests/mapping.test.ts](../packages/evidence-intelligence/tests/mapping.test.ts)","terminologyRelation":"el seed incluye binding SNOMED CT para `Coronary artery bypass graft` y CPT relacionado.","searchText":"cabg términos médicos generados por icicso cirugía de revascularización coronaria usada como intervención en ejemplos icicso. en los seeds de revascularización, cabg aparece como intervención quirúrgica recomendada para adultos seleccionados con enfermedad de tronco coronario izquierdo o enfermedad coronaria multivaso con alta complejidad anatómica. icicso la modela como acción derivable desde un ser hacia un eo, con restricciones operativas como equipo de cirugía cardíaca, quirófano e icu. término médico generado/usado por artefactos icicso. packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json packages/evidence-intelligence/examples/valid/eo.valid.json, packages/evidence-intelligence/tests/mapping.test.ts el seed incluye binding snomed ct para coronary artery bypass graft y cpt relacionado.","category":"medical"},{"id":"left-main-coronary-artery-disease","title":"Left main coronary artery disease","section":"Términos médicos generados por ICICSO","shortDefinition":"condición cardiovascular usada como criterio de aplicabilidad para CABG.","longDefinition":"ICICSO la usa como parte de la población objetivo de un `SER` de revascularización coronaria. En el ejemplo, sirve para determinar condiciones de aplicabilidad, intervención preferida y necesidad de evaluación por heart team.","type":"término médico generado/usado por artefactos ICICSO.","primarySource":"[packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json](../packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json)","mentions":"[packages/evidence-intelligence/examples/valid/eo.valid.json](../packages/evidence-intelligence/examples/valid/eo.valid.json)","terminologyRelation":"","searchText":"left main coronary artery disease términos médicos generados por icicso condición cardiovascular usada como criterio de aplicabilidad para cabg. icicso la usa como parte de la población objetivo de un ser de revascularización coronaria. en el ejemplo, sirve para determinar condiciones de aplicabilidad, intervención preferida y necesidad de evaluación por heart team. término médico generado/usado por artefactos icicso. packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json packages/evidence-intelligence/examples/valid/eo.valid.json","category":"medical"},{"id":"multivessel-cad","title":"Multivessel CAD","section":"Términos médicos generados por ICICSO","shortDefinition":"enfermedad coronaria multivaso usada como condición de activación de un `EO`.","longDefinition":"En el ejemplo válido de `EO`, `multivessel CAD` aparece como condición para una recomendación de evaluación y programación de CABG. El término no entra por haber sido descargado desde un vocabulario externo; entra porque ICICSO lo usa en un artefacto generado.","type":"término médico generado/usado por artefactos ICICSO.","primarySource":"[packages/evidence-intelligence/examples/valid/eo.valid.json](../packages/evidence-intelligence/examples/valid/eo.valid.json)","mentions":"[packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json](../packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json)","terminologyRelation":"","searchText":"multivessel cad términos médicos generados por icicso enfermedad coronaria multivaso usada como condición de activación de un eo. en el ejemplo válido de eo, multivessel cad aparece como condición para una recomendación de evaluación y programación de cabg. el término no entra por haber sido descargado desde un vocabulario externo; entra porque icicso lo usa en un artefacto generado. término médico generado/usado por artefactos icicso. packages/evidence-intelligence/examples/valid/eo.valid.json packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json","category":"medical"},{"id":"heart-team-evaluation","title":"Heart team evaluation","section":"Términos médicos generados por ICICSO","shortDefinition":"evaluación clínica multidisciplinaria usada como precondición para decisiones cardiovasculares complejas.","longDefinition":"ICICSO la modela como criterio de inclusión, condición operativa o trigger contextual para seleccionar intervención en enfermedad coronaria compleja. En el seed de CABG, aparece como precondición antes de selección final.","type":"término médico-operativo generado/usado por artefactos ICICSO.","primarySource":"[packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json](../packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json)","mentions":"[packages/evidence-intelligence/examples/valid/eo.valid.json](../packages/evidence-intelligence/examples/valid/eo.valid.json)","terminologyRelation":"","searchText":"heart team evaluation términos médicos generados por icicso evaluación clínica multidisciplinaria usada como precondición para decisiones cardiovasculares complejas. icicso la modela como criterio de inclusión, condición operativa o trigger contextual para seleccionar intervención en enfermedad coronaria compleja. en el seed de cabg, aparece como precondición antes de selección final. término médico-operativo generado/usado por artefactos icicso. packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json packages/evidence-intelligence/examples/valid/eo.valid.json","category":"medical"},{"id":"queratocono-keratoconus","title":"Queratocono / Keratoconus","section":"Términos médicos generados por ICICSO","shortDefinition":"ectasia corneal progresiva disponible en el repo como concepto ICD-10 `H18.6`.","longDefinition":"ICICSO lo registra por ahora como término médico con binding terminológico local, no como `SER` o `EO` ya materializado. El dato vive en el paquete ICD-10 ClaML descargado en `ICICSO_TERMINOLOGIAS`: `H18.6` corresponde a `Keratoconus`, y también aparece una mención relacionada de queratocono en síndrome de Down dentro de `H19.8`. Cuando se genere evidencia ICICSO sobre diagnóstico, seguimiento, cross-linking, topografía/tomografía corneal o pathway oftalmológico, esta entrada debe enlazarse a esos artefactos.","type":"término médico con binding terminológico; pendiente de artefacto `SER/EO`.","primarySource":"[ICICSO_TERMINOLOGIAS/01_RAW/ICD10/icd10_claml.xml](../ICICSO_TERMINOLOGIAS/01_RAW/ICD10/icd10_claml.xml)","mentions":"[ICICSO_TERMINOLOGIAS/01_RAW/ICD10/icd10_claml_package/icd102019en.xml](../ICICSO_TERMINOLOGIAS/01_RAW/ICD10/icd10_claml_package/icd102019en.xml)","terminologyRelation":"ICD-10 `H18.6 Keratoconus`; mención relacionada `H19.8` con referencia a síndrome de Down `Q90.-`.","searchText":"queratocono / keratoconus términos médicos generados por icicso ectasia corneal progresiva disponible en el repo como concepto icd-10 h18.6. icicso lo registra por ahora como término médico con binding terminológico local, no como ser o eo ya materializado. el dato vive en el paquete icd-10 claml descargado en icicso_terminologias: h18.6 corresponde a keratoconus, y también aparece una mención relacionada de queratocono en síndrome de down dentro de h19.8. cuando se genere evidencia icicso sobre diagnóstico, seguimiento, cross-linking, topografía/tomografía corneal o pathway oftalmológico, esta entrada debe enlazarse a esos artefactos. término médico con binding terminológico; pendiente de artefacto ser/eo. icicso_terminologias/01_raw/icd10/icd10_claml.xml icicso_terminologias/01_raw/icd10/icd10_claml_package/icd102019en.xml icd-10 h18.6 keratoconus; mención relacionada h19.8 con referencia a síndrome de down q90.-.","category":"medical"},{"id":"extended-antithrombotic-therapy","title":"Extended antithrombotic therapy","section":"Términos médicos generados por ICICSO","shortDefinition":"intervención farmacológica modelada como evidencia con balance beneficio-daño.","longDefinition":"En el seed cardiovascular RCT, ICICSO la usa para representar terapia antitrombótica extendida posterior a revascularización vascular. El mapper espera generar un `EO` que no recomiende ejecución automática, sino `defer_to_review`, porque la dirección de efecto es mixta: reduce eventos isquémicos pero aumenta sangrado.","type":"término médico generado/usado por artefactos ICICSO.","primarySource":"[packages/evidence-intelligence/seeds/cardiovascular-rct.bundle.json](../packages/evidence-intelligence/seeds/cardiovascular-rct.bundle.json)","mentions":"[packages/evidence-intelligence/tests/mapping.test.ts](../packages/evidence-intelligence/tests/mapping.test.ts)","terminologyRelation":"","searchText":"extended antithrombotic therapy términos médicos generados por icicso intervención farmacológica modelada como evidencia con balance beneficio-daño. en el seed cardiovascular rct, icicso la usa para representar terapia antitrombótica extendida posterior a revascularización vascular. el mapper espera generar un eo que no recomiende ejecución automática, sino defer_to_review, porque la dirección de efecto es mixta: reduce eventos isquémicos pero aumenta sangrado. término médico generado/usado por artefactos icicso. packages/evidence-intelligence/seeds/cardiovascular-rct.bundle.json packages/evidence-intelligence/tests/mapping.test.ts","category":"medical"},{"id":"bleeding-risk-review","title":"Bleeding risk review","section":"Términos médicos generados por ICICSO","shortDefinition":"revisión de riesgo hemorrágico requerida antes de aplicar cierta evidencia antitrombótica.","longDefinition":"ICICSO la registra como precondición de implementación y restricción operativa en el ejemplo de terapia antitrombótica extendida. Es una señal de que el `EO` necesita revisión contextual y no activación silenciosa.","type":"término médico-operativo generado/usado por artefactos ICICSO.","primarySource":"[packages/evidence-intelligence/seeds/cardiovascular-rct.bundle.json](../packages/evidence-intelligence/seeds/cardiovascular-rct.bundle.json)","mentions":"[packages/evidence-intelligence/docs/eo-mapper-v1.md](../packages/evidence-intelligence/docs/eo-mapper-v1.md)","terminologyRelation":"","searchText":"bleeding risk review términos médicos generados por icicso revisión de riesgo hemorrágico requerida antes de aplicar cierta evidencia antitrombótica. icicso la registra como precondición de implementación y restricción operativa en el ejemplo de terapia antitrombótica extendida. es una señal de que el eo necesita revisión contextual y no activación silenciosa. término médico-operativo generado/usado por artefactos icicso. packages/evidence-intelligence/seeds/cardiovascular-rct.bundle.json packages/evidence-intelligence/docs/eo-mapper-v1.md","category":"medical"},{"id":"eras","title":"ERAS","section":"Términos médicos generados por ICICSO","shortDefinition":"vía perioperatoria de recuperación mejorada usada en ejemplos de cirugía colorrectal.","longDefinition":"ICICSO usa ERAS para modelar evidencia de manejo postoperatorio, como ingesta oral temprana tras cirugía colorrectal electiva. En el seed, el término se conecta con outcomes como estancia hospitalaria y recuperación funcional, y con restricciones como protocolo de enfermería y firma quirúrgica postoperatoria.","type":"término médico-operativo generado/usado por artefactos ICICSO.","primarySource":"[packages/evidence-intelligence/seeds/colorectal-eras.bundle.json](../packages/evidence-intelligence/seeds/colorectal-eras.bundle.json)","mentions":"[packages/evidence-intelligence/docs/eo-mapper-v1.md](../packages/evidence-intelligence/docs/eo-mapper-v1.md), [packages/evidence-intelligence/tests/mapping.test.ts](../packages/evidence-intelligence/tests/mapping.test.ts)","terminologyRelation":"","searchText":"eras términos médicos generados por icicso vía perioperatoria de recuperación mejorada usada en ejemplos de cirugía colorrectal. icicso usa eras para modelar evidencia de manejo postoperatorio, como ingesta oral temprana tras cirugía colorrectal electiva. en el seed, el término se conecta con outcomes como estancia hospitalaria y recuperación funcional, y con restricciones como protocolo de enfermería y firma quirúrgica postoperatoria. término médico-operativo generado/usado por artefactos icicso. packages/evidence-intelligence/seeds/colorectal-eras.bundle.json packages/evidence-intelligence/docs/eo-mapper-v1.md, packages/evidence-intelligence/tests/mapping.test.ts","category":"medical"},{"id":"early-oral-intake","title":"Early oral intake","section":"Términos médicos generados por ICICSO","shortDefinition":"intervención postoperatoria usada dentro del ejemplo ERAS colorrectal.","longDefinition":"En ICICSO, aparece como intervención de manejo postoperatorio para pacientes estables después de cirugía colorrectal electiva. El seed la vincula a outcomes esperados como menor estancia hospitalaria y mejor recuperación funcional.","type":"término médico generado/usado por artefactos ICICSO.","primarySource":"[packages/evidence-intelligence/seeds/colorectal-eras.bundle.json](../packages/evidence-intelligence/seeds/colorectal-eras.bundle.json)","mentions":"[packages/evidence-intelligence/tests/mapping.test.ts](../packages/evidence-intelligence/tests/mapping.test.ts)","terminologyRelation":"","searchText":"early oral intake términos médicos generados por icicso intervención postoperatoria usada dentro del ejemplo eras colorrectal. en icicso, aparece como intervención de manejo postoperatorio para pacientes estables después de cirugía colorrectal electiva. el seed la vincula a outcomes esperados como menor estancia hospitalaria y mejor recuperación funcional. término médico generado/usado por artefactos icicso. packages/evidence-intelligence/seeds/colorectal-eras.bundle.json packages/evidence-intelligence/tests/mapping.test.ts","category":"medical"}],"sourceMarkdown":"# Glosario ICICSO\n\nEstado del documento: glosario canónico vivo.\n\nVista interactiva: [docs/glossary.html](glossary.html).\n\nEste documento no es un volcado de terminologías médicas externas. Es el glosario de conceptos que ICICSO va generando dentro del repo: artefactos, entidades, objetos de evidencia, ontologías, contratos, seeds, schemas, decisiones arquitectónicas y documentación operativa.\n\n## Regla de origen\n\nUn término entra al Glosario ICICSO cuando aparece en información producida por ICICSO, por ejemplo:\n\n- un `SER`, `EO`, `EL` u otro artefacto del continuum;\n- un schema o modelo de dominio;\n- un catálogo de ontología propio de `packages/evidence-intelligence`;\n- un seed bundle usado para pruebas o demostración;\n- una decisión de arquitectura, contrato de I/O o documento canónico del repo;\n- una salida generada por pipelines propios, siempre que represente conocimiento ICICSO y no sólo un dataset externo descargado.\n\nLas terminologías externas como SNOMED CT, ICD-10, LOINC, RxNorm, ATC, UCUM, CPT o MeSH no son el glosario. Son fuentes de codificación, validación o interoperabilidad. Si ICICSO genera un término médico propio o usa un término médico dentro de un `SER`/`EO`, entonces el glosario puede incluirlo con su explicación en contexto ICICSO y, si existe, con binding terminológico.\n\n## Regla de actualización\n\nCada entrada debe poder rastrearse a una fuente dentro del repo. Si una entrada no tiene fuente viva, debe marcarse como `histórica`, `conceptual` o eliminarse.\n\nFlujo automático:\n\n```powershell\npnpm glossary:refresh\n```\n\nEse comando hace dos cosas:\n\n1. escanea fuentes relevantes del repo y genera candidatos en [docs/glossary-candidates.md](glossary-candidates.md) y [docs/generated/glossary-candidates.json](generated/glossary-candidates.json);\n2. regenera la vista interactiva [docs/glossary.html](glossary.html).\n\nLos candidatos automáticos no son canónicos hasta que se revisen y se promuevan manualmente a este archivo.\n\nFormato recomendado por entrada:\n\n- **Definición corta:** una frase para lectura rápida.\n- **Definición larga:** explicación operativa dentro de ICICSO.\n- **Tipo:** artefacto, entidad, capa, regla, término médico generado, métrica, estado, engine, contrato.\n- **Fuente primaria:** archivo o artefacto donde se define.\n- **Menciones:** archivos donde aparece o se usa.\n- **Relación médica/terminológica:** opcional; sólo cuando el término tiene binding o dependencia clínica relevante.\n\n## Fuentes primarias actuales\n\n- [README.md](../README.md)\n- [START_HERE.md](../START_HERE.md)\n- [SYSTEM_STATUS.md](../SYSTEM_STATUS.md)\n- [docs/WHAT_ICICSO_IS.md](WHAT_ICICSO_IS.md)\n- [services/ingestion-orquestador/docs/ICICSO_CANONICAL_CONTINUUM.md](../services/ingestion-orquestador/docs/ICICSO_CANONICAL_CONTINUUM.md)\n- [services/ingestion-orquestador/docs/ICICSO_ENTITY_MODEL.md](../services/ingestion-orquestador/docs/ICICSO_ENTITY_MODEL.md)\n- [packages/evidence-intelligence/docs/architecture.md](../packages/evidence-intelligence/docs/architecture.md)\n- [packages/evidence-intelligence/docs/eo-mapper-v1.md](../packages/evidence-intelligence/docs/eo-mapper-v1.md)\n- [packages/evidence-intelligence/docs/ontology-v1.md](../packages/evidence-intelligence/docs/ontology-v1.md)\n- [packages/evidence-intelligence/seeds/](../packages/evidence-intelligence/seeds)\n- [packages/evidence-intelligence/examples/valid/](../packages/evidence-intelligence/examples/valid)\n\n## Entradas canónicas iniciales\n\n### ICICSO\n\n- **Definición corta:** continuum canónico para transformar evidencia clínica en artefactos estructurados, versionados, auditables y reutilizables.\n- **Definición larga:** ICICSO no es una sola app ni sólo un backend. Es un repositorio de trabajo que modela una cadena de transformación: documentos y fuentes clínicas entran al sistema, se normalizan, se convierten en artefactos canónicos y alimentan capas posteriores de gobernanza, decisión, readiness y ejecución.\n- **Tipo:** concepto raíz del repo.\n- **Fuente primaria:** [docs/WHAT_ICICSO_IS.md](WHAT_ICICSO_IS.md)\n- **Menciones:** [README.md](../README.md), [START_HERE.md](../START_HERE.md), [SYSTEM_STATUS.md](../SYSTEM_STATUS.md)\n\n### Continuum canónico\n\n- **Definición corta:** secuencia institucional de capas por las que ICICSO transforma evidencia en ejecución gobernada.\n- **Definición larga:** El continuum organiza el diseño por capas `L0-L12`, desde fundación/gobernanza hasta downstream, federación y exportación. En el estado actual del repo, el slice con evidencia real de ejecución es principalmente `ING -> SER -> EO -> EL`; el resto existe en diferentes grados de especificación, scaffold o runtime local.\n- **Tipo:** arquitectura/capa.\n- **Fuente primaria:** [services/ingestion-orquestador/docs/ICICSO_CANONICAL_CONTINUUM.md](../services/ingestion-orquestador/docs/ICICSO_CANONICAL_CONTINUUM.md)\n- **Menciones:** [docs/WHAT_ICICSO_IS.md](WHAT_ICICSO_IS.md), [SYSTEM_STATUS.md](../SYSTEM_STATUS.md), [icicso/docs/continuum/README.md](../icicso/docs/continuum/README.md)\n\n### ING\n\n- **Definición corta:** etapa de ingesta documental.\n- **Definición larga:** Representa la entrada inicial de documentos y fuentes clínicas al flujo ICICSO. En el repo aparece como la primera etapa del slice probado `ING -> SER -> EO -> EL`, conectada con catálogo documental, ingesta, materialización y auditoría.\n- **Tipo:** etapa del continuum.\n- **Fuente primaria:** [README.md](../README.md)\n- **Menciones:** [START_HERE.md](../START_HERE.md), [SYSTEM_STATUS.md](../SYSTEM_STATUS.md), [services/ingestion-orquestador/README.md](../services/ingestion-orquestador/README.md)\n\n### SER\n\n- **Definición corta:** registro estructurado de evidencia fuente.\n- **Definición larga:** `SER` captura evidencia validada y versionada antes de convertirse en un `EO`. En `packages/evidence-intelligence`, un `StructuredEvidenceRecord` contiene documento fuente, dominio clínico, statements, aplicabilidad, contexto operacional y provenance.\n- **Tipo:** artefacto de evidencia.\n- **Fuente primaria:** [packages/evidence-intelligence/src/models/ser.ts](../packages/evidence-intelligence/src/models/ser.ts)\n- **Menciones:** [icicso/packages/domain/ser/README.md](../icicso/packages/domain/ser/README.md), [services/ingestion-orquestador/docs/ICICSO_ENTITY_MODEL.md](../services/ingestion-orquestador/docs/ICICSO_ENTITY_MODEL.md), [packages/evidence-intelligence/docs/eo-mapper-v1.md](../packages/evidence-intelligence/docs/eo-mapper-v1.md)\n\n### EO\n\n- **Definición corta:** objeto de evidencia ejecutable, derivado de un `SER`.\n- **Definición larga:** `EO` transforma una declaración estructurada de evidencia en un objeto con trigger, condiciones, exclusiones, decisión, acción, outcomes esperados, confianza, soporte, trazabilidad, restricciones operativas y estado de revisión. No es una orden médica autónoma: es un artefacto auditable que puede alimentar capas posteriores.\n- **Tipo:** artefacto de evidencia.\n- **Fuente primaria:** [packages/evidence-intelligence/src/models/eo.ts](../packages/evidence-intelligence/src/models/eo.ts)\n- **Menciones:** [icicso/packages/domain/eo/README.md](../icicso/packages/domain/eo/README.md), [packages/evidence-intelligence/docs/eo-mapper-v1.md](../packages/evidence-intelligence/docs/eo-mapper-v1.md), [services/ingestion-orquestador/schemas/evidence/evidence_object.schema.json](../services/ingestion-orquestador/schemas/evidence/evidence_object.schema.json)\n\n### EL\n\n- **Definición corta:** Evidence Lake, registro canónico consultable de `EO`.\n- **Definición larga:** `EL` persiste e indexa Evidence Objects para consulta, trazabilidad y reutilización. En el canon actual funciona como destino posterior de `EO` dentro del slice `SER -> EO -> EL`.\n- **Tipo:** artefacto/registro de evidencia.\n- **Fuente primaria:** [icicso/packages/domain/evidence-lake/README.md](../icicso/packages/domain/evidence-lake/README.md)\n- **Menciones:** [START_HERE.md](../START_HERE.md), [SYSTEM_STATUS.md](../SYSTEM_STATUS.md), [icicso/packages/domain/ser/test-ser-eo-el-pipeline.ts](../icicso/packages/domain/ser/test-ser-eo-el-pipeline.ts)\n\n### Evidence statement\n\n- **Definición corta:** declaración clínica estructurada dentro de un `SER`.\n- **Definición larga:** Es la unidad semántica que el mapper puede convertir en `EO`. Contiene función clínica, clase de intervención, comparador, dirección del efecto, fuerza, certeza, condiciones, exclusiones, outcomes y contexto operacional.\n- **Tipo:** entidad interna de evidencia.\n- **Fuente primaria:** [packages/evidence-intelligence/src/models/ser.ts](../packages/evidence-intelligence/src/models/ser.ts)\n- **Menciones:** [packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json](../packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json), [packages/evidence-intelligence/seeds/colorectal-eras.bundle.json](../packages/evidence-intelligence/seeds/colorectal-eras.bundle.json)\n\n### Canon semántico-operacional\n\n- **Definición corta:** conjunto de contratos y catálogos que hacen estable la interpretación de evidencia.\n- **Definición larga:** Vive principalmente en `packages/evidence-intelligence`: `ontology/` define catálogos controlados; `schemas/` define contratos validables; `src/models`, `src/validators` y `src/mappers` dan comportamiento operativo a la transformación de evidencia.\n- **Tipo:** arquitectura de dominio.\n- **Fuente primaria:** [packages/evidence-intelligence/docs/architecture.md](../packages/evidence-intelligence/docs/architecture.md)\n- **Menciones:** [packages/evidence-intelligence/docs/ontology-v1.md](../packages/evidence-intelligence/docs/ontology-v1.md), [packages/evidence-intelligence/src/models](../packages/evidence-intelligence/src/models)\n\n### Mapper SER -> EO\n\n- **Definición corta:** transformación de un `StructuredEvidenceRecord` en un `EvidenceObject`.\n- **Definición larga:** Convierte un statement de `SER` en un `EO` usando reglas de inferencia: deriva trigger, condiciones, decisión, acciones, outcomes, confianza, conflictos y estado de revisión. En v1, un statement genera un EO a la vez y no resuelve silenciosamente conflictos.\n- **Tipo:** transformación/engine de dominio.\n- **Fuente primaria:** [packages/evidence-intelligence/docs/eo-mapper-v1.md](../packages/evidence-intelligence/docs/eo-mapper-v1.md)\n- **Menciones:** [packages/evidence-intelligence/src/mappers/ser-to-eo.ts](../packages/evidence-intelligence/src/mappers/ser-to-eo.ts), [packages/evidence-intelligence/tests/mapping.test.ts](../packages/evidence-intelligence/tests/mapping.test.ts)\n\n### Trigger\n\n- **Definición corta:** evento o situación que activa la aplicabilidad de un `EO`.\n- **Definición larga:** En un `EO`, el trigger combina un evento con una función clínica. El mapper lo deriva del dominio clínico y de la función clínica primaria del statement.\n- **Tipo:** campo de `EO`.\n- **Fuente primaria:** [packages/evidence-intelligence/src/models/eo.ts](../packages/evidence-intelligence/src/models/eo.ts)\n- **Menciones:** [packages/evidence-intelligence/examples/valid/eo.valid.json](../packages/evidence-intelligence/examples/valid/eo.valid.json), [packages/evidence-intelligence/docs/eo-mapper-v1.md](../packages/evidence-intelligence/docs/eo-mapper-v1.md)\n\n### Decision readiness\n\n- **Definición corta:** estado que indica si una evidencia está lista para ejecución, revisión o síntesis.\n- **Definición larga:** ICICSO usa este campo para separar evidencia accionable de evidencia que requiere revisión humana, síntesis adicional o sólo contexto. Aparece en SER, EO y perfiles de aplicabilidad.\n- **Tipo:** estado de decisión.\n- **Fuente primaria:** [packages/evidence-intelligence/src/models/eo.ts](../packages/evidence-intelligence/src/models/eo.ts)\n- **Menciones:** [packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json](../packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json), [packages/evidence-intelligence/seeds/cardiovascular-rct.bundle.json](../packages/evidence-intelligence/seeds/cardiovascular-rct.bundle.json)\n\n### Inference trace\n\n- **Definición corta:** rastro ordenado que explica cómo el sistema derivó campos de un `EO`.\n- **Definición larga:** El `inferenceTrace` permite auditar la transformación de `SER` a `EO`: cada paso registra una decisión de inferencia y su racionalidad. Es clave para que un `EO` generado no sea una caja negra.\n- **Tipo:** trazabilidad/inferencia.\n- **Fuente primaria:** [packages/evidence-intelligence/src/models/eo.ts](../packages/evidence-intelligence/src/models/eo.ts)\n- **Menciones:** [packages/evidence-intelligence/docs/eo-mapper-v1.md](../packages/evidence-intelligence/docs/eo-mapper-v1.md)\n\n### Conflict marker\n\n- **Definición corta:** marca explícita de conflicto o debilidad semántica en un `EO`.\n- **Definición larga:** ICICSO no debe resolver silenciosamente conflictos. El mapper puede marcar conflictos como dirección de efecto mixta, baja aplicabilidad, evidencia antigua o fuerza insuficiente, elevando el estado a revisión humana cuando corresponde.\n- **Tipo:** señal de revisión.\n- **Fuente primaria:** [packages/evidence-intelligence/src/models/eo.ts](../packages/evidence-intelligence/src/models/eo.ts)\n- **Menciones:** [packages/evidence-intelligence/docs/eo-mapper-v1.md](../packages/evidence-intelligence/docs/eo-mapper-v1.md), [packages/evidence-intelligence/seeds/conflictive-evidence.bundle.json](../packages/evidence-intelligence/seeds/conflictive-evidence.bundle.json)\n\n### Provenance\n\n- **Definición corta:** cadena de trazabilidad legal y técnica de un artefacto.\n- **Definición larga:** En ICICSO, provenance registra origen, captura, actor, cadena de custodia, licencia, política de revisión, retención y versionado. Es un campo estructural de SER, EO y otros artefactos de evidencia.\n- **Tipo:** trazabilidad/legal.\n- **Fuente primaria:** [packages/evidence-intelligence/src/models/provenance.ts](../packages/evidence-intelligence/src/models/provenance.ts)\n- **Menciones:** [packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json](../packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json), [packages/evidence-intelligence/docs/architecture.md](../packages/evidence-intelligence/docs/architecture.md)\n\n### VRN\n\n- **Definición corta:** identificador de registro/versionado usado para gobernar artefactos.\n- **Definición larga:** `VRN` aparece como parte de la gobernanza de entidades y del continuum. Se usa para vincular versiones activas, estados, decisiones y trazabilidad institucional.\n- **Tipo:** versionado/gobernanza.\n- **Fuente primaria:** [services/ingestion-orquestador/docs/ICICSO_ENTITY_MODEL.md](../services/ingestion-orquestador/docs/ICICSO_ENTITY_MODEL.md)\n- **Menciones:** [services/ingestion-orquestador/docs/ICICSO_CANONICAL_CONTINUUM.md](../services/ingestion-orquestador/docs/ICICSO_CANONICAL_CONTINUUM.md), [services/ingestion-orquestador/app/services/vrn_policy_service.py](../services/ingestion-orquestador/app/services/vrn_policy_service.py)\n\n### Terminology binding\n\n- **Definición corta:** vínculo entre un concepto usado por ICICSO y un sistema terminológico externo.\n- **Definición larga:** El binding terminológico permite que un término clínico generado o usado por ICICSO pueda apuntar a sistemas como SNOMED CT, ICD-10, LOINC, RxNorm, ATC, UCUM o CPT. En el glosario, el binding es evidencia complementaria; no convierte el glosario en catálogo externo.\n- **Tipo:** interoperabilidad/terminología.\n- **Fuente primaria:** [services/ingestion-orquestador/docs/ICICSO_ENTITY_MODEL.md](../services/ingestion-orquestador/docs/ICICSO_ENTITY_MODEL.md)\n- **Menciones:** [packages/evidence-intelligence/docs/architecture.md](../packages/evidence-intelligence/docs/architecture.md), [ICICSO_TERMINOLOGIAS/README.md](../ICICSO_TERMINOLOGIAS/README.md)\n\n## Términos médicos generados por ICICSO\n\nEstas entradas no sustituyen definiciones clínicas formales. Describen cómo ICICSO usa esos términos dentro de artefactos propios.\n\n### CABG\n\n- **Definición corta:** cirugía de revascularización coronaria usada como intervención en ejemplos ICICSO.\n- **Definición larga:** En los seeds de revascularización, `CABG` aparece como intervención quirúrgica recomendada para adultos seleccionados con enfermedad de tronco coronario izquierdo o enfermedad coronaria multivaso con alta complejidad anatómica. ICICSO la modela como acción derivable desde un `SER` hacia un `EO`, con restricciones operativas como equipo de cirugía cardíaca, quirófano e ICU.\n- **Tipo:** término médico generado/usado por artefactos ICICSO.\n- **Fuente primaria:** [packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json](../packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json)\n- **Menciones:** [packages/evidence-intelligence/examples/valid/eo.valid.json](../packages/evidence-intelligence/examples/valid/eo.valid.json), [packages/evidence-intelligence/tests/mapping.test.ts](../packages/evidence-intelligence/tests/mapping.test.ts)\n- **Relación médica/terminológica:** el seed incluye binding SNOMED CT para `Coronary artery bypass graft` y CPT relacionado.\n\n### Left main coronary artery disease\n\n- **Definición corta:** condición cardiovascular usada como criterio de aplicabilidad para CABG.\n- **Definición larga:** ICICSO la usa como parte de la población objetivo de un `SER` de revascularización coronaria. En el ejemplo, sirve para determinar condiciones de aplicabilidad, intervención preferida y necesidad de evaluación por heart team.\n- **Tipo:** término médico generado/usado por artefactos ICICSO.\n- **Fuente primaria:** [packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json](../packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json)\n- **Menciones:** [packages/evidence-intelligence/examples/valid/eo.valid.json](../packages/evidence-intelligence/examples/valid/eo.valid.json)\n\n### Multivessel CAD\n\n- **Definición corta:** enfermedad coronaria multivaso usada como condición de activación de un `EO`.\n- **Definición larga:** En el ejemplo válido de `EO`, `multivessel CAD` aparece como condición para una recomendación de evaluación y programación de CABG. El término no entra por haber sido descargado desde un vocabulario externo; entra porque ICICSO lo usa en un artefacto generado.\n- **Tipo:** término médico generado/usado por artefactos ICICSO.\n- **Fuente primaria:** [packages/evidence-intelligence/examples/valid/eo.valid.json](../packages/evidence-intelligence/examples/valid/eo.valid.json)\n- **Menciones:** [packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json](../packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json)\n\n### Heart team evaluation\n\n- **Definición corta:** evaluación clínica multidisciplinaria usada como precondición para decisiones cardiovasculares complejas.\n- **Definición larga:** ICICSO la modela como criterio de inclusión, condición operativa o trigger contextual para seleccionar intervención en enfermedad coronaria compleja. En el seed de CABG, aparece como precondición antes de selección final.\n- **Tipo:** término médico-operativo generado/usado por artefactos ICICSO.\n- **Fuente primaria:** [packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json](../packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json)\n- **Menciones:** [packages/evidence-intelligence/examples/valid/eo.valid.json](../packages/evidence-intelligence/examples/valid/eo.valid.json)\n\n### Queratocono / Keratoconus\n\n- **Definición corta:** ectasia corneal progresiva disponible en el repo como concepto ICD-10 `H18.6`.\n- **Definición larga:** ICICSO lo registra por ahora como término médico con binding terminológico local, no como `SER` o `EO` ya materializado. El dato vive en el paquete ICD-10 ClaML descargado en `ICICSO_TERMINOLOGIAS`: `H18.6` corresponde a `Keratoconus`, y también aparece una mención relacionada de queratocono en síndrome de Down dentro de `H19.8`. Cuando se genere evidencia ICICSO sobre diagnóstico, seguimiento, cross-linking, topografía/tomografía corneal o pathway oftalmológico, esta entrada debe enlazarse a esos artefactos.\n- **Tipo:** término médico con binding terminológico; pendiente de artefacto `SER/EO`.\n- **Fuente primaria:** [ICICSO_TERMINOLOGIAS/01_RAW/ICD10/icd10_claml.xml](../ICICSO_TERMINOLOGIAS/01_RAW/ICD10/icd10_claml.xml)\n- **Menciones:** [ICICSO_TERMINOLOGIAS/01_RAW/ICD10/icd10_claml_package/icd102019en.xml](../ICICSO_TERMINOLOGIAS/01_RAW/ICD10/icd10_claml_package/icd102019en.xml)\n- **Relación médica/terminológica:** ICD-10 `H18.6 Keratoconus`; mención relacionada `H19.8` con referencia a síndrome de Down `Q90.-`.\n\n### Extended antithrombotic therapy\n\n- **Definición corta:** intervención farmacológica modelada como evidencia con balance beneficio-daño.\n- **Definición larga:** En el seed cardiovascular RCT, ICICSO la usa para representar terapia antitrombótica extendida posterior a revascularización vascular. El mapper espera generar un `EO` que no recomiende ejecución automática, sino `defer_to_review`, porque la dirección de efecto es mixta: reduce eventos isquémicos pero aumenta sangrado.\n- **Tipo:** término médico generado/usado por artefactos ICICSO.\n- **Fuente primaria:** [packages/evidence-intelligence/seeds/cardiovascular-rct.bundle.json](../packages/evidence-intelligence/seeds/cardiovascular-rct.bundle.json)\n- **Menciones:** [packages/evidence-intelligence/tests/mapping.test.ts](../packages/evidence-intelligence/tests/mapping.test.ts)\n\n### Bleeding risk review\n\n- **Definición corta:** revisión de riesgo hemorrágico requerida antes de aplicar cierta evidencia antitrombótica.\n- **Definición larga:** ICICSO la registra como precondición de implementación y restricción operativa en el ejemplo de terapia antitrombótica extendida. Es una señal de que el `EO` necesita revisión contextual y no activación silenciosa.\n- **Tipo:** término médico-operativo generado/usado por artefactos ICICSO.\n- **Fuente primaria:** [packages/evidence-intelligence/seeds/cardiovascular-rct.bundle.json](../packages/evidence-intelligence/seeds/cardiovascular-rct.bundle.json)\n- **Menciones:** [packages/evidence-intelligence/docs/eo-mapper-v1.md](../packages/evidence-intelligence/docs/eo-mapper-v1.md)\n\n### ERAS\n\n- **Definición corta:** vía perioperatoria de recuperación mejorada usada en ejemplos de cirugía colorrectal.\n- **Definición larga:** ICICSO usa ERAS para modelar evidencia de manejo postoperatorio, como ingesta oral temprana tras cirugía colorrectal electiva. En el seed, el término se conecta con outcomes como estancia hospitalaria y recuperación funcional, y con restricciones como protocolo de enfermería y firma quirúrgica postoperatoria.\n- **Tipo:** término médico-operativo generado/usado por artefactos ICICSO.\n- **Fuente primaria:** [packages/evidence-intelligence/seeds/colorectal-eras.bundle.json](../packages/evidence-intelligence/seeds/colorectal-eras.bundle.json)\n- **Menciones:** [packages/evidence-intelligence/docs/eo-mapper-v1.md](../packages/evidence-intelligence/docs/eo-mapper-v1.md), [packages/evidence-intelligence/tests/mapping.test.ts](../packages/evidence-intelligence/tests/mapping.test.ts)\n\n### Early oral intake\n\n- **Definición corta:** intervención postoperatoria usada dentro del ejemplo ERAS colorrectal.\n- **Definición larga:** En ICICSO, aparece como intervención de manejo postoperatorio para pacientes estables después de cirugía colorrectal electiva. El seed la vincula a outcomes esperados como menor estancia hospitalaria y mejor recuperación funcional.\n- **Tipo:** término médico generado/usado por artefactos ICICSO.\n- **Fuente primaria:** [packages/evidence-intelligence/seeds/colorectal-eras.bundle.json](../packages/evidence-intelligence/seeds/colorectal-eras.bundle.json)\n- **Menciones:** [packages/evidence-intelligence/tests/mapping.test.ts](../packages/evidence-intelligence/tests/mapping.test.ts)\n\n## Notas de mantenimiento\n\n- Este archivo debe actualizarse cuando se agreguen nuevos seeds, schemas, EO, SER, catálogos de ontología o documentos canónicos.\n- Para automatización futura, el generador debería leer `packages/evidence-intelligence/seeds`, `packages/evidence-intelligence/examples/valid`, `packages/evidence-intelligence/ontology`, schemas y docs canónicos, y proponer entradas nuevas con fuente y menciones.\n- Los datasets en `ICICSO_TERMINOLOGIAS/01_RAW` no deben alimentar el glosario automáticamente. Sólo deben aparecer como binding, referencia o fuente de validación cuando un artefacto ICICSO ya usa el concepto, o cuando una entrada se promueve explícitamente como término médico pendiente de `SER/EO`.\n- Cuando aparezca `software_orquestador`, leerlo como antecedente histórico del soporte activo ubicado en `services/ingestion-orquestador/`.\n"}</script>
+  <script id="glossaryMarkdown" type="text/plain"># Glosario ICICSO
+
+Estado del documento: glosario canónico vivo.
+
+Vista interactiva: [docs/glossary.html](glossary.html).
+
+Este documento no es un volcado de terminologías médicas externas. Es el glosario de conceptos que ICICSO va generando dentro del repo: artefactos, entidades, objetos de evidencia, ontologías, contratos, seeds, schemas, decisiones arquitectónicas y documentación operativa.
+
+## Regla de origen
+
+Un término entra al Glosario ICICSO cuando aparece en información producida por ICICSO, por ejemplo:
+
+- un \`SER\`, \`EO\`, \`EL\` u otro artefacto del continuum;
+- un schema o modelo de dominio;
+- un catálogo de ontología propio de \`packages/evidence-intelligence\`;
+- un seed bundle usado para pruebas o demostración;
+- una decisión de arquitectura, contrato de I/O o documento canónico del repo;
+- una salida generada por pipelines propios, siempre que represente conocimiento ICICSO y no sólo un dataset externo descargado.
+
+Las terminologías externas como SNOMED CT, ICD-10, LOINC, RxNorm, ATC, UCUM, CPT o MeSH no son el glosario. Son fuentes de codificación, validación o interoperabilidad. Si ICICSO genera un término médico propio o usa un término médico dentro de un \`SER\`/\`EO\`, entonces el glosario puede incluirlo con su explicación en contexto ICICSO y, si existe, con binding terminológico.
+
+## Regla de actualización
+
+Cada entrada debe poder rastrearse a una fuente dentro del repo. Si una entrada no tiene fuente viva, debe marcarse como \`histórica\`, \`conceptual\` o eliminarse.
+
+Flujo automático:
+
+\`\`\`powershell
+pnpm glossary:refresh
+\`\`\`
+
+Ese comando hace dos cosas:
+
+1. escanea fuentes relevantes del repo y genera candidatos en [docs/glossary-candidates.md](glossary-candidates.md) y [docs/generated/glossary-candidates.json](generated/glossary-candidates.json);
+2. regenera la vista interactiva [docs/glossary.html](glossary.html).
+
+Los candidatos automáticos no son canónicos hasta que se revisen y se promuevan manualmente a este archivo.
+
+Formato recomendado por entrada:
+
+- **Definición corta:** una frase para lectura rápida.
+- **Definición larga:** explicación operativa dentro de ICICSO.
+- **Tipo:** artefacto, entidad, capa, regla, término médico generado, métrica, estado, engine, contrato.
+- **Fuente primaria:** archivo o artefacto donde se define.
+- **Menciones:** archivos donde aparece o se usa.
+- **Relación médica/terminológica:** opcional; sólo cuando el término tiene binding o dependencia clínica relevante.
+
+## Fuentes primarias actuales
+
+- [README.md](../README.md)
+- [START_HERE.md](../START_HERE.md)
+- [SYSTEM_STATUS.md](../SYSTEM_STATUS.md)
+- [docs/WHAT_ICICSO_IS.md](WHAT_ICICSO_IS.md)
+- [services/ingestion-orquestador/docs/ICICSO_CANONICAL_CONTINUUM.md](../services/ingestion-orquestador/docs/ICICSO_CANONICAL_CONTINUUM.md)
+- [services/ingestion-orquestador/docs/ICICSO_ENTITY_MODEL.md](../services/ingestion-orquestador/docs/ICICSO_ENTITY_MODEL.md)
+- [packages/evidence-intelligence/docs/architecture.md](../packages/evidence-intelligence/docs/architecture.md)
+- [packages/evidence-intelligence/docs/eo-mapper-v1.md](../packages/evidence-intelligence/docs/eo-mapper-v1.md)
+- [packages/evidence-intelligence/docs/ontology-v1.md](../packages/evidence-intelligence/docs/ontology-v1.md)
+- [packages/evidence-intelligence/seeds/](../packages/evidence-intelligence/seeds)
+- [packages/evidence-intelligence/examples/valid/](../packages/evidence-intelligence/examples/valid)
+
+## Entradas canónicas iniciales
+
+### ICICSO
+
+- **Definición corta:** continuum canónico para transformar evidencia clínica en artefactos estructurados, versionados, auditables y reutilizables.
+- **Definición larga:** ICICSO no es una sola app ni sólo un backend. Es un repositorio de trabajo que modela una cadena de transformación: documentos y fuentes clínicas entran al sistema, se normalizan, se convierten en artefactos canónicos y alimentan capas posteriores de gobernanza, decisión, readiness y ejecución.
+- **Tipo:** concepto raíz del repo.
+- **Fuente primaria:** [docs/WHAT_ICICSO_IS.md](WHAT_ICICSO_IS.md)
+- **Menciones:** [README.md](../README.md), [START_HERE.md](../START_HERE.md), [SYSTEM_STATUS.md](../SYSTEM_STATUS.md)
+
+### Continuum canónico
+
+- **Definición corta:** secuencia institucional de capas por las que ICICSO transforma evidencia en ejecución gobernada.
+- **Definición larga:** El continuum organiza el diseño por capas \`L0-L12\`, desde fundación/gobernanza hasta downstream, federación y exportación. En el estado actual del repo, el slice con evidencia real de ejecución es principalmente \`ING -> SER -> EO -> EL\`; el resto existe en diferentes grados de especificación, scaffold o runtime local.
+- **Tipo:** arquitectura/capa.
+- **Fuente primaria:** [services/ingestion-orquestador/docs/ICICSO_CANONICAL_CONTINUUM.md](../services/ingestion-orquestador/docs/ICICSO_CANONICAL_CONTINUUM.md)
+- **Menciones:** [docs/WHAT_ICICSO_IS.md](WHAT_ICICSO_IS.md), [SYSTEM_STATUS.md](../SYSTEM_STATUS.md), [icicso/docs/continuum/README.md](../icicso/docs/continuum/README.md)
+
+### ING
+
+- **Definición corta:** etapa de ingesta documental.
+- **Definición larga:** Representa la entrada inicial de documentos y fuentes clínicas al flujo ICICSO. En el repo aparece como la primera etapa del slice probado \`ING -> SER -> EO -> EL\`, conectada con catálogo documental, ingesta, materialización y auditoría.
+- **Tipo:** etapa del continuum.
+- **Fuente primaria:** [README.md](../README.md)
+- **Menciones:** [START_HERE.md](../START_HERE.md), [SYSTEM_STATUS.md](../SYSTEM_STATUS.md), [services/ingestion-orquestador/README.md](../services/ingestion-orquestador/README.md)
+
+### SER
+
+- **Definición corta:** registro estructurado de evidencia fuente.
+- **Definición larga:** \`SER\` captura evidencia validada y versionada antes de convertirse en un \`EO\`. En \`packages/evidence-intelligence\`, un \`StructuredEvidenceRecord\` contiene documento fuente, dominio clínico, statements, aplicabilidad, contexto operacional y provenance.
+- **Tipo:** artefacto de evidencia.
+- **Fuente primaria:** [packages/evidence-intelligence/src/models/ser.ts](../packages/evidence-intelligence/src/models/ser.ts)
+- **Menciones:** [icicso/packages/domain/ser/README.md](../icicso/packages/domain/ser/README.md), [services/ingestion-orquestador/docs/ICICSO_ENTITY_MODEL.md](../services/ingestion-orquestador/docs/ICICSO_ENTITY_MODEL.md), [packages/evidence-intelligence/docs/eo-mapper-v1.md](../packages/evidence-intelligence/docs/eo-mapper-v1.md)
+
+### EO
+
+- **Definición corta:** objeto de evidencia ejecutable, derivado de un \`SER\`.
+- **Definición larga:** \`EO\` transforma una declaración estructurada de evidencia en un objeto con trigger, condiciones, exclusiones, decisión, acción, outcomes esperados, confianza, soporte, trazabilidad, restricciones operativas y estado de revisión. No es una orden médica autónoma: es un artefacto auditable que puede alimentar capas posteriores.
+- **Tipo:** artefacto de evidencia.
+- **Fuente primaria:** [packages/evidence-intelligence/src/models/eo.ts](../packages/evidence-intelligence/src/models/eo.ts)
+- **Menciones:** [icicso/packages/domain/eo/README.md](../icicso/packages/domain/eo/README.md), [packages/evidence-intelligence/docs/eo-mapper-v1.md](../packages/evidence-intelligence/docs/eo-mapper-v1.md), [services/ingestion-orquestador/schemas/evidence/evidence_object.schema.json](../services/ingestion-orquestador/schemas/evidence/evidence_object.schema.json)
+
+### EL
+
+- **Definición corta:** Evidence Lake, registro canónico consultable de \`EO\`.
+- **Definición larga:** \`EL\` persiste e indexa Evidence Objects para consulta, trazabilidad y reutilización. En el canon actual funciona como destino posterior de \`EO\` dentro del slice \`SER -> EO -> EL\`.
+- **Tipo:** artefacto/registro de evidencia.
+- **Fuente primaria:** [icicso/packages/domain/evidence-lake/README.md](../icicso/packages/domain/evidence-lake/README.md)
+- **Menciones:** [START_HERE.md](../START_HERE.md), [SYSTEM_STATUS.md](../SYSTEM_STATUS.md), [icicso/packages/domain/ser/test-ser-eo-el-pipeline.ts](../icicso/packages/domain/ser/test-ser-eo-el-pipeline.ts)
+
+### Evidence statement
+
+- **Definición corta:** declaración clínica estructurada dentro de un \`SER\`.
+- **Definición larga:** Es la unidad semántica que el mapper puede convertir en \`EO\`. Contiene función clínica, clase de intervención, comparador, dirección del efecto, fuerza, certeza, condiciones, exclusiones, outcomes y contexto operacional.
+- **Tipo:** entidad interna de evidencia.
+- **Fuente primaria:** [packages/evidence-intelligence/src/models/ser.ts](../packages/evidence-intelligence/src/models/ser.ts)
+- **Menciones:** [packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json](../packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json), [packages/evidence-intelligence/seeds/colorectal-eras.bundle.json](../packages/evidence-intelligence/seeds/colorectal-eras.bundle.json)
+
+### Canon semántico-operacional
+
+- **Definición corta:** conjunto de contratos y catálogos que hacen estable la interpretación de evidencia.
+- **Definición larga:** Vive principalmente en \`packages/evidence-intelligence\`: \`ontology/\` define catálogos controlados; \`schemas/\` define contratos validables; \`src/models\`, \`src/validators\` y \`src/mappers\` dan comportamiento operativo a la transformación de evidencia.
+- **Tipo:** arquitectura de dominio.
+- **Fuente primaria:** [packages/evidence-intelligence/docs/architecture.md](../packages/evidence-intelligence/docs/architecture.md)
+- **Menciones:** [packages/evidence-intelligence/docs/ontology-v1.md](../packages/evidence-intelligence/docs/ontology-v1.md), [packages/evidence-intelligence/src/models](../packages/evidence-intelligence/src/models)
+
+### Mapper SER -> EO
+
+- **Definición corta:** transformación de un \`StructuredEvidenceRecord\` en un \`EvidenceObject\`.
+- **Definición larga:** Convierte un statement de \`SER\` en un \`EO\` usando reglas de inferencia: deriva trigger, condiciones, decisión, acciones, outcomes, confianza, conflictos y estado de revisión. En v1, un statement genera un EO a la vez y no resuelve silenciosamente conflictos.
+- **Tipo:** transformación/engine de dominio.
+- **Fuente primaria:** [packages/evidence-intelligence/docs/eo-mapper-v1.md](../packages/evidence-intelligence/docs/eo-mapper-v1.md)
+- **Menciones:** [packages/evidence-intelligence/src/mappers/ser-to-eo.ts](../packages/evidence-intelligence/src/mappers/ser-to-eo.ts), [packages/evidence-intelligence/tests/mapping.test.ts](../packages/evidence-intelligence/tests/mapping.test.ts)
+
+### Trigger
+
+- **Definición corta:** evento o situación que activa la aplicabilidad de un \`EO\`.
+- **Definición larga:** En un \`EO\`, el trigger combina un evento con una función clínica. El mapper lo deriva del dominio clínico y de la función clínica primaria del statement.
+- **Tipo:** campo de \`EO\`.
+- **Fuente primaria:** [packages/evidence-intelligence/src/models/eo.ts](../packages/evidence-intelligence/src/models/eo.ts)
+- **Menciones:** [packages/evidence-intelligence/examples/valid/eo.valid.json](../packages/evidence-intelligence/examples/valid/eo.valid.json), [packages/evidence-intelligence/docs/eo-mapper-v1.md](../packages/evidence-intelligence/docs/eo-mapper-v1.md)
+
+### Decision readiness
+
+- **Definición corta:** estado que indica si una evidencia está lista para ejecución, revisión o síntesis.
+- **Definición larga:** ICICSO usa este campo para separar evidencia accionable de evidencia que requiere revisión humana, síntesis adicional o sólo contexto. Aparece en SER, EO y perfiles de aplicabilidad.
+- **Tipo:** estado de decisión.
+- **Fuente primaria:** [packages/evidence-intelligence/src/models/eo.ts](../packages/evidence-intelligence/src/models/eo.ts)
+- **Menciones:** [packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json](../packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json), [packages/evidence-intelligence/seeds/cardiovascular-rct.bundle.json](../packages/evidence-intelligence/seeds/cardiovascular-rct.bundle.json)
+
+### Inference trace
+
+- **Definición corta:** rastro ordenado que explica cómo el sistema derivó campos de un \`EO\`.
+- **Definición larga:** El \`inferenceTrace\` permite auditar la transformación de \`SER\` a \`EO\`: cada paso registra una decisión de inferencia y su racionalidad. Es clave para que un \`EO\` generado no sea una caja negra.
+- **Tipo:** trazabilidad/inferencia.
+- **Fuente primaria:** [packages/evidence-intelligence/src/models/eo.ts](../packages/evidence-intelligence/src/models/eo.ts)
+- **Menciones:** [packages/evidence-intelligence/docs/eo-mapper-v1.md](../packages/evidence-intelligence/docs/eo-mapper-v1.md)
+
+### Conflict marker
+
+- **Definición corta:** marca explícita de conflicto o debilidad semántica en un \`EO\`.
+- **Definición larga:** ICICSO no debe resolver silenciosamente conflictos. El mapper puede marcar conflictos como dirección de efecto mixta, baja aplicabilidad, evidencia antigua o fuerza insuficiente, elevando el estado a revisión humana cuando corresponde.
+- **Tipo:** señal de revisión.
+- **Fuente primaria:** [packages/evidence-intelligence/src/models/eo.ts](../packages/evidence-intelligence/src/models/eo.ts)
+- **Menciones:** [packages/evidence-intelligence/docs/eo-mapper-v1.md](../packages/evidence-intelligence/docs/eo-mapper-v1.md), [packages/evidence-intelligence/seeds/conflictive-evidence.bundle.json](../packages/evidence-intelligence/seeds/conflictive-evidence.bundle.json)
+
+### Provenance
+
+- **Definición corta:** cadena de trazabilidad legal y técnica de un artefacto.
+- **Definición larga:** En ICICSO, provenance registra origen, captura, actor, cadena de custodia, licencia, política de revisión, retención y versionado. Es un campo estructural de SER, EO y otros artefactos de evidencia.
+- **Tipo:** trazabilidad/legal.
+- **Fuente primaria:** [packages/evidence-intelligence/src/models/provenance.ts](../packages/evidence-intelligence/src/models/provenance.ts)
+- **Menciones:** [packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json](../packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json), [packages/evidence-intelligence/docs/architecture.md](../packages/evidence-intelligence/docs/architecture.md)
+
+### VRN
+
+- **Definición corta:** identificador de registro/versionado usado para gobernar artefactos.
+- **Definición larga:** \`VRN\` aparece como parte de la gobernanza de entidades y del continuum. Se usa para vincular versiones activas, estados, decisiones y trazabilidad institucional.
+- **Tipo:** versionado/gobernanza.
+- **Fuente primaria:** [services/ingestion-orquestador/docs/ICICSO_ENTITY_MODEL.md](../services/ingestion-orquestador/docs/ICICSO_ENTITY_MODEL.md)
+- **Menciones:** [services/ingestion-orquestador/docs/ICICSO_CANONICAL_CONTINUUM.md](../services/ingestion-orquestador/docs/ICICSO_CANONICAL_CONTINUUM.md), [services/ingestion-orquestador/app/services/vrn_policy_service.py](../services/ingestion-orquestador/app/services/vrn_policy_service.py)
+
+### Terminology binding
+
+- **Definición corta:** vínculo entre un concepto usado por ICICSO y un sistema terminológico externo.
+- **Definición larga:** El binding terminológico permite que un término clínico generado o usado por ICICSO pueda apuntar a sistemas como SNOMED CT, ICD-10, LOINC, RxNorm, ATC, UCUM o CPT. En el glosario, el binding es evidencia complementaria; no convierte el glosario en catálogo externo.
+- **Tipo:** interoperabilidad/terminología.
+- **Fuente primaria:** [services/ingestion-orquestador/docs/ICICSO_ENTITY_MODEL.md](../services/ingestion-orquestador/docs/ICICSO_ENTITY_MODEL.md)
+- **Menciones:** [packages/evidence-intelligence/docs/architecture.md](../packages/evidence-intelligence/docs/architecture.md), [ICICSO_TERMINOLOGIAS/README.md](../ICICSO_TERMINOLOGIAS/README.md)
+
+## Términos médicos generados por ICICSO
+
+Estas entradas no sustituyen definiciones clínicas formales. Describen cómo ICICSO usa esos términos dentro de artefactos propios.
+
+### CABG
+
+- **Definición corta:** cirugía de revascularización coronaria usada como intervención en ejemplos ICICSO.
+- **Definición larga:** En los seeds de revascularización, \`CABG\` aparece como intervención quirúrgica recomendada para adultos seleccionados con enfermedad de tronco coronario izquierdo o enfermedad coronaria multivaso con alta complejidad anatómica. ICICSO la modela como acción derivable desde un \`SER\` hacia un \`EO\`, con restricciones operativas como equipo de cirugía cardíaca, quirófano e ICU.
+- **Tipo:** término médico generado/usado por artefactos ICICSO.
+- **Fuente primaria:** [packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json](../packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json)
+- **Menciones:** [packages/evidence-intelligence/examples/valid/eo.valid.json](../packages/evidence-intelligence/examples/valid/eo.valid.json), [packages/evidence-intelligence/tests/mapping.test.ts](../packages/evidence-intelligence/tests/mapping.test.ts)
+- **Relación médica/terminológica:** el seed incluye binding SNOMED CT para \`Coronary artery bypass graft\` y CPT relacionado.
+
+### Left main coronary artery disease
+
+- **Definición corta:** condición cardiovascular usada como criterio de aplicabilidad para CABG.
+- **Definición larga:** ICICSO la usa como parte de la población objetivo de un \`SER\` de revascularización coronaria. En el ejemplo, sirve para determinar condiciones de aplicabilidad, intervención preferida y necesidad de evaluación por heart team.
+- **Tipo:** término médico generado/usado por artefactos ICICSO.
+- **Fuente primaria:** [packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json](../packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json)
+- **Menciones:** [packages/evidence-intelligence/examples/valid/eo.valid.json](../packages/evidence-intelligence/examples/valid/eo.valid.json)
+
+### Multivessel CAD
+
+- **Definición corta:** enfermedad coronaria multivaso usada como condición de activación de un \`EO\`.
+- **Definición larga:** En el ejemplo válido de \`EO\`, \`multivessel CAD\` aparece como condición para una recomendación de evaluación y programación de CABG. El término no entra por haber sido descargado desde un vocabulario externo; entra porque ICICSO lo usa en un artefacto generado.
+- **Tipo:** término médico generado/usado por artefactos ICICSO.
+- **Fuente primaria:** [packages/evidence-intelligence/examples/valid/eo.valid.json](../packages/evidence-intelligence/examples/valid/eo.valid.json)
+- **Menciones:** [packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json](../packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json)
+
+### Heart team evaluation
+
+- **Definición corta:** evaluación clínica multidisciplinaria usada como precondición para decisiones cardiovasculares complejas.
+- **Definición larga:** ICICSO la modela como criterio de inclusión, condición operativa o trigger contextual para seleccionar intervención en enfermedad coronaria compleja. En el seed de CABG, aparece como precondición antes de selección final.
+- **Tipo:** término médico-operativo generado/usado por artefactos ICICSO.
+- **Fuente primaria:** [packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json](../packages/evidence-intelligence/seeds/cardiac-revascularization.bundle.json)
+- **Menciones:** [packages/evidence-intelligence/examples/valid/eo.valid.json](../packages/evidence-intelligence/examples/valid/eo.valid.json)
+
+### Queratocono / Keratoconus
+
+- **Definición corta:** ectasia corneal progresiva disponible en el repo como concepto ICD-10 \`H18.6\`.
+- **Definición larga:** ICICSO lo registra por ahora como término médico con binding terminológico local, no como \`SER\` o \`EO\` ya materializado. El dato vive en el paquete ICD-10 ClaML descargado en \`ICICSO_TERMINOLOGIAS\`: \`H18.6\` corresponde a \`Keratoconus\`, y también aparece una mención relacionada de queratocono en síndrome de Down dentro de \`H19.8\`. Cuando se genere evidencia ICICSO sobre diagnóstico, seguimiento, cross-linking, topografía/tomografía corneal o pathway oftalmológico, esta entrada debe enlazarse a esos artefactos.
+- **Tipo:** término médico con binding terminológico; pendiente de artefacto \`SER/EO\`.
+- **Fuente primaria:** [ICICSO_TERMINOLOGIAS/01_RAW/ICD10/icd10_claml.xml](../ICICSO_TERMINOLOGIAS/01_RAW/ICD10/icd10_claml.xml)
+- **Menciones:** [ICICSO_TERMINOLOGIAS/01_RAW/ICD10/icd10_claml_package/icd102019en.xml](../ICICSO_TERMINOLOGIAS/01_RAW/ICD10/icd10_claml_package/icd102019en.xml)
+- **Relación médica/terminológica:** ICD-10 \`H18.6 Keratoconus\`; mención relacionada \`H19.8\` con referencia a síndrome de Down \`Q90.-\`.
+
+### Extended antithrombotic therapy
+
+- **Definición corta:** intervención farmacológica modelada como evidencia con balance beneficio-daño.
+- **Definición larga:** En el seed cardiovascular RCT, ICICSO la usa para representar terapia antitrombótica extendida posterior a revascularización vascular. El mapper espera generar un \`EO\` que no recomiende ejecución automática, sino \`defer_to_review\`, porque la dirección de efecto es mixta: reduce eventos isquémicos pero aumenta sangrado.
+- **Tipo:** término médico generado/usado por artefactos ICICSO.
+- **Fuente primaria:** [packages/evidence-intelligence/seeds/cardiovascular-rct.bundle.json](../packages/evidence-intelligence/seeds/cardiovascular-rct.bundle.json)
+- **Menciones:** [packages/evidence-intelligence/tests/mapping.test.ts](../packages/evidence-intelligence/tests/mapping.test.ts)
+
+### Bleeding risk review
+
+- **Definición corta:** revisión de riesgo hemorrágico requerida antes de aplicar cierta evidencia antitrombótica.
+- **Definición larga:** ICICSO la registra como precondición de implementación y restricción operativa en el ejemplo de terapia antitrombótica extendida. Es una señal de que el \`EO\` necesita revisión contextual y no activación silenciosa.
+- **Tipo:** término médico-operativo generado/usado por artefactos ICICSO.
+- **Fuente primaria:** [packages/evidence-intelligence/seeds/cardiovascular-rct.bundle.json](../packages/evidence-intelligence/seeds/cardiovascular-rct.bundle.json)
+- **Menciones:** [packages/evidence-intelligence/docs/eo-mapper-v1.md](../packages/evidence-intelligence/docs/eo-mapper-v1.md)
+
+### ERAS
+
+- **Definición corta:** vía perioperatoria de recuperación mejorada usada en ejemplos de cirugía colorrectal.
+- **Definición larga:** ICICSO usa ERAS para modelar evidencia de manejo postoperatorio, como ingesta oral temprana tras cirugía colorrectal electiva. En el seed, el término se conecta con outcomes como estancia hospitalaria y recuperación funcional, y con restricciones como protocolo de enfermería y firma quirúrgica postoperatoria.
+- **Tipo:** término médico-operativo generado/usado por artefactos ICICSO.
+- **Fuente primaria:** [packages/evidence-intelligence/seeds/colorectal-eras.bundle.json](../packages/evidence-intelligence/seeds/colorectal-eras.bundle.json)
+- **Menciones:** [packages/evidence-intelligence/docs/eo-mapper-v1.md](../packages/evidence-intelligence/docs/eo-mapper-v1.md), [packages/evidence-intelligence/tests/mapping.test.ts](../packages/evidence-intelligence/tests/mapping.test.ts)
+
+### Early oral intake
+
+- **Definición corta:** intervención postoperatoria usada dentro del ejemplo ERAS colorrectal.
+- **Definición larga:** En ICICSO, aparece como intervención de manejo postoperatorio para pacientes estables después de cirugía colorrectal electiva. El seed la vincula a outcomes esperados como menor estancia hospitalaria y mejor recuperación funcional.
+- **Tipo:** término médico generado/usado por artefactos ICICSO.
+- **Fuente primaria:** [packages/evidence-intelligence/seeds/colorectal-eras.bundle.json](../packages/evidence-intelligence/seeds/colorectal-eras.bundle.json)
+- **Menciones:** [packages/evidence-intelligence/tests/mapping.test.ts](../packages/evidence-intelligence/tests/mapping.test.ts)
+</script>
   <script>
+    const CATEGORY_META = [
+      { key: "evidence", label: "Evidencia" },
+      { key: "governance", label: "Gobernanza" },
+      { key: "medical", label: "Médico" },
+      { key: "technical", label: "Técnico" },
+      { key: "all", label: "Todos" }
+    ].sort((a, b) => a.label.localeCompare(b.label, "es"));
+
     const FIELD_LABELS = new Map([
       ["Definición corta", "shortDefinition"],
       ["Definicion corta", "shortDefinition"],
@@ -636,25 +390,34 @@
       ["Fuente primaria", "primarySource"],
       ["Menciones", "mentions"],
       ["Relación médica/terminológica", "terminologyRelation"],
-      ["Relacion medica/terminologica", "terminologyRelation"],
+      ["Relacion medica/terminologica", "terminologyRelation"]
     ]);
 
-    const CATEGORY_LABELS = {
-      medical: "Médico",
-      evidence: "Evidencia",
-      technical: "Técnico",
-      governance: "Gobernanza",
-    };
+    const state = { entries: [], query: "", filter: "all", selectedId: null };
 
-    const CATEGORY_ORDER = ["medical", "evidence", "technical", "governance"];
-    const state = {
-      entries: [],
-      filter: "all",
-      query: "",
-      selectedId: null,
-    };
+    function decodeScriptText(id) {
+      const node = document.getElementById(id);
+      const textarea = document.createElement("textarea");
+      textarea.innerHTML = node.textContent;
+      return textarea.value;
+    }
 
-    const fallback = JSON.parse(document.getElementById("glossaryData").textContent);
+    function escapeHtml(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function renderInline(value) {
+      const tick = String.fromCharCode(96);
+      return escapeHtml(value || "")
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
+        .replace(new RegExp(tick + "([^" + tick + "]+)" + tick, "g"), "<code>$1</code>")
+        .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    }
 
     function stripMarkdown(value) {
       const tick = String.fromCharCode(96);
@@ -664,24 +427,6 @@
         .replace(/\*\*([^*]+)\*\*/g, "$1")
         .replace(/\s+/g, " ")
         .trim();
-    }
-
-    function escapeHtml(value) {
-      return String(value || "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-    }
-
-    function renderInline(value) {
-      const tick = String.fromCharCode(96);
-      const escaped = escapeHtml(value || "");
-      return escaped
-        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>')
-        .replace(new RegExp(tick + "([^" + tick + "]+)" + tick, "g"), "<code>$1</code>")
-        .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
     }
 
     function parseLinks(value) {
@@ -700,40 +445,22 @@
         entry.type,
         entry.title,
         entry.shortDefinition,
-        entry.longDefinition,
+        entry.longDefinition
       ].join(" ").toLowerCase();
 
-      if (
-        haystack.includes("término médico") ||
-        haystack.includes("termino medico") ||
-        haystack.includes("médico") ||
-        haystack.includes("medico") ||
-        entry.section.toLowerCase().includes("médicos")
-      ) {
+      if (haystack.includes("término médico") || haystack.includes("termino medico") || haystack.includes("médico") || haystack.includes("medico")) {
         return "medical";
       }
-
-      if (
-        haystack.includes("governanza") ||
-        haystack.includes("gobernanza") ||
-        haystack.includes("versionado") ||
-        haystack.includes("estado")
-      ) {
+      if (haystack.includes("gobernanza") || haystack.includes("versionado") || haystack.includes("estado")) {
         return "governance";
       }
-
-      if (
-        haystack.includes("artefacto") ||
-        haystack.includes("evidencia") ||
-        haystack.includes("entidad")
-      ) {
+      if (haystack.includes("evidencia") || haystack.includes("artefacto") || haystack.includes("entidad")) {
         return "evidence";
       }
-
       return "technical";
     }
 
-    function parseGlossaryMarkdown(markdown) {
+    function parseGlossary(markdown) {
       const lines = markdown.split(/\r?\n/);
       const entries = [];
       let section = "General";
@@ -741,6 +468,7 @@
 
       function commit() {
         if (!current) return;
+        current.category = categorize(current);
         current.searchText = stripMarkdown([
           current.title,
           current.section,
@@ -749,9 +477,8 @@
           current.type,
           current.primarySource,
           current.mentions,
-          current.terminologyRelation,
+          current.terminologyRelation
         ].join(" ")).toLowerCase();
-        current.category = categorize(current);
         entries.push(current);
         current = null;
       }
@@ -763,7 +490,6 @@
           section = sectionMatch[1].trim();
           continue;
         }
-
         const entryMatch = /^###\s+(.+)$/.exec(line);
         if (entryMatch) {
           commit();
@@ -776,11 +502,10 @@
             type: "",
             primarySource: "",
             mentions: "",
-            terminologyRelation: "",
+            terminologyRelation: ""
           };
           continue;
         }
-
         if (!current) continue;
         const fieldMatch = /^-\s+\*\*([^:]+):\*\*\s*(.*)$/.exec(line);
         if (fieldMatch) {
@@ -788,135 +513,140 @@
           if (key) current[key] = fieldMatch[2].trim();
         }
       }
-
       commit();
       return entries;
-    }
-
-    function scoreEntry(entry, query) {
-      if (!query) return 1;
-      const normalized = query.toLowerCase().trim();
-      if (!entry.searchText.includes(normalized)) return 0;
-      if (entry.title.toLowerCase().includes(normalized)) return 5;
-      if ((entry.type || "").toLowerCase().includes(normalized)) return 4;
-      if ((entry.shortDefinition || "").toLowerCase().includes(normalized)) return 3;
-      return 2;
     }
 
     function highlight(value) {
       const rendered = renderInline(value || "");
       const query = state.query.trim();
       if (!query) return rendered;
-      const safeQuery = query.replace(/[.*+?^$(){}|[\]\\]/g, "\\$&");
-      return rendered.replace(new RegExp(safeQuery, "ig"), (match) => "<mark>" + match + "</mark>");
+      const safe = query.replace(/[.*+?^$(){}|[\]\\]/g, "\\$&");
+      return rendered.replace(new RegExp(safe, "ig"), (match) => "<mark>" + match + "</mark>");
     }
 
-    function getFilteredEntries() {
+    function score(entry) {
+      const query = state.query.trim().toLowerCase();
+      if (!query) return 1;
+      if (!entry.searchText.includes(query)) return 0;
+      if (entry.title.toLowerCase().includes(query)) return 4;
+      if (entry.shortDefinition.toLowerCase().includes(query)) return 3;
+      return 2;
+    }
+
+    function filteredEntries() {
       return state.entries
-        .map((entry) => ({ entry, score: scoreEntry(entry, state.query) }))
+        .map((entry) => ({ entry, score: score(entry) }))
         .filter(({ entry, score }) => score > 0 && (state.filter === "all" || entry.category === state.filter))
         .sort((a, b) => {
           if (b.score !== a.score) return b.score - a.score;
-          const categoryDelta = CATEGORY_ORDER.indexOf(a.entry.category) - CATEGORY_ORDER.indexOf(b.entry.category);
-          if (categoryDelta !== 0) return categoryDelta;
+          const left = CATEGORY_META.findIndex((item) => item.key === a.entry.category);
+          const right = CATEGORY_META.findIndex((item) => item.key === b.entry.category);
+          if (left !== right) return left - right;
           return a.entry.title.localeCompare(b.entry.title, "es");
         })
         .map(({ entry }) => entry);
     }
 
-    function renderList(entries) {
-      const list = document.getElementById("entryList");
-      const resultCount = document.getElementById("resultCount");
-      resultCount.textContent = entries.length === 1 ? "1 término visible" : entries.length + " términos visibles";
+    function renderFilters() {
+      const row = document.getElementById("filterRow");
+      row.innerHTML = CATEGORY_META.map((item) => '<button class="filter" type="button" data-filter="' + item.key + '" aria-pressed="' + String(item.key === state.filter) + '">' + item.label + '</button>').join("");
+      row.querySelectorAll("button").forEach((button) => {
+        button.addEventListener("click", () => {
+          state.filter = button.dataset.filter;
+          render();
+        });
+      });
+    }
 
+    function renderStats() {
+      const counts = CATEGORY_META.filter((item) => item.key !== "all").map((item) => {
+        const total = state.entries.filter((entry) => entry.category === item.key).length;
+        return '<span class="chip">' + item.label + ': ' + total + '</span>';
+      });
+      document.getElementById("stats").innerHTML = counts.join("");
+      document.getElementById("entryTotal").textContent = state.entries.length + " términos";
+    }
+
+    function renderList(entries) {
+      document.getElementById("resultCount").textContent = entries.length === 1 ? "1 término visible" : entries.length + " términos visibles";
+      const list = document.getElementById("entryList");
       if (!entries.length) {
-        list.innerHTML = '<div class="empty">No hay términos para esta búsqueda.</div>';
+        list.innerHTML = '<div class="empty">No hay términos para esta combinación de búsqueda y filtro.</div>';
         renderDetail(null);
         return;
       }
-
       if (!entries.some((entry) => entry.id === state.selectedId)) {
         state.selectedId = entries[0].id;
       }
-
       list.innerHTML = entries.map((entry) => {
         const active = entry.id === state.selectedId ? " active" : "";
-        return '<button class="entry-button' + active + '" type="button" data-id="' + escapeHtml(entry.id) + '">' +
-          '<span class="entry-title"><strong>' + highlight(entry.title) + '</strong><span class="category ' + entry.category + '">' + CATEGORY_LABELS[entry.category] + '</span></span>' +
-          '<p>' + highlight(entry.shortDefinition || entry.type || entry.section) + '</p>' +
+        return '<button class="entry' + active + '" type="button" data-id="' + escapeHtml(entry.id) + '">' +
+          '<span class="entry-top"><strong>' + highlight(entry.title) + '</strong><span class="badge ' + entry.category + '">' + CATEGORY_META.find((item) => item.key === entry.category).label + '</span></span>' +
+          '<span>' + highlight(entry.shortDefinition || entry.type || entry.section) + '</span>' +
+          '<span class="label">' + escapeHtml(entry.section) + '</span>' +
         '</button>';
       }).join("");
-
-      for (const button of list.querySelectorAll(".entry-button")) {
+      list.querySelectorAll(".entry").forEach((button) => {
         button.addEventListener("click", () => {
           state.selectedId = button.dataset.id;
           render();
         });
-      }
+      });
     }
 
-    function renderLinks(label, value) {
+    function renderLinkBlock(label, value) {
       const links = parseLinks(value);
       if (!links.length) return "";
-      return '<div class="field"><span class="field-label">' + label + '</span><div class="link-list">' +
-        links.map((link) => '<a href="' + escapeHtml(link.href) + '">' + escapeHtml(link.label) + '</a>').join("") +
+      return '<div class="field"><span class="label">' + label + '</span><div class="links">' +
+        links.map((link) => '<a class="chip" href="' + escapeHtml(link.href) + '">' + escapeHtml(link.label) + '</a>').join("") +
       '</div></div>';
     }
 
     function renderField(label, value) {
       if (!value) return "";
-      return '<div class="field"><span class="field-label">' + label + '</span><p class="field-value">' + highlight(value) + '</p></div>';
+      return '<div class="field"><span class="label">' + label + '</span><div>' + highlight(value) + '</div></div>';
     }
 
     function renderDetail(entry) {
       const detail = document.getElementById("detailPanel");
       if (!entry) {
-        detail.innerHTML = '<div class="detail-body"><div class="empty">Selecciona otro filtro o cambia la búsqueda.</div></div>';
+        detail.innerHTML = '<div class="empty">Selecciona otro filtro o cambia la búsqueda.</div>';
         return;
       }
-
-      detail.innerHTML = '<div class="detail-head">' +
-        '<span class="category ' + entry.category + '">' + CATEGORY_LABELS[entry.category] + '</span>' +
-        '<h2>' + highlight(entry.title) + '</h2>' +
-        '<p>' + highlight(entry.shortDefinition || "") + '</p>' +
-      '</div>' +
-      '<div class="detail-body">' +
+      detail.innerHTML =
+        '<div class="field"><span class="badge ' + entry.category + '">' + CATEGORY_META.find((item) => item.key === entry.category).label + '</span></div>' +
+        '<div class="field"><h2>' + highlight(entry.title) + '</h2><div>' + highlight(entry.shortDefinition) + '</div></div>' +
         renderField("Definición larga", entry.longDefinition) +
         renderField("Tipo", entry.type) +
-        renderLinks("Fuente primaria", entry.primarySource) +
-        renderLinks("Menciones", entry.mentions) +
+        renderLinkBlock("Fuente primaria", entry.primarySource) +
+        renderLinkBlock("Menciones", entry.mentions) +
         renderField("Relación médica/terminológica", entry.terminologyRelation) +
-        '<div class="field"><span class="field-label">Sección</span><p class="field-value">' + escapeHtml(entry.section) + '</p></div>' +
-      '</div>';
+        renderField("Sección", entry.section);
     }
 
     function render() {
-      const entries = getFilteredEntries();
-      document.getElementById("entryTotal").textContent = state.entries.length === 1 ? "1 término" : state.entries.length + " términos";
+      renderFilters();
+      renderStats();
+      const entries = filteredEntries();
       renderList(entries);
       renderDetail(entries.find((entry) => entry.id === state.selectedId) || entries[0] || null);
-      for (const button of document.querySelectorAll(".filter")) {
-        button.setAttribute("aria-pressed", String(button.dataset.filter === state.filter));
-      }
     }
 
-    async function loadEntries() {
-      state.entries = fallback.entries;
+    async function init() {
+      let markdown = decodeScriptText("glossaryMarkdown");
       document.getElementById("syncState").textContent = "Snapshot local";
-
       if (location.protocol !== "file:") {
         try {
           const response = await fetch("glossary.md", { cache: "no-cache" });
           if (response.ok) {
-            state.entries = parseGlossaryMarkdown(await response.text());
+            markdown = await response.text();
             document.getElementById("syncState").textContent = "Markdown en vivo";
           }
-        } catch (_) {
-          document.getElementById("syncState").textContent = "Snapshot local";
-        }
+        } catch (_) {}
       }
-
-      state.selectedId = state.entries[0]?.id || null;
+      state.entries = parseGlossary(markdown);
+      state.selectedId = state.entries[0] ? state.entries[0].id : null;
       render();
     }
 
@@ -925,14 +655,7 @@
       render();
     });
 
-    for (const button of document.querySelectorAll(".filter")) {
-      button.addEventListener("click", () => {
-        state.filter = button.dataset.filter;
-        render();
-      });
-    }
-
-    loadEntries();
+    init();
   </script>
 </body>
 </html>
