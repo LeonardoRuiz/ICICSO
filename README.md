@@ -47,10 +47,10 @@ La capa `Acompañantes` ya vive como artefacto operativo y de gobernanza dentro 
 Estado editorial vigente de esa capa:
 
 - `927` registros activos de referencia
-- `372` fichas con acompañante explícito
+- `370` fichas con acompañante explícito
 - `33` fichas multietiqueta reales
 - `AC-09 = 5`
-- `AC-13 = 70`
+- `AC-13 = 68`
 - `AC-14 = 3`
 
 ## Qué funciona hoy
