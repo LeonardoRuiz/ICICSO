@@ -1,0 +1,215 @@
+version: 1
+updated_at: 2026-05-28
+artifact: icicso-acompanantes-taxonomia
+preserves_existing_model: true
+filter_anchor:
+  number: 1
+  name: Acompañantes
+  total_filter_count: 26
+  numbering_policy: stable_visible_numbering
+  ui_rules:
+    alphabetical_options: true
+    floating_allowed: false
+    sticky_allowed: false
+    functionally_linked_required: true
+companions:
+  - id: AC-01
+    label: Anestesia cardiotorácica, perfusión y cuidados críticos
+    aliases:
+      - anestesia
+      - anestesia cardiaca
+      - perfusion
+      - perfusión
+      - cuidados críticos
+      - uci cardiovascular
+    applies_to:
+      - cirugía cardiovascular
+      - cirugía torácica
+      - vascular
+      - cardiología compleja
+  - id: AC-02
+    label: Cardiorrenal y nefrocardiología
+    aliases:
+      - renal
+      - nefrología
+      - cardiorrenal
+      - lesión renal aguda
+      - diálisis
+    applies_to:
+      - cirugía cardiovascular
+      - cirugía torácica
+      - vascular
+      - insuficiencia cardíaca compleja
+  - id: AC-03
+    label: Cardiometabólica y endocrina
+    aliases:
+      - metabólica
+      - metabolica
+      - diabetes
+      - endocrina
+      - obesidad
+      - glucemia
+    applies_to:
+      - cirugía cardiovascular
+      - cirugía torácica
+      - vascular
+      - cardiología
+  - id: AC-04
+    label: Fragilidad, geriatría, prehabilitación y rehabilitación
+    aliases:
+      - fragilidad
+      - geriatría
+      - geriatria
+      - prehabilitación
+      - rehabilitación
+    applies_to:
+      - cirugía cardiovascular
+      - cirugía torácica
+      - vascular
+      - cardiología
+  - id: AC-05
+    label: Hematología, hemostasia y medicina transfusional
+    aliases:
+      - hematología
+      - hematologia
+      - hemostasia
+      - transfusión
+      - pbm
+      - anticoagulación
+    applies_to:
+      - cirugía cardiovascular
+      - cirugía torácica
+      - vascular
+      - soporte circulatorio
+  - id: AC-06
+    label: Hepatología, gastroenterología y medicina sistémica asociada
+    aliases:
+      - hepatología
+      - gastroenterología
+      - cirrosis
+      - hígado
+      - intestino
+      - isquemia mesentérica
+    applies_to:
+      - cirugía cardiovascular
+      - cirugía torácica
+      - vascular
+      - paciente complejo
+  - id: AC-07
+    label: Imagen cardiovascular e integración diagnóstica
+    aliases:
+      - imagen
+      - eco
+      - tomografía
+      - tc
+      - rm
+      - planificación
+    applies_to:
+      - cirugía cardiovascular
+      - cirugía torácica
+      - vascular
+      - cardiología estructural
+  - id: AC-08
+    label: Infectología y soporte antimicrobiano
+    aliases:
+      - infectología
+      - infectologia
+      - endocarditis
+      - mediastinitis
+      - antibióticos
+      - sepsis
+    applies_to:
+      - cirugía cardiovascular
+      - cirugía torácica
+      - vascular
+      - dispositivos
+  - id: AC-09
+    label: Inmunología, inflamación y respuesta biológica
+    aliases:
+      - inmunología
+      - inmunologia
+      - inflamación
+      - inflamacion
+      - vasculitis
+      - rechazo
+    applies_to:
+      - cirugía cardiovascular
+      - cirugía torácica
+      - vascular
+      - trasplante
+  - id: AC-10
+    label: Neumología, cuidados respiratorios y pleura
+    aliases:
+      - neumología
+      - neumologia
+      - respiratorio
+      - ventilación
+      - ventilacion
+      - pleura
+    applies_to:
+      - cirugía cardiovascular
+      - cirugía torácica
+      - vascular
+      - hipertensión pulmonar
+  - id: AC-11
+    label: Neurología perioperatoria y neurovascular
+    aliases:
+      - neurología
+      - neurologia
+      - neurovascular
+      - ictus
+      - delirium
+      - neuroprotección
+    applies_to:
+      - cirugía cardiovascular
+      - cirugía torácica
+      - vascular
+      - aorta
+  - id: AC-12
+    label: Nutrición clínica, sarcopenia y reserva funcional
+    aliases:
+      - nutrición
+      - nutricion
+      - sarcopenia
+      - desnutrición
+      - soporte nutricional
+      - reserva funcional
+    applies_to:
+      - cirugía cardiovascular
+      - cirugía torácica
+      - vascular
+      - recuperación perioperatoria
+  - id: AC-13
+    label: Oncología y cardio-oncología
+    aliases:
+      - oncología
+      - oncologia
+      - cardio-oncología
+      - cáncer
+      - cancer
+      - toxicidad cardiovascular
+    applies_to:
+      - cirugía cardiovascular
+      - cirugía torácica
+      - vascular
+      - paciente complejo
+  - id: AC-14
+    label: Psiquiatría, psicología clínica y salud mental perioperatoria
+    aliases:
+      - psiquiatría
+      - psiquiatria
+      - psicología
+      - psicologia
+      - salud mental
+      - ansiedad
+      - depresión
+    applies_to:
+      - cirugía cardiovascular
+      - cirugía torácica
+      - vascular
+      - recuperación y adherencia
+classification_rules:
+  - No usar Acompañantes como sustituto de Area.
+  - No usar Acompañantes como sustituto de Subespecialidad.
+  - Permitir múltiples acompañantes por recurso cuando la relación sea real.
+  - Mantener No especificado hasta revisión editorial cuando no exista trazabilidad suficiente.
