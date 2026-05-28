@@ -1,15 +1,20 @@
 {
   "artifact": "ICICSO Acompañantes Filter Model",
-  "updated_at": "2026-05-28 22:55 UTC",
+  "updated_at": "2026-05-28 23:20 UTC",
   "status": "repo_growth_integrated",
   "preserves_existing_model": true,
   "active_snapshot": {
     "catalog_records": 927,
-    "explicit_companions": 372,
+    "explicit_companions": 370,
     "multitag_records": 33,
-    "no_especificado": 555,
+    "no_especificado": 557,
     "ac_09_count": 5,
-    "ac_13_count": 70,
+    "ac_13_count": 68,
+    "ac_13_subfamilies": {
+      "Oncología torácica maligna": 49,
+      "Tumores cardíacos y masas intracardíacas": 10,
+      "Cardio-oncología avanzada": 9
+    },
     "ac_14_count": 3
   },
   "filter_registry": [
