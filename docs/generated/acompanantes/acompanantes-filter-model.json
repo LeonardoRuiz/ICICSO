@@ -1,8 +1,16 @@
 {
   "artifact": "ICICSO Acompañantes Filter Model",
-  "updated_at": "2026-05-28 17:00 UTC",
-  "status": "repo_growth_ready",
+  "updated_at": "2026-05-28 22:10 UTC",
+  "status": "repo_growth_integrated",
   "preserves_existing_model": true,
+  "active_snapshot": {
+    "catalog_records": 927,
+    "explicit_companions": 305,
+    "multitag_records": 30,
+    "no_especificado": 622,
+    "ac_09_count": 5,
+    "ac_14_count": 3
+  },
   "filter_registry": [
     { "number": 1, "name": "Acompañantes", "type": "taxonomy", "multivalue": true },
     { "number": 2, "name": "Area", "type": "taxonomy", "multivalue": false },
