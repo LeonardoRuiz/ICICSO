@@ -24,14 +24,14 @@ Su rol es describir capas clínicas transversales que cambian:
 
 ## Estado editorial vigente
 - Fecha de corte: `2026-05-28`
-- Lotes editoriales aplicados: `6`
+- Lotes editoriales aplicados: `7`
 - Registros activos del catálogo: `927`
-- Fichas con acompañante explícito: `372`
+- Fichas con acompañante explícito: `370`
 - Fichas multietiqueta reales: `33`
-- Registros que siguen en `No especificado`: `555`
+- Registros que siguen en `No especificado`: `557`
 
 ## Aperturas ya resueltas
-- `AC-13` ya quedó abierto como capa operativa propia para oncología y cardio-oncología explícita.
+- `AC-13` ya quedó abierto como capa operativa propia para oncología y cardio-oncología explícita, y ahora vive con subfamilias internas auxiliares.
 - `AC-09` ya incluye inflamación cardiovascular explícita, aortitis, inmunoterapia torácica y cardio-oncología explícita.
 - `AC-14` ya quedó abierto de forma rigurosa para delirium y salud mental perioperatoria con señal clínica directa.
 - El HTML activo ya muestra chips visibles por ficha y mantiene el filtro simple por pertenencia.
@@ -59,6 +59,7 @@ Su rol es describir capas clínicas transversales que cambian:
 - Nutrición y salud mental quedan visibles como capas propias para no esconderlas dentro de metabólica o fragilidad.
 - `AC-09` puede absorber inmunoterapia o cardio-oncología solo cuando la señal biológica sea explícita y clínicamente operativa.
 - `AC-13` debe usarse cuando el recurso pertenece claramente a una línea oncológica o cardio-oncológica explícita.
+- Las subfamilias internas de `AC-13` son metadata auxiliar y no crean un filtro adicional.
 
 ## Regla operativa para crecimiento
 Nuevas corridas:
