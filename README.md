@@ -34,6 +34,25 @@ La explicación corta del repo está en:
 - [docs/glossary-automation.md](docs/glossary-automation.md)
 - [docs/strategy/mxrep-resiliente-icicso-panomics-ehr.md](docs/strategy/mxrep-resiliente-icicso-panomics-ehr.md)
 
+## Capa documental activa de Acompañantes
+
+La capa `Acompañantes` ya vive como artefacto operativo y de gobernanza dentro del repo:
+
+- [docs/generated/acompanantes/README.md](docs/generated/acompanantes/README.md)
+- [docs/generated/acompanantes/index.html](docs/generated/acompanantes/index.html)
+- [docs/generated/acompanantes/acompanantes-filter-model.json](docs/generated/acompanantes/acompanantes-filter-model.json)
+- [docs/generated/acompanantes/acompanantes-taxonomia.yaml](docs/generated/acompanantes/acompanantes-taxonomia.yaml)
+- [docs/generated/acompanantes/estado-editorial-2026-05-28.md](docs/generated/acompanantes/estado-editorial-2026-05-28.md)
+
+Estado editorial vigente de esa capa:
+
+- `927` registros activos de referencia
+- `372` fichas con acompañante explícito
+- `33` fichas multietiqueta reales
+- `AC-09 = 5`
+- `AC-13 = 70`
+- `AC-14 = 3`
+
 ## Qué funciona hoy
 
 Lo que sí tiene evidencia de ejecución al 23 de abril de 2026:
@@ -61,11 +80,13 @@ Si entras hoy al repo, lee en este orden:
 
 1. [START_HERE.md](START_HERE.md)
 2. [docs/WHAT_ICICSO_IS.md](docs/WHAT_ICICSO_IS.md)
-3. [docs/glossary.md](docs/glossary.md)
-4. [docs/clinical-concepts.md](docs/clinical-concepts.md)
-5. [SYSTEM_STATUS.md](SYSTEM_STATUS.md)
-6. [icicso/README.md](icicso/README.md)
-7. [docs/local-development.md](docs/local-development.md)
+3. [docs/generated/acompanantes/index.html](docs/generated/acompanantes/index.html)
+4. [docs/generated/acompanantes/README.md](docs/generated/acompanantes/README.md)
+5. [docs/glossary.md](docs/glossary.md)
+6. [docs/clinical-concepts.md](docs/clinical-concepts.md)
+7. [SYSTEM_STATUS.md](SYSTEM_STATUS.md)
+8. [icicso/README.md](icicso/README.md)
+9. [docs/local-development.md](docs/local-development.md)
 
 ## Reglas de navegación
 
