@@ -22,6 +22,19 @@ Su rol es describir capas clínicas transversales que cambian:
 - No reclasificar retrospectivamente los `927` registros activos sin trazabilidad editorial.
 - Preservar `No especificado` en registros históricos cuando no exista base razonable para asignación fina.
 
+## Estado editorial vigente
+- Fecha de corte: `2026-05-28`
+- Lotes editoriales aplicados: `5`
+- Registros activos del catálogo: `927`
+- Fichas con acompañante explícito: `305`
+- Fichas multietiqueta reales: `30`
+- Registros que siguen en `No especificado`: `622`
+
+## Aperturas ya resueltas
+- `AC-09` ya incluye inflamación cardiovascular explícita, aortitis, inmunoterapia torácica y cardio-oncología explícita.
+- `AC-14` ya quedó abierto de forma rigurosa para delirium y salud mental perioperatoria con señal clínica directa.
+- El HTML activo ya muestra chips visibles por ficha y mantiene el filtro simple por pertenencia.
+
 ## Núcleos de acompañantes integrados
 1. Anestesia cardiotorácica, perfusión y cuidados críticos
 2. Cardiorrenal y nefrocardiología
@@ -43,6 +56,7 @@ Su rol es describir capas clínicas transversales que cambian:
 - La asignación debe reflejar utilidad clínica real, no mera mención incidental.
 - Si un recurso afecta conducta perioperatoria, organoprotección o seguimiento, `Acompañantes` debe capturarlo.
 - Nutrición y salud mental quedan visibles como capas propias para no esconderlas dentro de metabólica o fragilidad.
+- `AC-09` puede absorber inmunoterapia o cardio-oncología solo cuando la señal biológica sea explícita y clínicamente operativa.
 
 ## Regla operativa para crecimiento
 Nuevas corridas:
