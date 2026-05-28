@@ -219,3 +219,4 @@ classification_rules:
   - Permitir múltiples acompañantes por recurso cuando la relación sea real.
   - Mantener No especificado hasta revisión editorial cuando no exista trazabilidad suficiente.
   - AC-09 puede absorber inmunoterapia o cardio-oncología solo cuando la señal biológica sea explícita y operativamente relevante.
+  - AC-13 debe aplicarse cuando el recurso pertenece de forma explícita a oncología torácica, tumores cardíacos o cardio-oncología.
