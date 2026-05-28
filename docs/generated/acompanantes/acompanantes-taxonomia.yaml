@@ -132,11 +132,16 @@ companions:
       - inflamacion
       - vasculitis
       - rechazo
+      - inmunoterapia
+      - cardio-oncología
+      - cardio-oncologia
+      - respuesta biológica
     applies_to:
       - cirugía cardiovascular
       - cirugía torácica
       - vascular
       - trasplante
+      - onco-cardiotorácica
   - id: AC-10
     label: Neumología, cuidados respiratorios y pleura
     aliases:
@@ -213,3 +218,4 @@ classification_rules:
   - No usar Acompañantes como sustituto de Subespecialidad.
   - Permitir múltiples acompañantes por recurso cuando la relación sea real.
   - Mantener No especificado hasta revisión editorial cuando no exista trazabilidad suficiente.
+  - AC-09 puede absorber inmunoterapia o cardio-oncología solo cuando la señal biológica sea explícita y operativamente relevante.
