@@ -1,0 +1,66 @@
+{
+  "artifact": "ICICSO HTML Filter And Layout Contract",
+  "updated_at": "2026-05-28T16:00:00Z",
+  "status": "active_operational_contract",
+  "scope": [
+    "navigable_html_catalogs",
+    "fichas",
+    "indexes",
+    "feeds",
+    "derived_views"
+  ],
+  "rules": {
+    "floating_filters_allowed": false,
+    "sticky_filters_allowed": false,
+    "all_approved_filters_must_appear": true,
+    "filters_must_be_functionally_linked": true,
+    "numbered_filters_required": true,
+    "alphabetical_order_required": true,
+    "single_unified_filter_block_required": true,
+    "default_position": "below_header_above_auxiliary_panels",
+    "dark_mode_required": true,
+    "horizontal_scroll_allowed": false
+  },
+  "approved_filters": [
+    "Acompañantes",
+    "Area",
+    "Atajos",
+    "Año",
+    "Calidad",
+    "Confianza",
+    "Contexto",
+    "Decision",
+    "Enfoque",
+    "Estado",
+    "Evidencia",
+    "Fase",
+    "Frontera",
+    "Frontera tema",
+    "Fuente",
+    "Horizonte",
+    "Modo",
+    "Nivel",
+    "Orden",
+    "Prioridad",
+    "Revision",
+    "Rol clinico",
+    "Ruta",
+    "Subespecialidad",
+    "Tema",
+    "Tipo"
+  ],
+  "validation_checks": [
+    "approved_filter_completeness",
+    "alphabetical_filter_order",
+    "numbered_filter_presentation",
+    "functional_filter_linkage",
+    "non_floating_filter_block",
+    "dark_mode_vertical_navigation",
+    "no_horizontal_scroll"
+  ],
+  "notes": [
+    "Este contrato fija el acomodo repetible de filtros para futuras integraciones de data.",
+    "Si una corrida pierde filtros, numeracion o vinculo funcional, debe tratarse como defecto obligatorio.",
+    "Frontera y Frontera tema forman parte del set aprobado y no deben desaparecer en recompilaciones futuras."
+  ]
+}
