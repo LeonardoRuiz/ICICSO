@@ -220,3 +220,4 @@ classification_rules:
   - Mantener No especificado hasta revisión editorial cuando no exista trazabilidad suficiente.
   - AC-09 puede absorber inmunoterapia o cardio-oncología solo cuando la señal biológica sea explícita y operativamente relevante.
   - AC-13 debe aplicarse cuando el recurso pertenece de forma explícita a oncología torácica, tumores cardíacos o cardio-oncología.
+  - Las subfamilias internas de AC-13 no cambian el contrato de filtros; sirven solo como capa auxiliar de lectura y trazabilidad.
