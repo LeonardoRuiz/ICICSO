@@ -5,169 +5,70 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ICICSO Acompañantes</title>
   <style>
-    :root {
-      color-scheme: dark;
-      --bg: #1e1e1e;
-      --surface: #2b2f33;
-      --surface-2: #333333;
-      --text: #e6e6e6;
-      --muted: #b8b8b8;
-      --dim: #8f8f8f;
-      --border: #3f3f3f;
-      --accent: #8ab4a6;
-    }
+    :root { color-scheme: dark; --bg:#1e1e1e; --surface:#2b2f33; --text:#e6e6e6; --muted:#b8b8b8; --border:#3f3f3f; --accent:#8ab4a6; }
     * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: Arial, sans-serif;
-      line-height: 1.55;
-    }
-    .wrap {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 28px 18px 52px;
-    }
-    h1, h2, h3 { line-height: 1.15; }
-    h1 { margin: 0 0 10px; font-size: 2rem; }
-    h2 { margin: 26px 0 12px; font-size: 1.2rem; }
-    p { color: var(--muted); }
-    .hero, .panel, .card, .metric {
-      border: 1px solid var(--border);
-      background: var(--surface);
-    }
-    .hero { padding: 22px; }
-    .panel { padding: 18px; margin-top: 14px; }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 12px;
-    }
-    .card, .metric { padding: 14px; }
-    .metric strong, .card strong { display: block; }
-    .num {
-      color: var(--accent);
-      font-weight: 700;
-      font-size: 0.92rem;
-      margin-bottom: 8px;
-    }
-    .big {
-      color: var(--text);
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-top: 6px;
-    }
-    .small { color: var(--dim); font-size: 0.92rem; }
-    ul { margin: 8px 0 0; padding-left: 18px; }
-    li { margin: 6px 0; color: var(--muted); }
-    .filters {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 10px;
-    }
-    .filter {
-      border: 1px solid var(--border);
-      background: var(--surface-2);
-      padding: 10px 12px;
-    }
-    .filter strong {
-      display: block;
-      color: var(--text);
-    }
+    body { margin:0; background:var(--bg); color:var(--text); font-family:Arial,sans-serif; line-height:1.55; }
+    .wrap { max-width:1120px; margin:0 auto; padding:28px 18px 52px; }
+    .panel,.metric,.card { border:1px solid var(--border); background:var(--surface); }
+    .panel { padding:18px; margin-top:14px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; }
+    .metric,.card { padding:14px; }
+    .big { color:var(--text); font-size:1.5rem; font-weight:700; margin-top:6px; }
+    .small { color:var(--muted); font-size:.92rem; }
+    h1,h2,h3 { line-height:1.15; }
+    h1 { margin:0 0 10px; font-size:2rem; }
+    ul { margin:8px 0 0; padding-left:18px; }
+    li { margin:6px 0; color:var(--muted); }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <section class="hero">
+    <section class="panel">
       <h1>Acompañantes ICICSO</h1>
-      <p>Integración operativa del filtro <strong>01. Acompañantes</strong> dentro del bloque numerado vigente de `26` filtros. Esta capa crece el repo sin tocar el modelo principal de `Area`, `Subespecialidad` y `Tema`.</p>
-      <p class="small">Estado: integración viva tras lote editorial 7, con soporte multietiqueta, panorama visible y subfamilias auxiliares de AC-13.</p>
+      <p>Integración operativa del filtro <strong>01. Acompañantes</strong> dentro del bloque numerado vigente de <strong>26</strong> filtros.</p>
+      <p class="small">Estado: integración viva tras lote editorial 8, con AC-03 operativo y subfamilias auxiliares comparables para AC-03, AC-11 y AC-13.</p>
     </section>
 
     <section class="panel">
       <h2>Estado actual</h2>
       <div class="grid">
         <div class="metric"><strong>Registros activos</strong><div class="big">927</div><div class="small">base viva v168</div></div>
-        <div class="metric"><strong>Acompañante explícito</strong><div class="big">370</div><div class="small">fichas ya clasificadas</div></div>
+        <div class="metric"><strong>Acompañante explícito</strong><div class="big">396</div><div class="small">fichas ya clasificadas</div></div>
         <div class="metric"><strong>Multietiqueta real</strong><div class="big">33</div><div class="small">más de un acompañante</div></div>
-        <div class="metric"><strong>No especificado</strong><div class="big">557</div><div class="small">se conserva por fidelidad</div></div>
-        <div class="metric"><strong>AC-09</strong><div class="big">5</div><div class="small">inflamación, inmunoterapia y cardio-oncología explícita</div></div>
+        <div class="metric"><strong>No especificado</strong><div class="big">531</div><div class="small">se conserva por fidelidad</div></div>
+        <div class="metric"><strong>AC-03</strong><div class="big">26</div><div class="small">cardiometabólica y endocrina</div></div>
+        <div class="metric"><strong>AC-11</strong><div class="big">70</div><div class="small">neurología perioperatoria y neurovascular</div></div>
         <div class="metric"><strong>AC-13</strong><div class="big">68</div><div class="small">oncología y cardio-oncología explícita</div></div>
-        <div class="metric"><strong>AC-14</strong><div class="big">3</div><div class="small">salud mental perioperatoria explícita</div></div>
       </div>
     </section>
 
     <section class="panel">
-      <h2>Bloque numerado vigente</h2>
-      <div class="filters">
-        <div class="filter"><strong>01. Acompañantes</strong><span class="small">taxonomía clínica transversal</span></div>
-        <div class="filter"><strong>02. Area</strong><span class="small">jerarquía principal</span></div>
-        <div class="filter"><strong>03. Atajos</strong><span class="small">navegación rápida</span></div>
-        <div class="filter"><strong>04. Año</strong><span class="small">metadata</span></div>
-        <div class="filter"><strong>05. Calidad</strong><span class="small">evaluación</span></div>
-        <div class="filter"><strong>06. Confianza</strong><span class="small">evaluación</span></div>
-        <div class="filter"><strong>07. Contexto</strong><span class="small">contexto clínico</span></div>
-        <div class="filter"><strong>08. Decision</strong><span class="small">apoyo a decisión</span></div>
-        <div class="filter"><strong>09. Enfoque</strong><span class="small">enfoque editorial</span></div>
-        <div class="filter"><strong>10. Estado</strong><span class="small">ciclo de vida</span></div>
-        <div class="filter"><strong>11. Evidencia</strong><span class="small">capa de evidencia</span></div>
-        <div class="filter"><strong>12. Fase</strong><span class="small">fase clínica</span></div>
-        <div class="filter"><strong>13. Frontera</strong><span class="small">borde clínico</span></div>
-        <div class="filter"><strong>14. Frontera tema</strong><span class="small">borde temático</span></div>
-        <div class="filter"><strong>15. Fuente</strong><span class="small">origen</span></div>
-        <div class="filter"><strong>16. Horizonte</strong><span class="small">horizonte temporal</span></div>
-        <div class="filter"><strong>17. Modo</strong><span class="small">modo de interfaz</span></div>
-        <div class="filter"><strong>18. Nivel</strong><span class="small">granularidad</span></div>
-        <div class="filter"><strong>19. Orden</strong><span class="small">ordenamiento</span></div>
-        <div class="filter"><strong>20. Prioridad</strong><span class="small">priorización</span></div>
-        <div class="filter"><strong>21. Revision</strong><span class="small">revisión</span></div>
-        <div class="filter"><strong>22. Rol clinico</strong><span class="small">rol clínico</span></div>
-        <div class="filter"><strong>23. Ruta</strong><span class="small">ruta clínica</span></div>
-        <div class="filter"><strong>24. Subespecialidad</strong><span class="small">taxonomía principal</span></div>
-        <div class="filter"><strong>25. Tema</strong><span class="small">taxonomía principal</span></div>
-        <div class="filter"><strong>26. Tipo</strong><span class="small">tipo de recurso</span></div>
-      </div>
-    </section>
-
-    <section class="panel">
-      <h2>Núcleos de acompañantes</h2>
+      <h2>Subfamilias auxiliares de AC-03</h2>
       <div class="grid">
-        <div class="card"><div class="num">AC-01</div><strong>Anestesia cardiotorácica, perfusión y cuidados críticos</strong><p class="small">anestesia, perfusión, UCI cardiovascular, soporte intraoperatorio</p></div>
-        <div class="card"><div class="num">AC-02</div><strong>Cardiorrenal y nefrocardiología</strong><p class="small">renal, LRA, diálisis, balance hídrico, contrastes</p></div>
-        <div class="card"><div class="num">AC-03</div><strong>Cardiometabólica y endocrina</strong><p class="small">diabetes, glucemia, obesidad, endocrino, metabolismo</p></div>
-        <div class="card"><div class="num">AC-04</div><strong>Fragilidad, geriatría, prehabilitación y rehabilitación</strong><p class="small">fragilidad, funcionalidad, recuperación, transición</p></div>
-        <div class="card"><div class="num">AC-05</div><strong>Hematología, hemostasia y medicina transfusional</strong><p class="small">sangrado, PBM, anticoagulación, coagulopatía</p></div>
-        <div class="card"><div class="num">AC-06</div><strong>Hepatología, gastroenterología y medicina sistémica asociada</strong><p class="small">cirrosis, GI, hígado cardíaco, mesentérica</p></div>
-        <div class="card"><div class="num">AC-07</div><strong>Imagen cardiovascular e integración diagnóstica</strong><p class="small">eco, TC, RM, multimodalidad, planificación</p></div>
-        <div class="card"><div class="num">AC-08</div><strong>Infectología y soporte antimicrobiano</strong><p class="small">endocarditis, mediastinitis, sepsis, antibióticos</p></div>
-        <div class="card"><div class="num">AC-09</div><strong>Inmunología, inflamación y respuesta biológica</strong><p class="small">inflamación sistémica, vasculitis, inmunoterapia, cardio-oncología explícita</p></div>
-        <div class="card"><div class="num">AC-10</div><strong>Neumología, cuidados respiratorios y pleura</strong><p class="small">ventilación, pleura, destete, hipertensión pulmonar</p></div>
-        <div class="card"><div class="num">AC-11</div><strong>Neurología perioperatoria y neurovascular</strong><p class="small">ictus, delirium, neuroprotección, perfusión cerebral</p></div>
-        <div class="card"><div class="num">AC-12</div><strong>Nutrición clínica, sarcopenia y reserva funcional</strong><p class="small">nutrición, desnutrición, sarcopenia, soporte proteico-calórico</p></div>
-        <div class="card"><div class="num">AC-13</div><strong>Oncología y cardio-oncología</strong><p class="small">cáncer, toxicidad cardiovascular, resecciones complejas</p></div>
-        <div class="card"><div class="num">AC-14</div><strong>Psiquiatría, psicología clínica y salud mental perioperatoria</strong><p class="small">ansiedad, depresión, adherencia, recuperación mental</p></div>
+        <div class="card"><strong>Diabetes y control glucémico perioperatorio</strong><p class="small">5 fichas.</p></div>
+        <div class="card"><strong>Diabetes, endocrino y terapias cardiometabólicas</strong><p class="small">16 fichas.</p></div>
+        <div class="card"><strong>Lípidos y prevención cardiometabólica</strong><p class="small">2 fichas.</p></div>
+        <div class="card"><strong>Obesidad, peso y riesgo cardiometabólico</strong><p class="small">3 fichas.</p></div>
       </div>
     </section>
 
     <section class="panel">
-      <h2>Reglas de integración</h2>
-      <ul>
-        <li>`Acompañantes` se mantiene como filtro visible, numerado y funcional.</li>
-        <li>Los valores se presentan en orden alfabético en la interfaz, aunque con identificadores estables para gobernanza.</li>
-        <li>Un recurso puede portar múltiples acompañantes cuando cambian conducta, protección, ejecución o seguimiento.</li>
-        <li>Los registros históricos sin base editorial suficiente conservan `No especificado` hasta revisión por lotes.</li>
-        <li>`AC-09` solo absorbe inmunoterapia o cardio-oncología cuando la señal biológica sea explícita y clínicamente operativa.</li>
-        <li>`AC-13` se aplica cuando la línea del recurso es oncológica o cardio-oncológica de forma explícita.</li>
-      </ul>
+      <h2>Subfamilias auxiliares de AC-11</h2>
+      <div class="grid">
+        <div class="card"><strong>Aneurismas intracraneales y HSA</strong><p class="small">12 fichas.</p></div>
+        <div class="card"><strong>Carotídea, puentes supraaórticos y revascularización cerebral</strong><p class="small">19 fichas.</p></div>
+        <div class="card"><strong>Cuidados neurocríticos y neurocognición perioperatoria</strong><p class="small">12 fichas.</p></div>
+        <div class="card"><strong>Ictus isquémico y trombectomía</strong><p class="small">13 fichas.</p></div>
+        <div class="card"><strong>Neurointervencionismo complejo y malformaciones vasculares</strong><p class="small">14 fichas.</p></div>
+      </div>
     </section>
 
     <section class="panel">
       <h2>Subfamilias internas de AC-13</h2>
       <div class="grid">
-        <div class="card"><strong>Oncología torácica maligna</strong><p class="small">49 fichas. Incluye pulmón, mesotelioma, esófago, timo y mediastino tumoral con señal oncológica explícita.</p></div>
-        <div class="card"><strong>Tumores cardíacos y masas intracardíacas</strong><p class="small">10 fichas. Incluye mixomas, fibroelastomas y masas cardíacas con línea tumoral explícita.</p></div>
-        <div class="card"><strong>Cardio-oncología avanzada</strong><p class="small">9 fichas. Incluye toxicidad cardiovascular, vigilancia, rehabilitación y trombosis asociadas a cáncer.</p></div>
+        <div class="card"><strong>Oncología torácica maligna</strong><p class="small">49 fichas.</p></div>
+        <div class="card"><strong>Tumores cardíacos y masas intracardíacas</strong><p class="small">10 fichas.</p></div>
+        <div class="card"><strong>Cardio-oncología avanzada</strong><p class="small">9 fichas.</p></div>
       </div>
     </section>
   </div>
