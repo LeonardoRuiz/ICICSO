@@ -23,15 +23,17 @@ Su rol es describir capas clínicas transversales que cambian:
 - Preservar `No especificado` en registros históricos cuando no exista base razonable para asignación fina.
 
 ## Estado editorial vigente
-- Fecha de corte: `2026-05-28`
-- Lotes editoriales aplicados: `7`
+- Fecha de corte: `2026-05-29`
+- Lotes editoriales aplicados: `8`
 - Registros activos del catálogo: `927`
-- Fichas con acompañante explícito: `370`
+- Fichas con acompañante explícito: `396`
 - Fichas multietiqueta reales: `33`
-- Registros que siguen en `No especificado`: `557`
+- Registros que siguen en `No especificado`: `531`
 
 ## Aperturas ya resueltas
-- `AC-13` ya quedó abierto como capa operativa propia para oncología y cardio-oncología explícita, y ahora vive con subfamilias internas auxiliares.
+- `AC-03` ya quedó abierto como capa operativa real con subfamilias auxiliares para glucemia perioperatoria, diabetes/endocrino, lípidos y obesidad.
+- `AC-11` conserva su capa única pero ya muestra internamente aneurismas/HSA, ictus/trombectomía, carotídea/revascularización, neurointervencionismo complejo y neurocríticos/neurocognición.
+- `AC-13` ya quedó abierto como capa operativa propia para oncología y cardio-oncología explícita, y vive con subfamilias internas auxiliares.
 - `AC-09` ya incluye inflamación cardiovascular explícita, aortitis, inmunoterapia torácica y cardio-oncología explícita.
 - `AC-14` ya quedó abierto de forma rigurosa para delirium y salud mental perioperatoria con señal clínica directa.
 - El HTML activo ya muestra chips visibles por ficha y mantiene el filtro simple por pertenencia.
@@ -57,9 +59,10 @@ Su rol es describir capas clínicas transversales que cambian:
 - La asignación debe reflejar utilidad clínica real, no mera mención incidental.
 - Si un recurso afecta conducta perioperatoria, organoprotección o seguimiento, `Acompañantes` debe capturarlo.
 - Nutrición y salud mental quedan visibles como capas propias para no esconderlas dentro de metabólica o fragilidad.
+- `AC-03` puede abrir diabetes, control glucémico perioperatorio, obesidad o lípidos cuando la señal sea explícita y transversal.
 - `AC-09` puede absorber inmunoterapia o cardio-oncología solo cuando la señal biológica sea explícita y clínicamente operativa.
 - `AC-13` debe usarse cuando el recurso pertenece claramente a una línea oncológica o cardio-oncológica explícita.
-- Las subfamilias internas de `AC-13` son metadata auxiliar y no crean un filtro adicional.
+- Las subfamilias internas de `AC-03`, `AC-11` y `AC-13` son metadata auxiliar y no crean un filtro adicional.
 
 ## Regla operativa para crecimiento
 Nuevas corridas:
