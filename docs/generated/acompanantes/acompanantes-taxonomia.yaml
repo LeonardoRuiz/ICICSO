@@ -6,23 +6,8 @@ filter_anchor:
   number: 1
   name: Acompañantes
   total_filter_count: 26
-companions:
-  - id: AC-03
-    label: Cardiometabólica y endocrina
-  - id: AC-06
-    label: Hepatología, gastroenterología y medicina sistémica asociada
-  - id: AC-11
-    label: Neurología perioperatoria y neurovascular
-  - id: AC-13
-    label: Oncología y cardio-oncología
-classification_rules:
-  - No usar Acompañantes como sustituto de Area.
-  - No usar Acompañantes como sustituto de Subespecialidad.
-  - Permitir múltiples acompañantes por recurso cuando la relación sea real.
-  - Mantener No especificado hasta revisión editorial cuando no exista trazabilidad suficiente.
-  - AC-03 puede abrir diabetes, control glucémico perioperatorio, obesidad o lípidos cuando la señal sea explícita y transversal.
-  - AC-06 puede abrir hepatología/coagulopatía perioperatoria o enfermedad mesentérica cuando la señal clínica sea explícita y transversal.
-  - AC-11 puede usar subfamilias auxiliares de ictus, aneurismas/HSA, carotídea/revascularización, neurointervencionismo complejo y neurocríticos/neurocognición.
-  - AC-09 puede absorber inmunoterapia o cardio-oncología solo cuando la señal biológica sea explícita y operativamente relevante.
-  - AC-13 debe aplicarse cuando el recurso pertenece de forma explícita a oncología torácica, tumores cardíacos o cardio-oncología.
-  - Las subfamilias internas de AC-03, AC-06, AC-11 y AC-13 no cambian el contrato de filtros; sirven solo como capa auxiliar de lectura y trazabilidad.
+notes:
+  - AC-01 ya distingue anestesia/ERAS, ECMO/tMCS, shock cardiogénico y anestesia torácica.
+  - AC-05 ya distingue anticoagulación/HIT, PBM-perfusión-transfusión y hematología perioperatoria.
+  - AC-07 ya distingue imagen cardiovascular transversal de endocarditis multimodal.
+  - AC-12 se mantiene sin apertura interna nueva en este corte.
