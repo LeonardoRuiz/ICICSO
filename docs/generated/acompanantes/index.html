@@ -7,18 +7,16 @@
   <style>
     :root { color-scheme: dark; --bg:#1e1e1e; --surface:#2b2f33; --text:#e6e6e6; --muted:#b8b8b8; --border:#3f3f3f; --accent:#8ab4a6; }
     * { box-sizing: border-box; }
-    body { margin:0; background:var(--bg); color:var(--text); font-family:Arial,sans-serif; line-height:1.55; }
+    body { margin:0; background:linear-gradient(180deg,#202124 0%,#1e1e1e 100%); color:var(--text); font-family:Arial,sans-serif; line-height:1.55; }
     .wrap { max-width:1120px; margin:0 auto; padding:28px 18px 52px; }
-    .panel,.metric,.card { border:1px solid var(--border); background:var(--surface); }
+    .panel,.metric,.card { border:1px solid var(--border); background:var(--surface); border-radius:10px; }
     .panel { padding:18px; margin-top:14px; }
-    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; }
     .metric,.card { padding:14px; }
     .big { color:var(--text); font-size:1.5rem; font-weight:700; margin-top:6px; }
     .small { color:var(--muted); font-size:.92rem; }
     h1,h2,h3 { line-height:1.15; }
     h1 { margin:0 0 10px; font-size:2rem; }
-    ul { margin:8px 0 0; padding-left:18px; }
-    li { margin:6px 0; color:var(--muted); }
   </style>
 </head>
 <body>
@@ -26,49 +24,23 @@
     <section class="panel">
       <h1>Acompañantes ICICSO</h1>
       <p>Integración operativa del filtro <strong>01. Acompañantes</strong> dentro del bloque numerado vigente de <strong>26</strong> filtros.</p>
-      <p class="small">Estado: integración viva tras lote editorial 8, con AC-03 operativo y subfamilias auxiliares comparables para AC-03, AC-11 y AC-13.</p>
+      <p class="small">Estado: integración viva tras lote editorial 9, con dark mode de bajo brillo y panorama compacto.</p>
     </section>
-
     <section class="panel">
       <h2>Estado actual</h2>
       <div class="grid">
         <div class="metric"><strong>Registros activos</strong><div class="big">927</div><div class="small">base viva v168</div></div>
-        <div class="metric"><strong>Acompañante explícito</strong><div class="big">396</div><div class="small">fichas ya clasificadas</div></div>
+        <div class="metric"><strong>Acompañante explícito</strong><div class="big">405</div><div class="small">fichas ya clasificadas</div></div>
         <div class="metric"><strong>Multietiqueta real</strong><div class="big">33</div><div class="small">más de un acompañante</div></div>
-        <div class="metric"><strong>No especificado</strong><div class="big">531</div><div class="small">se conserva por fidelidad</div></div>
-        <div class="metric"><strong>AC-03</strong><div class="big">26</div><div class="small">cardiometabólica y endocrina</div></div>
-        <div class="metric"><strong>AC-11</strong><div class="big">70</div><div class="small">neurología perioperatoria y neurovascular</div></div>
-        <div class="metric"><strong>AC-13</strong><div class="big">68</div><div class="small">oncología y cardio-oncología explícita</div></div>
+        <div class="metric"><strong>No especificado</strong><div class="big">522</div><div class="small">se conserva por fidelidad</div></div>
+        <div class="metric"><strong>AC-06</strong><div class="big">9</div><div class="small">hepatología y enfermedad mesentérica explícita</div></div>
       </div>
     </section>
-
     <section class="panel">
-      <h2>Subfamilias auxiliares de AC-03</h2>
+      <h2>Subfamilias auxiliares de AC-06</h2>
       <div class="grid">
-        <div class="card"><strong>Diabetes y control glucémico perioperatorio</strong><p class="small">5 fichas.</p></div>
-        <div class="card"><strong>Diabetes, endocrino y terapias cardiometabólicas</strong><p class="small">16 fichas.</p></div>
-        <div class="card"><strong>Lípidos y prevención cardiometabólica</strong><p class="small">2 fichas.</p></div>
-        <div class="card"><strong>Obesidad, peso y riesgo cardiometabólico</strong><p class="small">3 fichas.</p></div>
-      </div>
-    </section>
-
-    <section class="panel">
-      <h2>Subfamilias auxiliares de AC-11</h2>
-      <div class="grid">
-        <div class="card"><strong>Aneurismas intracraneales y HSA</strong><p class="small">12 fichas.</p></div>
-        <div class="card"><strong>Carotídea, puentes supraaórticos y revascularización cerebral</strong><p class="small">19 fichas.</p></div>
-        <div class="card"><strong>Cuidados neurocríticos y neurocognición perioperatoria</strong><p class="small">12 fichas.</p></div>
-        <div class="card"><strong>Ictus isquémico y trombectomía</strong><p class="small">13 fichas.</p></div>
-        <div class="card"><strong>Neurointervencionismo complejo y malformaciones vasculares</strong><p class="small">14 fichas.</p></div>
-      </div>
-    </section>
-
-    <section class="panel">
-      <h2>Subfamilias internas de AC-13</h2>
-      <div class="grid">
-        <div class="card"><strong>Oncología torácica maligna</strong><p class="small">49 fichas.</p></div>
-        <div class="card"><strong>Tumores cardíacos y masas intracardíacas</strong><p class="small">10 fichas.</p></div>
-        <div class="card"><strong>Cardio-oncología avanzada</strong><p class="small">9 fichas.</p></div>
+        <div class="card"><strong>Hepatología, cirrosis y coagulopatía perioperatoria</strong><p class="small">5 fichas.</p></div>
+        <div class="card"><strong>Isquemia mesentérica y circulación visceral</strong><p class="small">4 fichas.</p></div>
       </div>
     </section>
   </div>
