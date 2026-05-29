@@ -1,87 +1,18 @@
 {
   "artifact": "ICICSO Acompañantes Filter Model",
-  "updated_at": "2026-05-29 00:40 UTC",
+  "updated_at": "2026-05-29 01:20 UTC",
   "status": "repo_growth_integrated",
   "preserves_existing_model": true,
   "active_snapshot": {
     "catalog_records": 927,
-    "explicit_companions": 396,
+    "explicit_companions": 405,
     "multitag_records": 33,
-    "no_especificado": 531,
+    "no_especificado": 522,
     "ac_03_count": 26,
-    "ac_03_subfamilies": {
-      "Diabetes y control glucémico perioperatorio": 5,
-      "Diabetes, endocrino y terapias cardiometabólicas": 16,
-      "Lípidos y prevención cardiometabólica": 2,
-      "Obesidad, peso y riesgo cardiometabólico": 3
-    },
+    "ac_06_count": 9,
     "ac_09_count": 5,
     "ac_11_count": 70,
-    "ac_11_subfamilies": {
-      "Aneurismas intracraneales y HSA": 12,
-      "Carotídea, puentes supraaórticos y revascularización cerebral": 19,
-      "Cuidados neurocríticos y neurocognición perioperatoria": 12,
-      "Ictus isquémico y trombectomía": 13,
-      "Neurointervencionismo complejo y malformaciones vasculares": 14
-    },
     "ac_13_count": 68,
-    "ac_13_subfamilies": {
-      "Oncología torácica maligna": 49,
-      "Tumores cardíacos y masas intracardíacas": 10,
-      "Cardio-oncología avanzada": 9
-    },
     "ac_14_count": 3
-  },
-  "filter_registry": [
-    { "number": 1, "name": "Acompañantes", "type": "taxonomy", "multivalue": true },
-    { "number": 2, "name": "Area", "type": "taxonomy", "multivalue": false },
-    { "number": 3, "name": "Atajos", "type": "navigation", "multivalue": false },
-    { "number": 4, "name": "Año", "type": "metadata", "multivalue": false },
-    { "number": 5, "name": "Calidad", "type": "assessment", "multivalue": false },
-    { "number": 6, "name": "Confianza", "type": "assessment", "multivalue": false },
-    { "number": 7, "name": "Contexto", "type": "clinical-context", "multivalue": false },
-    { "number": 8, "name": "Decision", "type": "decision-support", "multivalue": false },
-    { "number": 9, "name": "Enfoque", "type": "editorial", "multivalue": false },
-    { "number": 10, "name": "Estado", "type": "lifecycle", "multivalue": false },
-    { "number": 11, "name": "Evidencia", "type": "evidence", "multivalue": false },
-    { "number": 12, "name": "Fase", "type": "clinical-phase", "multivalue": false },
-    { "number": 13, "name": "Frontera", "type": "boundary", "multivalue": false },
-    { "number": 14, "name": "Frontera tema", "type": "boundary-theme", "multivalue": false },
-    { "number": 15, "name": "Fuente", "type": "source", "multivalue": false },
-    { "number": 16, "name": "Horizonte", "type": "time-horizon", "multivalue": false },
-    { "number": 17, "name": "Modo", "type": "ui-mode", "multivalue": false },
-    { "number": 18, "name": "Nivel", "type": "granularity", "multivalue": false },
-    { "number": 19, "name": "Orden", "type": "sorting", "multivalue": false },
-    { "number": 20, "name": "Prioridad", "type": "priority", "multivalue": false },
-    { "number": 21, "name": "Revision", "type": "review", "multivalue": false },
-    { "number": 22, "name": "Rol clinico", "type": "clinical-role", "multivalue": false },
-    { "number": 23, "name": "Ruta", "type": "pathway", "multivalue": false },
-    { "number": 24, "name": "Subespecialidad", "type": "taxonomy", "multivalue": false },
-    { "number": 25, "name": "Tema", "type": "taxonomy", "multivalue": false },
-    { "number": 26, "name": "Tipo", "type": "resource-type", "multivalue": false }
-  ],
-  "acompanantes_growth_policy": {
-    "retroactive_blind_reclassification_allowed": false,
-    "historical_default_value": "No especificado",
-    "new_records_should_use_structured_companions": true,
-    "options_must_be_alphabetical": true,
-    "filter_block_must_remain_numbered": true,
-    "filter_block_must_remain_functionally_linked": true
-  },
-  "acompanantes_registry": [
-    { "id": "AC-01", "label": "Anestesia cardiotorácica, perfusión y cuidados críticos" },
-    { "id": "AC-02", "label": "Cardiorrenal y nefrocardiología" },
-    { "id": "AC-03", "label": "Cardiometabólica y endocrina" },
-    { "id": "AC-04", "label": "Fragilidad, geriatría, prehabilitación y rehabilitación" },
-    { "id": "AC-05", "label": "Hematología, hemostasia y medicina transfusional" },
-    { "id": "AC-06", "label": "Hepatología, gastroenterología y medicina sistémica asociada" },
-    { "id": "AC-07", "label": "Imagen cardiovascular e integración diagnóstica" },
-    { "id": "AC-08", "label": "Infectología y soporte antimicrobiano" },
-    { "id": "AC-09", "label": "Inmunología, inflamación y respuesta biológica" },
-    { "id": "AC-10", "label": "Neumología, cuidados respiratorios y pleura" },
-    { "id": "AC-11", "label": "Neurología perioperatoria y neurovascular" },
-    { "id": "AC-12", "label": "Nutrición clínica, sarcopenia y reserva funcional" },
-    { "id": "AC-13", "label": "Oncología y cardio-oncología" },
-    { "id": "AC-14", "label": "Psiquiatría, psicología clínica y salud mental perioperatoria" }
-  ]
+  }
 }
