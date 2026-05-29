@@ -1,14 +1,29 @@
 {
   "artifact": "ICICSO Acompañantes Filter Model",
-  "updated_at": "2026-05-28 23:20 UTC",
+  "updated_at": "2026-05-29 00:40 UTC",
   "status": "repo_growth_integrated",
   "preserves_existing_model": true,
   "active_snapshot": {
     "catalog_records": 927,
-    "explicit_companions": 370,
+    "explicit_companions": 396,
     "multitag_records": 33,
-    "no_especificado": 557,
+    "no_especificado": 531,
+    "ac_03_count": 26,
+    "ac_03_subfamilies": {
+      "Diabetes y control glucémico perioperatorio": 5,
+      "Diabetes, endocrino y terapias cardiometabólicas": 16,
+      "Lípidos y prevención cardiometabólica": 2,
+      "Obesidad, peso y riesgo cardiometabólico": 3
+    },
     "ac_09_count": 5,
+    "ac_11_count": 70,
+    "ac_11_subfamilies": {
+      "Aneurismas intracraneales y HSA": 12,
+      "Carotídea, puentes supraaórticos y revascularización cerebral": 19,
+      "Cuidados neurocríticos y neurocognición perioperatoria": 12,
+      "Ictus isquémico y trombectomía": 13,
+      "Neurointervencionismo complejo y malformaciones vasculares": 14
+    },
     "ac_13_count": 68,
     "ac_13_subfamilies": {
       "Oncología torácica maligna": 49,
