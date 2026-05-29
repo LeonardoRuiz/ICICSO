@@ -42,14 +42,16 @@ La capa `Acompañantes` ya vive como artefacto operativo y de gobernanza dentro 
 - [docs/generated/acompanantes/index.html](docs/generated/acompanantes/index.html)
 - [docs/generated/acompanantes/acompanantes-filter-model.json](docs/generated/acompanantes/acompanantes-filter-model.json)
 - [docs/generated/acompanantes/acompanantes-taxonomia.yaml](docs/generated/acompanantes/acompanantes-taxonomia.yaml)
-- [docs/generated/acompanantes/estado-editorial-2026-05-28.md](docs/generated/acompanantes/estado-editorial-2026-05-28.md)
+- [docs/generated/acompanantes/estado-editorial-2026-05-29.md](docs/generated/acompanantes/estado-editorial-2026-05-29.md)
 
 Estado editorial vigente de esa capa:
 
 - `927` registros activos de referencia
-- `370` fichas con acompañante explícito
+- `396` fichas con acompañante explícito
 - `33` fichas multietiqueta reales
+- `AC-03 = 26`
 - `AC-09 = 5`
+- `AC-11 = 70`
 - `AC-13 = 68`
 - `AC-14 = 3`
 
