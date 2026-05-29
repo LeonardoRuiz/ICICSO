@@ -1,6 +1,6 @@
 {
   "artifact": "ICICSO Acompañantes Filter Model",
-  "updated_at": "2026-05-29 01:20 UTC",
+  "updated_at": "2026-05-29 02:10 UTC",
   "status": "repo_growth_integrated",
   "preserves_existing_model": true,
   "active_snapshot": {
@@ -8,10 +8,14 @@
     "explicit_companions": 405,
     "multitag_records": 33,
     "no_especificado": 522,
+    "ac_01_count": 34,
     "ac_03_count": 26,
+    "ac_05_count": 51,
     "ac_06_count": 9,
+    "ac_07_count": 12,
     "ac_09_count": 5,
     "ac_11_count": 70,
+    "ac_12_count": 8,
     "ac_13_count": 68,
     "ac_14_count": 3
   }
