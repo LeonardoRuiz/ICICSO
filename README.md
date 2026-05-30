@@ -50,11 +50,13 @@ Estado editorial vigente de esa capa:
 - `405` fichas con acompañante explícito
 - `33` fichas multietiqueta reales
 - `AC-01 = 34`
+- `AC-02 = 46`
 - `AC-03 = 26`
 - `AC-05 = 51`
 - `AC-06 = 9`
 - `AC-07 = 12`
 - `AC-09 = 5`
+- `AC-10 = 41`
 - `AC-11 = 70`
 - `AC-13 = 68`
 - `AC-14 = 3`
