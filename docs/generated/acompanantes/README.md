@@ -24,7 +24,7 @@ Su rol es describir capas clínicas transversales que cambian:
 
 ## Estado editorial vigente
 - Fecha de corte: `2026-05-29`
-- Lotes editoriales aplicados: `11`
+- Lotes editoriales aplicados: `12`
 - Registros activos del catálogo: `927`
 - Fichas con acompañante explícito: `405`
 - Fichas multietiqueta reales: `33`
@@ -32,10 +32,12 @@ Su rol es describir capas clínicas transversales que cambian:
 
 ## Aperturas ya resueltas
 - `AC-01` ya distingue anestesia/ERAS, ECMO/tMCS, shock cardiogénico/cuidados críticos y anestesia torácica/ventilación unipulmonar.
+- `AC-02` ya distingue síndrome cardiorrenal/CKD/renoprotección, lesión renal aguda perioperatoria, acceso para hemodiálisis y enfermedad renovascular.
 - `AC-03` ya quedó abierto como capa operativa real con subfamilias auxiliares para glucemia perioperatoria, diabetes/endocrino, lípidos y obesidad.
 - `AC-05` ya distingue anticoagulación/trombosis/HIT, PBM-perfusión-transfusión y hematología perioperatoria/manejo de sangre.
 - `AC-06` ya quedó abierto de forma conservadora para hepatología/cirrosis/coagulopatía perioperatoria e isquemia mesentérica/circulación visceral.
 - `AC-07` ya distingue imagen cardiovascular transversal de imagen multimodal en endocarditis y complicaciones perivalvulares.
+- `AC-10` ya distingue pleura-empiema-neumotórax, COPD/PH/OSA perioperatorias, rehabilitación respiratoria, CTEPH y ventilación unipulmonar.
 - `AC-11` conserva su capa única pero ya muestra internamente aneurismas/HSA, ictus/trombectomía, carotídea/revascularización, neurointervencionismo complejo y neurocríticos/neurocognición.
 - `AC-13` ya quedó abierto como capa operativa propia para oncología y cardio-oncología explícita, y vive con subfamilias internas auxiliares.
 - `AC-09` ya incluye inflamación cardiovascular explícita, aortitis, inmunoterapia torácica y cardio-oncología explícita.
@@ -63,7 +65,7 @@ Su rol es describir capas clínicas transversales que cambian:
 - La asignación debe reflejar utilidad clínica real, no mera mención incidental.
 - Si un recurso afecta conducta perioperatoria, organoprotección o seguimiento, `Acompañantes` debe capturarlo.
 - Nutrición y salud mental quedan visibles como capas propias para no esconderlas dentro de metabólica o fragilidad.
-- Las subfamilias internas de `AC-01`, `AC-03`, `AC-05`, `AC-06`, `AC-07`, `AC-11` y `AC-13` son metadata auxiliar y no crean un filtro adicional.
+- Las subfamilias internas de `AC-01`, `AC-02`, `AC-03`, `AC-05`, `AC-06`, `AC-07`, `AC-10`, `AC-11` y `AC-13` son metadata auxiliar y no crean un filtro adicional.
 
 ## Regla operativa para crecimiento
 Nuevas corridas:
