@@ -1,5 +1,5 @@
 version: 1
-updated_at: 2026-05-29
+updated_at: 2026-05-30
 artifact: icicso-acompanantes-taxonomia
 preserves_existing_model: true
 filter_anchor:
@@ -7,7 +7,7 @@ filter_anchor:
   name: Acompañantes
   total_filter_count: 26
 notes:
-  - AC-01 ya distingue anestesia/ERAS, ECMO/tMCS, shock cardiogénico y anestesia torácica.
-  - AC-05 ya distingue anticoagulación/HIT, PBM-perfusión-transfusión y hematología perioperatoria.
+  - AC-02 ya distingue cardiorrenal/CKD, AKI perioperatoria, acceso para hemodiálisis y renovascular.
   - AC-07 ya distingue imagen cardiovascular transversal de endocarditis multimodal.
+  - AC-10 ya distingue COPD-PH-OSA, rehabilitación, CTEPH, ventilación unipulmonar y pleura/empiema.
   - AC-12 se mantiene sin apertura interna nueva en este corte.
