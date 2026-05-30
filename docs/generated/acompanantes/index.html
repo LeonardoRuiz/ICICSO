@@ -5,16 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ICICSO Acompañantes</title>
   <style>
-    :root { color-scheme: dark; --bg:#1e1e1e; --surface:#2b2f33; --text:#e6e6e6; --muted:#b8b8b8; --border:#3f3f3f; }
+    :root { color-scheme: dark; --bg:#1f2124; --surface:#2a2d31; --surface-2:#24272b; --text:#e8e8e8; --muted:#b9bdc3; --border:#3a3f45; --accent:#9fb3c8; }
     * { box-sizing: border-box; }
-    body { margin:0; background:linear-gradient(180deg,#202124 0%,#1e1e1e 100%); color:var(--text); font-family:Arial,sans-serif; line-height:1.55; }
+    body { margin:0; background:linear-gradient(180deg,#1d1f22 0%,#181a1d 100%); color:var(--text); font-family:Arial,sans-serif; line-height:1.55; }
     .wrap { max-width:1120px; margin:0 auto; padding:28px 18px 52px; }
-    .panel,.metric,.card { border:1px solid var(--border); background:var(--surface); border-radius:10px; }
+    .panel,.metric,details { border:1px solid var(--border); background:var(--surface); border-radius:10px; }
     .panel { padding:18px; margin-top:14px; }
-    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; }
-    .metric,.card { padding:14px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:12px; }
+    .metric { padding:14px; background:var(--surface-2); }
     .big { color:var(--text); font-size:1.5rem; font-weight:700; margin-top:6px; }
     .small { color:var(--muted); font-size:.92rem; }
+    .stack { display:grid; gap:10px; }
+    details { padding:12px 14px; background:var(--surface-2); }
+    summary { cursor:pointer; color:var(--text); font-weight:700; }
+    ul { margin:10px 0 0 18px; padding:0; }
+    li { margin:6px 0; }
     h1,h2,h3 { line-height:1.15; }
     h1 { margin:0 0 10px; font-size:2rem; }
   </style>
@@ -24,7 +29,7 @@
     <section class="panel">
       <h1>Acompañantes ICICSO</h1>
       <p>Integración operativa del filtro <strong>01. Acompañantes</strong> dentro del bloque numerado vigente de <strong>26</strong> filtros.</p>
-      <p class="small">Estado: integración viva tras lote editorial 11, con dark mode de bajo brillo y panorama compacto.</p>
+      <p class="small">Estado: integración viva tras lote editorial 12, con dark mode carbón de bajo brillo y panorama compacto.</p>
     </section>
     <section class="panel">
       <h2>Estado actual</h2>
@@ -33,9 +38,34 @@
         <div class="metric"><strong>Acompañante explícito</strong><div class="big">405</div><div class="small">fichas ya clasificadas</div></div>
         <div class="metric"><strong>Multietiqueta real</strong><div class="big">33</div><div class="small">más de un acompañante</div></div>
         <div class="metric"><strong>No especificado</strong><div class="big">522</div><div class="small">se conserva por fidelidad</div></div>
-        <div class="metric"><strong>AC-01</strong><div class="big">34</div><div class="small">anestesia, ECMO, shock y ventilación torácica</div></div>
+        <div class="metric"><strong>AC-02</strong><div class="big">46</div><div class="small">cardiorrenal, AKI, hemodiálisis y renovascular</div></div>
         <div class="metric"><strong>AC-05</strong><div class="big">51</div><div class="small">hemostasia, PBM y anticoagulación</div></div>
-        <div class="metric"><strong>AC-07</strong><div class="big">12</div><div class="small">imagen transversal y endocarditis multimodal</div></div>
+        <div class="metric"><strong>AC-10</strong><div class="big">41</div><div class="small">pleura, pulmonar perioperatoria y CTEPH</div></div>
+        <div class="metric"><strong>AC-11</strong><div class="big">70</div><div class="small">neurología perioperatoria y neurovascular</div></div>
+      </div>
+    </section>
+    <section class="panel">
+      <h2>Lectura interna auxiliar</h2>
+      <div class="stack">
+        <details>
+          <summary>AC-02 · Cardiorrenal y nefrocardiología</summary>
+          <ul>
+            <li>Síndrome cardiorrenal, CKD y terapias renoprotectoras: 27</li>
+            <li>Lesión renal aguda y nefrología perioperatoria: 9</li>
+            <li>Acceso para hemodiálisis y fístula arteriovenosa: 6</li>
+            <li>Enfermedad renal renovascular: 4</li>
+          </ul>
+        </details>
+        <details>
+          <summary>AC-10 · Neumología, cuidados respiratorios y pleura</summary>
+          <ul>
+            <li>Pleura, neumotórax y empiema: 17</li>
+            <li>COPD, hipertensión pulmonar y OSA perioperatorias: 10</li>
+            <li>Rehabilitación respiratoria y prevención pulmonar: 5</li>
+            <li>CTEPH y tromboendarterectomía pulmonar: 5</li>
+            <li>Ventilación unipulmonar y anestesia torácica: 4</li>
+          </ul>
+        </details>
       </div>
     </section>
   </div>
