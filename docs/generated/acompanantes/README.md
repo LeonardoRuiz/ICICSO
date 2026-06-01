@@ -23,12 +23,19 @@ Su rol es describir capas clínicas transversales que cambian:
 - Preservar `No especificado` en registros históricos cuando no exista base razonable para asignación fina.
 
 ## Estado editorial vigente
-- Fecha de corte: `2026-05-29`
+- Fecha de corte: `2026-06-01`
+- Versión activa de referencia: `v169-integracion-fiel-acompanantes-lote12`
 - Lotes editoriales aplicados: `12`
 - Registros activos del catálogo: `927`
 - Fichas con acompañante explícito: `405`
 - Fichas multietiqueta reales: `33`
 - Registros que siguen en `No especificado`: `522`
+
+## Naturaleza del corte
+- reversionado fiel de integración
+- sin expansión documental nueva
+- consolidación explícita del estado alcanzado en `v168`
+- preserva contrato estable de `26` filtros y dark mode carbón de bajo brillo
 
 ## Aperturas ya resueltas
 - `AC-01` ya distingue anestesia/ERAS, ECMO/tMCS, shock cardiogénico/cuidados críticos y anestesia torácica/ventilación unipulmonar.
