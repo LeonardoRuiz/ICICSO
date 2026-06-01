@@ -1,13 +1,14 @@
 version: 1
-updated_at: 2026-05-30
+updated_at: 2026-06-01
 artifact: icicso-acompanantes-taxonomia
+active_version: v169-integracion-fiel-acompanantes-lote12
 preserves_existing_model: true
 filter_anchor:
   number: 1
   name: Acompañantes
   total_filter_count: 26
 notes:
+  - Corte de consolidación fiel tras doce lotes editoriales.
   - AC-02 ya distingue cardiorrenal/CKD, AKI perioperatoria, acceso para hemodiálisis y renovascular.
-  - AC-07 ya distingue imagen cardiovascular transversal de endocarditis multimodal.
   - AC-10 ya distingue COPD-PH-OSA, rehabilitación, CTEPH, ventilación unipulmonar y pleura/empiema.
   - AC-12 se mantiene sin apertura interna nueva en este corte.
