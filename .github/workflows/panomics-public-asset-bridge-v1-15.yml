@@ -1,0 +1,40 @@
+name: PanOmics public asset bridge v1.15
+
+on:
+  push:
+    branches:
+      - panomics-asset-bridge-v1-15
+    paths:
+      - .github/workflows/panomics-public-asset-bridge-v1-15.yml
+
+permissions:
+  contents: read
+
+jobs:
+  bridge-tools:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Download pinned public tool assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p bridge
+          curl -L --fail --retry 5 --retry-delay 2             -o bridge/bowtie2-2.5.5-linux-x86_64.zip             https://github.com/BenLangmead/bowtie2/releases/download/v2.5.5/bowtie2-2.5.5-linux-x86_64.zip
+          curl -L --fail --retry 5 --retry-delay 2             -o bridge/samtools-1.24.tar.bz2             https://github.com/samtools/samtools/releases/download/1.24/samtools-1.24.tar.bz2
+          curl -L --fail --retry 5 --retry-delay 2             -o bridge/bcftools-1.24.tar.bz2             https://github.com/samtools/bcftools/releases/download/1.24/bcftools-1.24.tar.bz2
+
+          echo "38472e806f56ed23d32cbe7a7fe1b7260680f892647aa78c2f6882f8f272a026  bridge/bowtie2-2.5.5-linux-x86_64.zip" | sha256sum -c -
+          echo "89b2a440123eeaa400392ce1736e7d60ce9041843027d76819753c5a8246bfdd  bridge/samtools-1.24.tar.bz2" | sha256sum -c -
+          echo "8caddc22610ee2851666047c859bb91da0c1e32d0c2ec553db6f153ad130e46f  bridge/bcftools-1.24.tar.bz2" | sha256sum -c -
+          sha256sum bridge/* > bridge/SHA256SUMS.txt
+          ls -lh bridge
+
+      - name: Upload pinned tool assets
+        uses: actions/upload-artifact@v4
+        with:
+          name: panomics-public-tools-v1-15
+          path: bridge/
+          compression-level: 0
+          retention-days: 1
+          if-no-files-found: error
