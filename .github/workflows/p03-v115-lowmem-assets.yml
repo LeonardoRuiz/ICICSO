@@ -1,0 +1,83 @@
+name: p03-v115-lowmem-assets
+on:
+  push:
+    branches:
+      - tmp/p03-v115-lowmem-assets
+jobs:
+  assets:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - name: Prepare
+        run: |
+          set -euxo pipefail
+          sudo apt-get update
+          sudo apt-get install -y curl bzip2 unzip zstd
+          mkdir -p "$RUNNER_TEMP/p03-assets" "$RUNNER_TEMP/micromamba"
+      - name: Build pinned portable tool environment
+        shell: bash
+        run: |
+          set -euxo pipefail
+          cd "$RUNNER_TEMP"
+          curl -L --retry 5 https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xj bin/micromamba
+          ./bin/micromamba create -y -p "$RUNNER_TEMP/p03-env" -c conda-forge -c bioconda \
+            bowtie2=2.5.5 samtools=1.24 bcftools=1.24 conda-pack
+          "$RUNNER_TEMP/p03-env/bin/conda-pack" -p "$RUNNER_TEMP/p03-env" \
+            -o "$RUNNER_TEMP/p03-assets/p03-lowmem-tools.tar.gz"
+          "$RUNNER_TEMP/p03-env/bin/bowtie2" --version | head -1
+          "$RUNNER_TEMP/p03-env/bin/samtools" --version | head -1
+          "$RUNNER_TEMP/p03-env/bin/bcftools" --version | head -1
+          sha256sum "$RUNNER_TEMP/p03-assets/p03-lowmem-tools.tar.gz" > "$RUNNER_TEMP/p03-assets/p03-lowmem-tools.tar.gz.sha256"
+      - name: Download GRCh38 no-alt Bowtie2 index
+        shell: bash
+        run: |
+          set -euxo pipefail
+          cd "$RUNNER_TEMP/p03-assets"
+          curl -L --fail --retry 5 -o GRCh38_noalt_as.zip https://genome-idx.s3.amazonaws.com/bt/GRCh38_noalt_as.zip
+          unzip -t GRCh38_noalt_as.zip
+          sha256sum GRCh38_noalt_as.zip > GRCh38_noalt_as.zip.sha256
+          split -b 900M -d -a 2 GRCh38_noalt_as.zip GRCh38_noalt_as.zip.part.
+          sha256sum GRCh38_noalt_as.zip.part.* > GRCh38_noalt_as.parts.sha256
+          ls -lh GRCh38_noalt_as.zip.part.*
+      - name: Upload tools
+        uses: actions/upload-artifact@v4
+        with:
+          name: p03-v115-tools
+          path: |
+            ${{ runner.temp }}/p03-assets/p03-lowmem-tools.tar.gz
+            ${{ runner.temp }}/p03-assets/p03-lowmem-tools.tar.gz.sha256
+          compression-level: 0
+      - name: Upload reference part 00
+        uses: actions/upload-artifact@v4
+        with:
+          name: p03-v115-ref-00
+          path: ${{ runner.temp }}/p03-assets/GRCh38_noalt_as.zip.part.00
+          compression-level: 0
+      - name: Upload reference part 01
+        if: ${{ hashFiles(format('{0}/p03-assets/GRCh38_noalt_as.zip.part.01', runner.temp)) != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: p03-v115-ref-01
+          path: ${{ runner.temp }}/p03-assets/GRCh38_noalt_as.zip.part.01
+          compression-level: 0
+      - name: Upload reference part 02
+        if: ${{ hashFiles(format('{0}/p03-assets/GRCh38_noalt_as.zip.part.02', runner.temp)) != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: p03-v115-ref-02
+          path: ${{ runner.temp }}/p03-assets/GRCh38_noalt_as.zip.part.02
+          compression-level: 0
+      - name: Upload reference part 03
+        if: ${{ hashFiles(format('{0}/p03-assets/GRCh38_noalt_as.zip.part.03', runner.temp)) != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: p03-v115-ref-03
+          path: ${{ runner.temp }}/p03-assets/GRCh38_noalt_as.zip.part.03
+          compression-level: 0
+      - name: Upload reference checksums
+        uses: actions/upload-artifact@v4
+        with:
+          name: p03-v115-ref-checksums
+          path: |
+            ${{ runner.temp }}/p03-assets/GRCh38_noalt_as.zip.sha256
+            ${{ runner.temp }}/p03-assets/GRCh38_noalt_as.parts.sha256
