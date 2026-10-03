@@ -1,0 +1,84 @@
+name: PanOmics Bowtie2 GRCh38 index bridge v1.15
+
+on:
+  push:
+    branches:
+      - panomics-asset-bridge-v1-15
+    paths:
+      - .github/workflows/panomics-bowtie2-grch38-index-bridge-v1-15.yml
+
+permissions:
+  contents: read
+
+jobs:
+  build-index:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Download pinned Bowtie2 and GRCh38
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p work
+          curl -L --fail --retry 8 --retry-delay 3             -o work/bowtie2.zip             https://github.com/BenLangmead/bowtie2/releases/download/v2.5.5/bowtie2-2.5.5-linux-x86_64.zip
+          echo "38472e806f56ed23d32cbe7a7fe1b7260680f892647aa78c2f6882f8f272a026  work/bowtie2.zip" | sha256sum -c -
+          unzip -q work/bowtie2.zip -d work/
+          B2DIR=$(find work -maxdepth 1 -type d -name 'bowtie2-2.5.5*' | head -1)
+
+          curl -L --fail --retry 8 --retry-delay 3             -o work/hg38.analysisSet.fa.gz             https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/analysisSet/hg38.analysisSet.fa.gz
+          echo "6d3c82e1e12b127d526395294526b9c8  work/hg38.analysisSet.fa.gz" | md5sum -c -
+          gzip -dc work/hg38.analysisSet.fa.gz > work/hg38.analysisSet.fa
+
+          "$B2DIR/bowtie2-build" --packed --offrate 9 --threads 2             work/hg38.analysisSet.fa work/hg38.analysisSet
+
+          mkdir -p bridge
+          tar -C work -cf bridge/hg38.analysisSet.offrate9.bt2.tar             hg38.analysisSet.1.bt2 hg38.analysisSet.2.bt2 hg38.analysisSet.3.bt2             hg38.analysisSet.4.bt2 hg38.analysisSet.rev.1.bt2 hg38.analysisSet.rev.2.bt2
+          sha256sum work/hg38.analysisSet*.bt2 > bridge/INDEX_SHA256SUMS.txt
+          sha256sum bridge/hg38.analysisSet.offrate9.bt2.tar > bridge/TAR_SHA256SUMS.txt
+          split -n 16 -d -a 2 bridge/hg38.analysisSet.offrate9.bt2.tar bridge/index.tar.part-
+          sha256sum bridge/index.tar.part-* > bridge/PART_SHA256SUMS.txt
+          ls -lh bridge/index.tar.part-*
+
+      - name: Upload manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: panomics-grch38-bt2-index-manifest-v1-15
+          path: |
+            bridge/INDEX_SHA256SUMS.txt
+            bridge/TAR_SHA256SUMS.txt
+            bridge/PART_SHA256SUMS.txt
+          compression-level: 0
+          retention-days: 1
+
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-grch38-bt2-part-00-v1-15, path: bridge/index.tar.part-00, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-grch38-bt2-part-01-v1-15, path: bridge/index.tar.part-01, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-grch38-bt2-part-02-v1-15, path: bridge/index.tar.part-02, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-grch38-bt2-part-03-v1-15, path: bridge/index.tar.part-03, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-grch38-bt2-part-04-v1-15, path: bridge/index.tar.part-04, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-grch38-bt2-part-05-v1-15, path: bridge/index.tar.part-05, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-grch38-bt2-part-06-v1-15, path: bridge/index.tar.part-06, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-grch38-bt2-part-07-v1-15, path: bridge/index.tar.part-07, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-grch38-bt2-part-08-v1-15, path: bridge/index.tar.part-08, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-grch38-bt2-part-09-v1-15, path: bridge/index.tar.part-09, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-grch38-bt2-part-10-v1-15, path: bridge/index.tar.part-10, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-grch38-bt2-part-11-v1-15, path: bridge/index.tar.part-11, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-grch38-bt2-part-12-v1-15, path: bridge/index.tar.part-12, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-grch38-bt2-part-13-v1-15, path: bridge/index.tar.part-13, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-grch38-bt2-part-14-v1-15, path: bridge/index.tar.part-14, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-grch38-bt2-part-15-v1-15, path: bridge/index.tar.part-15, compression-level: 0, retention-days: 1}
