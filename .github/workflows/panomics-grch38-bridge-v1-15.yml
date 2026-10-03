@@ -1,0 +1,35 @@
+name: PanOmics GRCh38 bridge v1.15
+
+on:
+  push:
+    branches:
+      - panomics-asset-bridge-v1-15
+    paths:
+      - .github/workflows/panomics-grch38-bridge-v1-15.yml
+
+permissions:
+  contents: read
+
+jobs:
+  bridge-reference:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Download and verify GRCh38 no-alt
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p bridge
+          curl -L --fail --retry 8 --retry-delay 3             -o bridge/hg38.analysisSet.fa.gz             https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/analysisSet/hg38.analysisSet.fa.gz
+          echo "6d3c82e1e12b127d526395294526b9c8  bridge/hg38.analysisSet.fa.gz" | md5sum -c -
+          sha256sum bridge/hg38.analysisSet.fa.gz > bridge/SHA256SUMS.txt
+          ls -lh bridge
+
+      - name: Upload GRCh38 no-alt
+        uses: actions/upload-artifact@v4
+        with:
+          name: panomics-grch38-noalt-v1-15
+          path: bridge/
+          compression-level: 0
+          retention-days: 1
+          if-no-files-found: error
