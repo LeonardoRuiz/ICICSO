@@ -1,0 +1,41 @@
+name: p03-v115-refsplit
+on:
+  push:
+    branches:
+      - tmp/p03-v115-refsplit
+jobs:
+  refsplit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - name: Download and split GRCh38 no-alt Bowtie2 index
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p "$RUNNER_TEMP/p03-ref"
+          cd "$RUNNER_TEMP/p03-ref"
+          curl -L --fail --retry 5 -o GRCh38_noalt_as.zip https://genome-idx.s3.amazonaws.com/bt/GRCh38_noalt_as.zip
+          unzip -t GRCh38_noalt_as.zip
+          sha256sum GRCh38_noalt_as.zip > GRCh38_noalt_as.zip.sha256
+          split -b 450M -d -a 2 GRCh38_noalt_as.zip GRCh38_noalt_as.zip.part.
+          sha256sum GRCh38_noalt_as.zip.part.* > GRCh38_noalt_as.parts.sha256
+          ls -lh GRCh38_noalt_as.zip.part.*
+      - name: Upload part 00
+        uses: actions/upload-artifact@v4
+        with:
+          name: p03-v115-refsplit-00
+          path: ${{ runner.temp }}/p03-ref/GRCh38_noalt_as.zip.part.00
+          compression-level: 0
+      - name: Upload part 01
+        uses: actions/upload-artifact@v4
+        with:
+          name: p03-v115-refsplit-01
+          path: ${{ runner.temp }}/p03-ref/GRCh38_noalt_as.zip.part.01
+          compression-level: 0
+      - name: Upload checksums
+        uses: actions/upload-artifact@v4
+        with:
+          name: p03-v115-refsplit-checksums
+          path: |
+            ${{ runner.temp }}/p03-ref/GRCh38_noalt_as.zip.sha256
+            ${{ runner.temp }}/p03-ref/GRCh38_noalt_as.parts.sha256
