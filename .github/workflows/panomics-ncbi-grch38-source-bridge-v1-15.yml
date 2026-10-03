@@ -1,0 +1,49 @@
+name: PanOmics exact NCBI GRCh38 source bridge v1.15
+
+on:
+  push:
+    branches:
+      - panomics-asset-bridge-v1-15
+    paths:
+      - .github/workflows/panomics-ncbi-grch38-source-bridge-v1-15.yml
+
+permissions:
+  contents: read
+
+jobs:
+  bridge-exact-reference:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Download verify and split exact NCBI source
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p bridge
+          curl -L --fail --retry 8 --retry-delay 3             -o bridge/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz             https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/001/405/GCA_000001405.15_GRCh38/seqs_for_alignment_pipelines.ucsc_ids/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz
+          echo "a08035b6a6e31780e96a34008ff21bd6  bridge/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz" | md5sum -c -
+          sha256sum bridge/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz > bridge/ORIGINAL_SHA256SUMS.txt
+          split -n 5 -d -a 2 bridge/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.gz bridge/reference.gz.part-
+          sha256sum bridge/reference.gz.part-* > bridge/PART_SHA256SUMS.txt
+          ls -lh bridge/reference.gz.part-*
+
+      - name: Upload manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: panomics-ncbi-grch38-source-manifest-v1-15
+          path: |
+            bridge/ORIGINAL_SHA256SUMS.txt
+            bridge/PART_SHA256SUMS.txt
+          compression-level: 0
+          retention-days: 1
+
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-ncbi-grch38-source-part-00-v1-15, path: bridge/reference.gz.part-00, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-ncbi-grch38-source-part-01-v1-15, path: bridge/reference.gz.part-01, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-ncbi-grch38-source-part-02-v1-15, path: bridge/reference.gz.part-02, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-ncbi-grch38-source-part-03-v1-15, path: bridge/reference.gz.part-03, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-ncbi-grch38-source-part-04-v1-15, path: bridge/reference.gz.part-04, compression-level: 0, retention-days: 1}
