@@ -1,0 +1,56 @@
+name: PanOmics public asset bootstrap v1.15
+on:
+  push:
+    branches:
+      - asset-bootstrap-v115-20261003
+permissions:
+  contents: read
+jobs:
+  fetch-assets:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Prepare
+        run: |
+          set -euxo pipefail
+          mkdir -p assets
+      - name: Fetch Bowtie2
+        run: |
+          set -euxo pipefail
+          curl -L --fail --retry 5 --retry-delay 3 -o assets/bowtie2-2.5.5-linux-x86_64.zip https://github.com/BenLangmead/bowtie2/releases/download/v2.5.5/bowtie2-2.5.5-linux-x86_64.zip
+          echo "38472e806f56ed23d32cbe7a7fe1b7260680f892647aa78c2f6882f8f272a026  assets/bowtie2-2.5.5-linux-x86_64.zip" | sha256sum -c -
+      - name: Fetch samtools
+        run: |
+          set -euxo pipefail
+          curl -L --fail --retry 5 --retry-delay 3 -o assets/samtools-1.24.tar.bz2 https://github.com/samtools/samtools/releases/download/1.24/samtools-1.24.tar.bz2
+          echo "89b2a440123eeaa400392ce1736e7d60ce9041843027d76819753c5a8246bfdd  assets/samtools-1.24.tar.bz2" | sha256sum -c -
+      - name: Fetch bcftools
+        run: |
+          set -euxo pipefail
+          curl -L --fail --retry 5 --retry-delay 3 -o assets/bcftools-1.24.tar.bz2 https://github.com/samtools/bcftools/releases/download/1.24/bcftools-1.24.tar.bz2
+          echo "8caddc22610ee2851666047c859bb91da0c1e32d0c2ec553db6f153ad130e46f  assets/bcftools-1.24.tar.bz2" | sha256sum -c -
+      - name: Fetch GRCh38 Bowtie2 index
+        run: |
+          set -euxo pipefail
+          curl -L --fail --retry 5 --retry-delay 5 -o assets/GRCh38_noalt_as.zip https://genome-idx.s3.amazonaws.com/bt/GRCh38_noalt_as.zip
+          sha256sum assets/GRCh38_noalt_as.zip | tee assets/GRCh38_noalt_as.zip.sha256
+          ls -lh assets
+      - name: Upload tool assets
+        uses: actions/upload-artifact@v4
+        with:
+          name: panomics-v115-tools
+          path: |
+            assets/bowtie2-2.5.5-linux-x86_64.zip
+            assets/samtools-1.24.tar.bz2
+            assets/bcftools-1.24.tar.bz2
+          compression-level: 0
+          retention-days: 1
+      - name: Upload GRCh38 index
+        uses: actions/upload-artifact@v4
+        with:
+          name: panomics-v115-grch38-index
+          path: |
+            assets/GRCh38_noalt_as.zip
+            assets/GRCh38_noalt_as.zip.sha256
+          compression-level: 0
+          retention-days: 1
