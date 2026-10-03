@@ -1,0 +1,72 @@
+name: PanOmics prebuilt GRCh38 Bowtie2 bridge v1.15
+
+on:
+  push:
+    branches:
+      - panomics-asset-bridge-v1-15
+    paths:
+      - .github/workflows/panomics-prebuilt-grch38-bowtie2-bridge-v1-15.yml
+
+permissions:
+  contents: read
+
+jobs:
+  bridge-prebuilt-index:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Download and split official prebuilt GRCh38 no-alt Bowtie2 index
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p bridge
+          curl -L --fail --retry 8 --retry-delay 3             -o bridge/GRCh38_noalt_as.zip             https://genome-idx.s3.amazonaws.com/bt/GRCh38_noalt_as.zip
+          sha256sum bridge/GRCh38_noalt_as.zip > bridge/ORIGINAL_SHA256SUMS.txt
+          unzip -t bridge/GRCh38_noalt_as.zip > bridge/ZIP_TEST.txt
+          split -n 16 -d -a 2 bridge/GRCh38_noalt_as.zip bridge/GRCh38_noalt_as.zip.part-
+          sha256sum bridge/GRCh38_noalt_as.zip.part-* > bridge/PART_SHA256SUMS.txt
+          ls -lh bridge/GRCh38_noalt_as.zip bridge/GRCh38_noalt_as.zip.part-*
+
+      - name: Upload manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: panomics-prebuilt-grch38-manifest-v1-15
+          path: |
+            bridge/ORIGINAL_SHA256SUMS.txt
+            bridge/PART_SHA256SUMS.txt
+            bridge/ZIP_TEST.txt
+          compression-level: 0
+          retention-days: 1
+
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-prebuilt-grch38-part-00-v1-15, path: bridge/GRCh38_noalt_as.zip.part-00, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-prebuilt-grch38-part-01-v1-15, path: bridge/GRCh38_noalt_as.zip.part-01, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-prebuilt-grch38-part-02-v1-15, path: bridge/GRCh38_noalt_as.zip.part-02, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-prebuilt-grch38-part-03-v1-15, path: bridge/GRCh38_noalt_as.zip.part-03, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-prebuilt-grch38-part-04-v1-15, path: bridge/GRCh38_noalt_as.zip.part-04, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-prebuilt-grch38-part-05-v1-15, path: bridge/GRCh38_noalt_as.zip.part-05, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-prebuilt-grch38-part-06-v1-15, path: bridge/GRCh38_noalt_as.zip.part-06, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-prebuilt-grch38-part-07-v1-15, path: bridge/GRCh38_noalt_as.zip.part-07, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-prebuilt-grch38-part-08-v1-15, path: bridge/GRCh38_noalt_as.zip.part-08, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-prebuilt-grch38-part-09-v1-15, path: bridge/GRCh38_noalt_as.zip.part-09, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-prebuilt-grch38-part-10-v1-15, path: bridge/GRCh38_noalt_as.zip.part-10, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-prebuilt-grch38-part-11-v1-15, path: bridge/GRCh38_noalt_as.zip.part-11, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-prebuilt-grch38-part-12-v1-15, path: bridge/GRCh38_noalt_as.zip.part-12, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-prebuilt-grch38-part-13-v1-15, path: bridge/GRCh38_noalt_as.zip.part-13, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-prebuilt-grch38-part-14-v1-15, path: bridge/GRCh38_noalt_as.zip.part-14, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: panomics-prebuilt-grch38-part-15-v1-15, path: bridge/GRCh38_noalt_as.zip.part-15, compression-level: 0, retention-days: 1}
