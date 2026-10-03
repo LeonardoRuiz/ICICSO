@@ -1,0 +1,50 @@
+name: PanOmics split GRCh38 asset v1.15
+on:
+  push:
+    branches:
+      - asset-bootstrap-v115-20261003
+permissions:
+  contents: read
+jobs:
+  split-grch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Fetch GRCh38 Bowtie2 index
+        run: |
+          set -euxo pipefail
+          mkdir -p parts
+          curl -L --fail --retry 5 --retry-delay 5 -o GRCh38_noalt_as.zip https://genome-idx.s3.amazonaws.com/bt/GRCh38_noalt_as.zip
+          sha256sum GRCh38_noalt_as.zip | tee GRCh38_noalt_as.zip.sha256
+          split -b 400M -d -a 2 GRCh38_noalt_as.zip parts/GRCh38_noalt_as.zip.part-
+          ls -lh parts
+      - uses: actions/upload-artifact@v4
+        with: {name: grch38-part-00, path: parts/GRCh38_noalt_as.zip.part-00, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: grch38-part-01, path: parts/GRCh38_noalt_as.zip.part-01, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: grch38-part-02, path: parts/GRCh38_noalt_as.zip.part-02, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: grch38-part-03, path: parts/GRCh38_noalt_as.zip.part-03, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: grch38-part-04, path: parts/GRCh38_noalt_as.zip.part-04, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: grch38-part-05, path: parts/GRCh38_noalt_as.zip.part-05, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: grch38-part-06, path: parts/GRCh38_noalt_as.zip.part-06, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: grch38-part-07, path: parts/GRCh38_noalt_as.zip.part-07, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with: {name: grch38-part-08, path: parts/GRCh38_noalt_as.zip.part-08, compression-level: 0, retention-days: 1}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: grch38-part-09
+          path: parts/GRCh38_noalt_as.zip.part-09
+          compression-level: 0
+          retention-days: 1
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        with:
+          name: grch38-sha256
+          path: GRCh38_noalt_as.zip.sha256
+          retention-days: 1
