@@ -1,0 +1,54 @@
+name: PanOmics sparse GRCh38 index v1.15
+on:
+  push:
+    branches:
+      - asset-bootstrap-v115-20261003
+permissions:
+  contents: read
+jobs:
+  build-sparse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Fetch Bowtie2 2.5.5 and GRCh38 no-alt
+        run: |
+          set -euxo pipefail
+          sudo apt-get update
+          sudo apt-get install -y unzip
+          curl -L --fail --retry 5 -o bowtie2.zip https://github.com/BenLangmead/bowtie2/releases/download/v2.5.5/bowtie2-2.5.5-linux-x86_64.zip
+          echo "38472e806f56ed23d32cbe7a7fe1b7260680f892647aa78c2f6882f8f272a026  bowtie2.zip" | sha256sum -c -
+          unzip -q bowtie2.zip
+          export PATH="$PWD/bowtie2-2.5.5-linux-x86_64:$PATH"
+          curl -L --fail --retry 5 --retry-delay 5 -o hg38.analysisSet.fa.gz https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/analysisSet/hg38.analysisSet.fa.gz
+          echo "6d3c82e1e12b127d526395294526b9c8  hg38.analysisSet.fa.gz" | md5sum -c -
+          gzip -dc hg38.analysisSet.fa.gz > hg38.analysisSet.fa
+          sha256sum hg38.analysisSet.fa | tee hg38.analysisSet.fa.sha256
+      - name: Build sparse Bowtie2 index
+        run: |
+          set -euxo pipefail
+          export PATH="$PWD/bowtie2-2.5.5-linux-x86_64:$PATH"
+          mkdir -p sparse
+          bowtie2-build --threads 4 --offrate 9 hg38.analysisSet.fa sparse/GRCh38_noalt_as_off9
+          sha256sum sparse/GRCh38_noalt_as_off9*.bt2 | tee sparse/INDEX_SHA256SUMS.txt
+          cat > sparse/MANIFEST.txt <<EOF
+          assembly=GRCh38
+          reference=hg38.analysisSet.fa
+          source_md5=6d3c82e1e12b127d526395294526b9c8
+          bowtie2_version=2.5.5
+          offrate=9
+          authority=RESEARCH_ONLY_LOW_MEMORY_BOOTSTRAP
+          EOF
+          tar -C sparse -cf GRCh38_noalt_as_off9.tar .
+          sha256sum GRCh38_noalt_as_off9.tar | tee GRCh38_noalt_as_off9.tar.sha256
+          mkdir parts
+          split -b 400M -d -a 2 GRCh38_noalt_as_off9.tar parts/GRCh38_noalt_as_off9.tar.part-
+          ls -lh parts
+      - name: Upload sparse parts
+        uses: actions/upload-artifact@v4
+        with:
+          name: grch38-off9-parts
+          path: |
+            parts/*
+            GRCh38_noalt_as_off9.tar.sha256
+          compression-level: 0
+          retention-days: 1
