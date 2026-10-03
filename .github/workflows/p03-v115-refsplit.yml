@@ -32,6 +32,42 @@ jobs:
           name: p03-v115-refsplit-01
           path: ${{ runner.temp }}/p03-ref/GRCh38_noalt_as.zip.part.01
           compression-level: 0
+      - name: Upload part 02
+        uses: actions/upload-artifact@v4
+        with:
+          name: p03-v115-refsplit-02
+          path: ${{ runner.temp }}/p03-ref/GRCh38_noalt_as.zip.part.02
+          compression-level: 0
+      - name: Upload part 03
+        uses: actions/upload-artifact@v4
+        with:
+          name: p03-v115-refsplit-03
+          path: ${{ runner.temp }}/p03-ref/GRCh38_noalt_as.zip.part.03
+          compression-level: 0
+      - name: Upload part 04
+        uses: actions/upload-artifact@v4
+        with:
+          name: p03-v115-refsplit-04
+          path: ${{ runner.temp }}/p03-ref/GRCh38_noalt_as.zip.part.04
+          compression-level: 0
+      - name: Upload part 05
+        uses: actions/upload-artifact@v4
+        with:
+          name: p03-v115-refsplit-05
+          path: ${{ runner.temp }}/p03-ref/GRCh38_noalt_as.zip.part.05
+          compression-level: 0
+      - name: Upload part 06
+        uses: actions/upload-artifact@v4
+        with:
+          name: p03-v115-refsplit-06
+          path: ${{ runner.temp }}/p03-ref/GRCh38_noalt_as.zip.part.06
+          compression-level: 0
+      - name: Upload part 07
+        uses: actions/upload-artifact@v4
+        with:
+          name: p03-v115-refsplit-07
+          path: ${{ runner.temp }}/p03-ref/GRCh38_noalt_as.zip.part.07
+          compression-level: 0
       - name: Upload checksums
         uses: actions/upload-artifact@v4
         with:
