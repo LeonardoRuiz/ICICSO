@@ -1,0 +1,84 @@
+name: PanOmics GRCh38 split bridge v1.15
+
+on:
+  push:
+    branches:
+      - panomics-asset-bridge-v1-15
+    paths:
+      - .github/workflows/panomics-grch38-split-bridge-v1-15.yml
+
+permissions:
+  contents: read
+
+jobs:
+  bridge-reference-split:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Download verify and split GRCh38 no-alt
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p bridge
+          curl -L --fail --retry 8 --retry-delay 3             -o bridge/hg38.analysisSet.fa.gz             https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/analysisSet/hg38.analysisSet.fa.gz
+          echo "6d3c82e1e12b127d526395294526b9c8  bridge/hg38.analysisSet.fa.gz" | md5sum -c -
+          sha256sum bridge/hg38.analysisSet.fa.gz > bridge/ORIGINAL_SHA256SUMS.txt
+          split -b 220M -d -a 2 bridge/hg38.analysisSet.fa.gz bridge/hg38.analysisSet.fa.gz.part-
+          sha256sum bridge/hg38.analysisSet.fa.gz.part-* > bridge/PART_SHA256SUMS.txt
+          ls -lh bridge/hg38.analysisSet.fa.gz.part-*
+
+      - name: Upload part 00
+        uses: actions/upload-artifact@v4
+        with:
+          name: panomics-grch38-part-00-v1-15
+          path: bridge/hg38.analysisSet.fa.gz.part-00
+          compression-level: 0
+          retention-days: 1
+          if-no-files-found: error
+
+      - name: Upload part 01
+        uses: actions/upload-artifact@v4
+        with:
+          name: panomics-grch38-part-01-v1-15
+          path: bridge/hg38.analysisSet.fa.gz.part-01
+          compression-level: 0
+          retention-days: 1
+          if-no-files-found: error
+
+      - name: Upload part 02
+        uses: actions/upload-artifact@v4
+        with:
+          name: panomics-grch38-part-02-v1-15
+          path: bridge/hg38.analysisSet.fa.gz.part-02
+          compression-level: 0
+          retention-days: 1
+          if-no-files-found: error
+
+      - name: Upload part 03
+        uses: actions/upload-artifact@v4
+        with:
+          name: panomics-grch38-part-03-v1-15
+          path: bridge/hg38.analysisSet.fa.gz.part-03
+          compression-level: 0
+          retention-days: 1
+          if-no-files-found: error
+
+      - name: Upload part 04
+        uses: actions/upload-artifact@v4
+        with:
+          name: panomics-grch38-part-04-v1-15
+          path: bridge/hg38.analysisSet.fa.gz.part-04
+          compression-level: 0
+          retention-days: 1
+          if-no-files-found: error
+
+      - name: Upload split manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: panomics-grch38-split-manifest-v1-15
+          path: |
+            bridge/ORIGINAL_SHA256SUMS.txt
+            bridge/PART_SHA256SUMS.txt
+          compression-level: 0
+          retention-days: 1
+          if-no-files-found: error
